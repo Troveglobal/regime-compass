@@ -452,17 +452,108 @@ footer.site .links a:hover { color: var(--text); }
 }
 
 /* ============================================================
-   Mobile
+   Table scroll wrapper (used inline: <div class="table-scroll">)
+   ============================================================ */
+.table-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 0 -8px;
+  padding: 0 8px;
+}
+.table-scroll table.t { min-width: 480px; }
+
+/* ============================================================
+   Tablet (up to 1000px)
+   ============================================================ */
+@media (max-width: 1000px) {
+  .wrap { padding: 26px 22px 40px; }
+  .hero h1 { font-size: 36px; }
+  nav.top .inner { padding: 13px 22px; gap: 18px; }
+}
+
+/* ============================================================
+   Mobile (up to 760px)
    ============================================================ */
 @media (max-width: 760px) {
-  .wrap { padding: 20px 16px 32px; }
-  .hero h1 { font-size: 30px; }
-  .hero .tagline { font-size: 14.5px; }
-  nav.top .inner { padding: 12px 16px; gap: 14px; }
-  nav.top .links { margin-left: 0; width: 100%; overflow-x: auto; }
-  nav.top .links a { padding: 6px 10px; }
-  footer.site .inner { padding: 0 16px; }
-  footer.site .links { margin-left: 0; }
-  .section h2 { font-size: 20px; }
-  .section h3 { font-size: 17px; }
+  /* Layout & spacing */
+  .wrap { padding: 18px 14px 32px; }
+  .panel { padding: 18px 16px; margin-bottom: 16px; border-radius: 10px; }
+  .section { margin-bottom: 28px; }
+  .section h2 { font-size: 20px; padding-bottom: 6px; }
+  .section h3 { font-size: 17px; margin: 18px 0 8px; }
+  .section p { font-size: 14.5px; line-height: 1.6; }
+  .section li { font-size: 14.5px; }
+  .section pre { font-size: 12px; padding: 12px 14px; }
+
+  /* Hero */
+  .hero { margin: 6px 0 26px; }
+  .hero h1 { font-size: 28px; line-height: 1.1; }
+  .hero .tagline { font-size: 14px; }
+  .hero .kicker { font-size: 13px; letter-spacing: 2.5px; gap: 8px; margin-bottom: 14px; }
+  .hero .kicker::before, .hero .kicker::after { width: 18px; }
+
+  /* Nav — horizontal scroll on mobile, hidden scrollbar for cleanness */
+  nav.top .inner { padding: 11px 14px; gap: 12px; flex-wrap: nowrap; }
+  nav.top .brand { font-size: 14px; flex-shrink: 0; }
+  .logo-svg { width: 20px; height: 20px; vertical-align: -5px; }
+  nav.top .links {
+    margin-left: auto;
+    display: flex;
+    gap: 2px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    max-width: calc(100vw - 160px);
+  }
+  nav.top .links::-webkit-scrollbar { display: none; }
+  nav.top .links a {
+    padding: 8px 12px;
+    font-size: 12.5px;
+    flex-shrink: 0;
+  }
+
+  /* Footer */
+  footer.site { margin-top: 36px; padding: 22px 0; }
+  footer.site .inner { padding: 0 14px; gap: 14px; }
+  footer.site .links { margin-left: 0; width: 100%; gap: 14px; }
+  footer.site .built-by { width: 100%; }
+
+  /* Tables — always horizontally scrollable on mobile */
+  table.t { font-size: 12.5px; min-width: 480px; }
+  table.t th, table.t td { padding: 8px 9px; }
+  .panel > table.t, section > table.t { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+  /* Pills + callouts */
+  .pill { padding: 2px 9px; font-size: 9.5px; letter-spacing: 1px; }
+  .callout { padding: 14px 16px; font-size: 13.5px; line-height: 1.55; }
+
+  /* Author card stacks on mobile */
+  .author-card { flex-direction: column; padding: 18px; gap: 14px; }
+  .author-card .avatar { width: 48px; height: 48px; font-size: 18px; }
+
+  /* Charts (canvas containers) — universal smaller height on phones */
+  .chart-wrap { height: 280px !important; }
+
+  /* Touch target safety for any inline button-style link */
+  .btn { padding: 11px 18px; font-size: 14px; }
+
+  /* Hide tooltips/hover-only effects on touch devices */
+  .panel:hover { border-color: var(--border); }
+}
+
+/* ============================================================
+   Small mobile (up to 460px) — tighter padding for narrow phones
+   ============================================================ */
+@media (max-width: 460px) {
+  .wrap { padding: 14px 12px 28px; }
+  .panel { padding: 16px 14px; }
+  .hero h1 { font-size: 24px; }
+  .hero .tagline { font-size: 13.5px; }
+  .panel-title { font-size: 10px; letter-spacing: 1.5px; }
+  nav.top .brand { font-size: 13px; }
+  nav.top .links { max-width: calc(100vw - 130px); }
+  nav.top .links a { padding: 7px 10px; font-size: 12px; }
+  .callout { padding: 12px 14px; font-size: 13px; }
 }
