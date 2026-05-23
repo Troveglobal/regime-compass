@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /api/
 
-Sitemap: https://regime.iquantlabs.com/sitemap.xml
+Sitemap: https://regimecompass.com/sitemap.xml

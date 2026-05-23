@@ -23,7 +23,7 @@ from . import email_sender
 from . import subscriptions
 from .config import DB_PATH, INDICES
 
-BASE_URL = "https://regime.iquantlabs.com"
+BASE_URL = "https://regimecompass.com"
 
 
 def _format_index_alert(index_name: str, new_state: str, days: int, prev_state: Optional[str]) -> str:
@@ -163,7 +163,7 @@ def detect_and_send() -> dict:
         body = (
             '<h1 style="font-size:22px;color:#fff;margin:0 0 12px;">Today\'s alerts</h1>'
             + "".join(sections)
-            + f'<p style="margin-top:20px;color:#8b95a3;font-size:13px;">View the live dashboards at <a href="{BASE_URL}" style="color:#6ec1ff;">regime.iquantlabs.com</a>.</p>'
+            + f'<p style="margin-top:20px;color:#8b95a3;font-size:13px;">View the live dashboards at <a href="{BASE_URL}" style="color:#6ec1ff;">regimecompass.com</a>.</p>'
         )
         subject = f"Regime Compass alert — {today_str}"
         html = email_sender._wrap(body) + f'<p style="margin-top:24px;color:#8b95a3;font-size:12px;text-align:center;">You\'re receiving this because you subscribed to Regime Compass alerts. <a href="{BASE_URL}/unsubscribe?token={sub["unsubscribe_token"]}" style="color:#6ec1ff;">Unsubscribe</a>.</p>'

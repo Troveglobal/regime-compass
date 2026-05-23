@@ -14,7 +14,7 @@ import urllib.request
 from .config import LOGS_DIR
 
 RESEND_API_KEY = os.getenv("RESEND_API_KEY", "")
-RESEND_FROM = os.getenv("RESEND_FROM_EMAIL", "Regime Compass <alerts@regime.iquantlabs.com>")
+RESEND_FROM = os.getenv("RESEND_FROM_EMAIL", "Regime Compass <alerts@regimecompass.com>")
 RESEND_API_URL = "https://api.resend.com/emails"
 
 LOGS_DIR.mkdir(parents=True, exist_ok=True)
@@ -81,7 +81,7 @@ def _wrap(content_html: str) -> str:
   <div style="height:1px;background:#232830;margin-top:32px;margin-bottom:18px;"></div>
   <div style="font-size:12px;color:#8b95a3;line-height:1.55;">
     Regime Compass is a statistical research tool for educational purposes only. Not investment advice.
-    Read the <a href="https://regime.iquantlabs.com/disclaimer" style="color:#6ec1ff;">full disclaimer</a>.
+    Read the <a href="https://regimecompass.com/disclaimer" style="color:#6ec1ff;">full disclaimer</a>.
   </div>
 </div>
 </body></html>"""

@@ -1,52 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://regime.iquantlabs.com/</loc>
+    <loc>https://regimecompass.com/</loc>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://regime.iquantlabs.com/hmm</loc>
+    <loc>https://regimecompass.com/hmm</loc>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://regime.iquantlabs.com/ma</loc>
+    <loc>https://regimecompass.com/ma</loc>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://regime.iquantlabs.com/ma/backtest</loc>
+    <loc>https://regimecompass.com/ma/backtest</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://regime.iquantlabs.com/ema</loc>
+    <loc>https://regimecompass.com/ema</loc>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://regime.iquantlabs.com/ema/backtest</loc>
+    <loc>https://regimecompass.com/ema/backtest</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://regime.iquantlabs.com/about</loc>
+    <loc>https://regimecompass.com/about</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://regime.iquantlabs.com/methodology</loc>
+    <loc>https://regimecompass.com/methodology</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://regime.iquantlabs.com/disclaimer</loc>
+    <loc>https://regimecompass.com/disclaimer</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://regime.iquantlabs.com/privacy</loc>
+    <loc>https://regimecompass.com/privacy</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>

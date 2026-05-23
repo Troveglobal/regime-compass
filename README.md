@@ -2,7 +2,7 @@
 
 Multi-market regime detection website. Hidden Markov Models, Simple Moving Average, and Exponential Moving Average models applied to six global markets (Nifty 50, S&P 500, KOSPI, Shanghai Composite, Bitcoin, Ethereum). Free, updated daily.
 
-Live at: `regime.iquantlabs.com` *(once deployed)*
+Live at: `regimecompass.com` *(once deployed)*
 
 Built by [Aditya Sahasrabuddhe](https://www.linkedin.com/in/aditya-s1/) as part of [iQuant Labs](https://iquantlabs.com).
 
@@ -40,17 +40,23 @@ Open `http://localhost:8001` in your browser.
 |---|---|---|
 | `PORT` | Auto-set by Railway | Don't override |
 | `RESEND_API_KEY` | Optional | Enables email alert sending. Sign up at [resend.com](https://resend.com) for free tier (3,000 emails/month). Without this, emails are logged but not sent. |
-| `RESEND_FROM_EMAIL` | If RESEND_API_KEY set | e.g. `Regime Compass <alerts@regime.iquantlabs.com>`. The domain must be verified in Resend. |
+| `RESEND_FROM_EMAIL` | If RESEND_API_KEY set | e.g. `Regime Compass <alerts@regimecompass.com>`. The domain must be verified in Resend. |
 | `HMM_CORS_ORIGINS` | Optional | Comma-separated list of allowed origins (default `*`). |
 
-### Custom domain (regime.iquantlabs.com)
+### Custom domain (regimecompass.com — apex)
 
-1. In Railway, go to your service → Settings → Networking → Custom Domain.
-2. Add `regime.iquantlabs.com`. Railway gives you a CNAME target.
-3. In your DNS provider (where you bought iquantlabs.com — Cloudflare, Namecheap, etc.):
-   - Add a CNAME record: `regime` → `<your-railway-app>.up.railway.app`
-4. Wait 5-30 minutes for DNS to propagate.
-5. Railway auto-issues an HTTPS certificate via Let's Encrypt.
+Because we're using the apex domain (no subdomain prefix), DNS setup needs a CNAME-flattening / ALIAS record.
+
+1. In Railway, go to your service → **Settings → Networking → Custom Domain**.
+2. Add `regimecompass.com` AND `www.regimecompass.com`. Railway gives you a CNAME target.
+3. In your DNS provider (Cloudflare, Namecheap, etc.):
+   - For `regimecompass.com` (apex): use a **CNAME-flattening / ALIAS / ANAME** record pointing to `<your-railway-app>.up.railway.app`. Cloudflare supports this natively as a "CNAME" at the root with proxying enabled.
+   - For `www.regimecompass.com`: add a regular **CNAME** pointing to the same Railway target.
+   - If your DNS provider doesn't support CNAME flattening at apex, use an **A record** pointing to Railway's IP (Railway docs show the current IP).
+4. Wait 5–30 minutes for DNS to propagate.
+5. Railway auto-issues an HTTPS certificate via Let's Encrypt for both domains.
+
+**Tip**: if you use **Cloudflare** as DNS (free tier is plenty), it auto-handles the apex CNAME via flattening and gives you a free CDN + DDoS protection on top.
 
 ### Scheduled jobs
 
@@ -60,25 +66,19 @@ The web server runs an in-process scheduler (APScheduler):
 
 No separate cron service needed. To disable the scheduler (e.g. for local dev), set `DISABLE_SCHEDULER=1`.
 
-## First push to GitHub
+## Repo
 
-If you haven't created the repo yet:
+Hosted at: `github.com/<YOUR-USERNAME>/regime-compass`
 
+For local development on a new machine:
 ```bash
-# 1. Create a new repo on github.com (do NOT initialise with README — we have one already)
-# Name suggestion: "regime-compass"
-
-# 2. Locally:
-cd ~/agents/hmm_nifty
-git init
-git add .
-git commit -m "Initial commit — Regime Compass v0.4"
-git branch -M main
-git remote add origin git@github.com:<YOUR-USERNAME>/regime-compass.git
-git push -u origin main
+git clone git@github.com:<YOUR-USERNAME>/regime-compass.git
+cd regime-compass
+python3.12 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+uvicorn src.api:app --host 127.0.0.1 --port 8001
 ```
-
-(Or use HTTPS instead of SSH if you prefer — Railway works with either.)
 
 ## Architecture
 
