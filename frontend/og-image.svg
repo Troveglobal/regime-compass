@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0d12"/>
+      <stop offset="100%" stop-color="#11141a"/>
+    </linearGradient>
+    <radialGradient id="glow1" cx="20%" cy="40%" r="40%">
+      <stop offset="0%" stop-color="#a78bfa" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#a78bfa" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow2" cx="80%" cy="70%" r="40%">
+      <stop offset="0%" stop-color="#6ec1ff" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#6ec1ff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow1)"/>
+  <rect width="1200" height="630" fill="url(#glow2)"/>
+
+  <!-- Compass logo on the right -->
+  <g transform="translate(820, 195)">
+    <circle cx="120" cy="120" r="115" fill="none" stroke="#2d3540" stroke-width="1.5" opacity="0.6"/>
+    <circle cx="120" cy="120" r="98" fill="none" stroke="#232830" stroke-width="1"/>
+    <circle cx="120" cy="120" r="78" fill="none" stroke="#232830" stroke-width="0.8"/>
+    <g opacity="0.6" stroke="#8b95a3" stroke-width="2" stroke-linecap="round">
+      <line x1="120" y1="12" x2="120" y2="24"/>
+      <line x1="120" y1="216" x2="120" y2="228"/>
+      <line x1="12" y1="120" x2="24" y2="120"/>
+      <line x1="216" y1="120" x2="228" y2="120"/>
+    </g>
+    <path d="M120 28 L96 118 L144 118 Z" fill="#34c673"/>
+    <path d="M120 212 L96 122 L144 122 Z" fill="#e35454"/>
+    <rect x="195" y="115" width="25" height="10" rx="2" fill="#d4a017"/>
+    <rect x="20" y="115" width="25" height="10" rx="2" fill="#d4a017"/>
+    <circle cx="120" cy="120" r="11" fill="#e6edf3"/>
+    <circle cx="120" cy="120" r="5" fill="#0a0d12"/>
+  </g>
+
+  <!-- Kicker -->
+  <text x="80" y="225" font-family="Inter, system-ui, sans-serif" font-size="22" font-weight="700" fill="#c4b5fd" letter-spacing="4">REGIME COMPASS</text>
+
+  <!-- Title -->
+  <text x="80" y="320" font-family="Fraunces, Georgia, serif" font-size="68" font-weight="600" fill="#ffffff" letter-spacing="-2">What kind of</text>
+  <text x="80" y="395" font-family="Fraunces, Georgia, serif" font-size="68" font-weight="600" fill="#ffffff" letter-spacing="-2">market is this?</text>
+
+  <!-- Tagline -->
+  <text x="80" y="450" font-family="Inter, system-ui, sans-serif" font-size="22" fill="#8b95a3">Daily regime snapshot — Nifty · S&amp;P 500 · KOSPI · Shanghai</text>
+
+  <!-- Tricolor accent at bottom -->
+  <rect x="80" y="510" width="220" height="6" rx="3" fill="#e35454"/>
+  <rect x="310" y="510" width="220" height="6" rx="3" fill="#d4a017"/>
+  <rect x="540" y="510" width="220" height="6" rx="3" fill="#34c673"/>
+
+  <!-- Domain hint -->
+  <text x="80" y="570" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="500" fill="#6b7480" letter-spacing="1">iquantlabs.com</text>
+</svg>

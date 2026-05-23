@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — Regime Compass</title>
+  <meta name="description" content="What the Regime Compass dashboard is, who built it, and how to use it for discretionary trading." />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Regime Compass" />
+  <meta property="og:title" content="About — Regime Compass" />
+  <meta property="og:description" content="What this dashboard is, who built it, and how to use it." />
+  <meta property="og:image" content="https://regime.iquantlabs.com/og-image.svg" />
+  <meta property="og:url" content="https://regime.iquantlabs.com/about" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="About — Regime Compass" />
+  <meta name="twitter:description" content="What this dashboard is, who built it, and how to use it." />
+  <meta name="twitter:image" content="https://regime.iquantlabs.com/og-image.svg" />
+  <meta name="theme-color" content="#0a0d12" />
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+</head>
+<body>
+<div class="page-loader" id="page-loader"></div>
+<div class="stale-banner" id="stale-banner"></div>
+
+<nav class="top">
+  <div class="inner">
+    <a class="brand" href="/"><svg class="logo-svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-label="Regime Compass logo">
+  <circle cx="12" cy="12" r="10" class="ring" fill="none" stroke="currentColor" stroke-width="0.6" opacity="0.5"/>
+  <path d="M12 2.5 L9.6 11 L14.4 11 Z" fill="#27ae60"/>
+  <path d="M12 21.5 L9.6 13 L14.4 13 Z" fill="#c0392b"/>
+  <rect x="19" y="11.4" width="2.7" height="1.2" fill="#d4a017"/>
+  <rect x="2.3" y="11.4" width="2.7" height="1.2" fill="#d4a017"/>
+  <circle cx="12" cy="12" r="1.4" class="needle" fill="currentColor"/>
+</svg> Regime Compass</a>
+    <div class="links">
+      <a href="/">Home</a>
+      <a href="/composite">Risk Score</a>
+      <a href="/hmm">Hidden Markov Model</a>
+      <a href="/ma">Moving Average</a>
+      <a href="/ema">Exponential Moving Average</a>
+      <a href="/subscribe">Alerts</a>
+      <a href="/about" class="active">About</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap narrow">
+  <div class="hero">
+    <h1>About this tool</h1>
+    <div class="tagline">A regime indicator for discretionary traders. Tells you what kind of market you're in — not what to buy or sell.</div>
+  </div>
+
+  <div class="section">
+    <h2>What is this?</h2>
+    <p>This dashboard runs a <strong>Hidden Markov Model</strong> — a statistical method used in speech recognition, bioinformatics, and finance — to classify the market into one of three regimes each trading day:</p>
+    <ul>
+      <li><span class="pill bull">bull</span> &nbsp; calm, low-volatility uptrends. Trends tend to persist.</li>
+      <li><span class="pill neutral">neutral</span> &nbsp; sideways markets with medium volatility. No strong directional bias.</li>
+      <li><span class="pill bear">bear</span> &nbsp; high-volatility regimes. Defensive. Historically associated with crashes, panics, and structural stress.</li>
+    </ul>
+    <p>Each day, the model outputs the <strong>probability</strong> that the market is in each regime, given everything it has observed up to that day's close. Those three numbers always sum to 100%.</p>
+    <p>It's a <strong>regime indicator</strong> — a thermometer. Not a buy/sell signal. The model doesn't predict future prices; it tells you what kind of environment you're in right now so you can size positions and manage risk accordingly.</p>
+  </div>
+
+  <div class="section">
+    <h2>Why does it exist?</h2>
+    <p>Discretionary traders often miss the moment a market regime changes. Vol gets quietly higher, correlations break, and the strategies that worked last quarter stop working — but it's hard to see in the moment. This tool is a second pair of eyes on the regime question: a quantitative, dispassionate read on what kind of market you're trading <em>today</em>.</p>
+    <p>It's built specifically for the four global indices that matter most to the author's portfolio context: <strong>Nifty 50</strong> (India, primary), <strong>S&amp;P 500</strong> (USA, for global risk-on/off context), <strong>KOSPI</strong> (South Korea, an early-cycle Asian indicator), and <strong>Shanghai Composite</strong> (China, the swing factor for emerging markets).</p>
+  </div>
+
+  <div class="section">
+    <h2>How to use it</h2>
+    <ol>
+      <li><strong>Open the dashboard.</strong> Pick the index you care about from the dropdown.</li>
+      <li><strong>Read the three percentages.</strong> They sum to 100%. The largest one is the <em>dominant regime</em>.</li>
+      <li><strong>Layer it on your own analysis:</strong>
+        <ul>
+          <li>Bear &gt; 70% &nbsp;→&nbsp; reduce position size, raise cash, avoid new entries, consider hedges.</li>
+          <li>Bull &gt; 70% &nbsp;→&nbsp; momentum is friendly, can size up, trend-following strategies typically work.</li>
+          <li>Neutral &gt; 70% &nbsp;→&nbsp; mean-reversion environment. No edge from this model; use other inputs.</li>
+          <li>No regime above ~60% &nbsp;→&nbsp; transition period. Watch closely; reduce conviction.</li>
+        </ul>
+      </li>
+      <li><strong>Watch how it changes over time.</strong> Use the 90-day chart to see how confidently the model is in each regime. A drift from one regime to another, visible over 1–2 weeks, is more useful than a single day's reading.</li>
+      <li><strong>Check the table of historical regimes.</strong> See how long the current and past runs lasted, and what the index actually did during them.</li>
+    </ol>
+
+    <div class="callout warn">
+      <strong>What it is not:</strong> a trade signal. The dashboard never says "buy" or "sell". Treat the probabilities as one input among many in your discretionary process. The model has a 1–3 day lag at regime transitions — fundamental to HMMs, not a bug.
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>What's under the hood</h2>
+    <p>For each index, a 3-state Gaussian Hidden Markov Model is trained on 16 years of daily data (2010 to today). The model learns from these features:</p>
+    <ul>
+      <li><strong>Log returns</strong> — daily price change</li>
+      <li><strong>10-day realized volatility</strong> — rolling standard deviation of returns</li>
+      <li><strong>FX move vs USD</strong> — captures currency stress</li>
+      <li><strong>Implied volatility</strong> — VIX-equivalent index (Nifty + S&amp;P only; KOSPI and Shanghai lack a reliable feed)</li>
+    </ul>
+    <p>The model is <strong>retrained every Sunday</strong> on the full dataset including the just-finished week. Daily probabilities are recomputed Monday-Friday at 16:30 IST (after NSE close) using the latest trained model.</p>
+    <p>For technical detail, see the <a href="/methodology">Methodology</a> page.</p>
+  </div>
+
+  <div class="section">
+    <h2>About the author</h2>
+    <div class="author-card">
+      <div class="avatar">AS</div>
+      <div class="info">
+        <h4>Aditya Sahasrabuddhe</h4>
+        <div class="role">Discretionary trader · builder of quantitative tooling</div>
+        <p>Aditya is an active trader managing a multi-account family portfolio in Indian equities. He builds analytical tools — including a daily AI-driven CIO brief and this regime indicator — to inform his own discretionary process rather than automate it. This dashboard is one piece of that workflow, shared publicly so other traders can use it (or argue with it) as they see fit.</p>
+        <div class="links">
+          <a href="https://www.linkedin.com/in/aditya-s1/" target="_blank" rel="noopener">
+            <svg class="icon-li" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            LinkedIn
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Important notice</h2>
+    <p>This tool is provided <strong>for educational and informational purposes only</strong>. It is not investment advice. The author is not a SEBI Registered Research Analyst. Trading and investing in equities carries substantial risk of loss. You are solely responsible for your own decisions. Read the full <a href="/disclaimer">disclaimer</a> before using.</p>
+  </div>
+</div>
+
+<footer class="site">
+  <div class="inner">
+    <div class="built-by">
+      Built by
+      <a href="https://www.linkedin.com/in/aditya-s1/" target="_blank" rel="noopener">
+        Aditya Sahasrabuddhe
+        <svg class="icon-li" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      </a>
+    </div>
+    <div class="links">
+      <a href="/about">About</a>
+      <a href="/methodology">Methodology</a>
+      <a href="/disclaimer">Disclaimer</a>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+// Page-load progress bar: remove on DOMContentLoaded
+document.addEventListener("DOMContentLoaded", () => {
+  // small delay so the bar is visible even on fast loads
+  setTimeout(() => document.body.classList.add("loaded"), 250);
+});
+// Stale-data banner
+(async () => {
+  try {
+    const r = await fetch("/api/freshness");
+    const d = await r.json();
+    if (d.any_stale) {
+      const b = document.getElementById("stale-banner");
+      b.innerHTML = `<strong>Data delayed.</strong> Latest fetch is ${d.max_age_hours.toFixed(0)} hours old. Yahoo Finance may be temporarily unavailable; showing most recent cached values.`;
+      b.classList.add("show");
+    }
+  } catch (e) { /* freshness check failed; ignore */ }
+})();
+</script>
+</body>
+</html>

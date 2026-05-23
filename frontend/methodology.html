@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Methodology — Regime Compass</title>
+  <meta name="description" content="How the Hidden Markov Model is trained, what features it uses, how filtered probabilities are computed, and how the labels are assigned." />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Regime Compass" />
+  <meta property="og:title" content="Methodology — Regime Compass" />
+  <meta property="og:description" content="How the regime models are built — features, training, label rule, cadence." />
+  <meta property="og:image" content="https://regime.iquantlabs.com/og-image.svg" />
+  <meta property="og:url" content="https://regime.iquantlabs.com/methodology" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Methodology — Regime Compass" />
+  <meta name="twitter:description" content="How the regime models are built — features, training, label rule, cadence." />
+  <meta name="twitter:image" content="https://regime.iquantlabs.com/og-image.svg" />
+  <meta name="theme-color" content="#0a0d12" />
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+</head>
+<body>
+<div class="page-loader" id="page-loader"></div>
+<div class="stale-banner" id="stale-banner"></div>
+
+<nav class="top">
+  <div class="inner">
+    <a class="brand" href="/"><svg class="logo-svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-label="Regime Compass logo">
+  <circle cx="12" cy="12" r="10" class="ring" fill="none" stroke="currentColor" stroke-width="0.6" opacity="0.5"/>
+  <path d="M12 2.5 L9.6 11 L14.4 11 Z" fill="#27ae60"/>
+  <path d="M12 21.5 L9.6 13 L14.4 13 Z" fill="#c0392b"/>
+  <rect x="19" y="11.4" width="2.7" height="1.2" fill="#d4a017"/>
+  <rect x="2.3" y="11.4" width="2.7" height="1.2" fill="#d4a017"/>
+  <circle cx="12" cy="12" r="1.4" class="needle" fill="currentColor"/>
+</svg> Regime Compass</a>
+    <div class="links">
+      <a href="/">Home</a>
+      <a href="/composite">Risk Score</a>
+      <a href="/hmm">Hidden Markov Model</a>
+      <a href="/ma">Moving Average</a>
+      <a href="/ema">Exponential Moving Average</a>
+      <a href="/subscribe">Alerts</a>
+      <a href="/about" class="active">About</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap narrow">
+  <div class="hero">
+    <h1>Methodology</h1>
+    <div class="tagline">How the model is trained, what it learns from, and how the live probabilities are computed each day.</div>
+  </div>
+
+  <div class="section">
+    <h2>The model</h2>
+    <p>A <strong>3-state Gaussian Hidden Markov Model</strong> with a full covariance matrix per state, trained via the Baum-Welch (Expectation-Maximization) algorithm using <code>hmmlearn</code>'s <code>GaussianHMM</code> implementation. Hyperparameters:</p>
+    <ul>
+      <li><code>n_components=3</code> — three hidden regimes</li>
+      <li><code>covariance_type="full"</code> — each state has its own full covariance matrix</li>
+      <li><code>n_iter=200</code>, <code>tol=1e-4</code> — convergence criteria</li>
+      <li><code>random_state=42</code> — for reproducibility; same data + same seed always produces an identical model</li>
+    </ul>
+    <p>Three states is the right count for a regime indicator: more states tend to overfit on daily data (the model finds spurious sub-regimes that don't generalize), and fewer collapses the meaningful bull/bear distinction.</p>
+  </div>
+
+  <div class="section">
+    <h2>Features (observations)</h2>
+    <p>Each trading day is represented by up to four features. Features are <strong>z-scored</strong> (standardized to mean=0, std=1) before feeding into the HMM so no single feature dominates.</p>
+    <table class="t">
+      <thead><tr><th>Feature</th><th>Formula</th><th>Why it matters</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><code>log_return</code></td>
+          <td><code>ln(P[t] / P[t-1])</code></td>
+          <td>Day-over-day directional move. Captures bull/bear drift.</td>
+        </tr>
+        <tr>
+          <td><code>realized_vol</code></td>
+          <td><code>std(log_return, window=10)</code></td>
+          <td>Backward-looking 10-day volatility. The primary axis separating regimes.</td>
+        </tr>
+        <tr>
+          <td><code>fx_change</code></td>
+          <td><code>ln(FX[t] / FX[t-1])</code></td>
+          <td>Local currency move vs USD (or DXY for SPX). Currency stress often leads equity stress.</td>
+        </tr>
+        <tr>
+          <td><code>vix</code></td>
+          <td>raw level (India VIX, CBOE VIX)</td>
+          <td>Forward-looking implied vol from options. Available only for Nifty + S&amp;P.</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>KOSPI and Shanghai use 3 features (no VIX). For those indices, <code>realized_vol</code> carries the vol signal alone — and is more than sufficient: see the regime tables on the <a href="/">dashboard</a>.</p>
+  </div>
+
+  <div class="section">
+    <h2>State labeling (the bear/neutral/bull rule)</h2>
+    <p>The HMM returns three states numbered 0, 1, 2 — but the numbering is arbitrary and can flip between training runs. To make labels stable, after each fit we compute a <strong>composite score</strong> for each state:</p>
+    <pre><code>score[i] = -z(mean_realized_vol[i]) + 0.25 * z(mean_log_return[i])</code></pre>
+    <p>Where <code>z(.)</code> is z-scoring across the three states. States are then sorted by score:</p>
+    <ul>
+      <li><strong>lowest score → bear</strong> (highest vol, with low return as a tiebreaker)</li>
+      <li><strong>middle score → neutral</strong></li>
+      <li><strong>highest score → bull</strong> (lowest vol, with high return as a tiebreaker)</li>
+    </ul>
+    <p><strong>Why vol-dominant?</strong> Returns alone barely separate regimes in long-bull markets like India — all three states tend to have positive mean returns. Volatility is the actionable axis: when vol is high, be defensive, regardless of price direction. The 0.25 weight on returns acts as a tiebreaker for ambiguous cases.</p>
+  </div>
+
+  <div class="section">
+    <h2>Filtered vs smoothed probabilities</h2>
+    <p>The single most important methodological choice in a live dashboard is using <strong>filtered</strong> probabilities, not smoothed ones.</p>
+    <ul>
+      <li><strong>Filtered:</strong> <code>P(state[t] | observations[1..t])</code>. At each day <code>t</code>, the model uses only data up through that day. This is what you'd actually have if you ran the model in real time.</li>
+      <li><strong>Smoothed:</strong> <code>P(state[t] | observations[1..T])</code>. The forward-backward algorithm uses <em>future</em> observations to refine past probabilities. Looks great in backtests, but cheats — you can't have it live.</li>
+    </ul>
+    <p>This dashboard always shows filtered probabilities. We compute them via a direct forward-pass implementation of the log-alpha recursion:</p>
+    <pre><code>log_alpha[t, j] = log_emission[t, j]
+                + logsumexp_i( log_alpha[t-1, i] + log_transmat[i, j] )
+
+filtered[t] = exp(log_alpha[t] - logsumexp(log_alpha[t]))</code></pre>
+    <p>This means: today's probabilities will be revised tomorrow as new data arrives, but past displayed probabilities are <strong>never</strong> revised retroactively using future data.</p>
+
+    <div class="callout">
+      <strong>Mathematical guarantee:</strong> at the final timestep, filtered and smoothed are mathematically identical (no future data exists to smooth with). This is used as a sanity check in the audit — we verified that they match to machine precision at the last row across all four models.
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Data sources and dates</h2>
+    <p>Daily OHLC data is pulled from <strong>Yahoo Finance</strong> via the <code>yfinance</code> library:</p>
+    <table class="t">
+      <thead><tr><th>Index</th><th>Price ticker</th><th>FX ticker</th><th>VIX ticker</th><th>Range</th></tr></thead>
+      <tbody>
+        <tr><td>Nifty 50</td><td><code>^NSEI</code></td><td><code>INR=X</code></td><td><code>^INDIAVIX</code></td><td>Jan 2010 – today</td></tr>
+        <tr><td>S&amp;P 500</td><td><code>^GSPC</code></td><td><code>DX-Y.NYB</code> (DXY)</td><td><code>^VIX</code></td><td>Jan 2010 – today</td></tr>
+        <tr><td>KOSPI</td><td><code>^KS11</code></td><td><code>KRW=X</code></td><td>—</td><td>Jan 2010 – today</td></tr>
+        <tr><td>Shanghai</td><td><code>000001.SS</code></td><td><code>CNY=X</code></td><td>—</td><td>Jan 2010 – today</td></tr>
+      </tbody>
+    </table>
+    <p>All indices have ~4,000 trading days of data. Yahoo Finance is a free, unofficial data source — adequate for personal research, but commercial deployments should use a paid feed (e.g., EOD Historical Data, Alpha Vantage). The <code>DataSource</code> abstraction in the code makes the swap a one-file change.</p>
+  </div>
+
+  <div class="section">
+    <h2>Update cadence</h2>
+    <table class="t">
+      <thead><tr><th>Job</th><th>When</th><th>What it does</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><code>daily</code></td>
+          <td>Mon–Fri 16:30 IST (after NSE close)</td>
+          <td>Refetches the latest day's prices/FX/VIX, recomputes features, runs filtered inference, writes today's probability row to SQLite.</td>
+        </tr>
+        <tr>
+          <td><code>weekly</code></td>
+          <td>Sundays</td>
+          <td>Retrains all four HMMs on the full dataset including the just-finished week. Saves a timestamped model backup. Rebuilds the full probability history.</td>
+        </tr>
+        <tr>
+          <td><code>api</code></td>
+          <td>Always</td>
+          <td>FastAPI server serves the dashboard, with auto-restart if it ever crashes.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>What we deliberately don't do</h2>
+    <ul>
+      <li><strong>No trading-strategy performance numbers.</strong> The model is published as a live regime indicator, not a backtested trading system. Binary timing strategies on equity indices typically underperform buy-and-hold for any signal — we keep the focus on the regime read itself, not on simulated returns.</li>
+      <li><strong>No trade signals.</strong> No "buy" or "sell" outputs. Only regime probabilities.</li>
+      <li><strong>No leverage or position sizing recommendations.</strong> That's your decision.</li>
+      <li><strong>No auto-execution.</strong> The system has no broker integration and is not designed to.</li>
+      <li><strong>No smoothed probabilities in the live view.</strong> Only filtered. The smoothed pass exists in the codebase for offline historical analysis only.</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>Honest limitations</h2>
+    <ul>
+      <li><strong>HMM lag:</strong> filtered probabilities will lag a regime change by 1–3 days. This is fundamental to the math — to detect that the regime has changed, the model needs to observe some post-change data.</li>
+      <li><strong>State labels assume regime persistence:</strong> the transition matrix is sticky (~0.95+ diagonals). If real markets have rapid regime switches, the model will be slow.</li>
+      <li><strong>Three states is a simplification.</strong> Real markets have more nuance (low-vol bull rally, high-vol bull rally, panic, slow grind, V-shape recovery, etc.). The 3-state quantization is a deliberate tradeoff for interpretability.</li>
+      <li><strong>Features are the model's universe.</strong> If something matters (e.g., bond yields, commodity prices, credit spreads, sentiment), but isn't in the feature set, the model is blind to it.</li>
+      <li><strong>Past patterns may not generalize.</strong> The model assumes the statistical structure of returns is stationary across the training window. Big structural changes (new asset classes, regime shifts) can break this assumption.</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>Verification</h2>
+    <p>A comprehensive audit was performed across seven layers — raw data accuracy, alignment and gaps, feature math, HMM training internals, label permutation, filtered probability correctness, and database parity. All 100+ assertions passed; the math is fully reproducible and the probabilities are provably causal (verified by truncating data and confirming byte-identical past values).</p>
+    <p>Known data-quality concerns: 4 days of suspect USD/INR ticks in Jan-Feb 2012 and 2 days of suspect USD/CNY ticks in Jul 2011 from Yahoo Finance. Impact is bounded to ~2 weeks of localized regime classification near those dates and does not affect any high-confidence historical calls (COVID, 2017–18 bull, 2022 bear, etc.).</p>
+  </div>
+</div>
+
+<footer class="site">
+  <div class="inner">
+    <div class="built-by">
+      Built by
+      <a href="https://www.linkedin.com/in/aditya-s1/" target="_blank" rel="noopener">
+        Aditya Sahasrabuddhe
+        <svg class="icon-li" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      </a>
+    </div>
+    <div class="links">
+      <a href="/about">About</a>
+      <a href="/methodology">Methodology</a>
+      <a href="/disclaimer">Disclaimer</a>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+// Page-load progress bar: remove on DOMContentLoaded
+document.addEventListener("DOMContentLoaded", () => {
+  // small delay so the bar is visible even on fast loads
+  setTimeout(() => document.body.classList.add("loaded"), 250);
+});
+// Stale-data banner
+(async () => {
+  try {
+    const r = await fetch("/api/freshness");
+    const d = await r.json();
+    if (d.any_stale) {
+      const b = document.getElementById("stale-banner");
+      b.innerHTML = `<strong>Data delayed.</strong> Latest fetch is ${d.max_age_hours.toFixed(0)} hours old. Yahoo Finance may be temporarily unavailable; showing most recent cached values.`;
+      b.classList.add("show");
+    }
+  } catch (e) { /* freshness check failed; ignore */ }
+})();
+</script>
+</body>
+</html>

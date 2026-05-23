@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+
+# Virtual environment
+venv/
+.venv/
+env/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+logs/
+*.log
+
+# Generated data (rebuilt on first run by the deployment)
+data/
+models/
+
+# Local secrets
+.env
+.env.local
+.env.production
+
+# Notebook artifacts
+notebooks/.ipynb_checkpoints/
+
+# macOS launchd plists (specific to local machine)
+*.plist.backup
