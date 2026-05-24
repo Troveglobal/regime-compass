@@ -22,7 +22,11 @@ from fastapi.staticfiles import StaticFiles
 from starlette.middleware.base import BaseHTTPMiddleware
 
 from . import alerts as alerts_mod
+from . import badge as badge_mod
+from . import cards as cards_mod
+from . import changes as changes_mod
 from . import composite as composite_mod
+from . import digest as digest_mod
 from . import email_sender
 from . import ma_backtest
 from . import ma_regime
@@ -100,6 +104,11 @@ def _run_weekly() -> None:
         _run_full_pipeline()
     except Exception as e:
         log.exception("Weekly retrain failed: %s", e)
+    try:
+        result = digest_mod.send_weekly_digest()
+        log.info("Weekly digest: %s", result)
+    except Exception as e:
+        log.exception("Weekly digest failed: %s", e)
 
 
 def _bootstrap_async() -> None:
@@ -386,6 +395,39 @@ def run_alerts_endpoint(request: Request):
     if auth != f"Bearer {_ALERTS_SECRET}":
         raise HTTPException(403, "Invalid or missing authorization.")
     return alerts_mod.detect_and_send()
+
+
+@app.get("/api/changes")
+def changes_endpoint(days: int = Query(30, ge=1, le=365)) -> list[dict]:
+    return changes_mod.recent_changes(days)
+
+
+@app.get("/api/calendar")
+def calendar_endpoint(index: str | None = Query(None)) -> dict:
+    if index and index not in INDICES:
+        raise HTTPException(400, f"Unknown index '{index}'")
+    return changes_mod.calendar_data(index)
+
+
+@app.get("/api/card/{index_key}")
+def card_endpoint(index_key: str):
+    if index_key not in INDICES:
+        raise HTTPException(400, f"Unknown index '{index_key}'")
+    try:
+        png = cards_mod.generate_card(index_key)
+        return Response(content=png, media_type="image/png",
+                        headers={"Cache-Control": "public, max-age=3600"})
+    except ValueError as e:
+        raise HTTPException(404, str(e))
+
+
+@app.get("/api/badge/{index_key}")
+def badge_endpoint(index_key: str):
+    if index_key not in INDICES:
+        raise HTTPException(400, f"Unknown index '{index_key}'")
+    svg = badge_mod.generate_badge(index_key)
+    return Response(content=svg, media_type="image/svg+xml",
+                    headers={"Cache-Control": "public, max-age=3600"})
 
 
 def _simple_html_page(title: str, body: str, cta_label: str) -> str:
@@ -713,6 +755,18 @@ if FRONTEND_DIR.exists():
     @app.get("/terms")
     def terms_page():
         return FileResponse(FRONTEND_DIR / "terms.html")
+
+    @app.get("/changes")
+    def changes_page():
+        return FileResponse(FRONTEND_DIR / "changes.html")
+
+    @app.get("/calendar")
+    def calendar_page():
+        return FileResponse(FRONTEND_DIR / "calendar.html")
+
+    @app.get("/embed")
+    def embed_page():
+        return FileResponse(FRONTEND_DIR / "embed.html")
 
     @app.get("/robots.txt")
     def robots():

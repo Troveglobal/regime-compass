@@ -3,6 +3,7 @@ fastapi==0.136.1
 hmmlearn==0.3.3
 numpy==2.4.6
 pandas==3.0.3
+Pillow==11.3.0
 pyarrow==24.0.0
 python-multipart==0.0.20
 scikit-learn==1.8.0

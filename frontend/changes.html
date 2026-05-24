@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', { analytics_storage: 'denied' });
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>What Changed — Regime Compass</title>
+  <meta name="description" content="Recent regime transitions across six global markets. See what flipped this week." />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Regime Compass" />
+  <meta property="og:title" content="What Changed — Regime Compass" />
+  <meta property="og:description" content="Recent regime transitions across six global markets. See what flipped this week." />
+  <meta property="og:image" content="https://regimecompass.com/og-image.png" />
+  <meta property="og:url" content="https://regimecompass.com/changes" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="What Changed — Regime Compass" />
+  <meta name="twitter:description" content="Recent regime transitions across six global markets. See what flipped this week." />
+  <meta name="twitter:image" content="https://regimecompass.com/og-image.png" />
+  <meta name="theme-color" content="#0a0d12" />
+  <link rel="canonical" href="https://www.regimecompass.com/changes" />
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="manifest" href="/manifest.json" />
+  <style>
+    .timeline { max-width: 640px; margin: 0 auto; }
+    .timeline-item {
+      position: relative;
+      padding: 0 0 0 32px;
+      margin-bottom: 24px;
+    }
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: 7px;
+      top: 0;
+      bottom: -24px;
+      width: 2px;
+      background: var(--border);
+    }
+    .timeline-item:last-child::before { display: none; }
+    .timeline-item::after {
+      content: "";
+      position: absolute;
+      left: 2px;
+      top: 18px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2px solid var(--bg);
+    }
+    .change-card {
+      background: var(--panel-2);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      padding: 18px 20px;
+      transition: var(--transition);
+    }
+    .change-card:hover {
+      border-color: var(--border-strong);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+    .change-date {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+    .change-market {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-strong);
+      margin-bottom: 2px;
+    }
+    .change-country {
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+    .change-transition {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+    }
+    .regime-pill {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+    .regime-pill.bull { background: #34c673; color: #fff; }
+    .regime-pill.bear { background: #e35454; color: #fff; }
+    .regime-pill.neutral { background: #d4a017; color: #1a1a1a; }
+    .change-arrow {
+      color: var(--muted);
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+    .empty-state {
+      background: var(--panel-2);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      padding: 40px 24px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+    .empty-state strong { color: var(--text-strong); }
+    @media (max-width: 600px) {
+      .change-card { padding: 14px 16px; }
+      .timeline-item { padding-left: 28px; }
+    }
+  </style>
+  <script type="application/ld+json">
+  {"@context": "https://schema.org", "@type": "WebPage", "name": "What Changed — Regime Compass", "description": "Recent regime transitions across six global markets. See what flipped this week.", "url": "https://www.regimecompass.com/changes", "isPartOf": {"@type": "WebSite", "name": "Regime Compass", "url": "https://www.regimecompass.com"}}
+  </script>
+</head>
+<body>
+<div class="page-loader" id="page-loader"></div>
+<div class="stale-banner" id="stale-banner"></div>
+
+<nav class="top">
+  <div class="inner">
+    <a class="brand" href="/"><svg class="logo-svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-label="Regime Compass logo">
+  <circle cx="12" cy="12" r="10" class="ring" fill="none" stroke="currentColor" stroke-width="0.6" opacity="0.5"/>
+  <path d="M12 2.5 L9.6 11 L14.4 11 Z" fill="#27ae60"/>
+  <path d="M12 21.5 L9.6 13 L14.4 13 Z" fill="#c0392b"/>
+  <rect x="19" y="11.4" width="2.7" height="1.2" fill="#d4a017"/>
+  <rect x="2.3" y="11.4" width="2.7" height="1.2" fill="#d4a017"/>
+  <circle cx="12" cy="12" r="1.4" class="needle" fill="currentColor"/>
+</svg> Regime Compass</a>
+    <div class="links">
+      <a href="/">Home</a>
+      <a href="/composite">Risk Score</a>
+      <a href="/hmm">Hidden Markov Model</a>
+      <a href="/ma">Moving Average</a>
+      <a href="/ema">Exponential Moving Average</a>
+      <a href="/subscribe">Alerts</a>
+      <a href="/about">About</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+  <div class="hero">
+    <h1>What Changed</h1>
+    <div class="tagline">Recent regime transitions across all markets. When models agree on a flip, pay attention.</div>
+  </div>
+
+  <section class="panel" id="changes-panel">
+    <div class="panel-title">Regime transitions — last 30 days</div>
+    <div id="changes-container"></div>
+  </section>
+</div>
+
+<footer class="site">
+  <div class="inner">
+    <div class="built-by">
+      Built by
+      <a href="https://www.linkedin.com/in/aditya-s1/" target="_blank" rel="noopener">
+        Aditya Sahasrabuddhe
+        <svg class="icon-li" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      </a>
+    </div>
+    <div class="links">
+      <a href="/about">About</a>
+      <a href="/methodology">Methodology</a>
+      <a href="/disclaimer">Disclaimer</a>
+      <a href="/terms">Terms</a>
+      <a href="/privacy">Privacy</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+function formatDate(dateStr) {
+  const d = new Date(dateStr + "T00:00:00");
+  return d.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric", year: "numeric" });
+}
+
+async function load() {
+  const container = document.getElementById("changes-container");
+  try {
+    const res = await fetch("/api/changes?days=30");
+    const changes = await res.json();
+
+    if (!changes || changes.length === 0) {
+      container.innerHTML = `<div class="empty-state"><strong>No regime changes in the last 30 days.</strong> Steady state.</div>`;
+      return;
+    }
+
+    // Sort most recent first
+    changes.sort((a, b) => b.date.localeCompare(a.date));
+
+    let html = '<div class="timeline">';
+    for (const c of changes) {
+      html += `
+        <div class="timeline-item">
+          <div class="change-card">
+            <div class="change-date">${formatDate(c.date)}</div>
+            <div class="change-market">${c.index_name}</div>
+            <div class="change-country">${c.country}</div>
+            <div class="change-transition">
+              <span class="regime-pill ${c.from}">${c.from}</span>
+              <span class="change-arrow">&rarr;</span>
+              <span class="regime-pill ${c.to}">${c.to}</span>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+    html += '</div>';
+    container.innerHTML = html;
+  } catch (e) {
+    container.innerHTML = `<div class="empty-state">Failed to load changes. Try refreshing.</div>`;
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  setTimeout(() => document.body.classList.add("loaded"), 250);
+});
+(async () => {
+  try {
+    const r = await fetch("/api/freshness"); const d = await r.json();
+    if (d.any_stale) {
+      const b = document.getElementById("stale-banner");
+      b.innerHTML = `<strong>Data delayed.</strong> Latest fetch is ${d.max_age_hours.toFixed(0)} hours old.`;
+      b.classList.add("show");
+    }
+  } catch (e) {}
+})();
+load();
+</script>
+<script src="/consent.js"></script>
+</body>
+</html>
