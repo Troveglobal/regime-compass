@@ -251,15 +251,6 @@
     </div>
   </section>
 
-  <!-- India G-Sec -->
-  <section class="panel">
-    <div class="panel-title">India 10-Year Government Bond Yield</div>
-    <div class="chart-box">
-      <canvas id="india-chart" height="260"></canvas>
-    </div>
-    <p class="india-note">Monthly data from FRED, approximately 2 month lag.</p>
-  </section>
-
   <div class="callout">
     <strong>Why this matters:</strong> An inverted yield curve (2-year yield above 10-year) has preceded every US recession since 1970. The spread is the single most watched macro signal in global finance. <strong>Not investment advice.</strong>
   </div>
@@ -577,13 +568,6 @@ async function load() {
     console.error('Failed to load US yield data:', e);
   }
 
-  try {
-    const res = await fetch('/api/yields/india');
-    const data = await res.json();
-    buildIndiaChart(data.series);
-  } catch (e) {
-    console.error('Failed to load India yield data:', e);
-  }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
