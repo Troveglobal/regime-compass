@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', { analytics_storage: 'denied' });
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MA Backtest — Regime Compass</title>
@@ -9,15 +18,17 @@
   <meta property="og:site_name" content="Regime Compass" />
   <meta property="og:title" content="EMA Backtest — Regime Compass" />
   <meta property="og:description" content="Backtest of the EMA regime strategy across four global indices." />
-  <meta property="og:image" content="https://regimecompass.com/og-image.svg" />
+  <meta property="og:image" content="https://regimecompass.com/og-image.png" />
   <meta property="og:url" content="https://regimecompass.com/ema_backtest" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="EMA Backtest — Regime Compass" />
   <meta name="twitter:description" content="Backtest of the EMA regime strategy across four global indices." />
-  <meta name="twitter:image" content="https://regimecompass.com/og-image.svg" />
+  <meta name="twitter:image" content="https://regimecompass.com/og-image.png" />
   <meta name="theme-color" content="#0a0d12" />
+  <link rel="canonical" href="https://www.regimecompass.com/ema/backtest" />
   <link rel="stylesheet" href="/styles.css" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="manifest" href="/manifest.json" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
   <style>
     .controls { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: 14px; }
@@ -80,6 +91,9 @@
     .pill-buy  { background: var(--bull); color: white; padding: 1px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
     .pill-sell { background: var(--bear); color: white; padding: 1px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
   </style>
+  <script type="application/ld+json">
+  {"@context": "https://schema.org", "@type": "WebPage", "name": "MA Backtest — Regime Compass", "description": "Walk-forward backtest of the price-vs-DMA regime strategy with 2-day confirmation. Long when bull, cash earning country risk-free rate when bear.", "url": "https://www.regimecompass.com/ema/backtest", "isPartOf": {"@type": "WebSite", "name": "Regime Compass", "url": "https://www.regimecompass.com"}}
+  </script>
 </head>
 <body>
 <div class="page-loader" id="page-loader"></div>
@@ -216,7 +230,8 @@
       <li><strong>Does it reduce volatility?</strong> Almost always yes — cash periods damp the overall ride.</li>
       <li><strong>Does the return give-up justify the risk reduction?</strong> Compare the Sharpe ratios. If strategy Sharpe ≥ buy-and-hold Sharpe, you got risk-adjusted improvement.</li>
     </ol>
-    <strong>Pre-cost gross returns.</strong> Real-world friction (commissions, bid-ask, taxes on each trade) would erode strategy returns more than buy-and-hold's. Strategies with many trades suffer more. <strong>Not investment advice</strong> — see <a href="/disclaimer">Disclaimer</a>.
+    <strong>Pre-cost gross returns.</strong> Real-world friction (commissions, bid-ask, taxes on each trade) would erode strategy returns more than buy-and-hold's. Strategies with many trades suffer more. <strong>Not investment advice</strong> — see <a href="/disclaimer">Disclaimer</a>
+      <a href="/terms">Terms</a>.
   </div>
 </div>
 
@@ -233,6 +248,7 @@
       <a href="/about">About</a>
       <a href="/methodology">Methodology</a>
       <a href="/disclaimer">Disclaimer</a>
+      <a href="/terms">Terms</a>
     </div>
   </div>
 </footer>
@@ -410,5 +426,6 @@ document.addEventListener("DOMContentLoaded", () => {
   } catch (e) { /* freshness check failed; ignore */ }
 })();
 </script>
+<script src="/consent.js"></script>
 </body>
 </html>

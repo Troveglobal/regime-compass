@@ -1,0 +1,22 @@
+{
+  "name": "Regime Compass",
+  "short_name": "Regime",
+  "description": "Three regime models, six global markets, updated daily. By iQuant Labs.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0d12",
+  "theme_color": "#0a0d12",
+  "icons": [
+    {
+      "src": "/og-image.png",
+      "sizes": "1200x630",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

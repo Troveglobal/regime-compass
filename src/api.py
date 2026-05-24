@@ -1,6 +1,7 @@
 """FastAPI server for Regime Compass."""
 from __future__ import annotations
 
+import collections
 import logging
 import os
 import pickle
@@ -149,39 +150,104 @@ async def lifespan(app: FastAPI):
 app = FastAPI(title="Regime Compass", version="0.4.0", docs_url=None, redoc_url=None, lifespan=lifespan)
 
 
+_STATIC_EXTS = {".css", ".js", ".svg", ".png", ".jpg", ".ico", ".woff2", ".woff"}
+
+
 class SecurityHeadersMiddleware(BaseHTTPMiddleware):
-    """Adds baseline security headers to every response."""
     async def dispatch(self, request: Request, call_next):
         response = await call_next(request)
         response.headers["X-Content-Type-Options"] = "nosniff"
         response.headers["X-Frame-Options"] = "DENY"
         response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
         response.headers["Permissions-Policy"] = "geolocation=(), microphone=(), camera=()"
-        # Content Security Policy - allows our needed CDNs + fonts
+        response.headers["Strict-Transport-Security"] = "max-age=63072000; includeSubDomains; preload"
+        response.headers["Cross-Origin-Opener-Policy"] = "same-origin"
+        response.headers["X-DNS-Prefetch-Control"] = "off"
         response.headers["Content-Security-Policy"] = (
             "default-src 'self'; "
-            "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; "
+            "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://www.googletagmanager.com https://www.google-analytics.com; "
             "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; "
             "font-src 'self' https://fonts.gstatic.com data:; "
-            "img-src 'self' data: blob:; "
-            "connect-src 'self'; "
+            "img-src 'self' data: blob: https://www.google-analytics.com https://www.googletagmanager.com; "
+            "connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://www.googletagmanager.com; "
             "frame-ancestors 'none'; "
             "base-uri 'self'; "
             "form-action 'self'"
         )
-        # Hide server signature
         if "server" in response.headers:
             del response.headers["server"]
+
+        path = request.url.path
+        ext = os.path.splitext(path)[1].lower()
+        if ext in _STATIC_EXTS:
+            response.headers["Cache-Control"] = "public, max-age=86400, stale-while-revalidate=3600"
+        elif path.startswith("/api/"):
+            response.headers["Cache-Control"] = "public, max-age=300, stale-while-revalidate=60"
+        else:
+            response.headers["Cache-Control"] = "public, max-age=600, stale-while-revalidate=120"
+
         return response
 
 
+# --------------- Rate limiter (in-memory, per-IP) ---------------
+_rate_buckets: dict[str, collections.deque] = {}
+_rate_lock = threading.Lock()
+
+RATE_LIMITS = {
+    "/api/subscribe": (5, 300),
+    "/api/run-alerts": (3, 600),
+}
+GLOBAL_API_RATE = (120, 60)
+
+
+def _check_rate_limit(key: str, max_requests: int, window_seconds: int) -> tuple[bool, int]:
+    now = time.monotonic()
+    with _rate_lock:
+        bucket = _rate_buckets.setdefault(key, collections.deque())
+        while bucket and bucket[0] < now - window_seconds:
+            bucket.popleft()
+        if len(bucket) >= max_requests:
+            retry_after = int(bucket[0] + window_seconds - now) + 1
+            return False, retry_after
+        bucket.append(now)
+        return True, 0
+
+
+def _rate_limit_response(retry_after: int) -> JSONResponse:
+    return JSONResponse(
+        {"error": "Rate limit exceeded. Try again later."},
+        status_code=429,
+        headers={"Retry-After": str(retry_after)},
+    )
+
+
+class RateLimitMiddleware(BaseHTTPMiddleware):
+    async def dispatch(self, request: Request, call_next):
+        client_ip = request.client.host if request.client else "unknown"
+        path = request.url.path
+
+        if path.startswith("/api/"):
+            specific = RATE_LIMITS.get(path)
+            if specific:
+                ok, retry = _check_rate_limit(f"{path}:{client_ip}", *specific)
+                if not ok:
+                    return _rate_limit_response(retry)
+            else:
+                ok, retry = _check_rate_limit(f"api:{client_ip}", *GLOBAL_API_RATE)
+                if not ok:
+                    return _rate_limit_response(retry)
+
+        return await call_next(request)
+
+
 app.add_middleware(SecurityHeadersMiddleware)
+app.add_middleware(RateLimitMiddleware)
 app.add_middleware(GZipMiddleware, minimum_size=500)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=API_CORS_ORIGINS,
-    allow_methods=["GET"],
-    allow_headers=["*"],
+    allow_methods=["GET", "POST"],
+    allow_headers=["Content-Type", "Authorization"],
 )
 
 
@@ -309,9 +375,16 @@ def unsubscribe_endpoint(token: str):
     ))
 
 
+_ALERTS_SECRET = os.getenv("ALERTS_API_SECRET", "")
+
+
 @app.post("/api/run-alerts")
 def run_alerts_endpoint(request: Request):
-    """Trigger alert detection + dispatch. Should be called by the daily job."""
+    if not _ALERTS_SECRET:
+        raise HTTPException(403, "Alert trigger disabled — ALERTS_API_SECRET not configured.")
+    auth = request.headers.get("authorization", "")
+    if auth != f"Bearer {_ALERTS_SECRET}":
+        raise HTTPException(403, "Invalid or missing authorization.")
     return alerts_mod.detect_and_send()
 
 
@@ -636,6 +709,10 @@ if FRONTEND_DIR.exists():
     @app.get("/privacy")
     def privacy_page():
         return FileResponse(FRONTEND_DIR / "privacy.html")
+
+    @app.get("/terms")
+    def terms_page():
+        return FileResponse(FRONTEND_DIR / "terms.html")
 
     @app.get("/robots.txt")
     def robots():

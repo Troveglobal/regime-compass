@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', { analytics_storage: 'denied' });
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Exponential Moving Average Regime — Regime Compass</title>
@@ -9,15 +18,17 @@
   <meta property="og:site_name" content="Regime Compass" />
   <meta property="og:title" content="EMA Dashboard — Regime Compass" />
   <meta property="og:description" content="Exponential moving average regime detector. Same logic as SMA but faster reaction." />
-  <meta property="og:image" content="https://regimecompass.com/og-image.svg" />
+  <meta property="og:image" content="https://regimecompass.com/og-image.png" />
   <meta property="og:url" content="https://regimecompass.com/ema" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="EMA Dashboard — Regime Compass" />
   <meta name="twitter:description" content="Exponential moving average regime detector. Same logic as SMA but faster reaction." />
-  <meta name="twitter:image" content="https://regimecompass.com/og-image.svg" />
+  <meta name="twitter:image" content="https://regimecompass.com/og-image.png" />
   <meta name="theme-color" content="#0a0d12" />
+  <link rel="canonical" href="https://www.regimecompass.com/ema" />
   <link rel="stylesheet" href="/styles.css" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="manifest" href="/manifest.json" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
   <style>
     .banner-row { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; margin-bottom: 14px; }
@@ -109,6 +120,9 @@
     .stats-grid .sc .meta { font-size: 10px; color: var(--muted); margin-top: 4px; }
     @media (max-width: 700px) { .stats-grid { grid-template-columns: 1fr 1fr; } }
   </style>
+  <script type="application/ld+json">
+  {"@context": "https://schema.org", "@type": "WebPage", "name": "Exponential Moving Average Regime — Regime Compass", "description": "EMA-based regime indicator. Bull when price > EMA, bear when below. Toggle between 50, 100, and 200-day EMA. Faster reaction than SMA.", "url": "https://www.regimecompass.com/ema", "isPartOf": {"@type": "WebSite", "name": "Regime Compass", "url": "https://www.regimecompass.com"}}
+  </script>
 </head>
 <body>
 <div class="page-loader" id="page-loader"></div>
@@ -318,6 +332,7 @@
       <a href="/about">About</a>
       <a href="/methodology">Methodology</a>
       <a href="/disclaimer">Disclaimer</a>
+      <a href="/terms">Terms</a>
     </div>
   </div>
 </footer>
@@ -582,5 +597,6 @@ document.addEventListener("DOMContentLoaded", () => {
   } catch (e) { /* freshness check failed; ignore */ }
 })();
 </script>
+<script src="/consent.js"></script>
 </body>
 </html>

@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', { analytics_storage: 'denied' });
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Privacy Policy — Regime Compass</title>
@@ -9,15 +18,20 @@
   <meta property="og:site_name" content="Regime Compass" />
   <meta property="og:title" content="Privacy Policy — Regime Compass" />
   <meta property="og:description" content="We collect almost nothing. Plain-language privacy policy." />
-  <meta property="og:image" content="https://regimecompass.com/og-image.svg" />
+  <meta property="og:image" content="https://regimecompass.com/og-image.png" />
   <meta property="og:url" content="https://regimecompass.com/privacy" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Privacy Policy — Regime Compass" />
   <meta name="twitter:description" content="We collect almost nothing. Plain-language privacy policy." />
-  <meta name="twitter:image" content="https://regimecompass.com/og-image.svg" />
+  <meta name="twitter:image" content="https://regimecompass.com/og-image.png" />
   <meta name="theme-color" content="#0a0d12" />
+  <link rel="canonical" href="https://www.regimecompass.com/privacy" />
   <link rel="stylesheet" href="/styles.css" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="manifest" href="/manifest.json" />
+  <script type="application/ld+json">
+  {"@context": "https://schema.org", "@type": "WebPage", "name": "Privacy Policy — Regime Compass", "description": "What Regime Compass does and doesn't collect from visitors.", "url": "https://www.regimecompass.com/privacy", "isPartOf": {"@type": "WebSite", "name": "Regime Compass", "url": "https://www.regimecompass.com"}}
+  </script>
 </head>
 <body>
 <div class="page-loader" id="page-loader"></div>
@@ -48,61 +62,85 @@
 <div class="wrap narrow">
   <div class="hero">
     <h1>Privacy Policy</h1>
-    <div class="tagline">A short, plain-language statement of what Regime Compass collects and what it does with it. Last updated: today.</div>
+    <div class="tagline">A short, plain-language statement of what Regime Compass collects and what it does with it. Last updated: 24 May 2026.</div>
   </div>
 
   <div class="callout">
-    <strong>Short version.</strong> Regime Compass is a static, anonymous, read-only dashboard. We do not require accounts, do not store personal data, do not use tracking cookies, and do not sell anything. The only data we keep is server access logs (which any web host keeps) and basic anonymous traffic statistics.
+    <strong>Short version.</strong> Regime Compass is a free financial dashboard. We use Google Analytics (only with your consent) to understand traffic. If you subscribe to email alerts, we store your email address. We do not sell data to anyone, ever.
   </div>
 
   <div class="section">
     <h2>What we collect</h2>
-    <p>By default, when you visit the site, our server records standard web-server access logs containing:</p>
+    <p>When you visit the site, our server records standard web-server access logs containing:</p>
     <ul>
       <li>Your IP address (truncated where possible)</li>
       <li>The URL you requested and the response code</li>
       <li>Timestamp of the request</li>
-      <li>Your browser's User-Agent string and the page you came from (Referer)</li>
+      <li>Your browser's User-Agent string and the referring page</li>
     </ul>
-    <p>These logs are retained for up to <strong>30 days</strong> for the purposes of debugging, security, and basic traffic analysis. They are not shared with third parties except where required by law.</p>
-    <p>If we add privacy-respecting analytics (e.g., Plausible, Fathom), it will record only aggregate, anonymous traffic metrics — never anything that identifies you personally. No cookies are set for analytics.</p>
+    <p>These logs are retained for up to <strong>30 days</strong> for debugging and security. They are not shared with third parties except where required by law.</p>
   </div>
 
   <div class="section">
-    <h2>What we do not collect</h2>
+    <h2>Google Analytics</h2>
+    <p>We use <strong>Google Analytics 4</strong> to understand aggregate traffic patterns — which pages are visited, how long users stay, and where visitors come from geographically. Google Analytics uses cookies and sends data to Google's servers.</p>
+    <p>Analytics is <strong>only activated if you click "Accept"</strong> on the cookie consent banner. If you decline or ignore the banner, no analytics cookies are set and no data is sent to Google. You can change your preference at any time by clearing your browser's local storage for this site.</p>
+    <p>We do not use Google Analytics data for advertising, remarketing, or profiling. For details on how Google processes this data, see <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a>.</p>
+  </div>
+
+  <div class="section">
+    <h2>Email subscriptions</h2>
+    <p>If you sign up for regime-change alerts at <a href="/subscribe">/subscribe</a>, we collect and store:</p>
     <ul>
-      <li><strong>No accounts.</strong> You don't sign up. You don't log in.</li>
-      <li><strong>No personal data.</strong> No names, emails, addresses, phone numbers, financial information, or anything you might call "PII".</li>
-      <li><strong>No tracking cookies.</strong> The site sets no cookies for advertising or tracking.</li>
-      <li><strong>No third-party trackers.</strong> No Facebook Pixel, Google Analytics, ad networks, etc.</li>
+      <li>Your <strong>email address</strong></li>
+      <li>Your <strong>alert preferences</strong> (which types of alerts you want)</li>
+      <li>Timestamps of signup, verification, and last email sent</li>
+    </ul>
+    <p>We use <strong>double opt-in</strong>: you must click a verification link before any alerts are sent. Every alert email contains a one-click <strong>unsubscribe link</strong> that permanently deletes your record. We never share your email with third parties or use it for marketing beyond the alerts you signed up for.</p>
+  </div>
+
+  <div class="section">
+    <h2>What we do not do</h2>
+    <ul>
+      <li><strong>No accounts or passwords.</strong> The site has no login system.</li>
+      <li><strong>No advertising.</strong> No ads, no ad networks, no remarketing pixels.</li>
       <li><strong>No fingerprinting.</strong> We do not attempt to identify you across visits.</li>
       <li><strong>No data sales.</strong> We do not sell, rent, or share data with anyone.</li>
     </ul>
   </div>
 
   <div class="section">
-    <h2>Third-party content</h2>
-    <p>The site loads a few resources from third parties to function:</p>
+    <h2>Cookies</h2>
+    <p>Regime Compass sets the following cookies and storage:</p>
     <ul>
-      <li><strong>Google Fonts</strong> — for the typefaces (Inter, Fraunces). Your browser fetches them from Google's CDN. Their privacy policy applies to that fetch.</li>
-      <li><strong>jsDelivr CDN</strong> — for the Chart.js charting library. Their privacy policy applies.</li>
+      <li><strong><code>rc_consent</code></strong> (localStorage) — records whether you accepted or declined analytics. Not a tracking cookie; stays in your browser only.</li>
+      <li><strong>Google Analytics cookies</strong> (<code>_ga</code>, <code>_ga_*</code>) — only set if you accept analytics via the consent banner. These are first-party cookies used by GA4 to distinguish visitors. They expire after 2 years.</li>
     </ul>
-    <p>We do not control these third parties. If you want to avoid them, use a browser extension that blocks third-party requests; the site will still function (charts may not render).</p>
+    <p>No other cookies are set.</p>
   </div>
 
   <div class="section">
-    <h2>Cookies</h2>
-    <p>Regime Compass does not set any cookies on your browser. (If you see a cookie called <code>_csrf</code> or similar, it is from a security middleware and is short-lived and non-tracking.)</p>
+    <h2>Third-party services</h2>
+    <p>The site loads resources from these third parties:</p>
+    <ul>
+      <li><strong>Google Analytics</strong> (consent-gated) — traffic analytics. <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Privacy policy</a>.</li>
+      <li><strong>Google Fonts</strong> — typefaces (Inter, Fraunces). <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Privacy policy</a>.</li>
+      <li><strong>jsDelivr CDN</strong> — Chart.js library. <a href="https://www.jsdelivr.com/terms/privacy-policy-jsdelivr-net" target="_blank" rel="noopener">Privacy policy</a>.</li>
+    </ul>
   </div>
 
   <div class="section">
     <h2>Your rights</h2>
-    <p>Because we collect no personal data, there is generally nothing to access, correct, or delete. If you are based in a jurisdiction with specific rights (GDPR, CCPA, India DPDPA), you can email the author via the LinkedIn link in the footer with any privacy-related questions or requests.</p>
+    <p>If you are in a jurisdiction with data protection rights (GDPR, CCPA, India DPDPA):</p>
+    <ul>
+      <li><strong>Access / deletion:</strong> If you subscribed to alerts, use the unsubscribe link in any alert email to permanently delete your record. For other requests, contact the author via the LinkedIn link in the footer.</li>
+      <li><strong>Analytics opt-out:</strong> Decline the cookie consent banner, or clear localStorage for this site.</li>
+    </ul>
   </div>
 
   <div class="section">
     <h2>Children</h2>
-    <p>This site is not directed at children under 13. We do not knowingly collect data from children. If you believe a child has provided us with personal data (which would be hard given we collect none), contact the author for removal.</p>
+    <p>This site is not directed at children under 13. We do not knowingly collect data from children. If you believe a child has provided personal data, contact the author via the LinkedIn link in the footer.</p>
   </div>
 
   <div class="section">
@@ -124,6 +162,7 @@
       <a href="/about">About</a>
       <a href="/methodology">Methodology</a>
       <a href="/disclaimer">Disclaimer</a>
+      <a href="/terms">Terms</a>
       <a href="/privacy">Privacy</a>
     </div>
   </div>
@@ -149,5 +188,6 @@ document.addEventListener("DOMContentLoaded", () => {
   } catch (e) { /* freshness check failed; ignore */ }
 })();
 </script>
+<script src="/consent.js"></script>
 </body>
 </html>

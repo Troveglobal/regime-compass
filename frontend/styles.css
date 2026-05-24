@@ -557,3 +557,32 @@ footer.site .links a:hover { color: var(--text); }
   nav.top .links a { padding: 7px 10px; font-size: 12px; }
   .callout { padding: 12px 14px; font-size: 13px; }
 }
+
+/* ============================================================
+   Cookie consent banner
+   ============================================================ */
+#cookie-consent {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 9999;
+  background: var(--panel); border-top: 1px solid var(--border-strong);
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.5);
+  animation: rise 0.3s ease-out;
+}
+.cc-inner {
+  max-width: 900px; margin: 0 auto;
+  padding: 16px 24px; display: flex; align-items: center;
+  gap: 20px; flex-wrap: wrap;
+}
+.cc-inner p {
+  margin: 0; font-size: 13.5px; color: var(--text); flex: 1; min-width: 200px; line-height: 1.5;
+}
+.cc-inner p a { color: var(--link); }
+.cc-btns { display: flex; gap: 10px; flex-shrink: 0; }
+.cc-btns button {
+  padding: 8px 20px; border-radius: var(--r-md); font-size: 13px;
+  font-weight: 600; cursor: pointer; border: none; font-family: inherit;
+  transition: var(--transition);
+}
+#cc-accept { background: var(--accent); color: var(--bg); }
+#cc-accept:hover { background: var(--accent-strong); }
+#cc-reject { background: transparent; color: var(--muted); border: 1px solid var(--border-strong); }
+#cc-reject:hover { color: var(--text); border-color: var(--muted); }

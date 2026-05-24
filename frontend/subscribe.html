@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', { analytics_storage: 'denied' });
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Subscribe — Regime Compass</title>
@@ -9,15 +18,17 @@
   <meta property="og:site_name" content="Regime Compass" />
   <meta property="og:title" content="Subscribe to Regime Compass alerts" />
   <meta property="og:description" content="Get an email when regimes flip across global markets. Free, no spam." />
-  <meta property="og:image" content="https://regimecompass.com/og-image.svg" />
+  <meta property="og:image" content="https://regimecompass.com/og-image.png" />
   <meta property="og:url" content="https://regimecompass.com/subscribe" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Subscribe to Regime Compass alerts" />
   <meta name="twitter:description" content="Get an email when regimes flip. Free, no spam." />
-  <meta name="twitter:image" content="https://regimecompass.com/og-image.svg" />
+  <meta name="twitter:image" content="https://regimecompass.com/og-image.png" />
   <meta name="theme-color" content="#0a0d12" />
+  <link rel="canonical" href="https://www.regimecompass.com/subscribe" />
   <link rel="stylesheet" href="/styles.css" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="manifest" href="/manifest.json" />
   <style>
     .sub-form { display: flex; flex-direction: column; gap: 18px; }
     .sub-form input[type="email"] {
@@ -85,6 +96,9 @@
     .what-card .ttl { font-weight: 600; font-size: 14px; color: var(--text-strong); }
     .what-card .desc { font-size: 13px; color: var(--muted); margin-top: 6px; line-height: 1.5; }
   </style>
+  <script type="application/ld+json">
+  {"@context": "https://schema.org", "@type": "WebPage", "name": "Subscribe — Regime Compass", "description": "Get an email when the regime changes. Free, opt-out anytime.", "url": "https://www.regimecompass.com/subscribe", "isPartOf": {"@type": "WebSite", "name": "Regime Compass", "url": "https://www.regimecompass.com"}}
+  </script>
 </head>
 <body>
 <div class="page-loader" id="page-loader"></div>
@@ -188,6 +202,7 @@
       <a href="/about">About</a>
       <a href="/methodology">Methodology</a>
       <a href="/disclaimer">Disclaimer</a>
+      <a href="/terms">Terms</a>
       <a href="/privacy">Privacy</a>
     </div>
   </div>
@@ -228,5 +243,6 @@ form.addEventListener("submit", async (e) => {
   }
 });
 </script>
+<script src="/consent.js"></script>
 </body>
 </html>

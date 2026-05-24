@@ -20,7 +20,10 @@ DATA_SOURCE = os.getenv("HMM_DATA_SOURCE", "yfinance")
 
 API_HOST = os.getenv("HMM_API_HOST", "127.0.0.1")
 API_PORT = int(os.getenv("HMM_API_PORT", "8001"))
-API_CORS_ORIGINS = os.getenv("HMM_CORS_ORIGINS", "*").split(",")
+API_CORS_ORIGINS = os.getenv(
+    "HMM_CORS_ORIGINS",
+    "https://www.regimecompass.com,https://regimecompass.com",
+).split(",")
 
 
 # Registry of supported indices. To add a new one, append here.

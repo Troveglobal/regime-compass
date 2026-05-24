@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', { analytics_storage: 'denied' });
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Methodology — Regime Compass</title>
@@ -9,15 +18,20 @@
   <meta property="og:site_name" content="Regime Compass" />
   <meta property="og:title" content="Methodology — Regime Compass" />
   <meta property="og:description" content="How the regime models are built — features, training, label rule, cadence." />
-  <meta property="og:image" content="https://regimecompass.com/og-image.svg" />
+  <meta property="og:image" content="https://regimecompass.com/og-image.png" />
   <meta property="og:url" content="https://regimecompass.com/methodology" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Methodology — Regime Compass" />
   <meta name="twitter:description" content="How the regime models are built — features, training, label rule, cadence." />
-  <meta name="twitter:image" content="https://regimecompass.com/og-image.svg" />
+  <meta name="twitter:image" content="https://regimecompass.com/og-image.png" />
   <meta name="theme-color" content="#0a0d12" />
+  <link rel="canonical" href="https://www.regimecompass.com/methodology" />
   <link rel="stylesheet" href="/styles.css" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="manifest" href="/manifest.json" />
+  <script type="application/ld+json">
+  {"@context": "https://schema.org", "@type": "WebPage", "name": "Methodology — Regime Compass", "description": "How the Hidden Markov Model is trained, what features it uses, how filtered probabilities are computed, and how the labels are assigned.", "url": "https://www.regimecompass.com/methodology", "isPartOf": {"@type": "WebSite", "name": "Regime Compass", "url": "https://www.regimecompass.com"}}
+  </script>
 </head>
 <body>
 <div class="page-loader" id="page-loader"></div>
@@ -207,6 +221,7 @@ filtered[t] = exp(log_alpha[t] - logsumexp(log_alpha[t]))</code></pre>
       <a href="/about">About</a>
       <a href="/methodology">Methodology</a>
       <a href="/disclaimer">Disclaimer</a>
+      <a href="/terms">Terms</a>
     </div>
   </div>
 </footer>
@@ -231,5 +246,6 @@ document.addEventListener("DOMContentLoaded", () => {
   } catch (e) { /* freshness check failed; ignore */ }
 })();
 </script>
+<script src="/consent.js"></script>
 </body>
 </html>
