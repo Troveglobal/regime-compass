@@ -385,6 +385,15 @@ def unsubscribe_endpoint(token: str):
 
 
 _ALERTS_SECRET = os.getenv("ALERTS_API_SECRET", "")
+_ADMIN_SECRET = os.getenv("ADMIN_API_SECRET", "")
+
+
+def _require_admin(request: Request) -> None:
+    if not _ADMIN_SECRET:
+        raise HTTPException(403, "Admin API disabled — ADMIN_API_SECRET not configured.")
+    auth = request.headers.get("authorization", "")
+    if auth != f"Bearer {_ADMIN_SECRET}":
+        raise HTTPException(403, "Invalid or missing authorization.")
 
 
 @app.post("/api/run-alerts")
@@ -395,6 +404,42 @@ def run_alerts_endpoint(request: Request):
     if auth != f"Bearer {_ALERTS_SECRET}":
         raise HTTPException(403, "Invalid or missing authorization.")
     return alerts_mod.detect_and_send()
+
+
+@app.get("/api/admin/subscribers")
+def admin_subscribers(request: Request):
+    _require_admin(request)
+    subs = subscriptions.list_subscribers(only_verified=False)
+    stats = subscriptions.summary_stats()
+    return {"stats": stats, "subscribers": subs}
+
+
+@app.get("/api/admin/subscribers/export")
+def admin_subscribers_export(request: Request):
+    _require_admin(request)
+    subs = subscriptions.list_subscribers(only_verified=False)
+    lines = ["email,verified,created_at,verified_at,alert_any_regime_change,alert_bear_start,alert_bull_start,alert_composite_extreme,indices_subscribed"]
+    for s in subs:
+        lines.append(
+            f"{s['email']},{s['verified']},{s.get('created_at','')},{s.get('verified_at','')}"
+            f",{s.get('alert_any_regime_change','')},{s.get('alert_bear_start','')}"
+            f",{s.get('alert_bull_start','')},{s.get('alert_composite_extreme','')}"
+            f",{s.get('indices_subscribed','')}"
+        )
+    csv_text = "\n".join(lines) + "\n"
+    return Response(
+        content=csv_text,
+        media_type="text/csv",
+        headers={"Content-Disposition": "attachment; filename=subscribers.csv"},
+    )
+
+
+@app.get("/api/admin/stats")
+def admin_stats(request: Request):
+    _require_admin(request)
+    stats = subscriptions.summary_stats()
+    fresh = freshness()
+    return {"subscribers": stats, "data_freshness": fresh}
 
 
 @app.get("/api/changes")
