@@ -26,7 +26,7 @@
   <meta name="twitter:image" content="https://regimecompass.com/og-image.png" />
   <meta name="theme-color" content="#0a0d12" />
   <link rel="canonical" href="https://www.regimecompass.com/ema" />
-  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/styles.css?v=3.1" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="manifest" href="/manifest.json" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
@@ -598,7 +598,7 @@ document.addEventListener("DOMContentLoaded", () => {
   } catch (e) { /* freshness check failed; ignore */ }
 })();
 </script>
-<script src="/share.js"></script>
+<script src="/share.js?v=3.1"></script>
 <script>
 document.getElementById("index-select").addEventListener("change", function() {
   var sel = this.options[this.selectedIndex];
@@ -609,6 +609,6 @@ setTimeout(function() {
   if (sel && sel.value) renderShareButtons("share-container", sel.value, sel.options[sel.selectedIndex].textContent);
 }, 1500);
 </script>
-<script src="/consent.js"></script>
+<script src="/consent.js?v=3.1"></script>
 </body>
 </html>
