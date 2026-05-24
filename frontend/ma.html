@@ -596,6 +596,17 @@ document.addEventListener("DOMContentLoaded", () => {
   } catch (e) { /* freshness check failed; ignore */ }
 })();
 </script>
+<script src="/share.js"></script>
+<script>
+document.getElementById("index-select").addEventListener("change", function() {
+  var sel = this.options[this.selectedIndex];
+  renderShareButtons("share-container", this.value, sel.textContent);
+});
+setTimeout(function() {
+  var sel = document.getElementById("index-select");
+  if (sel && sel.value) renderShareButtons("share-container", sel.value, sel.options[sel.selectedIndex].textContent);
+}, 1500);
+</script>
 <script src="/consent.js"></script>
 </body>
 </html>

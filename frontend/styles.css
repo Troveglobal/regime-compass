@@ -586,3 +586,22 @@ footer.site .links a:hover { color: var(--text); }
 #cc-accept:hover { background: var(--accent-strong); }
 #cc-reject { background: transparent; color: var(--muted); border: 1px solid var(--border-strong); }
 #cc-reject:hover { color: var(--text); border-color: var(--muted); }
+
+/* ============================================================
+   Share buttons
+   ============================================================ */
+.share-bar {
+  display: flex; gap: 8px; flex-wrap: wrap; margin: 16px 0;
+}
+.share-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 7px 14px; border-radius: var(--r-md); font-size: 12.5px;
+  font-weight: 600; cursor: pointer; border: 1px solid var(--border-strong);
+  font-family: inherit; transition: var(--transition);
+  background: var(--panel-2); color: var(--text);
+}
+.share-btn:hover { background: var(--panel); border-color: var(--muted); transform: translateY(-1px); }
+.share-li:hover { color: #0a66c2; border-color: #0a66c2; }
+.share-x:hover { color: #fff; border-color: #fff; }
+.share-dl:hover { color: var(--accent-strong); border-color: var(--accent); }
+.share-cp:hover { color: var(--bull); border-color: var(--bull); }

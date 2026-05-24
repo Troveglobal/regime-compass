@@ -430,6 +430,59 @@ def badge_endpoint(index_key: str):
                     headers={"Cache-Control": "public, max-age=3600"})
 
 
+@app.get("/share/{index_key}")
+def share_page(index_key: str):
+    if index_key not in INDICES:
+        raise HTTPException(404, "Unknown index")
+    cfg = INDICES[index_key]
+    conn = sqlite3.connect(DB_PATH)
+    cur = conn.execute(
+        "SELECT date, bear, neutral, bull, hard_state, price_close "
+        "FROM probabilities WHERE index_key = ? ORDER BY date DESC LIMIT 1",
+        (index_key,),
+    )
+    row = cur.fetchone()
+    conn.close()
+    if not row:
+        raise HTTPException(404, "No data")
+    date, bear, neutral, bull, hard_state, price = row
+    confidence = max(bear, neutral, bull) * 100
+    title = f"{cfg['name']} — {hard_state.upper()} regime"
+    desc = f"{cfg['name']} is in a {hard_state} regime ({confidence:.0f}% HMM confidence) as of {date}. View all 6 markets on Regime Compass."
+    base = "https://www.regimecompass.com"
+    card_url = f"{base}/api/card/{index_key}"
+    page_url = f"{base}/share/{index_key}"
+    html = f"""<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>{title} — Regime Compass</title>
+<meta name="description" content="{desc}"/>
+<meta property="og:type" content="website"/>
+<meta property="og:site_name" content="Regime Compass"/>
+<meta property="og:title" content="{title}"/>
+<meta property="og:description" content="{desc}"/>
+<meta property="og:image" content="{card_url}"/>
+<meta property="og:image:width" content="800"/>
+<meta property="og:image:height" content="418"/>
+<meta property="og:url" content="{page_url}"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="{title}"/>
+<meta name="twitter:description" content="{desc}"/>
+<meta name="twitter:image" content="{card_url}"/>
+<link rel="canonical" href="{page_url}"/>
+<link rel="stylesheet" href="/styles.css"/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<meta http-equiv="refresh" content="3;url=/hmm?index={index_key}"/>
+</head><body>
+<div class="wrap" style="text-align:center;padding-top:60px;">
+<img src="/api/card/{index_key}" alt="{title}" style="max-width:100%;border-radius:12px;margin-bottom:24px;"/>
+<p style="color:var(--muted);font-size:14px;">Redirecting to dashboard...</p>
+</div>
+</body></html>"""
+    return HTMLResponse(html)
+
+
 def _simple_html_page(title: str, body: str, cta_label: str) -> str:
     return f"""<!DOCTYPE html>
 <html><head><meta charset="utf-8"/>
