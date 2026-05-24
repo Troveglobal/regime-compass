@@ -1,5 +1,5 @@
 function shareOnX(indexKey, text) {
-  var url = encodeURIComponent("https://web-production-05f4d0.up.railway.app/share/" + indexKey);
+  var url = encodeURIComponent("https://www.regimecompass.com/share/" + indexKey);
   var t = encodeURIComponent(text || "Market regime update from Regime Compass");
   window.open("https://x.com/intent/tweet?url=" + url + "&text=" + t, "_blank", "width=600,height=400");
 }
@@ -12,7 +12,7 @@ function downloadCard(indexKey) {
 }
 
 function copyShareLink(indexKey) {
-  var url = "https://web-production-05f4d0.up.railway.app/share/" + indexKey;
+  var url = "https://www.regimecompass.com/share/" + indexKey;
   navigator.clipboard.writeText(url).then(function () {
     var btn = document.querySelector('[data-copy="' + indexKey + '"]');
     if (btn) {
