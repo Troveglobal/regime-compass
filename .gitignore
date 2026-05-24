@@ -27,9 +27,10 @@ Thumbs.db
 logs/
 *.log
 
-# Generated data (rebuilt on first run by the deployment)
-data/
-models/
+# Keep data/ and models/ in git so Railway deploys with pre-built data.
+# Only ignore transient files inside them.
+data/backups/
+data/fonts/
 
 # Local secrets
 .env
