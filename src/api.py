@@ -118,11 +118,14 @@ def _bootstrap_async() -> None:
         if _bootstrap_done:
             return
         if not _data_is_present():
-            log.info("[bootstrap] No regime data found — running first-run pipeline.")
-            try:
-                _run_full_pipeline()
-            except Exception as e:
-                log.exception("[bootstrap] First-run failed: %s", e)
+            if os.getenv("RAILWAY_ENVIRONMENT"):
+                log.info("[bootstrap] No data on Railway — deferring to first scheduled run. App starts empty.")
+            else:
+                log.info("[bootstrap] No regime data found — running first-run pipeline.")
+                try:
+                    _run_full_pipeline()
+                except Exception as e:
+                    log.exception("[bootstrap] First-run failed: %s", e)
         else:
             log.info("[bootstrap] Data present — skipping first-run pipeline.")
         _bootstrap_done = True
