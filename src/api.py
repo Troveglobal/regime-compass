@@ -28,6 +28,9 @@ from . import changes as changes_mod
 from . import composite as composite_mod
 from . import digest as digest_mod
 from . import email_sender
+from . import seasonality as season_mod
+from . import valuation as val_mod
+from . import yieldcurve as yield_mod
 from . import ma_backtest
 from . import ma_regime
 from . import subscriptions
@@ -440,6 +443,38 @@ def admin_stats(request: Request):
     stats = subscriptions.summary_stats()
     fresh = freshness()
     return {"subscribers": stats, "data_freshness": fresh}
+
+
+@app.get("/api/seasonality")
+def seasonality_endpoint(index: str = Query(DEFAULT_INDEX)) -> dict:
+    key = _validate(index)
+    return season_mod.monthly_returns(key)
+
+
+@app.get("/api/seasonality/summary")
+def seasonality_summary_endpoint() -> list[dict]:
+    return season_mod.all_seasonality()
+
+
+@app.get("/api/valuation")
+def valuation_endpoint(index: str = Query(DEFAULT_INDEX)) -> dict:
+    key = _validate(index)
+    return val_mod.valuation_data(key)
+
+
+@app.get("/api/valuation/summary")
+def valuation_summary_endpoint() -> list[dict]:
+    return val_mod.valuation_summary()
+
+
+@app.get("/api/yields/us")
+def us_yields_endpoint() -> dict:
+    return yield_mod.us_yield_curve()
+
+
+@app.get("/api/yields/india")
+def india_yields_endpoint() -> dict:
+    return yield_mod.india_yield()
 
 
 @app.get("/api/changes")
@@ -865,6 +900,18 @@ if FRONTEND_DIR.exists():
     @app.get("/embed")
     def embed_page():
         return FileResponse(FRONTEND_DIR / "embed.html")
+
+    @app.get("/seasonality")
+    def seasonality_page():
+        return FileResponse(FRONTEND_DIR / "seasonality.html")
+
+    @app.get("/valuation")
+    def valuation_page():
+        return FileResponse(FRONTEND_DIR / "valuation.html")
+
+    @app.get("/yields")
+    def yields_page():
+        return FileResponse(FRONTEND_DIR / "yields.html")
 
     @app.get("/robots.txt")
     def robots():

@@ -1,0 +1,175 @@
+"""Yield curve data — US Treasury yields from FRED, India from FRED monthly.
+
+US yields: daily from FRED CSV (no API key needed)
+  - DGS2: 2-Year Treasury
+  - DGS10: 10-Year Treasury
+  - DGS30: 30-Year Treasury
+
+India: INDIRLTLT01STM from FRED (monthly, ~2 month lag)
+
+The key signal: 2y-10y spread. Negative = inverted = recession warning.
+"""
+from __future__ import annotations
+
+import csv
+import io
+import logging
+import time
+import urllib.request
+from datetime import datetime
+from pathlib import Path
+
+import pandas as pd
+
+from .config import DATA_DIR
+
+log = logging.getLogger("regime_compass")
+
+_CACHE_DIR = DATA_DIR / "yields"
+_FRED_CSV = "https://fred.stlouisfed.org/graph/fredgraph.csv"
+
+SERIES = {
+    "us_2y": "DGS2",
+    "us_10y": "DGS10",
+    "us_30y": "DGS30",
+    "india_10y": "INDIRLTLT01STM",
+}
+
+
+def _cache_path(name: str) -> Path:
+    _CACHE_DIR.mkdir(parents=True, exist_ok=True)
+    return _CACHE_DIR / f"{name}.parquet"
+
+
+def _is_fresh(path: Path, max_age_hours: int = 24) -> bool:
+    if not path.exists():
+        return False
+    age = time.time() - path.stat().st_mtime
+    return age < max_age_hours * 3600
+
+
+def _fetch_fred(series_id: str, cache_name: str, max_age: int = 24) -> pd.DataFrame:
+    cache = _cache_path(cache_name)
+    if _is_fresh(cache, max_age):
+        return pd.read_parquet(cache)
+
+    url = f"{_FRED_CSV}?id={series_id}"
+    try:
+        req = urllib.request.Request(url, headers={"User-Agent": "RegimeCompass/1.0"})
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            text = resp.read().decode()
+    except Exception as e:
+        log.warning("Failed to fetch FRED %s: %s", series_id, e)
+        if cache.exists():
+            return pd.read_parquet(cache)
+        return pd.DataFrame()
+
+    rows = []
+    reader = csv.DictReader(io.StringIO(text))
+    for row in reader:
+        date_str = row.get("DATE") or row.get("observation_date", "")
+        val_str = list(row.values())[-1] if len(row) > 1 else ""
+        if val_str == "." or not val_str:
+            continue
+        try:
+            rows.append({"date": datetime.strptime(date_str, "%Y-%m-%d"), "value": float(val_str)})
+        except (ValueError, TypeError):
+            continue
+
+    if not rows:
+        if cache.exists():
+            return pd.read_parquet(cache)
+        return pd.DataFrame()
+
+    df = pd.DataFrame(rows).sort_values("date").reset_index(drop=True)
+    df.to_parquet(cache, index=False)
+    return df
+
+
+def us_yield_curve() -> dict:
+    y2 = _fetch_fred("DGS2", "us_2y")
+    y10 = _fetch_fred("DGS10", "us_10y")
+    y30 = _fetch_fred("DGS30", "us_30y")
+
+    if y2.empty or y10.empty:
+        return {"error": "Could not fetch US yield data"}
+
+    merged = y2.merge(y10, on="date", suffixes=("_2y", "_10y"))
+    if not y30.empty:
+        merged = merged.merge(y30.rename(columns={"value": "value_30y"}), on="date", how="left")
+
+    merged["spread_2y10y"] = merged["value_10y"] - merged["value_2y"]
+
+    current_2y = float(y2["value"].iloc[-1])
+    current_10y = float(y10["value"].iloc[-1])
+    current_30y = float(y30["value"].iloc[-1]) if not y30.empty else None
+    current_spread = current_10y - current_2y
+
+    inversions = merged[merged["spread_2y10y"] < 0]
+    inversion_periods = []
+    if not inversions.empty:
+        groups = (inversions["date"].diff() > pd.Timedelta(days=30)).cumsum()
+        for _, grp in inversions.groupby(groups):
+            inversion_periods.append({
+                "start": str(grp["date"].iloc[0].date()),
+                "end": str(grp["date"].iloc[-1].date()),
+                "days": len(grp),
+                "min_spread": round(float(grp["spread_2y10y"].min()), 3),
+            })
+
+    recent = merged[merged["date"] >= "2000-01-01"]
+    series = []
+    for _, r in recent.iterrows():
+        row = {
+            "date": str(r["date"].date()),
+            "y2": round(float(r["value_2y"]), 3),
+            "y10": round(float(r["value_10y"]), 3),
+            "spread": round(float(r["spread_2y10y"]), 3),
+        }
+        if "value_30y" in r and pd.notna(r.get("value_30y")):
+            row["y30"] = round(float(r["value_30y"]), 3)
+        series.append(row)
+
+    inverted_now = current_spread < 0
+
+    return {
+        "country": "US",
+        "current": {
+            "y2": round(current_2y, 3),
+            "y10": round(current_10y, 3),
+            "y30": round(current_30y, 3) if current_30y else None,
+            "spread_2y10y": round(current_spread, 3),
+            "inverted": inverted_now,
+            "date": str(y10["date"].iloc[-1].date()),
+        },
+        "inversions": inversion_periods,
+        "data_start": str(merged["date"].iloc[0].date()),
+        "data_end": str(merged["date"].iloc[-1].date()),
+        "series": series,
+    }
+
+
+def india_yield() -> dict:
+    df = _fetch_fred("INDIRLTLT01STM", "india_10y", max_age=168)
+
+    if df.empty:
+        return {"error": "Could not fetch India yield data"}
+
+    current = float(df["value"].iloc[-1])
+    hist_mean = float(df["value"].mean())
+
+    recent = df[df["date"] >= "2012-01-01"]
+    series = [
+        {"date": str(r["date"].date()), "value": round(float(r["value"]), 3)}
+        for _, r in recent.iterrows()
+    ]
+
+    return {
+        "country": "India",
+        "metric": "10-Year G-Sec Yield",
+        "current": round(current, 3),
+        "mean": round(hist_mean, 3),
+        "date": str(df["date"].iloc[-1].date()),
+        "note": "Monthly data from FRED, approximately 2 month lag",
+        "series": series,
+    }
