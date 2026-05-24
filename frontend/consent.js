@@ -3,14 +3,14 @@
   var stored = localStorage.getItem(KEY);
 
   function grantGA() {
-    window["ga-disable-G-XXXXXXXXXX"] = false;
+    window["ga-disable-G-94DE53GC07"] = false;
     gtag("consent", "update", {
       analytics_storage: "granted",
     });
   }
 
   function denyGA() {
-    window["ga-disable-G-XXXXXXXXXX"] = true;
+    window["ga-disable-G-94DE53GC07"] = true;
   }
 
   function hideBanner() {
