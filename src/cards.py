@@ -1,4 +1,4 @@
-"""Shareable regime card — generates a branded PNG for a given index."""
+"""Shareable regime card — generates a data-rich PNG showing regime snapshot."""
 from __future__ import annotations
 
 import io
@@ -7,14 +7,16 @@ import sqlite3
 import urllib.request
 from pathlib import Path
 
+from . import ma_regime
 from .config import DB_PATH, INDICES, ROOT
 
 COLORS = {"bear": (227, 84, 84), "neutral": (212, 160, 23), "bull": (52, 198, 115)}
 BG = (10, 13, 18)
 PANEL = (22, 27, 34)
-BORDER = (35, 40, 48)
+BORDER = (45, 50, 58)
 WHITE = (255, 255, 255)
 GRAY = (139, 149, 163)
+DARK_GRAY = (100, 108, 120)
 VIOLET = (167, 139, 250)
 W, H = 1200, 630
 
@@ -44,7 +46,6 @@ def _font(size: int):
             pass
     for p in [
         "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
-        "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
         "/System/Library/Fonts/Helvetica.ttc",
     ]:
         if os.path.exists(p):
@@ -53,6 +54,35 @@ def _font(size: int):
             except Exception:
                 continue
     return ImageFont.load_default()
+
+
+def _draw_prob_bar(draw, x, y, w, h, bear, neutral, bull):
+    bear_w = int(w * bear)
+    neutral_w = int(w * neutral)
+    bull_w = w - bear_w - neutral_w
+    draw.rounded_rectangle([x, y, x + w, y + h], radius=h // 2, fill=(30, 34, 42))
+    cx = x
+    if bear_w > 0:
+        draw.rectangle([cx, y, cx + bear_w, y + h], fill=COLORS["bear"])
+    cx += bear_w
+    if neutral_w > 0:
+        draw.rectangle([cx, y, cx + neutral_w, y + h], fill=COLORS["neutral"])
+    cx += neutral_w
+    if bull_w > 0:
+        draw.rectangle([cx, y, cx + bull_w, y + h], fill=COLORS["bull"])
+    draw.rounded_rectangle([x, y, x + w, y + h], radius=h // 2, outline=(30, 34, 42), width=1)
+
+
+def _draw_regime_pill(draw, x, y, state, font):
+    color = COLORS.get(state, GRAY)
+    text = state.upper()
+    bbox = draw.textbbox((0, 0), text, font=font)
+    tw = bbox[2] - bbox[0]
+    pw, ph = tw + 20, bbox[3] - bbox[1] + 12
+    text_color = WHITE if state != "neutral" else (26, 26, 26)
+    draw.rounded_rectangle([x, y, x + pw, y + ph], radius=ph // 2, fill=color)
+    draw.text((x + 10, y + 6), text, fill=text_color, font=font)
+    return pw
 
 
 def generate_card(index_key: str) -> bytes:
@@ -85,70 +115,99 @@ def generate_card(index_key: str) -> bytes:
         else:
             break
 
+    try:
+        sma200 = ma_regime.today(index_key, 200, kind="sma")
+        sma_regime = sma200.get("regime", "?")
+    except Exception:
+        sma_regime = "?"
+    try:
+        ema200 = ma_regime.today(index_key, 200, kind="ema")
+        ema_regime = ema200.get("regime", "?")
+    except Exception:
+        ema_regime = "?"
+
     confidence = max(bear, neutral, bull) * 100
     regime_color = COLORS.get(hard_state, GRAY)
 
     img = Image.new("RGB", (W, H), BG)
     draw = ImageDraw.Draw(img)
 
+    f12 = _font(12)
     f14 = _font(14)
-    f18 = _font(18)
-    f22 = _font(22)
-    f28 = _font(28)
-    f52 = _font(52)
-    f72 = _font(72)
+    f16 = _font(16)
+    f20 = _font(20)
+    f24 = _font(24)
+    f48 = _font(48)
+    f56 = _font(56)
 
-    pad = 60
+    pad = 48
+    right_col = 660
 
-    # Top bar line
-    draw.rectangle([0, 0, W, 4], fill=regime_color)
+    # ── Top color bar ──
+    draw.rectangle([0, 0, W, 5], fill=regime_color)
 
-    # Brand
-    draw.text((pad, 36), "REGIME COMPASS", fill=VIOLET, font=f18)
+    # ── Left column: index info ──
+    draw.text((pad, 28), "REGIME COMPASS", fill=VIOLET, font=f14)
+    draw.text((pad, 68), cfg["name"], fill=WHITE, font=f56)
+    draw.text((pad, 138), f'{cfg["country"]}  ·  {cfg["currency"]}  ·  {price:,.2f}', fill=GRAY, font=f20)
 
-    # Index name
-    draw.text((pad, 90), cfg["name"], fill=WHITE, font=f72)
+    # ── HMM regime state ──
+    draw.text((pad, 190), "HMM REGIME", fill=DARK_GRAY, font=f12)
+    draw.text((pad, 210), hard_state.upper(), fill=regime_color, font=f48)
+    draw.text((pad, 270), f"{confidence:.0f}% confidence  ·  {days}d in regime", fill=GRAY, font=f16)
 
-    # Country + currency tag
-    tag_y = 170
-    draw.text((pad, tag_y), f'{cfg["country"]}  ·  {cfg["currency"]}', fill=GRAY, font=f22)
+    # ── Probability bar ──
+    draw.text((pad, 310), "PROBABILITY", fill=DARK_GRAY, font=f12)
+    bar_w = right_col - pad - 40
+    _draw_prob_bar(draw, pad, 330, bar_w, 24, bear, neutral, bull)
+    draw.text((pad, 362), f"Bear {bear*100:.0f}%", fill=COLORS["bear"], font=f14)
+    draw.text((pad + bar_w // 2 - 30, 362), f"Neutral {neutral*100:.0f}%", fill=COLORS["neutral"], font=f14)
+    draw.text((pad + bar_w - 80, 362), f"Bull {bull*100:.0f}%", fill=COLORS["bull"], font=f14)
 
-    # Regime state - large
-    state_y = 230
-    draw.text((pad, state_y), hard_state.upper(), fill=regime_color, font=f52)
+    # ── Right column: model agreement panel ──
+    panel_x, panel_y = right_col, 28
+    panel_w, panel_h = W - right_col - pad, 360
+    draw.rounded_rectangle(
+        [panel_x, panel_y, panel_x + panel_w, panel_y + panel_h],
+        radius=16, fill=PANEL, outline=BORDER,
+    )
 
-    # Confidence pill
-    pill_y = 300
-    pill_text = f"{confidence:.0f}% confidence  ·  {days}d in regime"
-    bbox = draw.textbbox((0, 0), pill_text, font=f22)
-    pw = bbox[2] - bbox[0] + 40
-    ph = bbox[3] - bbox[1] + 20
-    draw.rounded_rectangle([pad, pill_y, pad + pw, pill_y + ph], radius=ph // 2, fill=PANEL, outline=BORDER)
-    draw.text((pad + 20, pill_y + 10), pill_text, fill=WHITE, font=f22)
+    inner_pad = 28
+    ix = panel_x + inner_pad
+    iy = panel_y + inner_pad
 
-    # Price
-    price_y = 370
-    draw.text((pad, price_y), f"Price: {price:,.2f} {cfg['currency']}", fill=GRAY, font=f28)
+    draw.text((ix, iy), "MODEL AGREEMENT", fill=DARK_GRAY, font=f12)
+    iy += 30
 
-    # Date
-    draw.text((pad, price_y + 44), f"As of {date}", fill=GRAY, font=f22)
+    models = [
+        ("Hidden Markov Model", hard_state),
+        ("200-day SMA", sma_regime),
+        ("200-day EMA", ema_regime),
+    ]
+    for label, regime in models:
+        draw.text((ix, iy), label, fill=GRAY, font=f16)
+        iy += 24
+        if regime in COLORS:
+            _draw_regime_pill(draw, ix, iy, regime, f14)
+        else:
+            draw.text((ix, iy), regime.upper(), fill=GRAY, font=f14)
+        iy += 40
 
-    # Compass motif (right side)
-    cx, cy = W - 140, 200
-    r = 80
-    draw.ellipse([cx - r, cy - r, cx + r, cy + r], outline=BORDER, width=2)
-    tri = 55
-    draw.polygon([(cx, cy - tri), (cx - 22, cy - 6), (cx + 22, cy - 6)], fill=(52, 198, 115))
-    draw.polygon([(cx, cy + tri), (cx - 22, cy + 6), (cx + 22, cy + 6)], fill=(227, 84, 84))
-    draw.rectangle([cx + 30, cy - 4, cx + 50, cy + 4], fill=(212, 160, 23))
-    draw.rectangle([cx - 50, cy - 4, cx - 30, cy + 4], fill=(212, 160, 23))
-    draw.ellipse([cx - 7, cy - 7, cx + 7, cy + 7], fill=WHITE)
-    draw.ellipse([cx - 3, cy - 3, cx + 3, cy + 3], fill=BG)
+    agreement = sum(1 for _, r in models if r == hard_state)
+    if agreement == 3:
+        ag_text, ag_color = "All 3 models agree", COLORS.get(hard_state, GRAY)
+    elif agreement == 2:
+        ag_text, ag_color = "2 of 3 models agree", COLORS.get(hard_state, GRAY)
+    else:
+        ag_text, ag_color = "Models disagree", COLORS["neutral"]
 
-    # Bottom bar
-    draw.rectangle([0, H - 56, W, H], fill=PANEL)
-    draw.text((pad, H - 42), "regimecompass.com", fill=VIOLET, font=f18)
-    draw.text((W - pad - 200, H - 42), "by iQuant Labs", fill=GRAY, font=f18)
+    draw.text((ix, iy + 10), ag_text, fill=ag_color, font=f20)
+
+    # ── Bottom bar ──
+    draw.rectangle([0, H - 50, W, H], fill=PANEL)
+    draw.line([(0, H - 50), (W, H - 50)], fill=BORDER, width=1)
+    draw.text((pad, H - 38), f"regimecompass.com  ·  {date}", fill=GRAY, font=f14)
+    draw.text((W - pad - 120, H - 38), "by iQuant Labs", fill=VIOLET, font=f14)
 
     buf = io.BytesIO()
     img.save(buf, "PNG", optimize=True)
