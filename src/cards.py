@@ -18,6 +18,7 @@ WHITE = (255, 255, 255)
 GRAY = (139, 149, 163)
 DARK_GRAY = (100, 108, 120)
 VIOLET = (167, 139, 250)
+NEUTRAL_TEXT = (26, 26, 26)
 W, H = 1200, 630
 
 _FONT_DIR = ROOT / "data" / "fonts"
@@ -56,33 +57,87 @@ def _font(size: int):
     return ImageFont.load_default()
 
 
-def _draw_prob_bar(draw, x, y, w, h, bear, neutral, bull):
-    bear_w = int(w * bear)
-    neutral_w = int(w * neutral)
-    bull_w = w - bear_w - neutral_w
-    draw.rounded_rectangle([x, y, x + w, y + h], radius=h // 2, fill=(30, 34, 42))
-    cx = x
-    if bear_w > 0:
-        draw.rectangle([cx, y, cx + bear_w, y + h], fill=COLORS["bear"])
-    cx += bear_w
-    if neutral_w > 0:
-        draw.rectangle([cx, y, cx + neutral_w, y + h], fill=COLORS["neutral"])
-    cx += neutral_w
-    if bull_w > 0:
-        draw.rectangle([cx, y, cx + bull_w, y + h], fill=COLORS["bull"])
-    draw.rounded_rectangle([x, y, x + w, y + h], radius=h // 2, outline=(30, 34, 42), width=1)
-
-
-def _draw_regime_pill(draw, x, y, state, font):
-    color = COLORS.get(state, GRAY)
-    text = state.upper()
+def _text_width(draw, text: str, font) -> int:
     bbox = draw.textbbox((0, 0), text, font=font)
-    tw = bbox[2] - bbox[0]
-    pw, ph = tw + 20, bbox[3] - bbox[1] + 12
-    text_color = WHITE if state != "neutral" else (26, 26, 26)
-    draw.rounded_rectangle([x, y, x + pw, y + ph], radius=ph // 2, fill=color)
-    draw.text((x + 10, y + 6), text, fill=text_color, font=font)
-    return pw
+    return bbox[2] - bbox[0]
+
+
+def _text_height(draw, text: str, font) -> int:
+    bbox = draw.textbbox((0, 0), text, font=font)
+    return bbox[3] - bbox[1]
+
+
+def _draw_centered(draw, y: int, text: str, font, fill):
+    tw = _text_width(draw, text, font)
+    draw.text(((W - tw) // 2, y), text, fill=fill, font=font)
+
+
+def _draw_prob_bar(draw, cx, y, w, h, bear, neutral, bull, f_label):
+    """Draw a centered horizontal stacked probability bar with labels below."""
+    x = cx - w // 2
+    # Background track
+    draw.rounded_rectangle([x, y, x + w, y + h], radius=h // 2, fill=(30, 34, 42))
+
+    bear_w = max(int(w * bear), 1) if bear > 0.005 else 0
+    neutral_w = max(int(w * neutral), 1) if neutral > 0.005 else 0
+    bull_w = w - bear_w - neutral_w if (bear_w + neutral_w) < w else 0
+
+    # Clip segments to rounded shape via mask
+    from PIL import Image, ImageDraw as ID
+    mask = Image.new("L", (w, h), 0)
+    md = ID.Draw(mask)
+    md.rounded_rectangle([0, 0, w, h], radius=h // 2, fill=255)
+
+    bar = Image.new("RGB", (w, h), (30, 34, 42))
+    bd = ID.Draw(bar)
+    px = 0
+    if bear_w > 0:
+        bd.rectangle([px, 0, px + bear_w, h], fill=COLORS["bear"])
+        px += bear_w
+    if neutral_w > 0:
+        bd.rectangle([px, 0, px + neutral_w, h], fill=COLORS["neutral"])
+        px += neutral_w
+    if bull_w > 0:
+        bd.rectangle([px, 0, px + bull_w, h], fill=COLORS["bull"])
+
+    # Paste bar onto main image using mask
+    draw._image.paste(bar, (x, y), mask)
+
+    # Labels below the bar — spread across bar width
+    label_y = y + h + 6
+    bear_label = f"Bear {bear*100:.0f}%"
+    neut_label = f"Neutral {neutral*100:.0f}%"
+    bull_label = f"Bull {bull*100:.0f}%"
+
+    # Bear label left-aligned to bar start
+    draw.text((x, label_y), bear_label, fill=COLORS["bear"], font=f_label)
+    # Neutral label centered
+    nw = _text_width(draw, neut_label, f_label)
+    draw.text((cx - nw // 2, label_y), neut_label, fill=COLORS["neutral"], font=f_label)
+    # Bull label right-aligned to bar end
+    bw = _text_width(draw, bull_label, f_label)
+    draw.text((x + w - bw, label_y), bull_label, fill=COLORS["bull"], font=f_label)
+
+
+def _draw_pill(draw, cx, y, label: str, regime: str, f_label, f_regime):
+    """Draw a model pill: 'HMM: BULL' with colored rounded-rect background.
+    cx is the center x of the pill. Returns pill width."""
+    color = COLORS.get(regime, GRAY)
+    text_color = NEUTRAL_TEXT if regime == "neutral" else WHITE
+    regime_text = regime.upper() if regime in COLORS else "?"
+
+    full_text = f"{label}: {regime_text}"
+    tw = _text_width(draw, full_text, f_regime)
+    pad_x, pad_y = 16, 8
+    pw = tw + pad_x * 2
+    ph = _text_height(draw, full_text, f_regime) + pad_y * 2
+
+    rx = cx - pw // 2
+    ry = y
+
+    draw.rounded_rectangle([rx, ry, rx + pw, ry + ph], radius=ph // 2, fill=color)
+    draw.text((rx + pad_x, ry + pad_y), full_text, fill=text_color, font=f_regime)
+    return pw, ph
 
 
 def generate_card(index_key: str) -> bytes:
@@ -129,85 +184,95 @@ def generate_card(index_key: str) -> bytes:
     confidence = max(bear, neutral, bull) * 100
     regime_color = COLORS.get(hard_state, GRAY)
 
+    # ── Build canvas ──
     img = Image.new("RGB", (W, H), BG)
     draw = ImageDraw.Draw(img)
 
     f12 = _font(12)
+    f13 = _font(13)
     f14 = _font(14)
+    f15 = _font(15)
     f16 = _font(16)
+    f18 = _font(18)
     f20 = _font(20)
-    f24 = _font(24)
-    f48 = _font(48)
+    f44 = _font(44)
     f56 = _font(56)
 
-    pad = 48
-    right_col = 660
+    cx = W // 2  # center x
 
-    # ── Top color bar ──
-    draw.rectangle([0, 0, W, 5], fill=regime_color)
+    # ── 1. Top color bar (4px) ──
+    draw.rectangle([0, 0, W, 4], fill=regime_color)
 
-    # ── Left column: index info ──
-    draw.text((pad, 28), "REGIME COMPASS", fill=VIOLET, font=f14)
-    draw.text((pad, 68), cfg["name"], fill=WHITE, font=f56)
-    draw.text((pad, 138), f'{cfg["country"]}  ·  {cfg["currency"]}  ·  {price:,.2f}', fill=GRAY, font=f20)
+    # ── 2. Brand line ──
+    _draw_centered(draw, 54, "REGIME COMPASS", f13, VIOLET)
 
-    # ── HMM regime state ──
-    draw.text((pad, 190), "HMM REGIME", fill=DARK_GRAY, font=f12)
-    draw.text((pad, 210), hard_state.upper(), fill=regime_color, font=f48)
-    draw.text((pad, 270), f"{confidence:.0f}% confidence  ·  {days}d in regime", fill=GRAY, font=f16)
+    # ── 3. Index name — large, white, centered ──
+    _draw_centered(draw, 86, cfg["name"], f56, WHITE)
 
-    # ── Probability bar ──
-    draw.text((pad, 310), "PROBABILITY", fill=DARK_GRAY, font=f12)
-    bar_w = right_col - pad - 40
-    _draw_prob_bar(draw, pad, 330, bar_w, 24, bear, neutral, bull)
-    draw.text((pad, 362), f"Bear {bear*100:.0f}%", fill=COLORS["bear"], font=f14)
-    draw.text((pad + bar_w // 2 - 30, 362), f"Neutral {neutral*100:.0f}%", fill=COLORS["neutral"], font=f14)
-    draw.text((pad + bar_w - 80, 362), f"Bull {bull*100:.0f}%", fill=COLORS["bull"], font=f14)
+    # ── 4. Subtitle: country · currency · price ──
+    subtitle = f'{cfg["country"]}  ·  {cfg["currency"]}  ·  {price:,.2f}'
+    _draw_centered(draw, 164, subtitle, f18, GRAY)
 
-    # ── Right column: model agreement panel ──
-    panel_x, panel_y = right_col, 28
-    panel_w, panel_h = W - right_col - pad, 360
-    draw.rounded_rectangle(
-        [panel_x, panel_y, panel_x + panel_w, panel_y + panel_h],
-        radius=16, fill=PANEL, outline=BORDER,
-    )
+    # ── 5. Regime state — large, colored ──
+    _draw_centered(draw, 224, hard_state.upper(), f44, regime_color)
 
-    inner_pad = 28
-    ix = panel_x + inner_pad
-    iy = panel_y + inner_pad
+    # ── 6. Confidence + duration ──
+    conf_line = f"{confidence:.0f}% confidence  ·  {days}d in regime"
+    _draw_centered(draw, 284, conf_line, f16, GRAY)
 
-    draw.text((ix, iy), "MODEL AGREEMENT", fill=DARK_GRAY, font=f12)
-    iy += 30
-
+    # ── 7. Three-model pill row ──
+    pill_y = 344
     models = [
-        ("Hidden Markov Model", hard_state),
-        ("200-day SMA", sma_regime),
-        ("200-day EMA", ema_regime),
+        ("HMM", hard_state),
+        ("SMA", sma_regime),
+        ("EMA", ema_regime),
     ]
+    # Measure total width first to center the row
+    pill_gap = 16
+    pill_widths = []
     for label, regime in models:
-        draw.text((ix, iy), label, fill=GRAY, font=f16)
-        iy += 24
-        if regime in COLORS:
-            _draw_regime_pill(draw, ix, iy, regime, f14)
-        else:
-            draw.text((ix, iy), regime.upper(), fill=GRAY, font=f14)
-        iy += 40
+        regime_text = regime.upper() if regime in COLORS else "?"
+        full = f"{label}: {regime_text}"
+        tw = _text_width(draw, full, f15)
+        pw = tw + 32  # pad_x * 2
+        pill_widths.append(pw)
+    total_pills_w = sum(pill_widths) + pill_gap * (len(models) - 1)
+    pill_x = cx - total_pills_w // 2
 
-    agreement = sum(1 for _, r in models if r == hard_state)
-    if agreement == 3:
-        ag_text, ag_color = "All 3 models agree", COLORS.get(hard_state, GRAY)
-    elif agreement == 2:
-        ag_text, ag_color = "2 of 3 models agree", COLORS.get(hard_state, GRAY)
-    else:
-        ag_text, ag_color = "Models disagree", COLORS["neutral"]
+    pill_h = 0
+    for i, (label, regime) in enumerate(models):
+        pcx = pill_x + pill_widths[i] // 2
+        pw, ph = _draw_pill(draw, pcx, pill_y, label, regime, f15, f15)
+        pill_h = max(pill_h, ph)
+        pill_x += pill_widths[i] + pill_gap
 
-    draw.text((ix, iy + 10), ag_text, fill=ag_color, font=f20)
+    # ── 8. Probability bar ──
+    bar_y = pill_y + pill_h + 40
+    bar_w = 500
+    bar_h = 18
+    _draw_prob_bar(draw, cx, bar_y, bar_w, bar_h, bear, neutral, bull, f14)
 
-    # ── Bottom bar ──
-    draw.rectangle([0, H - 50, W, H], fill=PANEL)
-    draw.line([(0, H - 50), (W, H - 50)], fill=BORDER, width=1)
-    draw.text((pad, H - 38), f"regimecompass.com  ·  {date}", fill=GRAY, font=f14)
-    draw.text((W - pad - 120, H - 38), "by iQuant Labs", fill=VIOLET, font=f14)
+    # ── 9. Explainer line ──
+    explainer_y = bar_y + bar_h + 40
+    explainer = "Three regime models classify this market as risk-on, risk-off, or neutral."
+    _draw_centered(draw, explainer_y, explainer, f14, DARK_GRAY)
+
+    # ── 10. Bottom bar ──
+    bottom_h = 44
+    bottom_y = H - bottom_h
+    draw.rectangle([0, bottom_y, W, H], fill=PANEL)
+    draw.line([(0, bottom_y), (W, bottom_y)], fill=BORDER, width=1)
+
+    pad_bottom = 32
+    draw.text((pad_bottom, bottom_y + 14), "regimecompass.com", fill=GRAY, font=f14)
+
+    # Date centered
+    _draw_centered(draw, bottom_y + 14, date, f14, DARK_GRAY)
+
+    # "by iQuant Labs" right-aligned
+    iq_text = "by iQuant Labs"
+    iq_w = _text_width(draw, iq_text, f14)
+    draw.text((W - pad_bottom - iq_w, bottom_y + 14), iq_text, fill=VIOLET, font=f14)
 
     buf = io.BytesIO()
     img.save(buf, "PNG", optimize=True)
