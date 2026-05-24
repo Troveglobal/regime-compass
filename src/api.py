@@ -296,7 +296,7 @@ def _load_bundle_summary(key: str) -> dict:
 
 @app.get("/healthz")
 def healthz() -> dict:
-    return {"ok": True, "version": "v3.0", "bootstrap_done": _bootstrap_done, "data_present": _data_is_present()}
+    return {"ok": True, "version": "v3.1", "bootstrap_done": _bootstrap_done, "data_present": _data_is_present()}
 
 
 @app.get("/api/composite/today")

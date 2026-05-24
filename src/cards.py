@@ -204,7 +204,18 @@ def generate_card(index_key: str) -> bytes:
     draw.rectangle([0, 0, W, 4], fill=regime_color)
 
     # ── 2. Brand line ──
-    _draw_centered(draw, 54, "REGIME COMPASS", f13, VIOLET)
+    # Compass logo + brand name in white
+    brand_text = "Regime Compass"
+    brand_bbox = draw.textbbox((0, 0), brand_text, font=f16)
+    brand_w = brand_bbox[2] - brand_bbox[0]
+    brand_x = (W - brand_w - 24) // 2
+    brand_y = 46
+    # Draw compass motif (small green/red triangles)
+    logo_cx = brand_x
+    logo_cy = brand_y + 9
+    draw.polygon([(logo_cx, logo_cy - 8), (logo_cx - 5, logo_cy - 1), (logo_cx + 5, logo_cy - 1)], fill=(52, 198, 115))
+    draw.polygon([(logo_cx, logo_cy + 8), (logo_cx - 5, logo_cy + 1), (logo_cx + 5, logo_cy + 1)], fill=(227, 84, 84))
+    draw.text((logo_cx + 12, brand_y), brand_text, fill=WHITE, font=f16)
 
     # ── 3. Index name — large, white, centered ──
     _draw_centered(draw, 86, cfg["name"], f56, WHITE)
