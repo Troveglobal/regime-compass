@@ -142,6 +142,7 @@
     <div class="kicker">Per-Market Risk Score</div>
     <h1>How risk-on is each market right now?</h1>
     <div class="tagline">For every tracked market, a single risk score from 0 (full risk-off) to 100 (full risk-on). Each score blends the Hidden Markov Model, 200-day Simple Moving Average, and 200-day Exponential Moving Average for that specific market. Updated daily.</div>
+    <div id="share-container"></div>
   </div>
 
   <section class="panel">
@@ -258,14 +259,7 @@ load();
 </script>
 <script src="/share.js"></script>
 <script>
-document.getElementById("index-select").addEventListener("change", function() {
-  var sel = this.options[this.selectedIndex];
-  renderShareButtons("share-container", this.value, sel.textContent);
-});
-setTimeout(function() {
-  var sel = document.getElementById("index-select");
-  if (sel && sel.value) renderShareButtons("share-container", sel.value, sel.options[sel.selectedIndex].textContent);
-}, 1500);
+renderShareButtons("share-container", "nifty", "Regime Compass");
 </script>
 <script src="/consent.js"></script>
 </body>

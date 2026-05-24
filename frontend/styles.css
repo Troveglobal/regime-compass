@@ -591,16 +591,22 @@ footer.site .links a:hover { color: var(--text); }
    Share buttons
    ============================================================ */
 .share-bar {
-  display: flex; gap: 8px; flex-wrap: wrap; margin: 16px 0;
+  display: inline-flex; align-items: center; gap: 6px; margin: 12px 0 0;
+}
+.share-label {
+  font-size: 11px; color: var(--muted); text-transform: uppercase;
+  letter-spacing: 1.2px; font-weight: 600; margin-right: 4px;
 }
 .share-btn {
-  display: inline-flex; align-items: center; gap: 6px;
-  padding: 7px 14px; border-radius: var(--r-md); font-size: 12.5px;
-  font-weight: 600; cursor: pointer; border: 1px solid var(--border-strong);
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 32px; height: 32px; border-radius: var(--r-sm);
+  cursor: pointer; border: 1px solid var(--border);
   font-family: inherit; transition: var(--transition);
-  background: var(--panel-2); color: var(--text);
+  background: transparent; color: var(--muted); font-size: 11px; font-weight: 600;
+  padding: 0;
 }
-.share-btn:hover { background: var(--panel); border-color: var(--muted); transform: translateY(-1px); }
+.share-cp { width: auto; padding: 0 10px; }
+.share-btn:hover { background: var(--panel-2); color: var(--text-strong); border-color: var(--border-strong); }
 .share-li:hover { color: #0a66c2; border-color: #0a66c2; }
 .share-x:hover { color: #fff; border-color: #fff; }
 .share-dl:hover { color: var(--accent-strong); border-color: var(--accent); }

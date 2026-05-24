@@ -494,7 +494,7 @@ def share_page(index_key: str):
     confidence = max(bear, neutral, bull) * 100
     title = f"{cfg['name']} — {hard_state.upper()} regime"
     desc = f"{cfg['name']} is in a {hard_state} regime ({confidence:.0f}% HMM confidence) as of {date}. View all 6 markets on Regime Compass."
-    base = "https://www.regimecompass.com"
+    base = os.getenv("PUBLIC_URL", "https://web-production-05f4d0.up.railway.app")
     card_url = f"{base}/api/card/{index_key}"
     page_url = f"{base}/share/{index_key}"
     html = f"""<!DOCTYPE html>
@@ -508,8 +508,8 @@ def share_page(index_key: str):
 <meta property="og:title" content="{title}"/>
 <meta property="og:description" content="{desc}"/>
 <meta property="og:image" content="{card_url}"/>
-<meta property="og:image:width" content="800"/>
-<meta property="og:image:height" content="418"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
 <meta property="og:url" content="{page_url}"/>
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:title" content="{title}"/>
