@@ -13,16 +13,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Yield Curve — Regime Compass</title>
-  <meta name="description" content="US Treasury yield curve and 2y-10y spread monitor. Track inversions — the classic recession signal." />
+  <meta name="description" content="US Treasury yield curve and 3m-10y spread monitor. Track inversions — the classic recession signal." />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Regime Compass" />
   <meta property="og:title" content="Yield Curve — Regime Compass" />
-  <meta property="og:description" content="US Treasury yield curve and 2y-10y spread monitor. Track inversions — the classic recession signal." />
+  <meta property="og:description" content="US Treasury yield curve and 3m-10y spread monitor. Track inversions — the classic recession signal." />
   <meta property="og:image" content="https://regimecompass.com/og-image.png" />
   <meta property="og:url" content="https://regimecompass.com/yields" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Yield Curve — Regime Compass" />
-  <meta name="twitter:description" content="US Treasury yield curve and 2y-10y spread monitor. Track inversions — the classic recession signal." />
+  <meta name="twitter:description" content="US Treasury yield curve and 3m-10y spread monitor. Track inversions — the classic recession signal." />
   <meta name="twitter:image" content="https://regimecompass.com/og-image.png" />
   <meta name="theme-color" content="#0a0d12" />
   <link rel="canonical" href="https://www.regimecompass.com/yields" />
@@ -162,7 +162,7 @@
     .callout strong { color: var(--text-strong); }
   </style>
   <script type="application/ld+json">
-  {"@context": "https://schema.org", "@type": "WebPage", "name": "Yield Curve — Regime Compass", "description": "US Treasury yield curve and 2y-10y spread monitor. Track inversions — the classic recession signal.", "url": "https://www.regimecompass.com/yields", "isPartOf": {"@type": "WebSite", "name": "Regime Compass", "url": "https://www.regimecompass.com"}}
+  {"@context": "https://schema.org", "@type": "WebPage", "name": "Yield Curve — Regime Compass", "description": "US Treasury yield curve and 3m-10y spread monitor. Track inversions — the classic recession signal.", "url": "https://www.regimecompass.com/yields", "isPartOf": {"@type": "WebSite", "name": "Regime Compass", "url": "https://www.regimecompass.com"}}
   </script>
 </head>
 <body>
@@ -198,7 +198,7 @@
   <div class="hero">
     <div class="kicker">Yield Curve Monitor</div>
     <h1>Is the yield curve inverted?</h1>
-    <div class="tagline">US Treasury 2-year, 10-year, and 30-year yields with the 2y-10y spread &mdash; the classic recession signal. Updated daily.</div>
+    <div class="tagline">US Treasury 2-year, 10-year, and 30-year yields with the 3m-10y spread &mdash; the classic recession signal. Updated daily.</div>
     <div id="share-container"></div>
   </div>
 
@@ -206,10 +206,10 @@
   <section class="panel">
     <div class="panel-title">Current snapshot</div>
     <div class="snapshot-grid" id="snapshot-grid">
-      <div class="snap-item"><div class="label">2-Year</div><div class="value" id="val-y2">&mdash;</div></div>
+      <div class="snap-item"><div class="label">3-Month</div><div class="value" id="val-y3m">&mdash;</div></div>
       <div class="snap-item"><div class="label">10-Year</div><div class="value" id="val-y10">&mdash;</div></div>
       <div class="snap-item"><div class="label">30-Year</div><div class="value" id="val-y30">&mdash;</div></div>
-      <div class="snap-item spread-card"><div class="label">2y-10y Spread</div><div class="value" id="val-spread">&mdash;</div></div>
+      <div class="snap-item spread-card"><div class="label">3m-10y Spread</div><div class="value" id="val-spread">&mdash;</div></div>
       <div class="snap-item"><div class="label">Status</div><div class="value" id="val-status">&mdash;</div></div>
     </div>
     <div class="snap-date" id="snap-date"></div>
@@ -217,7 +217,7 @@
 
   <!-- Spread chart -->
   <section class="panel">
-    <div class="panel-title">2y-10y Treasury Spread</div>
+    <div class="panel-title">3m-10y Treasury Spread</div>
     <div class="chart-box">
       <canvas id="spread-chart" height="400"></canvas>
     </div>
@@ -325,7 +325,7 @@ function buildSpreadChart(series) {
       labels,
       datasets: [
         {
-          label: '2y-10y Spread (%)',
+          label: '3m-10y Spread (%)',
           data: spreads,
           borderColor: '#6ec1ff',
           borderWidth: 1.5,
@@ -408,8 +408,8 @@ function buildYieldsChart(series) {
       labels,
       datasets: [
         {
-          label: '2-Year',
-          data: sampled.map(d => d.y2),
+          label: '3-Month',
+          data: sampled.map(d => d.y3m),
           borderColor: '#a78bfa',
           borderWidth: 1.5,
           pointRadius: 0,
@@ -527,14 +527,14 @@ function buildIndiaChart(series) {
 
 /* ── Populate snapshot ── */
 function populateSnapshot(current) {
-  document.getElementById('val-y2').textContent = current.y2.toFixed(2) + '%';
+  document.getElementById('val-y3m').textContent = current.y3m.toFixed(2) + '%';
   document.getElementById('val-y10').textContent = current.y10.toFixed(2) + '%';
   document.getElementById('val-y30').textContent = current.y30.toFixed(2) + '%';
 
   const spreadEl = document.getElementById('val-spread');
-  const sign = current.spread_2y10y >= 0 ? '+' : '';
-  spreadEl.textContent = sign + current.spread_2y10y.toFixed(2) + '%';
-  spreadEl.className = 'value ' + (current.spread_2y10y >= 0 ? 'positive' : 'negative');
+  const sign = current.spread >= 0 ? '+' : '';
+  spreadEl.textContent = sign + current.spread.toFixed(2) + '%';
+  spreadEl.className = 'value ' + (current.spread >= 0 ? 'positive' : 'negative');
 
   const statusEl = document.getElementById('val-status');
   if (current.inverted) {
