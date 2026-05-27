@@ -141,7 +141,7 @@ def _start_scheduler() -> None:
         log.info("[scheduler] disabled via DISABLE_SCHEDULER env var.")
         return
     _scheduler = BackgroundScheduler(timezone="UTC")
-    # Daily 11:00 UTC = 16:30 IST = 19:00 SGT. Mon–Fri after NSE close.
+    # Daily 11:00 UTC = after US market close. Mon–Fri.
     _scheduler.add_job(_run_daily, CronTrigger(day_of_week="mon-fri", hour=11, minute=0), id="daily_update")
     # Weekly: Sunday 03:30 UTC.
     _scheduler.add_job(_run_weekly, CronTrigger(day_of_week="sun", hour=3, minute=30), id="weekly_refit")

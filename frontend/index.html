@@ -31,6 +31,18 @@
   <link rel="manifest" href="/manifest.json" />
   <style>
     .updated-ts { color: var(--muted); font-size: 12px; }
+    .above-fold {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--accent-strong);
+      letter-spacing: 0.02em;
+      margin: 0 0 18px;
+      padding: 8px 16px;
+      background: var(--accent-dim);
+      border: 1px solid rgba(167, 139, 250, 0.2);
+      border-radius: var(--r-md);
+      display: inline-block;
+    }
 
     /* Hero with logo */
     .hero-home { margin: 24px 0 48px; }
@@ -181,15 +193,13 @@
     <div class="links">
       <a href="/" class="active">Home</a>
       <a href="/composite">Risk Score</a>
+      <a href="/yields">Yield Curve</a>
       <span class="nav-group">
         <a href="/hmm">Hidden Markov Model</a>
         <a href="/ma">Moving Average</a>
         <a href="/ema">Exponential Moving Average</a>
       </span>
-      <span class="nav-group">
-        <a href="/yields">Yield Curve</a>
-        <a href="/seasonality">Seasonality</a>
-      </span>
+      <a href="/seasonality">Seasonality</a>
       <a href="/subscribe">Alerts</a>
       <a href="/about">About</a>
     </div>
@@ -201,8 +211,9 @@
     <div class="hero-grid">
       <div>
         <div class="kicker">Regime Compass</div>
+        <p class="above-fold">Daily regime classification across 10 global markets. Three independent models. Free.</p>
         <h1>What kind of<br/>market is this?</h1>
-        <div class="tagline">Three regime models, ten markets — equities, crypto, and commodities — side by side, updated daily. Volatility-based <strong>SMA</strong>, faster-reacting <strong>EMA</strong>, and a probabilistic <strong>Hidden Markov Model</strong>. Click any cell to drill in.</div>
+        <div class="tagline">Volatility-based <strong>SMA</strong>, faster-reacting <strong>EMA</strong>, and a probabilistic <strong>Hidden Markov Model</strong> — across US equities, crypto, commodities, and Asian indices. Updated daily after US market close. Click any cell to drill in.</div>
         <div style="margin-top: 22px; display: flex; gap: 12px; flex-wrap: wrap;">
           <a href="/composite" style="background: var(--accent); color: var(--bg); padding: 11px 22px; border-radius: var(--r-md); font-weight: 700; text-decoration: none; font-size: 14px;">View risk-on/off gauge →</a>
           <a href="/subscribe" style="background: transparent; color: var(--text); padding: 11px 22px; border-radius: var(--r-md); font-weight: 600; text-decoration: none; font-size: 14px; border: 1px solid var(--border-strong);">Get alerts</a>
@@ -370,7 +381,9 @@ async function loadHmmSnapshot() {
 
 (async () => {
   await Promise.all([loadDmaSnapshot(), loadEmaSnapshot(), loadHmmSnapshot()]);
-  document.getElementById("updated").textContent = "Updated " + new Date().toLocaleString();
+  const now = new Date();
+  const utc = now.toISOString().replace("T", " ").slice(0, 16) + " UTC";
+  document.getElementById("updated").textContent = "Last refresh: " + utc + " · Updated daily after US market close";
 })();
 </script>
 

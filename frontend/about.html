@@ -50,15 +50,13 @@
     <div class="links">
       <a href="/">Home</a>
       <a href="/composite">Risk Score</a>
+      <a href="/yields">Yield Curve</a>
       <span class="nav-group">
         <a href="/hmm">Hidden Markov Model</a>
         <a href="/ma">Moving Average</a>
         <a href="/ema">Exponential Moving Average</a>
       </span>
-      <span class="nav-group">
-        <a href="/yields">Yield Curve</a>
-        <a href="/seasonality">Seasonality</a>
-      </span>
+      <a href="/seasonality">Seasonality</a>
       <a href="/subscribe">Alerts</a>
       <a href="/about" class="active">About</a>
     </div>
@@ -86,7 +84,7 @@
   <div class="section">
     <h2>Why does it exist?</h2>
     <p>Discretionary traders often miss the moment a market regime changes. Vol gets quietly higher, correlations break, and the strategies that worked last quarter stop working — but it's hard to see in the moment. This tool is a second pair of eyes on the regime question: a quantitative, dispassionate read on what kind of market you're trading <em>today</em>.</p>
-    <p>It covers ten markets across equities, crypto, and commodities: <strong>Nifty 50</strong>, <strong>S&amp;P 500</strong>, <strong>Nasdaq 100</strong>, <strong>Nikkei 225</strong>, <strong>KOSPI</strong>, <strong>Shanghai Composite</strong>, <strong>Bitcoin</strong>, <strong>Ethereum</strong>, <strong>Gold</strong>, and <strong>Silver</strong>.</p>
+    <p>Ten markets across US equities, crypto, commodities, and Asia: <strong>S&amp;P 500</strong>, <strong>Nasdaq 100</strong>, <strong>Bitcoin</strong>, <strong>Ethereum</strong>, <strong>Gold</strong>, <strong>Silver</strong>, <strong>Nifty 50</strong>, <strong>Nikkei 225</strong>, <strong>KOSPI</strong>, and <strong>Shanghai Composite</strong>.</p>
   </div>
 
   <div class="section">
@@ -118,20 +116,20 @@
       <li><strong>Log returns</strong> — daily price change</li>
       <li><strong>10-day realized volatility</strong> — rolling standard deviation of returns</li>
       <li><strong>FX move vs USD</strong> — captures currency stress</li>
-      <li><strong>Implied volatility</strong> — VIX-equivalent index (Nifty + S&amp;P only; KOSPI and Shanghai lack a reliable feed)</li>
+      <li><strong>Implied volatility</strong> — VIX for US indices, India VIX for Nifty (where available)</li>
     </ul>
-    <p>The model is <strong>retrained every Sunday</strong> on the full dataset including the just-finished week. Daily probabilities are recomputed Monday-Friday at 16:30 IST (after NSE close) using the latest trained model.</p>
+    <p>The model is <strong>retrained every Sunday</strong> on the full dataset including the just-finished week. Daily probabilities are recomputed Monday–Friday at 11:00 UTC (after US market close) using the latest trained model.</p>
     <p>For technical detail, see the <a href="/methodology">Methodology</a> page.</p>
   </div>
 
   <div class="section">
-    <h2>About the author</h2>
+    <h2>Who built this</h2>
     <div class="author-card">
       <div class="avatar">AS</div>
       <div class="info">
         <h4>Aditya Sahasrabuddhe</h4>
-        <div class="role">Discretionary trader · builder of quantitative tooling</div>
-        <p>Aditya is an active trader managing a multi-account family portfolio in Indian equities. He builds analytical tools — including a daily AI-driven CIO brief and this regime indicator — to inform his own discretionary process rather than automate it. This dashboard is one piece of that workflow, shared publicly so other traders can use it (or argue with it) as they see fit.</p>
+        <div class="role">Singapore · quantitative tooling for wealth management</div>
+        <p>Aditya builds analytical tools for discretionary portfolio management — regime models, risk indicators, and AI-driven research workflows. Regime Compass is one piece of that toolkit, open-sourced so other traders and allocators can use it as an independent input into their own process.</p>
         <div class="links">
           <a href="https://www.linkedin.com/in/aditya-s1/" target="_blank" rel="noopener">
             <svg class="icon-li" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
@@ -144,7 +142,7 @@
 
   <div class="section">
     <h2>Important notice</h2>
-    <p>This tool is provided <strong>for educational and informational purposes only</strong>. It is not investment advice. The author is not a SEBI Registered Research Analyst. Trading and investing in equities carries substantial risk of loss. You are solely responsible for your own decisions. Read the full <a href="/disclaimer">disclaimer</a> before using.</p>
+    <p>This tool is provided <strong>for educational and informational purposes only</strong>. It is not investment advice and does not constitute a recommendation to buy, sell, or hold any security. Trading and investing carries substantial risk of loss. You are solely responsible for your own decisions. Read the full <a href="/disclaimer">disclaimer</a> before using.</p>
   </div>
 </div>
 

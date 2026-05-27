@@ -6,7 +6,11 @@ For each index, we compute a "risk score" in [-100, +100]:
   EMA score:  +100 if price > 200-EMA, else -100
 
 Per-index score = mean of the 3 sub-scores (any None contributions skipped).
-Composite     = mean across all indices, then mapped to a 0-100 gauge.
+
+Cross-market indicators (VIX regime, DXY regime) are added as separate
+inputs alongside the per-index scores.
+
+Composite     = mean across all inputs, then mapped to a 0-100 gauge.
    gauge = (composite + 100) / 2   so 0 = full bear, 50 = neutral, 100 = full bull.
 """
 from __future__ import annotations
@@ -14,13 +18,14 @@ from __future__ import annotations
 import sqlite3
 from typing import Optional
 
+import numpy as np
 import pandas as pd
 
 from . import ma_regime
-from .config import DB_PATH, INDICES
+from .config import DB_PATH, INDICES, raw_path
 
 
-COMPOSITE_PERIOD = 200  # which SMA/EMA period we use for the composite (long-term trend)
+COMPOSITE_PERIOD = 200
 
 
 def _hmm_score_from_probs(bear: float, neutral: float, bull: float) -> float:
@@ -33,6 +38,56 @@ def _ma_score(regime: str) -> float:
     if regime == "bear":
         return -100.0
     return 0.0
+
+
+def _vix_regime(vix: float) -> tuple[str, float]:
+    """Classify VIX level into a regime and score."""
+    if vix < 15:
+        return "low-vol", 100.0
+    elif vix < 20:
+        return "normal", 33.0
+    elif vix < 25:
+        return "elevated", -33.0
+    elif vix < 35:
+        return "high", -80.0
+    else:
+        return "extreme", -100.0
+
+
+def _dxy_regime(df: pd.DataFrame) -> tuple[str, float]:
+    """DXY vs 200-day SMA — strong dollar = risk-off headwind."""
+    if len(df) < 200:
+        return "unknown", 0.0
+    sma200 = df["fx"].rolling(200).mean()
+    latest = df["fx"].iloc[-1]
+    sma_val = sma200.iloc[-1]
+    gap_pct = (latest / sma_val - 1) * 100
+    if gap_pct > 2:
+        return "strong", -60.0
+    elif gap_pct > 0:
+        return "firm", -20.0
+    elif gap_pct > -2:
+        return "soft", 20.0
+    else:
+        return "weak", 60.0
+
+
+def _load_cross_market() -> dict:
+    """Load VIX and DXY regime from SPX raw data."""
+    try:
+        df = pd.read_parquet(raw_path("spx"))
+    except FileNotFoundError:
+        return {}
+    out = {}
+    if "vix" in df.columns:
+        vix_val = float(df["vix"].dropna().iloc[-1])
+        label, score = _vix_regime(vix_val)
+        out["vix"] = {"value": round(vix_val, 2), "regime": label, "score": round(score, 1)}
+    if "fx" in df.columns:
+        label, score = _dxy_regime(df)
+        dxy_val = float(df["fx"].dropna().iloc[-1])
+        out["dxy"] = {"value": round(dxy_val, 2), "regime": label, "score": round(score, 1)}
+    return out
 
 
 def composite_today() -> dict:
@@ -92,6 +147,15 @@ def composite_today() -> dict:
         score_sum += idx_score
         score_n += 1
 
+    # Cross-market indicators (VIX, DXY) as additional composite inputs
+    cross = _load_cross_market()
+    if "vix" in cross:
+        score_sum += cross["vix"]["score"]
+        score_n += 1
+    if "dxy" in cross:
+        score_sum += cross["dxy"]["score"]
+        score_n += 1
+
     composite_score = score_sum / score_n if score_n else 0.0
     gauge_value = (composite_score + 100.0) / 2.0  # map [-100, 100] -> [0, 100]
 
@@ -114,6 +178,7 @@ def composite_today() -> dict:
         "composite_period": COMPOSITE_PERIOD,
         "n_indices": score_n,
         "breakdown": breakdown,
+        "cross_market": cross,
     }
 
 

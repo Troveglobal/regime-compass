@@ -141,15 +141,13 @@
     <div class="links">
       <a href="/">Home</a>
       <a href="/composite">Risk Score</a>
+      <a href="/yields">Yield Curve</a>
       <span class="nav-group">
         <a href="/hmm">Hidden Markov Model</a>
         <a href="/ma" class="active">Moving Average</a>
         <a href="/ema">Exponential Moving Average</a>
       </span>
-      <span class="nav-group">
-        <a href="/yields">Yield Curve</a>
-        <a href="/seasonality">Seasonality</a>
-      </span>
+      <a href="/seasonality">Seasonality</a>
       <a href="/subscribe">Alerts</a>
       <a href="/about">About</a>
     </div>
@@ -348,7 +346,7 @@ const fmtPct = (v, signed=true) => (signed && v >= 0 ? "+" : "") + v.toFixed(2) 
 const fmtNum = v => v.toLocaleString("en-IN", { maximumFractionDigits: 2 });
 const cls = v => v >= 0 ? "positive" : "negative";
 
-let currentIndex = "nifty";
+let currentIndex = "spx";
 let currentPeriod = 200;
 let chart;
 

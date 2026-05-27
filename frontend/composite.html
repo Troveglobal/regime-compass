@@ -128,15 +128,13 @@
     <div class="links">
       <a href="/">Home</a>
       <a href="/composite" class="active">Risk Score</a>
+      <a href="/yields">Yield Curve</a>
       <span class="nav-group">
         <a href="/hmm">Hidden Markov Model</a>
         <a href="/ma">Moving Average</a>
         <a href="/ema">Exponential Moving Average</a>
       </span>
-      <span class="nav-group">
-        <a href="/yields">Yield Curve</a>
-        <a href="/seasonality">Seasonality</a>
-      </span>
+      <a href="/seasonality">Seasonality</a>
       <a href="/subscribe">Alerts</a>
       <a href="/about">About</a>
     </div>
@@ -153,7 +151,8 @@
 
   <section class="panel">
     <div class="panel-title">Today's risk score by market</div>
-    <p style="font-size:13px; color:var(--muted); margin:0 0 18px;">Each gauge is computed independently for that market only. We do NOT average across markets &mdash; aggregating six indices into a single "global" score with this small a sample isn't statistically meaningful. Treat each market on its own.</p>
+    <p style="font-size:13px; color:var(--muted); margin:0 0 18px;">Each gauge is computed independently for that market only. VIX and Dollar Index regime are included as cross-market risk inputs.</p>
+    <div id="cross-market" style="display:flex; gap:12px; margin-bottom:20px; flex-wrap:wrap;"></div>
     <div class="gauge-grid" id="gauge-grid"></div>
   </section>
 
@@ -208,6 +207,30 @@ function buildMiniGauge(gauge, score) {
 
 async function load() {
   const today = await (await fetch("/api/composite/today")).json();
+
+  // Cross-market indicators (VIX, DXY)
+  const crossEl = document.getElementById("cross-market");
+  if (today.cross_market) {
+    const cm = today.cross_market;
+    const items = [];
+    if (cm.vix) {
+      const vc = cm.vix.score > 20 ? "bull" : cm.vix.score < -20 ? "bear" : "neutral";
+      items.push(`<div class="sub-score ${vc}" style="flex:1;min-width:140px;padding:12px 16px;border-radius:var(--r-md);background:var(--panel);border:1px solid var(--border);">
+        <span class="lbl" style="font-size:10px;">VIX Regime</span>
+        <span class="val" style="font-size:16px;display:block;margin-top:4px;">${cm.vix.value}</span>
+        <span style="font-size:11px;color:var(--muted);display:block;margin-top:2px;">${cm.vix.regime}</span>
+      </div>`);
+    }
+    if (cm.dxy) {
+      const dc = cm.dxy.score > 0 ? "bull" : cm.dxy.score < -20 ? "bear" : "neutral";
+      items.push(`<div class="sub-score ${dc}" style="flex:1;min-width:140px;padding:12px 16px;border-radius:var(--r-md);background:var(--panel);border:1px solid var(--border);">
+        <span class="lbl" style="font-size:10px;">Dollar Index (DXY)</span>
+        <span class="val" style="font-size:16px;display:block;margin-top:4px;">${cm.dxy.value}</span>
+        <span style="font-size:11px;color:var(--muted);display:block;margin-top:2px;">${cm.dxy.regime} dollar</span>
+      </div>`);
+    }
+    crossEl.innerHTML = items.join("");
+  }
 
   const grid = document.getElementById("gauge-grid");
   grid.innerHTML = "";
@@ -265,7 +288,7 @@ load();
 </script>
 <script src="/share.js?v=3.1"></script>
 <script>
-renderShareButtons("share-container", "nifty", "Regime Compass");
+renderShareButtons("share-container", "spx", "Regime Compass");
 </script>
 <script src="/consent.js?v=3.1"></script>
 </body>
