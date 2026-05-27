@@ -13,16 +13,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Seasonality — Regime Compass</title>
-  <meta name="description" content="Monthly return heatmap for six global markets from 2010 to today. See which months historically favor bulls or bears." />
+  <meta name="description" content="Monthly return heatmap for ten markets from 2010 to today. See which months historically favor bulls or bears." />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Regime Compass" />
   <meta property="og:title" content="Seasonality — Regime Compass" />
-  <meta property="og:description" content="Monthly return heatmap for six global markets from 2010 to today. See which months historically favor bulls or bears." />
+  <meta property="og:description" content="Monthly return heatmap for ten markets from 2010 to today. See which months historically favor bulls or bears." />
   <meta property="og:image" content="https://www.regimecompass.com/og-image.png" />
   <meta property="og:url" content="https://www.regimecompass.com/seasonality" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Seasonality — Regime Compass" />
-  <meta name="twitter:description" content="Monthly return heatmap for six global markets from 2010 to today. See which months historically favor bulls or bears." />
+  <meta name="twitter:description" content="Monthly return heatmap for ten markets from 2010 to today. See which months historically favor bulls or bears." />
   <meta name="twitter:image" content="https://www.regimecompass.com/og-image.png" />
   <meta name="theme-color" content="#0a0d12" />
   <link rel="canonical" href="https://www.regimecompass.com/seasonality" />
@@ -87,7 +87,7 @@
     }
   </style>
   <script type="application/ld+json">
-  {"@context": "https://schema.org", "@type": "WebPage", "name": "Seasonality — Regime Compass", "description": "Monthly return heatmap for six global markets from 2010 to today. See which months historically favor bulls or bears.", "url": "https://www.regimecompass.com/seasonality", "isPartOf": {"@type": "WebSite", "name": "Regime Compass", "url": "https://www.regimecompass.com"}}
+  {"@context": "https://schema.org", "@type": "WebPage", "name": "Seasonality — Regime Compass", "description": "Monthly return heatmap for ten markets from 2010 to today. See which months historically favor bulls or bears.", "url": "https://www.regimecompass.com/seasonality", "isPartOf": {"@type": "WebSite", "name": "Regime Compass", "url": "https://www.regimecompass.com"}}
   </script>
 </head>
 <body>
@@ -107,11 +107,15 @@
     <div class="links">
       <a href="/">Home</a>
       <a href="/composite">Risk Score</a>
-      <a href="/hmm">HMM</a>
-      <a href="/ma">MA</a>
-      <a href="/ema">EMA</a>
-      <a href="/yields">Yield Curve</a>
-      <a href="/seasonality">Seasonality</a>
+      <span class="nav-group">
+        <a href="/hmm">Hidden Markov Model</a>
+        <a href="/ma">Moving Average</a>
+        <a href="/ema">Exponential Moving Average</a>
+      </span>
+      <span class="nav-group">
+        <a href="/yields">Yield Curve</a>
+        <a href="/seasonality" class="active">Seasonality</a>
+      </span>
       <a href="/subscribe">Alerts</a>
       <a href="/about">About</a>
     </div>
@@ -121,7 +125,7 @@
 <div class="wrap">
   <div class="hero">
     <h1>Seasonality</h1>
-    <div class="tagline">Monthly return patterns across six markets. Green months tend to be positive, red months tend to be negative. Historical average — not a prediction.</div>
+    <div class="tagline">Monthly return patterns across ten markets. Green months tend to be positive, red months tend to be negative. Historical average — not a prediction.</div>
     <div class="controls" style="margin-top: 18px;">
       <label for="index-select">Index</label>
       <select id="index-select"></select>

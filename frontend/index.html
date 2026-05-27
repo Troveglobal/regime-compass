@@ -13,16 +13,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Home — Regime Compass</title>
-  <meta name="description" content="Market regime overview across four global indices: moving-average regime (50/100/200-day) and Hidden Markov Model regime side by side." />
+  <meta name="description" content="Three regime models across ten markets — equities, crypto, and commodities — updated daily. SMA, EMA, and Hidden Markov Model side by side." />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Regime Compass" />
   <meta property="og:title" content="Regime Compass — What kind of market is this?" />
-  <meta property="og:description" content="Three regime models, four global indices, one snapshot. Updated daily. By iQuant Labs." />
+  <meta property="og:description" content="Three regime models, ten markets, one snapshot. Updated daily. By iQuant Labs." />
   <meta property="og:image" content="https://www.regimecompass.com/og-image.png" />
   <meta property="og:url" content="https://regimecompass.com" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Regime Compass — What kind of market is this?" />
-  <meta name="twitter:description" content="Three regime models, four global indices, one snapshot. Updated daily. By iQuant Labs." />
+  <meta name="twitter:description" content="Three regime models, ten markets, one snapshot. Updated daily. By iQuant Labs." />
   <meta name="twitter:image" content="https://www.regimecompass.com/og-image.png" />
   <meta name="theme-color" content="#0a0d12" />
   <link rel="canonical" href="https://www.regimecompass.com/" />
@@ -39,6 +39,28 @@
     .hero-logo { display: flex; align-items: center; justify-content: center; }
     .logo-svg-xl { width: 240px; height: 240px; animation: rise 0.6s ease-out; }
     .logo-svg-xl path[fill="#34c673"], .logo-svg-xl path[fill="#e35454"] { transform-origin: 120px 120px; animation: fade-in 1s ease-out; }
+    .hero-logo { cursor: pointer; }
+    .hero-logo .compass-needle {
+      transform-origin: 120px 120px;
+      transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .hero-logo:hover .compass-needle {
+      transform: rotate(25deg);
+    }
+    .hero-logo .compass-rings circle {
+      transition: all 0.5s ease;
+    }
+    .hero-logo:hover .compass-rings circle:nth-child(1) {
+      stroke: var(--accent);
+      opacity: 0.6;
+      filter: drop-shadow(0 0 8px rgba(167, 139, 250, 0.3));
+    }
+    .hero-logo:hover .compass-rings circle:nth-child(2) { opacity: 0.5; stroke: var(--accent); }
+    .hero-logo:hover .compass-rings circle:nth-child(3) { opacity: 0.4; stroke: var(--accent); }
+    .hero-logo:hover .logo-svg-xl {
+      filter: drop-shadow(0 0 20px rgba(167, 139, 250, 0.15));
+    }
+    .logo-svg-xl { transition: filter 0.5s ease; }
     @media (max-width: 900px) {
       .hero-grid { grid-template-columns: 1fr; gap: 24px; }
       .logo-svg-xl { width: 160px; height: 160px; }
@@ -133,7 +155,7 @@
     "@type": "WebSite",
     "name": "Regime Compass",
     "url": "https://www.regimecompass.com",
-    "description": "Three regime models, six global markets, updated daily. By iQuant Labs.",
+    "description": "Three regime models, ten markets, updated daily. By iQuant Labs.",
     "publisher": {
       "@type": "Organization",
       "name": "iQuant Labs",
@@ -159,11 +181,15 @@
     <div class="links">
       <a href="/" class="active">Home</a>
       <a href="/composite">Risk Score</a>
-      <a href="/hmm">Hidden Markov Model</a>
-      <a href="/ma">Moving Average</a>
-      <a href="/ema">Exponential Moving Average</a>
-      <a href="/yields">Yield Curve</a>
-      <a href="/seasonality">Seasonality</a>
+      <span class="nav-group">
+        <a href="/hmm">Hidden Markov Model</a>
+        <a href="/ma">Moving Average</a>
+        <a href="/ema">Exponential Moving Average</a>
+      </span>
+      <span class="nav-group">
+        <a href="/yields">Yield Curve</a>
+        <a href="/seasonality">Seasonality</a>
+      </span>
       <a href="/subscribe">Alerts</a>
       <a href="/about">About</a>
     </div>
@@ -176,7 +202,7 @@
       <div>
         <div class="kicker">Regime Compass</div>
         <h1>What kind of<br/>market is this?</h1>
-        <div class="tagline">Three regime models, six global markets — including <strong>Bitcoin</strong> and <strong>Ethereum</strong> — side by side, updated daily. Volatility-based <strong>SMA</strong>, faster-reacting <strong>EMA</strong>, and a probabilistic <strong>Hidden Markov Model</strong>. Click any cell to drill in.</div>
+        <div class="tagline">Three regime models, ten markets — equities, crypto, and commodities — side by side, updated daily. Volatility-based <strong>SMA</strong>, faster-reacting <strong>EMA</strong>, and a probabilistic <strong>Hidden Markov Model</strong>. Click any cell to drill in.</div>
         <div style="margin-top: 22px; display: flex; gap: 12px; flex-wrap: wrap;">
           <a href="/composite" style="background: var(--accent); color: var(--bg); padding: 11px 22px; border-radius: var(--r-md); font-weight: 700; text-decoration: none; font-size: 14px;">View risk-on/off gauge →</a>
           <a href="/subscribe" style="background: transparent; color: var(--text); padding: 11px 22px; border-radius: var(--r-md); font-weight: 600; text-decoration: none; font-size: 14px; border: 1px solid var(--border-strong);">Get alerts</a>
@@ -185,31 +211,29 @@
       </div>
       <div class="hero-logo">
         <svg class="logo-svg-xl" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
-          <!-- Faint outer rings -->
-          <circle cx="120" cy="120" r="115" fill="none" stroke="var(--border-strong)" stroke-width="1" opacity="0.5"/>
-          <circle cx="120" cy="120" r="98" fill="none" stroke="var(--border)" stroke-width="0.5" opacity="0.4"/>
-          <circle cx="120" cy="120" r="78" fill="none" stroke="var(--border)" stroke-width="0.5" opacity="0.3"/>
-          <!-- Tick marks at compass points -->
-          <g opacity="0.5" stroke="var(--muted)" stroke-width="1.5" stroke-linecap="round">
-            <line x1="120" y1="14" x2="120" y2="24"/>
-            <line x1="120" y1="216" x2="120" y2="226"/>
-            <line x1="14" y1="120" x2="24" y2="120"/>
-            <line x1="216" y1="120" x2="226" y2="120"/>
-            <line x1="46" y1="46" x2="53" y2="53" opacity="0.4"/>
-            <line x1="187" y1="46" x2="194" y2="53" opacity="0.4"/>
-            <line x1="46" y1="194" x2="53" y2="187" opacity="0.4"/>
-            <line x1="187" y1="194" x2="194" y2="187" opacity="0.4"/>
+          <g class="compass-rings">
+            <circle cx="120" cy="120" r="115" fill="none" stroke="var(--border-strong)" stroke-width="1" opacity="0.5"/>
+            <circle cx="120" cy="120" r="98" fill="none" stroke="var(--border)" stroke-width="0.5" opacity="0.4"/>
+            <circle cx="120" cy="120" r="78" fill="none" stroke="var(--border)" stroke-width="0.5" opacity="0.3"/>
           </g>
-          <!-- Bull arrow (north) -->
-          <path d="M120 28 L96 118 L144 118 Z" fill="#34c673" filter="drop-shadow(0 0 6px rgba(52,198,115,0.3))"/>
-          <!-- Bear arrow (south) -->
-          <path d="M120 212 L96 122 L144 122 Z" fill="#e35454" filter="drop-shadow(0 0 6px rgba(227,84,84,0.25))"/>
-          <!-- Neutral tick marks east/west -->
-          <rect x="195" y="116" width="22" height="8" rx="2" fill="#d4a017"/>
-          <rect x="23" y="116" width="22" height="8" rx="2" fill="#d4a017"/>
-          <!-- Center cap -->
-          <circle cx="120" cy="120" r="9" fill="var(--text-strong)"/>
-          <circle cx="120" cy="120" r="4" fill="var(--bg)"/>
+          <g class="compass-needle">
+            <g opacity="0.5" stroke="var(--muted)" stroke-width="1.5" stroke-linecap="round">
+              <line x1="120" y1="14" x2="120" y2="24"/>
+              <line x1="120" y1="216" x2="120" y2="226"/>
+              <line x1="14" y1="120" x2="24" y2="120"/>
+              <line x1="216" y1="120" x2="226" y2="120"/>
+              <line x1="46" y1="46" x2="53" y2="53" opacity="0.4"/>
+              <line x1="187" y1="46" x2="194" y2="53" opacity="0.4"/>
+              <line x1="46" y1="194" x2="53" y2="187" opacity="0.4"/>
+              <line x1="187" y1="194" x2="194" y2="187" opacity="0.4"/>
+            </g>
+            <path d="M120 28 L96 118 L144 118 Z" fill="#34c673" filter="drop-shadow(0 0 6px rgba(52,198,115,0.3))"/>
+            <path d="M120 212 L96 122 L144 122 Z" fill="#e35454" filter="drop-shadow(0 0 6px rgba(227,84,84,0.25))"/>
+            <rect x="195" y="116" width="22" height="8" rx="2" fill="#d4a017"/>
+            <rect x="23" y="116" width="22" height="8" rx="2" fill="#d4a017"/>
+            <circle cx="120" cy="120" r="9" fill="var(--text-strong)"/>
+            <circle cx="120" cy="120" r="4" fill="var(--bg)"/>
+          </g>
         </svg>
       </div>
     </div>

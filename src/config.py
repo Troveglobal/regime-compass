@@ -84,6 +84,38 @@ INDICES = {
         "cash_rate": 0.020,
         "cash_label": "US T-bill",
     },
+    "nasdaq": {
+        "name": "Nasdaq 100",
+        "country": "USA",
+        "currency": "USD",
+        "tickers": {"price": "^NDX", "fx": "DX-Y.NYB", "vix": "^VIX"},
+        "cash_rate": 0.020,
+        "cash_label": "US T-bill",
+    },
+    "nikkei": {
+        "name": "Nikkei 225",
+        "country": "Japan",
+        "currency": "JPY",
+        "tickers": {"price": "^N225", "fx": "JPY=X", "vix": None},
+        "cash_rate": 0.005,
+        "cash_label": "Japanese MMF",
+    },
+    "gold": {
+        "name": "Gold",
+        "country": "Commodity",
+        "currency": "USD",
+        "tickers": {"price": "GC=F", "fx": "DX-Y.NYB", "vix": None},
+        "cash_rate": 0.020,
+        "cash_label": "US T-bill",
+    },
+    "silver": {
+        "name": "Silver",
+        "country": "Commodity",
+        "currency": "USD",
+        "tickers": {"price": "SI=F", "fx": "DX-Y.NYB", "vix": None},
+        "cash_rate": 0.020,
+        "cash_label": "US T-bill",
+    },
 }
 
 DEFAULT_INDEX = "nifty"

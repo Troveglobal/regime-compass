@@ -146,17 +146,20 @@ def snapshot(kind: str = "sma") -> dict:
             "currency": cfg["currency"],
             "cells": {},
         }
-        for period in SUPPORTED_PERIODS:
-            t = today(key, period, kind)
-            row["cells"][period] = {
-                "regime": t["regime"],
-                "days_in_regime": t["days_in_regime"],
-                "price": t["price"],
-                "ma": t["ma"],
-                "gap_pct": t["gap_pct"],
-                "date": t["date"],
-            }
-        out["indices"].append(row)
+        try:
+            for period in SUPPORTED_PERIODS:
+                t = today(key, period, kind)
+                row["cells"][period] = {
+                    "regime": t["regime"],
+                    "days_in_regime": t["days_in_regime"],
+                    "price": t["price"],
+                    "ma": t["ma"],
+                    "gap_pct": t["gap_pct"],
+                    "date": t["date"],
+                }
+            out["indices"].append(row)
+        except (FileNotFoundError, KeyError):
+            pass
     return out
 
 

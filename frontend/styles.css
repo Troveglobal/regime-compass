@@ -144,7 +144,7 @@ nav.top .brand .dot {
   width: 8px; height: 8px; border-radius: 50%;
   background: linear-gradient(135deg, var(--bear) 0%, var(--neutral) 50%, var(--bull) 100%);
 }
-nav.top .links { display: flex; gap: 2px; margin-left: auto; flex-wrap: wrap; }
+nav.top .links { display: flex; gap: 4px; margin-left: auto; flex-wrap: wrap; align-items: center; }
 nav.top .links a {
   color: var(--muted);
   padding: 7px 14px;
@@ -162,6 +162,20 @@ nav.top .links a:hover {
 nav.top .links a.active {
   color: var(--accent-strong);
   background: var(--accent-dim);
+}
+nav.top .nav-group {
+  display: flex;
+  gap: 2px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 3px;
+}
+nav.top .nav-group a {
+  border-radius: var(--r-sm);
+}
+nav.top .nav-group a:hover {
+  background: var(--panel-2);
 }
 
 /* Compass logo (inline SVG with classes) */
@@ -512,6 +526,11 @@ footer.site .links a:hover { color: var(--text); }
     padding: 8px 12px;
     font-size: 12.5px;
     flex-shrink: 0;
+  }
+  nav.top .nav-group {
+    flex-shrink: 0;
+    padding: 2px;
+    gap: 1px;
   }
 
   /* Footer */

@@ -63,8 +63,11 @@ def composite_today() -> dict:
         if hmm:
             hmm_score = _hmm_score_from_probs(hmm["bear"], hmm["neutral"], hmm["bull"])
 
-        sma_today = ma_regime.today(key, COMPOSITE_PERIOD, kind="sma")
-        ema_today = ma_regime.today(key, COMPOSITE_PERIOD, kind="ema")
+        try:
+            sma_today = ma_regime.today(key, COMPOSITE_PERIOD, kind="sma")
+            ema_today = ma_regime.today(key, COMPOSITE_PERIOD, kind="ema")
+        except (FileNotFoundError, KeyError):
+            continue
         sma_score = _ma_score(sma_today["regime"])
         ema_score = _ma_score(ema_today["regime"])
 
@@ -136,8 +139,11 @@ def composite_history(days: int = 180) -> dict:
         hmm_df = hmm_df.set_index("date").sort_index()
 
         # SMA + EMA regime history
-        sma_df = ma_regime.compute_regime(key, COMPOSITE_PERIOD, kind="sma")
-        ema_df = ma_regime.compute_regime(key, COMPOSITE_PERIOD, kind="ema")
+        try:
+            sma_df = ma_regime.compute_regime(key, COMPOSITE_PERIOD, kind="sma")
+            ema_df = ma_regime.compute_regime(key, COMPOSITE_PERIOD, kind="ema")
+        except (FileNotFoundError, KeyError):
+            continue
         sma_df = sma_df.set_index("date").rename(columns={"regime": "sma_regime"})[["sma_regime"]]
         ema_df = ema_df.set_index("date").rename(columns={"regime": "ema_regime"})[["ema_regime"]]
 
