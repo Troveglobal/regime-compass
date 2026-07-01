@@ -48,3 +48,4 @@ src/smartmoney/store.db
 src/smartmoney/data/prices/
 src/smartmoney/data/raw/daily/
 src/smartmoney/__pycache__/
+src/markets/__pycache__/

@@ -46,6 +46,7 @@ from .config import (
 
 FRONTEND_DIR = Path(__file__).resolve().parent.parent / "frontend"
 SMARTMONEY_FEED = Path(__file__).resolve().parent / "smartmoney" / "out" / "feed.json"
+SECTORS_FEED = Path(__file__).resolve().parent / "markets" / "out" / "sectors.json"
 
 log = logging.getLogger("regime_compass")
 logging.basicConfig(level=logging.INFO, format="[%(asctime)s] %(levelname)s %(name)s — %(message)s")
@@ -98,6 +99,15 @@ def _run_smartmoney() -> None:
         log.exception("[smartmoney] refresh failed: %s", e)
 
 
+def _run_sectors() -> None:
+    """Refresh the India sector heatmap (Nifty sectoral index returns)."""
+    try:
+        from .markets import sectors as sec
+        sec.refresh()
+    except Exception as e:
+        log.exception("[sectors] refresh failed: %s", e)
+
+
 def _run_daily() -> None:
     from .alerts import detect_and_send
     from .inference import update_today_all
@@ -142,6 +152,9 @@ def _bootstrap_async() -> None:
         if not SMARTMONEY_FEED.exists():
             log.info("[bootstrap] No Smart Money feed — generating.")
             _run_smartmoney()
+        if not SECTORS_FEED.exists():
+            log.info("[bootstrap] No sector heatmap — generating.")
+            _run_sectors()
         _bootstrap_done = True
         log.info("[bootstrap] Ready.")
 
@@ -159,6 +172,8 @@ def _start_scheduler() -> None:
     _scheduler.add_job(_run_daily, CronTrigger(day_of_week="mon-fri", hour=11, minute=0), id="daily_update")
     # Smart Money India: 15:00 UTC = ~20:30 IST, after NSE publishes the day's bulk/block deals
     _scheduler.add_job(_run_smartmoney, CronTrigger(day_of_week="mon-fri", hour=15, minute=0), id="smartmoney_daily")
+    # India sector heatmap: 12:00 UTC = ~17:30 IST, after NSE index close is published
+    _scheduler.add_job(_run_sectors, CronTrigger(day_of_week="mon-fri", hour=12, minute=0), id="sectors_daily")
     # Weekly: Sunday 03:30 UTC.
     _scheduler.add_job(_run_weekly, CronTrigger(day_of_week="sun", hour=3, minute=30), id="weekly_refit")
     _scheduler.start()
@@ -937,6 +952,18 @@ if FRONTEND_DIR.exists():
             _run_smartmoney()
         if SMARTMONEY_FEED.exists():
             return FileResponse(SMARTMONEY_FEED, media_type="application/json")
+        return JSONResponse({"error": "feed unavailable"}, status_code=503)
+
+    @app.get("/sectors")
+    def sectors_page():
+        return FileResponse(FRONTEND_DIR / "sectors.html")
+
+    @app.get("/api/sectors")
+    def sectors_feed():
+        if not SECTORS_FEED.exists():
+            _run_sectors()
+        if SECTORS_FEED.exists():
+            return FileResponse(SECTORS_FEED, media_type="application/json")
         return JSONResponse({"error": "feed unavailable"}, status_code=503)
 
     @app.get("/valuation")

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-94DE53GC07"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', { analytics_storage: 'denied' });
+    gtag('js', new Date());
+    gtag('config', 'G-94DE53GC07');
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>India Sector Heatmap — Regime Compass</title>
+  <meta name="description" content="Daily performance of the Nifty sectoral indices — 1-day, 1-week and 1-month, in one heatmap. Updated daily." />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Regime Compass" />
+  <meta property="og:title" content="India Sector Heatmap — Regime Compass" />
+  <meta name="theme-color" content="#0a0d12" />
+  <link rel="canonical" href="https://www.regimecompass.com/sectors" />
+  <link rel="stylesheet" href="/styles.css?v=3.5" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="manifest" href="/manifest.json" />
+  <style>
+    .sec-toolbar { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 18px; }
+    .seg { display: inline-flex; gap: 2px; background: var(--panel); border: 1px solid var(--border); border-radius: var(--r-md); padding: 3px; }
+    .seg button { padding: 7px 15px; border-radius: var(--r-sm); background: none; border: none; color: var(--muted); font-size: 13px; font-weight: 500; cursor: pointer; font-family: inherit; transition: var(--transition); }
+    .seg button.active { background: var(--accent-dim); color: var(--accent-strong); }
+    .bench { font-size: 13px; color: var(--muted); }
+    .bench b { font-variant-numeric: tabular-nums; }
+    .sec-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(158px, 1fr)); gap: 10px; }
+    .sec-tile { border: 1px solid var(--border); border-radius: var(--r-md); padding: 15px 15px 13px; transition: var(--transition); }
+    .sec-tile:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+    .sec-name { font-size: 13px; font-weight: 600; color: var(--text-strong); }
+    .sec-main { font-size: 27px; font-weight: 700; font-variant-numeric: tabular-nums; margin-top: 7px; letter-spacing: -0.02em; line-height: 1; }
+    .sec-sub { font-size: 10.5px; color: var(--muted); margin-top: 8px; font-variant-numeric: tabular-nums; letter-spacing: 0.02em; }
+    .asof { color: var(--muted); font-size: 12px; margin-top: 22px; }
+  </style>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebPage","name":"India Sector Heatmap — Regime Compass","url":"https://www.regimecompass.com/sectors","isPartOf":{"@type":"WebSite","name":"Regime Compass","url":"https://www.regimecompass.com"}}
+  </script>
+</head>
+<body>
+<nav class="top">
+  <div class="inner">
+    <a class="brand" href="/"><svg class="logo-svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-label="Regime Compass logo">
+  <circle cx="12" cy="12" r="10" class="ring" fill="none" stroke="currentColor" stroke-width="0.6" opacity="0.5"/>
+  <path d="M12 2.5 L9.6 11 L14.4 11 Z" fill="#27ae60"/>
+  <path d="M12 21.5 L9.6 13 L14.4 13 Z" fill="#c0392b"/>
+  <rect x="19" y="11.4" width="2.7" height="1.2" fill="#d4a017"/>
+  <rect x="2.3" y="11.4" width="2.7" height="1.2" fill="#d4a017"/>
+  <circle cx="12" cy="12" r="1.4" class="needle" fill="currentColor"/>
+</svg> Regime Compass</a>
+    <button class="nav-burger" type="button" aria-label="Menu"><span></span><span></span><span></span></button>
+    <div class="links">
+      <a href="/" data-nav="/">Home</a>
+      <span class="nav-dd">
+        <span class="dd-trigger">Signals <span class="chev">&#9662;</span></span>
+        <span class="dd-menu">
+          <a href="/composite" data-nav="/composite">Risk Score <span class="dd-note">Composite</span></a>
+          <a href="/hmm" data-nav="/hmm">HMM <span class="dd-note">Hidden Markov Model</span></a>
+          <a href="/ma" data-nav="/ma">MA <span class="dd-note">Moving Average</span></a>
+          <a href="/ema" data-nav="/ema">EMA <span class="dd-note">Exponential Moving Average</span></a>
+        </span>
+      </span>
+      <span class="nav-dd">
+        <span class="dd-trigger">Smart Money <span class="chev">&#9662;</span></span>
+        <span class="dd-menu">
+          <a href="/smartmoney" data-nav="/smartmoney">Smart Money India <span class="dd-note">FII / DII flows</span></a>
+          <span class="dd-disabled">Smart Money US <span class="dd-note">coming soon</span></span>
+        </span>
+      </span>
+      <span class="nav-dd">
+        <span class="dd-trigger">Markets <span class="chev">&#9662;</span></span>
+        <span class="dd-menu">
+          <a href="/sectors" data-nav="/sectors">Sector Heatmap <span class="dd-note">India · daily</span></a>
+          <a href="/yields" data-nav="/yields">Yield Curve</a>
+          <a href="/seasonality" data-nav="/seasonality">Seasonality</a>
+          <span class="dd-soon">More market data soon</span>
+        </span>
+      </span>
+      <a href="/subscribe" data-nav="/subscribe">Alerts</a>
+      <a href="/about" data-nav="/about">About</a>
+    </div>
+  </div>
+  <script>(function(){var s=document.currentScript,nav=s.closest("nav.top");var p=location.pathname.replace(/\/+$/,"")||"/";nav.querySelectorAll("[data-nav]").forEach(function(a){if(a.getAttribute("data-nav")===p){a.classList.add("active");var d=a.closest(".nav-dd");if(d)d.classList.add("cat-active");}});var inner=nav.querySelector(".inner"),b=nav.querySelector(".nav-burger");if(b)b.addEventListener("click",function(e){e.stopPropagation();inner.classList.toggle("menu-open");});nav.querySelectorAll(".nav-dd>.dd-trigger").forEach(function(t){t.addEventListener("click",function(e){e.stopPropagation();var dd=t.parentNode,was=dd.classList.contains("open");nav.querySelectorAll(".nav-dd.open").forEach(function(o){o.classList.remove("open");});if(!was)dd.classList.add("open");});});document.addEventListener("click",function(){nav.querySelectorAll(".nav-dd.open").forEach(function(o){o.classList.remove("open");});inner.classList.remove("menu-open");});})();</script>
+</nav>
+
+<div class="wrap">
+  <div class="hero">
+    <p class="kicker">India Sectors</p>
+    <h1>How are sectors moving?</h1>
+    <p class="tagline">Daily performance of the Nifty sectoral indices — 1&#8209;day, 1&#8209;week and 1&#8209;month, in one heatmap. Updated daily.</p>
+  </div>
+
+  <div class="sec-toolbar">
+    <div class="seg" id="seg">
+      <button data-p="d1" class="active">1 Day</button>
+      <button data-p="w1">1 Week</button>
+      <button data-p="m1">1 Month</button>
+    </div>
+    <span class="bench" id="bench"></span>
+  </div>
+
+  <div class="sec-grid" id="grid"></div>
+  <p class="asof" id="asof"></p>
+</div>
+
+<script>
+(function(){
+  var DATA=null, period="d1";
+  var grid=document.getElementById("grid"), bench=document.getElementById("bench"), asof=document.getElementById("asof");
+  function fmt(r){ return r==null ? "—" : (r>=0?"+":"")+r.toFixed(2)+"%"; }
+  function color(r){
+    if(r==null) return {bg:"var(--panel-2)", bd:"var(--border)", fg:"var(--muted)"};
+    var a=Math.min(Math.abs(r)/3,1);
+    return r>=0
+      ? {bg:"rgba(52,198,115,"+(0.05+a*0.20)+")", bd:"rgba(52,198,115,"+(0.28+a*0.42)+")", fg:"var(--bull)"}
+      : {bg:"rgba(227,84,84,"+(0.05+a*0.20)+")",  bd:"rgba(227,84,84,"+(0.28+a*0.42)+")",  fg:"var(--bear)"};
+  }
+  function render(){
+    if(!DATA) return;
+    var rows=DATA.sectors.slice().sort(function(a,b){return (b[period]==null?-99:b[period])-(a[period]==null?-99:a[period]);});
+    grid.innerHTML=rows.map(function(s){
+      var c=color(s[period]);
+      return '<div class="sec-tile" style="background:'+c.bg+';border-color:'+c.bd+'">'
+        +'<div class="sec-name">'+s.label+'</div>'
+        +'<div class="sec-main" style="color:'+c.fg+'">'+fmt(s[period])+'</div>'
+        +'<div class="sec-sub">1D '+fmt(s.d1)+' · 1W '+fmt(s.w1)+' · 1M '+fmt(s.m1)+'</div>'
+        +'</div>';
+    }).join("");
+    if(DATA.benchmark){ var b=DATA.benchmark; bench.innerHTML='Nifty 50 <b style="color:'+(b[period]>=0?"var(--bull)":"var(--bear)")+'">'+fmt(b[period])+'</b>'; }
+    asof.textContent="As of "+new Date(DATA.as_of).toLocaleDateString("en-GB",{day:"numeric",month:"short",year:"numeric"})+" · Nifty sectoral indices, NSE. Not investment advice.";
+  }
+  document.getElementById("seg").addEventListener("click",function(e){
+    var btn=e.target.closest("button"); if(!btn) return;
+    period=btn.getAttribute("data-p");
+    [].forEach.call(this.children,function(x){x.classList.toggle("active",x===btn);});
+    render();
+  });
+  fetch("/api/sectors").then(function(r){return r.ok?r.json():null;}).then(function(d){ if(d){DATA=d; render();} else grid.innerHTML='<p class="bench">Sector data is refreshing — check back shortly.</p>'; }).catch(function(){});
+})();
+</script>
+</body>
+</html>
