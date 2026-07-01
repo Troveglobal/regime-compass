@@ -26,7 +26,7 @@
   <meta name="twitter:image" content="https://www.regimecompass.com/og-image.png" />
   <meta name="theme-color" content="#0a0d12" />
   <link rel="canonical" href="https://www.regimecompass.com/disclaimer" />
-  <link rel="stylesheet" href="/styles.css?v=3.3" />
+  <link rel="stylesheet" href="/styles.css?v=3.4" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="manifest" href="/manifest.json" />
   <script type="application/ld+json">
@@ -47,6 +47,7 @@
   <rect x="2.3" y="11.4" width="2.7" height="1.2" fill="#d4a017"/>
   <circle cx="12" cy="12" r="1.4" class="needle" fill="currentColor"/>
 </svg> Regime Compass</a>
+    <button class="nav-burger" type="button" aria-label="Menu"><span></span><span></span><span></span></button>
     <div class="links">
       <a href="/" data-nav="/">Home</a>
       <span class="nav-dd">
@@ -77,7 +78,7 @@
       <a href="/about" data-nav="/about">About</a>
     </div>
   </div>
-  <script>(function(){var p=location.pathname.replace(/\/+$/,'')||'/';document.querySelectorAll('nav.top [data-nav]').forEach(function(a){if(a.getAttribute('data-nav')===p){a.classList.add('active');var d=a.closest('.nav-dd');if(d)d.classList.add('cat-active');}});})();</script>
+  <script>(function(){var s=document.currentScript,nav=s.closest("nav.top");var p=location.pathname.replace(/\/+$/,"")||"/";nav.querySelectorAll("[data-nav]").forEach(function(a){if(a.getAttribute("data-nav")===p){a.classList.add("active");var d=a.closest(".nav-dd");if(d)d.classList.add("cat-active");}});var inner=nav.querySelector(".inner"),b=nav.querySelector(".nav-burger");if(b)b.addEventListener("click",function(e){e.stopPropagation();inner.classList.toggle("menu-open");});nav.querySelectorAll(".nav-dd>.dd-trigger").forEach(function(t){t.addEventListener("click",function(e){e.stopPropagation();var dd=t.parentNode,was=dd.classList.contains("open");nav.querySelectorAll(".nav-dd.open").forEach(function(o){o.classList.remove("open");});if(!was)dd.classList.add("open");});});document.addEventListener("click",function(){nav.querySelectorAll(".nav-dd.open").forEach(function(o){o.classList.remove("open");});inner.classList.remove("menu-open");});})();</script>
 </nav>
 
 <div class="wrap narrow">

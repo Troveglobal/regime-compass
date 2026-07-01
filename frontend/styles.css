@@ -653,3 +653,39 @@ nav.top .dd-menu .dd-soon {
   display: block; padding: 8px 12px 3px; margin-top: 4px; border-top: 1px solid var(--border);
   font-size: 10.5px; color: var(--muted); opacity: 0.6; letter-spacing: 0.02em;
 }
+
+/* ===== nav: click/tap-toggle dropdowns + mobile hamburger ===== */
+nav.top .nav-burger {
+  display: none; margin-left: auto; flex: 0 0 auto;
+  width: 40px; height: 34px; padding: 0; background: none;
+  border: 1px solid var(--border); border-radius: 9px; cursor: pointer;
+  flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+}
+nav.top .nav-burger span { width: 18px; height: 2px; background: var(--text); border-radius: 2px; }
+nav.top .nav-dd.open > .dd-menu { opacity: 1; visibility: visible; }
+nav.top .nav-dd.open .chev { transform: rotate(180deg); }
+
+@media (max-width: 760px) {
+  nav.top .inner { position: relative; }
+  nav.top .inner .nav-burger { display: flex; }
+  nav.top .inner .links {
+    display: none; position: absolute; top: calc(100% + 10px); left: 8px; right: 8px;
+    flex-direction: column; align-items: stretch; gap: 2px; margin-left: 0;
+    max-width: none; white-space: normal; overflow: visible; overflow-y: auto;
+    background: var(--panel); border: 1px solid var(--border); border-radius: var(--r-md);
+    padding: 8px; box-shadow: var(--shadow-md); max-height: 78vh;
+  }
+  nav.top .inner.menu-open .links { display: flex; }
+  nav.top .inner .links > a { width: 100%; padding: 11px 12px; font-size: 14px; }
+  nav.top .inner .nav-dd { display: block; width: 100%; }
+  nav.top .inner .nav-dd > .dd-trigger {
+    width: 100%; justify-content: flex-start; gap: 8px; padding: 12px 12px 5px; cursor: default;
+    font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
+  }
+  nav.top .inner .nav-dd > .dd-trigger .chev { display: none; }
+  nav.top .inner .nav-dd > .dd-menu {
+    position: static; transform: none; opacity: 1; visibility: visible;
+    min-width: 0; box-shadow: none; border: none; background: transparent; padding: 0 0 6px;
+  }
+  nav.top .inner .nav-dd > .dd-menu a { width: 100%; padding: 9px 12px 9px 22px; }
+}
