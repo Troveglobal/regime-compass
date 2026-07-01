@@ -26,7 +26,7 @@
   <meta name="twitter:image" content="https://www.regimecompass.com/og-image.png" />
   <meta name="theme-color" content="#0a0d12" />
   <link rel="canonical" href="https://www.regimecompass.com/ma/backtest" />
-  <link rel="stylesheet" href="/styles.css?v=3.1" />
+  <link rel="stylesheet" href="/styles.css?v=3.3" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="manifest" href="/manifest.json" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
@@ -110,19 +110,36 @@
   <circle cx="12" cy="12" r="1.4" class="needle" fill="currentColor"/>
 </svg> Regime Compass</a>
     <div class="links">
-      <a href="/">Home</a>
-      <a href="/composite">Risk Score</a>
-      <a href="/yields">Yield Curve</a>
-      <span class="nav-group">
-        <a href="/hmm">Hidden Markov Model</a>
-        <a href="/ma" class="active">Moving Average</a>
-        <a href="/ema">Exponential Moving Average</a>
+      <a href="/" data-nav="/">Home</a>
+      <span class="nav-dd">
+        <span class="dd-trigger">Signals <span class="chev">&#9662;</span></span>
+        <span class="dd-menu">
+          <a href="/composite" data-nav="/composite">Risk Score <span class="dd-note">Composite</span></a>
+          <a href="/hmm" data-nav="/hmm">HMM <span class="dd-note">Hidden Markov Model</span></a>
+          <a href="/ma" data-nav="/ma">MA <span class="dd-note">Moving Average</span></a>
+          <a href="/ema" data-nav="/ema">EMA <span class="dd-note">Exponential Moving Average</span></a>
+        </span>
       </span>
-      <a href="/seasonality">Seasonality</a>
-      <a href="/subscribe">Alerts</a>
-      <a href="/about">About</a>
+      <span class="nav-dd">
+        <span class="dd-trigger">Smart Money <span class="chev">&#9662;</span></span>
+        <span class="dd-menu">
+          <a href="/smartmoney" data-nav="/smartmoney">Smart Money India <span class="dd-note">FII / DII flows</span></a>
+          <span class="dd-disabled">Smart Money US <span class="dd-note">coming soon</span></span>
+        </span>
+      </span>
+      <span class="nav-dd">
+        <span class="dd-trigger">Markets <span class="chev">&#9662;</span></span>
+        <span class="dd-menu">
+          <a href="/yields" data-nav="/yields">Yield Curve</a>
+          <a href="/seasonality" data-nav="/seasonality">Seasonality</a>
+          <span class="dd-soon">More market data soon</span>
+        </span>
+      </span>
+      <a href="/subscribe" data-nav="/subscribe">Alerts</a>
+      <a href="/about" data-nav="/about">About</a>
     </div>
   </div>
+  <script>(function(){var p=location.pathname.replace(/\/+$/,'')||'/';document.querySelectorAll('nav.top [data-nav]').forEach(function(a){if(a.getAttribute('data-nav')===p){a.classList.add('active');var d=a.closest('.nav-dd');if(d)d.classList.add('cat-active');}});})();</script>
 </nav>
 
 <div class="wrap">

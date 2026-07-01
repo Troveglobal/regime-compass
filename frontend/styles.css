@@ -621,3 +621,35 @@ footer.site .links a:hover { color: var(--text); }
   padding: 0;
 }
 .share-btn:hover { background: var(--panel); color: var(--text-strong); border-color: var(--border-strong); }
+
+/* ===== unified categorised nav (Signals / Smart Money / Markets) ===== */
+nav.top .nav-dd { position: relative; display: inline-flex; align-items: center; }
+nav.top .nav-dd > .dd-trigger {
+  display: inline-flex; align-items: center; gap: 6px; cursor: default;
+  color: var(--muted); padding: 7px 14px; border-radius: var(--r-sm);
+  font-size: 13px; font-weight: 500; transition: var(--transition);
+}
+nav.top .nav-dd:hover > .dd-trigger { color: var(--text); background: var(--panel); }
+nav.top .nav-dd.cat-active > .dd-trigger { color: var(--accent-strong); background: var(--accent-dim); }
+nav.top .nav-dd .chev { font-size: 9px; opacity: 0.6; transition: transform .15s ease; }
+nav.top .nav-dd:hover .chev { transform: rotate(180deg); }
+nav.top .nav-dd .dd-menu {
+  position: absolute; top: calc(100% + 7px); left: 50%; transform: translateX(-50%);
+  min-width: 236px; background: var(--panel); border: 1px solid var(--border);
+  border-radius: var(--r-md); padding: 6px; z-index: 200; box-shadow: var(--shadow-md);
+  opacity: 0; visibility: hidden; transition: opacity .14s ease;
+}
+nav.top .nav-dd:hover .dd-menu { opacity: 1; visibility: visible; }
+nav.top .dd-menu a, nav.top .dd-menu .dd-disabled {
+  display: flex; align-items: baseline; gap: 8px; padding: 8px 12px;
+  border-radius: var(--r-sm); font-size: 13px; font-weight: 500;
+}
+nav.top .dd-menu a { color: var(--text); }
+nav.top .dd-menu a:hover { background: var(--panel-2); color: var(--text-strong); }
+nav.top .dd-menu a.active { color: var(--accent-strong); background: var(--accent-dim); }
+nav.top .dd-menu .dd-note { color: var(--muted); font-size: 11px; font-weight: 400; margin-left: auto; padding-left: 12px; }
+nav.top .dd-menu .dd-disabled { color: var(--muted); opacity: 0.45; cursor: not-allowed; }
+nav.top .dd-menu .dd-soon {
+  display: block; padding: 8px 12px 3px; margin-top: 4px; border-top: 1px solid var(--border);
+  font-size: 10.5px; color: var(--muted); opacity: 0.6; letter-spacing: 0.02em;
+}

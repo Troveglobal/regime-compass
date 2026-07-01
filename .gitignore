@@ -42,3 +42,9 @@ notebooks/.ipynb_checkpoints/
 
 # macOS launchd plists (specific to local machine)
 *.plist.backup
+
+# SmartFlow (Smart Money India) — generated at runtime; seed CSV + initial feed are kept
+src/smartmoney/store.db
+src/smartmoney/data/prices/
+src/smartmoney/data/raw/daily/
+src/smartmoney/__pycache__/

@@ -45,6 +45,7 @@ from .config import (
 )
 
 FRONTEND_DIR = Path(__file__).resolve().parent.parent / "frontend"
+SMARTMONEY_FEED = Path(__file__).resolve().parent / "smartmoney" / "out" / "feed.json"
 
 log = logging.getLogger("regime_compass")
 logging.basicConfig(level=logging.INFO, format="[%(asctime)s] %(levelname)s %(name)s — %(message)s")
@@ -85,6 +86,16 @@ def _run_full_pipeline() -> None:
     log.info("Computing filtered probability history ...")
     inference_mod.compute_history_all()
     log.info("Pipeline complete.")
+
+
+def _run_smartmoney() -> None:
+    """Refresh the Smart Money India feed (NSE bulk/block deals + returns)."""
+    try:
+        from .smartmoney import refresh as sm_refresh
+        sm_refresh.refresh()
+        log.info("[smartmoney] feed refreshed.")
+    except Exception as e:
+        log.exception("[smartmoney] refresh failed: %s", e)
 
 
 def _run_daily() -> None:
@@ -128,6 +139,9 @@ def _bootstrap_async() -> None:
                 log.exception("[bootstrap] First-run failed: %s", e)
         else:
             log.info("[bootstrap] Data present — skipping first-run pipeline.")
+        if not SMARTMONEY_FEED.exists():
+            log.info("[bootstrap] No Smart Money feed — generating.")
+            _run_smartmoney()
         _bootstrap_done = True
         log.info("[bootstrap] Ready.")
 
@@ -143,6 +157,8 @@ def _start_scheduler() -> None:
     _scheduler = BackgroundScheduler(timezone="UTC")
     # Daily 11:00 UTC = after US market close. Mon–Fri.
     _scheduler.add_job(_run_daily, CronTrigger(day_of_week="mon-fri", hour=11, minute=0), id="daily_update")
+    # Smart Money India: 15:00 UTC = ~20:30 IST, after NSE publishes the day's bulk/block deals
+    _scheduler.add_job(_run_smartmoney, CronTrigger(day_of_week="mon-fri", hour=15, minute=0), id="smartmoney_daily")
     # Weekly: Sunday 03:30 UTC.
     _scheduler.add_job(_run_weekly, CronTrigger(day_of_week="sun", hour=3, minute=30), id="weekly_refit")
     _scheduler.start()
@@ -168,8 +184,12 @@ _STATIC_EXTS = {".css", ".js", ".svg", ".png", ".jpg", ".ico", ".woff2", ".woff"
 class SecurityHeadersMiddleware(BaseHTTPMiddleware):
     async def dispatch(self, request: Request, call_next):
         response = await call_next(request)
+        # The SmartFlow section is a same-origin embed inside /smartmoney, so it
+        # must permit framing by self; the rest of the site stays DENY.
+        embeddable = request.url.path.startswith("/smartflow")
+        frame_ancestors = "'self'" if embeddable else "'none'"
         response.headers["X-Content-Type-Options"] = "nosniff"
-        response.headers["X-Frame-Options"] = "DENY"
+        response.headers["X-Frame-Options"] = "SAMEORIGIN" if embeddable else "DENY"
         response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
         response.headers["Permissions-Policy"] = "geolocation=(), microphone=(), camera=()"
         response.headers["Strict-Transport-Security"] = "max-age=63072000; includeSubDomains; preload"
@@ -182,7 +202,7 @@ class SecurityHeadersMiddleware(BaseHTTPMiddleware):
             "font-src 'self' https://fonts.gstatic.com data:; "
             "img-src 'self' data: blob: https://www.google-analytics.com https://www.googletagmanager.com; "
             "connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://www.googletagmanager.com; "
-            "frame-ancestors 'none'; "
+            f"frame-ancestors {frame_ancestors}; "
             "base-uri 'self'; "
             "form-action 'self'"
         )
@@ -904,6 +924,20 @@ if FRONTEND_DIR.exists():
     @app.get("/seasonality")
     def seasonality_page():
         return FileResponse(FRONTEND_DIR / "seasonality.html")
+
+    @app.get("/smartmoney")
+    def smartmoney_page():
+        # SmartFlow is a same-origin static app that renders the Regime Compass nav itself.
+        return RedirectResponse("/smartflow/?embed=1")
+
+    @app.get("/api/smartmoney")
+    def smartmoney_feed():
+        # Live feed for the Smart Money India dashboard; refreshed daily by the scheduler.
+        if not SMARTMONEY_FEED.exists():
+            _run_smartmoney()
+        if SMARTMONEY_FEED.exists():
+            return FileResponse(SMARTMONEY_FEED, media_type="application/json")
+        return JSONResponse({"error": "feed unavailable"}, status_code=503)
 
     @app.get("/valuation")
     def valuation_page():
