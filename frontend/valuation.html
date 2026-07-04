@@ -26,7 +26,7 @@
   <meta name="twitter:image" content="https://www.regimecompass.com/og-image.png" />
   <meta name="theme-color" content="#07090e" />
   <link rel="canonical" href="https://www.regimecompass.com/valuation" />
-  <link rel="stylesheet" href="/styles.css?v=4.0" />
+  <link rel="stylesheet" href="/styles.css?v=4.1" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="manifest" href="/manifest.json" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
@@ -166,9 +166,38 @@
   <script type="application/ld+json">
   {"@context": "https://schema.org", "@type": "WebPage", "name": "Valuation Compass — Regime Compass", "description": "PE ratio, Shiller CAPE, and MVRV valuation metrics for ten markets. Is the market cheap or expensive?", "url": "https://www.regimecompass.com/valuation", "isPartOf": {"@type": "WebSite", "name": "Regime Compass", "url": "https://www.regimecompass.com"}}
   </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the Shiller CAPE ratio?",
+        "acceptedAnswer": {"@type": "Answer", "text": "The Cyclically Adjusted Price-to-Earnings ratio: price divided by inflation-adjusted average earnings over the past 10 years, from Robert Shiller's dataset going back to 1881. It smooths out business cycles — a high CAPE has historically predicted lower 10-year forward returns for the S&P 500."}
+      },
+      {
+        "@type": "Question",
+        "name": "What is the MVRV ratio for Bitcoin and Ethereum?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Market Value to Realized Value — the on-chain equivalent of PE for crypto. Market cap divided by realized cap (each coin valued at the price it last moved). MVRV above 3 is historically overheated; below 1 is undervalued, meaning the average holder is underwater."}
+      },
+      {
+        "@type": "Question",
+        "name": "How do the valuation percentiles work?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Each metric is ranked against its own full history. A percentile of 90 means the market is more expensive than 90% of all historical readings. Below 20 is historically cheap; above 80 is historically expensive; 40-60 is fair value relative to history."}
+      },
+      {
+        "@type": "Question",
+        "name": "Where does the trailing PE for Nasdaq, Nikkei, KOSPI and Shanghai come from?",
+        "acceptedAnswer": {"@type": "Answer", "text": "There is no free historical PE series for these indices, so Regime Compass shows a current-snapshot trailing PE via the closest US-listed ETF proxy (QQQ, EWJ, EWY, FXI) — snapshot only, without percentile ranking. Nifty 50 PE comes from NSE data back to 1999."}
+      }
+    ]
+  }
+  </script>
+  <!--GEO:JSONLD-->
 </head>
 <body>
-<script src="/shell.js?v=4.2"></script>
+<script src="/shell.js?v=4.3"></script>
 
 <div class="wrap">
   <div class="hero">
@@ -177,6 +206,8 @@
     <div class="tagline">Trailing PE, Shiller CAPE, and MVRV ratios for ten markets. Each metric is ranked against its own history to produce a percentile &mdash; higher means more expensive relative to the past. Updated daily.</div>
     <div id="share-container"></div>
   </div>
+
+  <!--GEO:BRIEF-->
 
   <details class="metric-info">
     <summary>What each metric means &amp; how to read percentiles</summary>

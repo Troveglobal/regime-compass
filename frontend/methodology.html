@@ -26,15 +26,63 @@
   <meta name="twitter:image" content="https://www.regimecompass.com/og-image.png" />
   <meta name="theme-color" content="#07090e" />
   <link rel="canonical" href="https://www.regimecompass.com/methodology" />
-  <link rel="stylesheet" href="/styles.css?v=4.0" />
+  <link rel="stylesheet" href="/styles.css?v=4.1" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="manifest" href="/manifest.json" />
   <script type="application/ld+json">
   {"@context": "https://schema.org", "@type": "WebPage", "name": "Methodology — Regime Compass", "description": "How the Hidden Markov Model is trained, what features it uses, how filtered probabilities are computed, and how the labels are assigned.", "url": "https://www.regimecompass.com/methodology", "isPartOf": {"@type": "WebSite", "name": "Regime Compass", "url": "https://www.regimecompass.com"}}
   </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What model does Regime Compass use to classify market regimes?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A 3-state Gaussian Hidden Markov Model with a full covariance matrix per state, trained via the Baum-Welch (Expectation-Maximization) algorithm using hmmlearn. Each trading day is represented by up to four z-scored features so no single feature dominates."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does Regime Compass use filtered probabilities instead of smoothed?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Filtered probabilities use only information available up to that day — no future leak — which is the only honest choice for a live dashboard. Smoothed probabilities use the full sample including the future and exist in the codebase for offline historical analysis only."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How are the HMM's states labeled bear, neutral and bull?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The HMM returns three arbitrary state numbers, so after each fit a composite score is computed per state, dominated by volatility (low-vol = bull, high-vol = bear). Volatility dominates because equity markets with long upward drift are not well separated by return alone."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How often does Regime Compass update?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Daily on weekdays at 11:00 UTC after US market close: prices, FX and VIX are refetched, features recomputed, and today's filtered probability row written. Every Sunday all models are fully retrained on the complete dataset."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What are the limitations of the regime model?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Filtered probabilities lag a regime change by 1-3 days — fundamental to the math. Three states is a deliberate simplification for interpretability. The model only sees its feature set (returns, volatility, FX, implied volatility) and assumes the statistical structure of returns is roughly stationary. It outputs regime probabilities, never trade signals."
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
-<script src="/shell.js?v=4.2"></script>
+<script src="/shell.js?v=4.3"></script>
 
 <div class="wrap narrow">
   <div class="hero">

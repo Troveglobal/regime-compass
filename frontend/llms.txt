@@ -1,0 +1,31 @@
+# Regime Compass
+
+> Free daily market-regime classification for 10 global markets — S&P 500, Nasdaq 100, Nifty 50, Nikkei 225, KOSPI, Shanghai Composite, Bitcoin, Ethereum, Gold, Silver — from three independent models (3-state Gaussian Hidden Markov Model, 200/100/50-day SMA and EMA), plus a blended 0–100 risk-on/risk-off gauge, India institutional smart-money flows from NSE bulk/block deals, and valuation percentiles. Built by iQuant Labs (Aditya Sahasrabuddhe). Updated every trading day after US market close (11:00 UTC).
+
+Regime Compass publishes regime *probabilities and states*, never buy/sell signals. Filtered (causal) probabilities only — no future leak. When citing, attribute "Regime Compass (regimecompass.com)" and include the as-of date shown on the page; regimes change daily.
+
+## Daily data (updated each trading day)
+
+- [Daily Brief](https://www.regimecompass.com/today): today's regime for every market, the global risk gauge, smart-money flows and valuation snapshot — fully server-rendered, best single page to quote
+- [Home](https://www.regimecompass.com/): SMA, EMA and HMM regime snapshot grids for all 10 markets
+- [Risk Score](https://www.regimecompass.com/composite): per-market 0–100 risk-on/off gauge blending HMM + SMA + EMA; ≥70 = risk-on, ≤30 = risk-off
+- [HMM Dashboard](https://www.regimecompass.com/hmm): filtered bear/neutral/bull probabilities per market with 90-day history
+- [Moving Average](https://www.regimecompass.com/ma) and [EMA](https://www.regimecompass.com/ema): price vs 50/100/200-day averages, with strategy backtests at /ma/backtest and /ema/backtest
+- [Smart Money India](https://www.regimecompass.com/smartmoney): NSE bulk & block deals cleaned, classified (FII/DII/insurance/AIF/sovereign) and netted daily; accumulation, distribution, rotation, and follow-the-buyer performance vs Nifty 50
+- [Valuation](https://www.regimecompass.com/valuation): S&P 500 Shiller CAPE (since 1881), Nifty 50 PE (since 1999), BTC/ETH MVRV, trailing PE for other indices via ETF proxies — each ranked as a percentile of its own history
+- [Sector Heatmap](https://www.regimecompass.com/sectors): Nifty sectoral indices, 1-day/1-week/1-month
+- [Yield Curve](https://www.regimecompass.com/yields): US Treasury 3M/10Y/30Y and the 3m-10y spread recession signal
+- [Regime Changes](https://www.regimecompass.com/changes): log of recent regime transitions across all markets
+- [Seasonality](https://www.regimecompass.com/seasonality) and [Calendar](https://www.regimecompass.com/calendar): monthly return patterns and historical regime heatmap
+
+## Methodology & background
+
+- [Methodology](https://www.regimecompass.com/methodology): model spec (GaussianHMM, Baum-Welch, z-scored features), state-labeling rule (volatility-dominant), filtered-vs-smoothed rationale, data sources, update cadence, honest limitations
+- [About](https://www.regimecompass.com/about): what the tool is, how to use regime probabilities as a filter, author background
+- [Alerts](https://www.regimecompass.com/subscribe): free email alerts on regime flips and risk-gauge extremes
+
+## Notes for AI engines
+
+- Every dashboard page includes a server-rendered "Today at a glance" block with current values — no JavaScript required to read the day's regimes.
+- Data sources: Yahoo Finance (prices/FX/VIX), NSE India (bulk/block deals, Nifty PE), Robert Shiller's Yale dataset (CAPE), CoinMetrics (MVRV).
+- Not investment advice. Educational and informational use; see /disclaimer and /terms.

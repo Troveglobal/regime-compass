@@ -26,7 +26,31 @@
   <meta name="twitter:image" content="https://www.regimecompass.com/og-smartmoney.jpg" />
   <meta name="theme-color" content="#07090e" />
   <link rel="canonical" href="https://www.regimecompass.com/smartmoney" />
-  <link rel="stylesheet" href="/styles.css?v=4.0" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "name": "Smart Money India — Regime Compass",
+        "description": "What India's smartest institutional money is buying and selling — NSE bulk & block deals, cleaned, classified and netted daily. FII vs DII accumulation, rotation and performance.",
+        "url": "https://www.regimecompass.com/smartmoney",
+        "isPartOf": {"@type": "WebSite", "name": "Regime Compass", "url": "https://www.regimecompass.com"}
+      },
+      {
+        "@type": "Dataset",
+        "name": "Smart Money India — NSE institutional deal flows",
+        "description": "Daily NSE bulk and block deals cleaned, entity names canonicalised and classified (FII/FPI, DII mutual funds, insurance, AIF/PMS, sovereign), intraday round-trips netted out. Net accumulation and distribution by stock, sector and institution, with follow-the-buyer performance vs the Nifty 50.",
+        "url": "https://www.regimecompass.com/smartmoney",
+        "creator": {"@type": "Organization", "name": "iQuant Labs", "url": "https://www.regimecompass.com"},
+        "isAccessibleForFree": true,
+        "license": "https://www.regimecompass.com/terms",
+        "keywords": ["FII DII flows", "NSE bulk deals", "NSE block deals", "smart money India", "institutional buying India"]
+      }
+    ]
+  }
+  </script>
+  <link rel="stylesheet" href="/styles.css?v=4.1" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="manifest" href="/manifest.json" />
   <style>
@@ -265,9 +289,10 @@
     .empty { padding: 30px; text-align: center; color: var(--muted); font-size: 13.5px; }
     .quiet-note { font-family: var(--font-mono); font-size: 11px; color: var(--muted); margin: -8px 0 16px; }
   </style>
+  <!--GEO:JSONLD-->
 </head>
 <body>
-<script src="/shell.js?v=4.2"></script>
+<script src="/shell.js?v=4.3"></script>
 
 <div class="wrap">
   <div class="hero">
@@ -326,6 +351,8 @@
     </div>
     <div class="verdict" id="verdict" style="display:none"></div>
   </div>
+
+  <!--GEO:BRIEF-->
 
   <div id="sm-root">
     <div class="skeleton" style="height:88px; margin:22px 0 14px;"></div>
@@ -741,6 +768,9 @@ function render() {
       (topFlav ? ' <span class="sep">·</span> heaviest in <strong>' + esc(topFlav.sector) + "</strong>" : "") +
       "</span>";
     v.style.display = "";
+    /* the live verdict supersedes the server-rendered GEO brief */
+    var gb = document.querySelector(".geo-brief");
+    if (gb) gb.style.display = "none";
   })();
 
   var stocks = side.stocks.filter(function (s) { return metric(s, state.mode) > 0; })

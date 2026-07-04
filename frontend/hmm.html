@@ -26,7 +26,7 @@
   <meta name="twitter:image" content="https://www.regimecompass.com/og-image.png" />
   <meta name="theme-color" content="#07090e" />
   <link rel="canonical" href="https://www.regimecompass.com/hmm" />
-  <link rel="stylesheet" href="/styles.css?v=4.0" />
+  <link rel="stylesheet" href="/styles.css?v=4.1" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="manifest" href="/manifest.json" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
@@ -108,9 +108,33 @@
   <script type="application/ld+json">
   {"@context": "https://schema.org", "@type": "WebPage", "name": "Dashboard — Regime Compass", "description": "Hidden Markov Model regime indicator for Nifty 50, S&P 500, KOSPI, and Shanghai Composite. Daily filtered probabilities of bull / neutral / bear regimes.", "url": "https://www.regimecompass.com/hmm", "isPartOf": {"@type": "WebSite", "name": "Regime Compass", "url": "https://www.regimecompass.com"}}
   </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What are the three market regimes in the Regime Compass HMM?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Bear: a high-volatility regime, historically associated with panics and uncertainty — defensive. Neutral: medium volatility, sideways or grinding markets with no strong directional bias. Bull: low volatility, calm uptrends where trends persist. The model classifies each trading day into one of these three regimes."}
+      },
+      {
+        "@type": "Question",
+        "name": "What do the HMM regime percentages mean?",
+        "acceptedAnswer": {"@type": "Answer", "text": "The three percentages are the model's confidence that the market is in each regime right now, given everything it has seen through today's close. They always sum to 100%. They are filtered probabilities — computed causally with no future information."}
+      },
+      {
+        "@type": "Question",
+        "name": "How should I use the HMM regime indicator?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Use it as a filter, not a signal. Strong bear (above 70% probability) suggests reducing risk. Strong bull (above 70%) is momentum-friendly. Neutral offers no edge from this indicator. It is a three-state Gaussian Hidden Markov Model trained on 16 years of daily data per market. Not investment advice."}
+      }
+    ]
+  }
+  </script>
+  <!--GEO:JSONLD-->
 </head>
 <body>
-<script src="/shell.js?v=4.2"></script>
+<script src="/shell.js?v=4.3"></script>
 
 <div class="wrap">
   <div class="hero">
@@ -126,6 +150,8 @@
       <div id="share-container"></div>
     </div>
   </div>
+
+  <!--GEO:BRIEF-->
 
   <details class="howto">
     <summary>How to read this dashboard</summary>

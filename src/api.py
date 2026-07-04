@@ -10,6 +10,7 @@ import sys
 import threading
 import time
 from contextlib import asynccontextmanager
+from datetime import datetime, timezone
 from pathlib import Path
 
 from apscheduler.schedulers.background import BackgroundScheduler
@@ -27,6 +28,7 @@ from . import cards as cards_mod
 from . import changes as changes_mod
 from . import composite as composite_mod
 from . import digest as digest_mod
+from . import geo
 from . import email_sender
 from . import seasonality as season_mod
 from . import valuation as val_mod
@@ -876,6 +878,17 @@ def model_info(index: str = Query(DEFAULT_INDEX)) -> dict:
 
 
 if FRONTEND_DIR.exists():
+    # GEO: data pages are served with a server-rendered "today at a glance"
+    # block injected so non-JS AI crawlers see live numbers (src/geo.py;
+    # falls back to the raw file on any error).
+    @app.get("/")
+    def index_page():
+        return geo.render_page("index.html", "index")
+
+    @app.get("/today")
+    def today_page():
+        return geo.render_page("today.html", "today")
+
     @app.get("/about")
     def about_page():
         return FileResponse(FRONTEND_DIR / "about.html")
@@ -886,11 +899,11 @@ if FRONTEND_DIR.exists():
 
     @app.get("/hmm")
     def hmm_page():
-        return FileResponse(FRONTEND_DIR / "hmm.html")
+        return geo.render_page("hmm.html", "hmm")
 
     @app.get("/ma")
     def ma_page():
-        return FileResponse(FRONTEND_DIR / "ma.html")
+        return geo.render_page("ma.html", "ma")
 
     @app.get("/ma/backtest")
     def ma_backtest_page():
@@ -898,7 +911,7 @@ if FRONTEND_DIR.exists():
 
     @app.get("/ema")
     def ema_page():
-        return FileResponse(FRONTEND_DIR / "ema.html")
+        return geo.render_page("ema.html", "ema")
 
     @app.get("/ema/backtest")
     def ema_backtest_page():
@@ -906,7 +919,7 @@ if FRONTEND_DIR.exists():
 
     @app.get("/composite")
     def composite_page():
-        return FileResponse(FRONTEND_DIR / "composite.html")
+        return geo.render_page("composite.html", "composite")
 
     @app.get("/subscribe")
     def subscribe_page():
@@ -942,7 +955,7 @@ if FRONTEND_DIR.exists():
 
     @app.get("/smartmoney")
     def smartmoney_page():
-        return FileResponse(FRONTEND_DIR / "smartmoney.html")
+        return geo.render_page("smartmoney.html", "smartmoney")
 
     @app.get("/smartflow")
     @app.get("/smartflow/")
@@ -973,7 +986,7 @@ if FRONTEND_DIR.exists():
 
     @app.get("/valuation")
     def valuation_page():
-        return FileResponse(FRONTEND_DIR / "valuation.html")
+        return geo.render_page("valuation.html", "valuation")
 
     @app.get("/yields")
     def yields_page():
@@ -985,7 +998,32 @@ if FRONTEND_DIR.exists():
 
     @app.get("/sitemap.xml")
     def sitemap():
-        return FileResponse(FRONTEND_DIR / "sitemap.xml", media_type="application/xml")
+        # Generated so daily-data pages carry a fresh <lastmod> (AI/search freshness signal).
+        base = "https://www.regimecompass.com"
+        today_str = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+        evergreen = "2026-07-05"
+        daily = [("/", "1.0"), ("/today", "1.0"), ("/composite", "0.9"), ("/hmm", "0.9"),
+                 ("/ma", "0.9"), ("/ema", "0.9"), ("/smartmoney", "0.9"), ("/valuation", "0.9"),
+                 ("/changes", "0.8"), ("/yields", "0.8"), ("/sectors", "0.8")]
+        weekly = [("/ma/backtest", "0.7"), ("/ema/backtest", "0.7"), ("/calendar", "0.7"),
+                  ("/seasonality", "0.7")]
+        stable = [("/subscribe", "0.6"), ("/about", "0.5"), ("/methodology", "0.6"), ("/embed", "0.4"),
+                  ("/disclaimer", "0.3"), ("/terms", "0.3"), ("/privacy", "0.3")]
+        entries = []
+        for path, prio in daily:
+            entries.append((path, today_str, "daily", prio))
+        for path, prio in weekly:
+            entries.append((path, today_str, "weekly", prio))
+        for path, prio in stable:
+            entries.append((path, evergreen, "monthly", prio))
+        body = "".join(
+            f"<url><loc>{base}{p}</loc><lastmod>{lm}</lastmod>"
+            f"<changefreq>{cf}</changefreq><priority>{pr}</priority></url>"
+            for p, lm, cf, pr in entries
+        )
+        xml = ('<?xml version="1.0" encoding="UTF-8"?>'
+               '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + body + "</urlset>")
+        return Response(content=xml, media_type="application/xml")
 
     # Custom 404 — replaces FastAPI's default JSON Not Found
     @app.exception_handler(404)

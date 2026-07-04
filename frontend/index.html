@@ -26,7 +26,7 @@
   <meta name="twitter:image" content="https://www.regimecompass.com/og-image.png" />
   <meta name="theme-color" content="#07090e" />
   <link rel="canonical" href="https://www.regimecompass.com/" />
-  <link rel="stylesheet" href="/styles.css?v=4.0" />
+  <link rel="stylesheet" href="/styles.css?v=4.1" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="manifest" href="/manifest.json" />
   <style>
@@ -169,20 +169,50 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "Regime Compass",
-    "url": "https://www.regimecompass.com",
-    "description": "Three regime models, ten markets, updated daily. By iQuant Labs.",
-    "publisher": {
-      "@type": "Organization",
-      "name": "iQuant Labs",
-      "url": "https://www.regimecompass.com"
-    }
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://www.regimecompass.com/#website",
+        "name": "Regime Compass",
+        "url": "https://www.regimecompass.com",
+        "description": "Three regime models, ten markets, updated daily. By iQuant Labs.",
+        "publisher": { "@id": "https://www.regimecompass.com/#org" }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://www.regimecompass.com/#org",
+        "name": "iQuant Labs",
+        "url": "https://www.regimecompass.com",
+        "logo": "https://www.regimecompass.com/og-image.png",
+        "founder": { "@id": "https://www.regimecompass.com/#aditya" }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://www.regimecompass.com/#aditya",
+        "name": "Aditya Sahasrabuddhe",
+        "url": "https://www.regimecompass.com/about",
+        "sameAs": ["https://www.linkedin.com/in/aditya-s1/"],
+        "jobTitle": "Founder, iQuant Labs",
+        "knowsAbout": ["market regimes", "hidden Markov models", "quantitative finance", "Indian equity markets"]
+      },
+      {
+        "@type": "Dataset",
+        "name": "Regime Compass daily market regime classifications",
+        "description": "Daily bull/neutral/bear regime classifications for 10 global markets (S&P 500, Nasdaq 100, Nifty 50, Nikkei 225, KOSPI, Shanghai Composite, Bitcoin, Ethereum, Gold, Silver) from three independent models: a 3-state Gaussian Hidden Markov Model, 200/100/50-day simple moving averages, and exponential moving averages. Includes a blended 0-100 risk-on/risk-off gauge per market.",
+        "url": "https://www.regimecompass.com",
+        "creator": { "@id": "https://www.regimecompass.com/#org" },
+        "temporalCoverage": "2010-01-01/..",
+        "isAccessibleForFree": true,
+        "license": "https://www.regimecompass.com/terms",
+        "keywords": ["market regime", "risk-on risk-off", "hidden Markov model", "moving average regime", "bull bear indicator"]
+      }
+    ]
   }
   </script>
+  <!--GEO:JSONLD-->
 </head>
 <body>
-<script src="/shell.js?v=4.2"></script>
+<script src="/shell.js?v=4.3"></script>
 
 <div class="wrap">
   <div class="hero hero-home">
@@ -227,6 +257,8 @@
       </div>
     </div>
   </div>
+
+  <!--GEO:BRIEF-->
 
   <!-- Count-up stats strip -->
   <div class="stats-strip reveal">

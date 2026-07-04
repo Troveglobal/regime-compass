@@ -591,6 +591,26 @@ footer.site .built-by a:hover { color: var(--accent-strong); }
 .icon-li { display: inline-block; width: 16px; height: 16px; vertical-align: -3px; }
 
 /* ============================================================
+   GEO brief — server-rendered "today at a glance"
+   (crawlable live data; also useful to humans)
+   ============================================================ */
+.geo-brief {
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--r-md);
+  padding: 12px 16px;
+  margin: 18px 0 22px;
+}
+.geo-brief h2 {
+  font-family: var(--font-ui);
+  font-size: 10.5px; font-weight: 700; margin: 0 0 6px;
+  color: var(--muted); text-transform: uppercase; letter-spacing: 1.6px;
+  border: none; padding: 0;
+}
+.geo-brief p { margin: 0; font-size: 13px; line-height: 1.65; color: var(--text-body); }
+
+/* ============================================================
    Cookie consent banner
    ============================================================ */
 #cookie-consent {

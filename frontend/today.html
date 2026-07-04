@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-94DE53GC07"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', { analytics_storage: 'denied' });
+    gtag('js', new Date());
+    gtag('config', 'G-94DE53GC07');
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daily Market Brief — Regime Compass</title>
+  <meta name="description" content="Today's market regime brief: bull/bear/neutral state for 10 global markets from three independent models, the global risk gauge, India smart-money flows, and valuation percentiles. Updated daily." />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Regime Compass" />
+  <meta property="og:title" content="Daily Market Brief — Regime Compass" />
+  <meta property="og:description" content="Today's regime state for 10 global markets, the risk gauge, smart-money flows and valuations. Updated daily." />
+  <meta property="og:image" content="https://www.regimecompass.com/og-image.png" />
+  <meta property="og:url" content="https://www.regimecompass.com/today" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Daily Market Brief — Regime Compass" />
+  <meta name="twitter:description" content="Today's regime state for 10 global markets, the risk gauge, smart-money flows and valuations." />
+  <meta name="twitter:image" content="https://www.regimecompass.com/og-image.png" />
+  <meta name="theme-color" content="#07090e" />
+  <link rel="canonical" href="https://www.regimecompass.com/today" />
+  <link rel="stylesheet" href="/styles.css?v=4.1" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="manifest" href="/manifest.json" />
+  <!--GEO:JSONLD-->
+</head>
+<body>
+<script src="/shell.js?v=4.3"></script>
+
+<div class="wrap narrow">
+  <div class="hero">
+    <div class="kicker">Daily Brief</div>
+    <h1>What kind of market is it today?</h1>
+    <div class="tagline">A plain-language snapshot of every market Regime Compass tracks — regenerated after each daily model run. Data as of <strong class="num"><!--GEO:ASOF--></strong>.</div>
+  </div>
+
+  <div class="section">
+    <h2>The bottom line</h2>
+    <p><!--GEO:HEADLINE--></p>
+    <p style="font-size:13px;color:var(--muted)">Where the three models agree, the regime is named outright; where they disagree, the market is called <em>mixed</em> and the blended risk gauge (0 = full risk-off, 100 = full risk-on) tells you which way it leans. Full interactive detail: <a href="/composite">risk gauges</a>, <a href="/hmm">HMM probabilities</a>, <a href="/ma">moving-average regimes</a>.</p>
+  </div>
+
+  <div class="section">
+    <h2>Regime by market</h2>
+    <!--GEO:TABLE-->
+  </div>
+
+  <div class="section">
+    <h2>Smart money (India)</h2>
+    <!--GEO:SMARTMONEY-->
+    <p style="font-size:13px;color:var(--muted)">From NSE bulk &amp; block deals, cleaned and netted daily — <a href="/smartmoney">full dashboard</a>.</p>
+  </div>
+
+  <div class="section">
+    <h2>Valuation check</h2>
+    <!--GEO:VALUATION-->
+    <p style="font-size:13px;color:var(--muted)">Percentiles rank today against each metric's own full history — <a href="/valuation">methodology and charts</a>.</p>
+  </div>
+
+  <div class="callout">
+    <strong>About this brief.</strong> Generated automatically from the same models that power the dashboards: a 3-state Gaussian HMM, 200-day SMA and 200-day EMA per market, NSE institutional deal flows, and public valuation datasets. See the <a href="/methodology">methodology</a>. Not investment advice — see <a href="/disclaimer">disclaimer</a>.
+  </div>
+</div>
+</body>
+</html>

@@ -56,7 +56,7 @@
     "<p>Daily regime classification across ten global markets. Three independent models, one honest snapshot. An iQuant Labs project.</p>" +
     "</div>" +
     '<div class="f-col"><h5>Signals</h5>' +
-    '<a href="/composite">Risk Score</a><a href="/hmm">HMM</a><a href="/ma">Moving Average</a><a href="/ema">EMA</a><a href="/smartmoney">Smart Money India</a></div>' +
+    '<a href="/today">Daily Brief</a><a href="/composite">Risk Score</a><a href="/hmm">HMM</a><a href="/ma">Moving Average</a><a href="/ema">EMA</a><a href="/smartmoney">Smart Money India</a></div>' +
     '<div class="f-col"><h5>Markets</h5>' +
     '<a href="/sectors">Sector Heatmap</a><a href="/yields">Yield Curve</a><a href="/valuation">Valuation</a><a href="/seasonality">Seasonality</a><a href="/calendar">Calendar</a></div>' +
     '<div class="f-col"><h5>Company</h5>' +
