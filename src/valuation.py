@@ -158,6 +158,49 @@ def fetch_mvrv(asset: str) -> pd.DataFrame:
     return df
 
 
+# Equity indices → US-listed ETF proxy whose trailing PE approximates the index.
+# Snapshot only (no free history) — used to put a current PE on every equity market.
+_PE_PROXIES = {
+    "spx":    ("SPY",  "SPDR S&P 500"),
+    "nasdaq": ("QQQ",  "Invesco QQQ"),
+    "nifty":  ("INDA", "iShares MSCI India"),
+    "nikkei": ("EWJ",  "iShares MSCI Japan"),
+    "kospi":  ("EWY",  "iShares MSCI South Korea"),
+    "shcomp": ("FXI",  "iShares China Large-Cap"),
+}
+
+
+def fetch_pe_snapshots() -> dict:
+    """Current trailing PE per equity index via ETF proxies (yfinance), cached 24h."""
+    cache = _CACHE_DIR / "pe_snapshots.json"
+    _CACHE_DIR.mkdir(parents=True, exist_ok=True)
+    if _is_fresh(cache):
+        try:
+            return json.loads(cache.read_text())
+        except Exception:
+            pass
+
+    import yfinance as yf
+
+    out: dict = {}
+    for key, (ticker, proxy_name) in _PE_PROXIES.items():
+        try:
+            pe = yf.Ticker(ticker).info.get("trailingPE")
+            if pe:
+                out[key] = {"pe": round(float(pe), 2), "proxy": ticker, "proxy_name": proxy_name}
+        except Exception as e:  # noqa: BLE001 — one bad ticker shouldn't kill the rest
+            log.warning("PE snapshot failed for %s (%s): %s", key, ticker, e)
+
+    if out:
+        cache.write_text(json.dumps(out))
+    elif cache.exists():
+        try:
+            return json.loads(cache.read_text())
+        except Exception:
+            pass
+    return out
+
+
 def valuation_data(index_key: str) -> dict:
     cfg = INDICES.get(index_key)
     if not cfg:
@@ -256,6 +299,7 @@ def valuation_data(index_key: str) -> dict:
 
 
 def valuation_summary() -> list[dict]:
+    pe_snaps = fetch_pe_snapshots()
     results = []
     for key in INDICES:
         data = valuation_data(key)
@@ -270,5 +314,9 @@ def valuation_summary() -> list[dict]:
         }
         if "zone" in data:
             summary["zone"] = data["zone"]
+        if key in pe_snaps:
+            summary["pe"] = pe_snaps[key]["pe"]
+            summary["pe_proxy"] = pe_snaps[key]["proxy"]
+            summary["pe_proxy_name"] = pe_snaps[key]["proxy_name"]
         results.append(summary)
     return results

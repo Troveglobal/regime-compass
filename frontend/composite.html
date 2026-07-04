@@ -24,141 +24,101 @@
   <meta name="twitter:title" content="Risk-On / Risk-Off Composite — Regime Compass" />
   <meta name="twitter:description" content="One number for global market risk appetite." />
   <meta name="twitter:image" content="https://www.regimecompass.com/og-image.png" />
-  <meta name="theme-color" content="#0a0d12" />
+  <meta name="theme-color" content="#07090e" />
   <link rel="canonical" href="https://www.regimecompass.com/composite" />
-  <link rel="stylesheet" href="/styles.css?v=3.5" />
+  <link rel="stylesheet" href="/styles.css?v=4.0" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="manifest" href="/manifest.json" />
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
   <style>
     /* Per-market gauge grid */
-    .gauge-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-    }
+    .gauge-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
     @media (max-width: 900px) { .gauge-grid { grid-template-columns: 1fr 1fr; } }
     @media (max-width: 600px) { .gauge-grid { grid-template-columns: 1fr; } }
+
     .market-card {
-      background: var(--panel-2);
+      background: linear-gradient(180deg, rgba(255,255,255,0.015), transparent 40%), var(--panel-2);
       border: 1px solid var(--border);
-      border-radius: var(--r-md);
+      border-radius: var(--r-lg);
       padding: 18px 18px 16px;
+      box-shadow: inset 0 1px 0 var(--edge-light);
       transition: var(--transition);
       display: flex; flex-direction: column;
+      opacity: 0; transform: translateY(10px);
+      animation: card-in 0.5s var(--ease-out) forwards;
     }
-    .market-card:hover { border-color: var(--border-strong); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+    @keyframes card-in { to { opacity: 1; transform: translateY(0); } }
+    .market-card:hover { border-color: var(--border-strong); transform: translateY(-2px); box-shadow: var(--shadow-md), inset 0 1px 0 var(--edge-light); }
     .market-card .header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 14px; }
     .market-card .name { font-weight: 600; font-size: 16px; color: var(--text-strong); }
     .market-card .country { color: var(--muted); font-size: 11px; margin-top: 2px; }
     .market-card .regime-pill {
-      display: inline-block;
-      padding: 3px 10px; border-radius: 12px;
+      display: inline-block; padding: 3px 10px; border-radius: 12px;
       font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px;
     }
-    .market-card .regime-pill.bull { background: rgba(52,198,115,0.18); color: var(--bull); border: 1px solid rgba(52,198,115,0.4); }
-    .market-card .regime-pill.bear { background: rgba(227,84,84,0.18); color: var(--bear); border: 1px solid rgba(227,84,84,0.4); }
-    .market-card .regime-pill.neutral { background: rgba(212,160,23,0.18); color: var(--neutral); border: 1px solid rgba(212,160,23,0.4); }
+    .market-card .regime-pill.bull { background: rgba(52,198,115,0.14); color: var(--bull); border: 1px solid rgba(52,198,115,0.4); box-shadow: 0 0 12px rgba(52,198,115,0.12); }
+    .market-card .regime-pill.bear { background: rgba(227,84,84,0.14); color: var(--bear); border: 1px solid rgba(227,84,84,0.4); box-shadow: 0 0 12px rgba(227,84,84,0.12); }
+    .market-card .regime-pill.neutral { background: rgba(212,160,23,0.12); color: var(--neutral); border: 1px solid rgba(212,160,23,0.4); }
 
     .mini-gauge { display: flex; flex-direction: column; align-items: center; padding: 4px 0 0; }
-    .mini-gauge svg { width: 100%; max-width: 200px; height: auto; }
+    .mini-gauge svg { width: 100%; max-width: 200px; height: auto; overflow: visible; }
+    .mini-gauge .needle-g {
+      transform-origin: 100px 110px;
+      transition: transform 1s var(--ease-spring);
+    }
     .mini-gauge .score-num {
-      font-family: "Fraunces", serif;
-      font-size: 48px; font-weight: 600; line-height: 1;
+      font-size: 46px; font-weight: 700; line-height: 1;
       margin-top: -26px;
-      font-variant-numeric: tabular-nums;
       letter-spacing: -0.03em;
     }
-    .mini-gauge .score-num.positive { color: var(--bull); }
-    .mini-gauge .score-num.negative { color: var(--bear); }
-    .mini-gauge .score-num.zero { color: var(--neutral); }
+    .mini-gauge .score-num.positive { color: var(--bull); text-shadow: 0 0 24px rgba(52,198,115,0.35); }
+    .mini-gauge .score-num.negative { color: var(--bear); text-shadow: 0 0 24px rgba(227,84,84,0.35); }
+    .mini-gauge .score-num.zero { color: var(--neutral); text-shadow: 0 0 24px rgba(212,160,23,0.3); }
+    .mini-gauge .score-scale { font-size: 10px; color: var(--muted-2); letter-spacing: 1.2px; text-transform: uppercase; margin-top: 6px; font-weight: 600; }
 
     .market-card .sub-scores {
       display: flex; gap: 8px; flex-wrap: wrap;
-      margin-top: 14px;
-      padding-top: 14px;
-      border-top: 1px solid var(--border);
+      margin-top: 14px; padding-top: 14px;
+      border-top: 1px solid var(--hairline);
       font-size: 11px;
     }
     .market-card .sub-score {
       flex: 1; min-width: 0; text-align: center;
-      padding: 6px 4px;
-      border-radius: 6px;
-      background: var(--bg-elev);
-      border: 1px solid var(--border);
+      padding: 6px 4px; border-radius: 6px;
+      background: var(--bg-elev); border: 1px solid var(--border);
+      transition: var(--transition);
     }
     .market-card .sub-score .lbl {
-      display: block;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      font-size: 9.5px;
-      font-weight: 600;
-      margin-bottom: 3px;
+      display: block; color: var(--muted); text-transform: uppercase;
+      letter-spacing: 1px; font-size: 9.5px; font-weight: 600; margin-bottom: 3px;
     }
-    .market-card .sub-score .val {
-      font-weight: 600;
-      font-size: 12px;
-    }
-    .market-card .sub-score.bull    { border-color: rgba(52,198,115,0.4); }
+    .market-card .sub-score .val { font-weight: 600; font-size: 12px; }
+    .market-card .sub-score.bull    { border-color: rgba(52,198,115,0.35); }
     .market-card .sub-score.bull    .val { color: var(--bull); }
-    .market-card .sub-score.bear    { border-color: rgba(227,84,84,0.4); }
+    .market-card .sub-score.bear    { border-color: rgba(227,84,84,0.35); }
     .market-card .sub-score.bear    .val { color: var(--bear); }
-    .market-card .sub-score.neutral { border-color: rgba(212,160,23,0.4); }
+    .market-card .sub-score.neutral { border-color: rgba(212,160,23,0.35); }
     .market-card .sub-score.neutral .val { color: var(--neutral); }
+
+    /* cross-market tiles */
+    #cross-market { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+    .cm-tile {
+      flex: 1; min-width: 150px; padding: 12px 16px; border-radius: var(--r-md);
+      background: var(--panel); border: 1px solid var(--border);
+      box-shadow: inset 0 1px 0 var(--edge-light);
+    }
+    .cm-tile .lbl { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 1.2px; font-weight: 600; }
+    .cm-tile .val { font-size: 17px; display: block; margin-top: 4px; font-weight: 700; font-family: var(--font-mono); }
+    .cm-tile .sub { font-size: 11px; color: var(--muted); display: block; margin-top: 2px; }
+    .cm-tile.bull { border-color: rgba(52,198,115,0.35); } .cm-tile.bull .val { color: var(--bull); }
+    .cm-tile.bear { border-color: rgba(227,84,84,0.35); } .cm-tile.bear .val { color: var(--bear); }
+    .cm-tile.neutral { border-color: rgba(212,160,23,0.35); } .cm-tile.neutral .val { color: var(--neutral); }
   </style>
   <script type="application/ld+json">
   {"@context": "https://schema.org", "@type": "WebPage", "name": "Risk-On / Risk-Off Composite — Regime Compass", "description": "One number for global market risk appetite. Composite of HMM + SMA + EMA across ten markets including BTC and ETH.", "url": "https://www.regimecompass.com/composite", "isPartOf": {"@type": "WebSite", "name": "Regime Compass", "url": "https://www.regimecompass.com"}}
   </script>
 </head>
 <body>
-<div class="page-loader" id="page-loader"></div>
-<div class="stale-banner" id="stale-banner"></div>
-
-<nav class="top">
-  <div class="inner">
-    <a class="brand" href="/"><svg class="logo-svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-label="Regime Compass logo">
-  <circle cx="12" cy="12" r="10" class="ring" fill="none" stroke="currentColor" stroke-width="0.6" opacity="0.5"/>
-  <path d="M12 2.5 L9.6 11 L14.4 11 Z" fill="#27ae60"/>
-  <path d="M12 21.5 L9.6 13 L14.4 13 Z" fill="#c0392b"/>
-  <rect x="19" y="11.4" width="2.7" height="1.2" fill="#d4a017"/>
-  <rect x="2.3" y="11.4" width="2.7" height="1.2" fill="#d4a017"/>
-  <circle cx="12" cy="12" r="1.4" class="needle" fill="currentColor"/>
-</svg> Regime Compass</a>
-    <button class="nav-burger" type="button" aria-label="Menu"><span></span><span></span><span></span></button>
-    <div class="links">
-      <a href="/" data-nav="/">Home</a>
-      <span class="nav-dd">
-        <span class="dd-trigger">Signals <span class="chev">&#9662;</span></span>
-        <span class="dd-menu">
-          <a href="/composite" data-nav="/composite">Risk Score <span class="dd-note">Composite</span></a>
-          <a href="/hmm" data-nav="/hmm">HMM <span class="dd-note">Hidden Markov Model</span></a>
-          <a href="/ma" data-nav="/ma">MA <span class="dd-note">Moving Average</span></a>
-          <a href="/ema" data-nav="/ema">EMA <span class="dd-note">Exponential Moving Average</span></a>
-        </span>
-      </span>
-      <span class="nav-dd">
-        <span class="dd-trigger">Smart Money <span class="chev">&#9662;</span></span>
-        <span class="dd-menu">
-          <a href="/smartmoney" data-nav="/smartmoney">Smart Money India <span class="dd-note">FII / DII flows</span></a>
-          <span class="dd-disabled">Smart Money US <span class="dd-note">coming soon</span></span>
-        </span>
-      </span>
-      <span class="nav-dd">
-        <span class="dd-trigger">Markets <span class="chev">&#9662;</span></span>
-        <span class="dd-menu">
-          <a href="/sectors" data-nav="/sectors">Sector Heatmap <span class="dd-note">India · daily</span></a>
-          <a href="/yields" data-nav="/yields">Yield Curve</a>
-          <a href="/seasonality" data-nav="/seasonality">Seasonality</a>
-          <span class="dd-soon">More market data soon</span>
-        </span>
-      </span>
-      <a href="/subscribe" data-nav="/subscribe">Alerts</a>
-      <a href="/about" data-nav="/about">About</a>
-    </div>
-  </div>
-  <script>(function(){var s=document.currentScript,nav=s.closest("nav.top");var p=location.pathname.replace(/\/+$/,"")||"/";nav.querySelectorAll("[data-nav]").forEach(function(a){if(a.getAttribute("data-nav")===p){a.classList.add("active");var d=a.closest(".nav-dd");if(d)d.classList.add("cat-active");}});var inner=nav.querySelector(".inner"),b=nav.querySelector(".nav-burger");if(b)b.addEventListener("click",function(e){e.stopPropagation();inner.classList.toggle("menu-open");});nav.querySelectorAll(".nav-dd>.dd-trigger").forEach(function(t){t.addEventListener("click",function(e){e.stopPropagation();var dd=t.parentNode,was=dd.classList.contains("open");nav.querySelectorAll(".nav-dd.open").forEach(function(o){o.classList.remove("open");});if(!was)dd.classList.add("open");});});document.addEventListener("click",function(){nav.querySelectorAll(".nav-dd.open").forEach(function(o){o.classList.remove("open");});inner.classList.remove("menu-open");});})();</script>
-</nav>
+<script src="/shell.js?v=4.2"></script>
 
 <div class="wrap">
   <div class="hero">
@@ -171,55 +131,37 @@
   <section class="panel">
     <div class="panel-title">Today's risk score by market</div>
     <p style="font-size:13px; color:var(--muted); margin:0 0 18px;">Each gauge is computed independently for that market only. VIX and Dollar Index regime are included as cross-market risk inputs.</p>
-    <div id="cross-market" style="display:flex; gap:12px; margin-bottom:20px; flex-wrap:wrap;"></div>
+    <div id="cross-market"></div>
     <div class="gauge-grid" id="gauge-grid"></div>
   </section>
 
-  <div class="callout">
+  <div class="callout reveal">
     <strong>How to read each gauge.</strong> Above 70 = the market is in a confirmed bull regime across HMM + SMA + EMA (you can be aggressive). Below 30 = confirmed bear regime across models (defensive). Between 30 and 70 = signals disagree — for example HMM bull but SMA bear, often around a turning point. The 3 sub-scores under each gauge show which model says what. Read the <a href="/methodology">methodology</a>. <strong>Not investment advice.</strong>
   </div>
 </div>
 
-<footer class="site">
-  <div class="inner">
-    <div class="built-by">
-      Built by
-      <a href="https://www.linkedin.com/in/aditya-s1/" target="_blank" rel="noopener">
-        Aditya Sahasrabuddhe
-        <svg class="icon-li" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-      </a>
-    </div>
-    <div class="links">
-      <a href="/about">About</a>
-      <a href="/methodology">Methodology</a>
-      <a href="/disclaimer">Disclaimer</a>
-      <a href="/terms">Terms</a>
-      <a href="/privacy">Privacy</a>
-    </div>
-  </div>
-</footer>
-
 <script>
-const fmtSigned = v => (v >= 0 ? "+" : "") + v.toFixed(1);
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 
 function buildMiniGauge(gauge, score) {
-  // gauge: 0-100 mapped to needle angle -90..+90
-  const angle = (gauge - 50) * 1.8;
-  const colorClass = score > 33 ? "positive" : score < -33 ? "negative" : "zero";
+  // gauge: 0-100 mapped to needle angle -90..+90 (needle starts at -90, sweeps on mount)
+  // zone thresholds match the backend (composite.py / alerts.py): gauge ≥70 risk-on, ≤30 risk-off
+  const colorClass = gauge >= 70 ? "positive" : gauge <= 30 ? "negative" : "zero";
   return `
     <div class="mini-gauge">
       <svg viewBox="0 0 200 130">
-        <path d="M 20 110 A 80 80 0 0 1 180 110" fill="none" stroke="var(--border)" stroke-width="12" stroke-linecap="round"/>
-        <path d="M 20 110 A 80 80 0 0 1 68 48" fill="none" stroke="rgba(227,84,84,0.75)" stroke-width="12" stroke-linecap="round"/>
-        <path d="M 68 48 A 80 80 0 0 1 132 48" fill="none" stroke="rgba(212,160,23,0.75)" stroke-width="12" stroke-linecap="round"/>
-        <path d="M 132 48 A 80 80 0 0 1 180 110" fill="none" stroke="rgba(52,198,115,0.75)" stroke-width="12" stroke-linecap="round"/>
-        <g transform="rotate(${angle}, 100, 110)">
-          <line x1="100" y1="110" x2="100" y2="38" stroke="var(--text-strong)" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M 20 110 A 80 80 0 0 1 180 110" fill="none" stroke="var(--border)" stroke-width="10" stroke-linecap="round"/>
+        <path d="M 20 110 A 80 80 0 0 1 53 45.3"   fill="none" stroke="rgba(227,84,84,0.7)"  stroke-width="10" stroke-linecap="round"/>
+        <path d="M 53 45.3 A 80 80 0 0 1 147 45.3" fill="none" stroke="rgba(212,160,23,0.7)" stroke-width="10" stroke-linecap="round"/>
+        <path d="M 147 45.3 A 80 80 0 0 1 180 110" fill="none" stroke="rgba(52,198,115,0.7)" stroke-width="10" stroke-linecap="round"/>
+        <g class="needle-g" data-angle="${(gauge - 50) * 1.8}" style="transform: rotate(-90deg);">
+          <line x1="100" y1="110" x2="100" y2="40" stroke="var(--text-strong)" stroke-width="2.5" stroke-linecap="round"/>
           <circle cx="100" cy="110" r="6" fill="var(--text-strong)"/>
           <circle cx="100" cy="110" r="2.5" fill="var(--bg)"/>
         </g>
       </svg>
-      <div class="score-num ${colorClass}">${gauge.toFixed(0)}</div>
+      <div class="score-num ${colorClass}" data-score="${gauge.toFixed(0)}">0</div>
+      <div class="score-scale">0 risk-off · 100 risk-on</div>
     </div>
   `;
 }
@@ -234,18 +176,18 @@ async function load() {
     const items = [];
     if (cm.vix) {
       const vc = cm.vix.score > 20 ? "bull" : cm.vix.score < -20 ? "bear" : "neutral";
-      items.push(`<div class="sub-score ${vc}" style="flex:1;min-width:140px;padding:12px 16px;border-radius:var(--r-md);background:var(--panel);border:1px solid var(--border);">
-        <span class="lbl" style="font-size:10px;">VIX Regime</span>
-        <span class="val" style="font-size:16px;display:block;margin-top:4px;">${cm.vix.value}</span>
-        <span style="font-size:11px;color:var(--muted);display:block;margin-top:2px;">${cm.vix.regime}</span>
+      items.push(`<div class="cm-tile ${vc}">
+        <span class="lbl">VIX Regime</span>
+        <span class="val">${esc(cm.vix.value)}</span>
+        <span class="sub">${esc(cm.vix.regime)}</span>
       </div>`);
     }
     if (cm.dxy) {
-      const dc = cm.dxy.score > 0 ? "bull" : cm.dxy.score < -20 ? "bear" : "neutral";
-      items.push(`<div class="sub-score ${dc}" style="flex:1;min-width:140px;padding:12px 16px;border-radius:var(--r-md);background:var(--panel);border:1px solid var(--border);">
-        <span class="lbl" style="font-size:10px;">Dollar Index (DXY)</span>
-        <span class="val" style="font-size:16px;display:block;margin-top:4px;">${cm.dxy.value}</span>
-        <span style="font-size:11px;color:var(--muted);display:block;margin-top:2px;">${cm.dxy.regime} dollar</span>
+      const dc = cm.dxy.score > 20 ? "bull" : cm.dxy.score < -20 ? "bear" : "neutral";
+      items.push(`<div class="cm-tile ${dc}">
+        <span class="lbl">Dollar Index (DXY)</span>
+        <span class="val">${esc(cm.dxy.value)}</span>
+        <span class="sub">${esc(cm.dxy.regime)} dollar</span>
       </div>`);
     }
     crossEl.innerHTML = items.join("");
@@ -253,20 +195,23 @@ async function load() {
 
   const grid = document.getElementById("gauge-grid");
   grid.innerHTML = "";
+  let i = 0;
   for (const b of today.breakdown) {
     // Per-index gauge: map score [-100, +100] -> 0-100
     const gauge = (b.score + 100) / 2;
-    const overallRegime = b.score > 33 ? "bull" : b.score < -33 ? "bear" : "neutral";
+    // same 70/30 gauge thresholds as the backend alerting
+    const overallRegime = gauge >= 70 ? "bull" : gauge <= 30 ? "bear" : "neutral";
     const overallLabel = overallRegime === "bull" ? "risk-on" : overallRegime === "bear" ? "risk-off" : "mixed";
     const hmmRegime = b.hmm_state || "neutral";
 
     const card = document.createElement("div");
     card.className = "market-card";
+    card.style.animationDelay = (i++ * 60) + "ms";
     card.innerHTML = `
       <div class="header">
         <div>
-          <div class="name">${b.index_name}</div>
-          <div class="country">${b.country}</div>
+          <div class="name">${esc(b.index_name)}</div>
+          <div class="country">${esc(b.country)}</div>
         </div>
         <span class="regime-pill ${overallRegime}">${overallLabel}</span>
       </div>
@@ -274,41 +219,39 @@ async function load() {
       <div class="sub-scores">
         <div class="sub-score ${hmmRegime}">
           <span class="lbl">Hidden Markov</span>
-          <span class="val">${b.hmm_state || '—'}</span>
+          <span class="val">${esc(b.hmm_state || '—')}</span>
         </div>
         <div class="sub-score ${b.sma_regime}">
           <span class="lbl">200 SMA</span>
-          <span class="val">${b.sma_regime}</span>
+          <span class="val">${esc(b.sma_regime)}</span>
         </div>
         <div class="sub-score ${b.ema_regime}">
           <span class="lbl">200 EMA</span>
-          <span class="val">${b.ema_regime}</span>
+          <span class="val">${esc(b.ema_regime)}</span>
         </div>
       </div>
     `;
     grid.appendChild(card);
   }
+
+  /* needle sweep + score count-up, staggered with the card entrance.
+     setTimeout (not rAF) so hidden/background tabs still land on final values. */
+  grid.querySelectorAll(".market-card").forEach((card, idx) => {
+    setTimeout(() => {
+      const g = card.querySelector(".needle-g");
+      if (g) g.style.transform = `rotate(${g.dataset.angle}deg)`;
+      const n = card.querySelector(".score-num");
+      if (n && window.RC) RC.countUp(n, +n.dataset.score, { duration: 1000 });
+      else if (n) n.textContent = n.dataset.score;
+    }, 150 + idx * 60);
+  });
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  setTimeout(() => document.body.classList.add("loaded"), 250);
-});
-(async () => {
-  try {
-    const r = await fetch("/api/freshness"); const d = await r.json();
-    if (d.any_stale) {
-      const b = document.getElementById("stale-banner");
-      b.innerHTML = `<strong>Data delayed.</strong> Latest fetch is ${d.max_age_hours.toFixed(0)} hours old.`;
-      b.classList.add("show");
-    }
-  } catch (e) {}
-})();
 load();
 </script>
 <script src="/share.js?v=3.1"></script>
 <script>
 renderShareButtons("share-container", "spx", "Regime Compass");
 </script>
-<script src="/consent.js?v=3.1"></script>
 </body>
 </html>

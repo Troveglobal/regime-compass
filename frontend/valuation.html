@@ -24,9 +24,9 @@
   <meta name="twitter:title" content="Valuation Compass — Regime Compass" />
   <meta name="twitter:description" content="PE ratio, Shiller CAPE, and MVRV valuation metrics for ten markets." />
   <meta name="twitter:image" content="https://www.regimecompass.com/og-image.png" />
-  <meta name="theme-color" content="#0a0d12" />
+  <meta name="theme-color" content="#07090e" />
   <link rel="canonical" href="https://www.regimecompass.com/valuation" />
-  <link rel="stylesheet" href="/styles.css?v=3.5" />
+  <link rel="stylesheet" href="/styles.css?v=4.0" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="manifest" href="/manifest.json" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
@@ -46,15 +46,16 @@
       border: 1px solid var(--border);
       border-radius: var(--r-md);
       padding: 20px;
+      box-shadow: inset 0 1px 0 var(--edge-light);
       transition: var(--transition);
       display: flex; flex-direction: column;
     }
-    .val-card:hover { border-color: var(--border-strong); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+    .val-card:hover { border-color: var(--border-strong); transform: translateY(-2px); box-shadow: var(--shadow-md), inset 0 1px 0 var(--edge-light); }
     .val-card .card-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 6px; }
     .val-card .index-name { font-weight: 600; font-size: 16px; color: var(--text-strong); }
     .val-card .metric-name { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
     .val-card .current-value {
-      font-family: "Fraunces", serif;
+      font-family: var(--font-display);
       font-size: 42px; font-weight: 600; line-height: 1.1;
       font-variant-numeric: tabular-nums;
       letter-spacing: -0.03em;
@@ -64,19 +65,19 @@
     .val-card .mean-compare {
       font-size: 12px; color: var(--muted); margin-bottom: 14px;
     }
-    .val-card .mean-compare span { font-weight: 600; color: var(--text); }
+    .val-card .mean-compare span { font-weight: 600; color: var(--text); font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
 
     /* Percentile bar */
     .pct-bar-wrap { margin-top: auto; }
     .pct-bar-label { display: flex; justify-content: space-between; font-size: 11px; color: var(--muted); margin-bottom: 4px; }
-    .pct-bar-label .pct-value { font-weight: 700; }
+    .pct-bar-label .pct-value { font-weight: 700; font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
     .pct-bar-track {
       height: 8px; border-radius: 4px; background: var(--bg-elev);
       position: relative; overflow: hidden;
     }
     .pct-bar-fill {
       height: 100%; border-radius: 4px;
-      transition: width 0.6s ease;
+      transition: width 0.6s var(--ease-out);
     }
     .pct-bar-fill.cheap    { background: linear-gradient(90deg, #27ae60, #34c673); }
     .pct-bar-fill.fair     { background: linear-gradient(90deg, #c08e0a, #d4a017); }
@@ -109,22 +110,27 @@
 
     /* Chart section */
     .chart-controls { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 18px; }
-    .chart-controls label { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
+    .chart-controls label { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: 1.4px; font-weight: 600; }
     .chart-controls select {
-      background: var(--panel); color: var(--text);
-      border: 1px solid var(--border); border-radius: 6px;
-      padding: 6px 12px; font-size: 14px; min-width: 220px;
-      cursor: pointer;
+      appearance: none; -webkit-appearance: none;
+      background: var(--panel) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%238b95a3' fill='none' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 12px center;
+      color: var(--text);
+      border: 1px solid var(--border-strong); border-radius: var(--r-md);
+      padding: 8px 34px 8px 14px; font-size: 14px; min-width: 230px; font-family: inherit;
+      cursor: pointer; transition: var(--transition);
+      box-shadow: inset 0 1px 0 var(--edge-light);
     }
+    .chart-controls select:hover { border-color: var(--muted); }
+    .chart-controls select:focus { outline: none; border-color: var(--accent); box-shadow: var(--ring-accent); }
     .chart-wrap { position: relative; height: 400px; }
     .chart-stats {
       display: flex; gap: 24px; flex-wrap: wrap; font-size: 13px; margin-top: 14px;
     }
     .chart-stats .item { color: var(--muted); }
-    .chart-stats .item span { color: var(--text); font-weight: 600; }
+    .chart-stats .item span { color: var(--text); font-weight: 600; font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
 
     .pct-highlight {
-      font-family: "Fraunces", serif;
+      font-family: var(--font-display);
       font-size: 28px; font-weight: 600;
       font-variant-numeric: tabular-nums;
       margin-left: auto;
@@ -135,7 +141,7 @@
 
     /* Callout (reusable) */
     details.metric-info {
-      background: var(--panel-2); border: 1px solid var(--border); border-radius: 10px;
+      background: var(--panel-2); border: 1px solid var(--border); border-radius: var(--r-md);
       padding: 14px 20px; margin-bottom: 18px;
     }
     details.metric-info summary {
@@ -143,9 +149,9 @@
       list-style: none; display: flex; align-items: center; gap: 8px;
     }
     details.metric-info summary::-webkit-details-marker { display: none; }
-    details.metric-info summary::before { content: "\25B6"; font-size: 10px; color: var(--muted); transition: transform 0.2s; }
+    details.metric-info summary::before { content: "\25B6"; font-size: 10px; color: var(--muted); transition: transform 0.2s var(--ease-out); }
     details.metric-info[open] summary::before { transform: rotate(90deg); }
-    details.metric-info .body { margin-top: 14px; font-size: 13px; color: #c9d1d9; }
+    details.metric-info .body { margin-top: 14px; font-size: 13px; color: var(--text-body); }
     details.metric-info .body p { margin: 8px 0; }
     details.metric-info .body ul { padding-left: 22px; margin: 8px 0; }
     details.metric-info .body li { margin: 4px 0; }
@@ -162,57 +168,11 @@
   </script>
 </head>
 <body>
-<div class="page-loader" id="page-loader"></div>
-<div class="stale-banner" id="stale-banner"></div>
-
-<nav class="top">
-  <div class="inner">
-    <a class="brand" href="/"><svg class="logo-svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-label="Regime Compass logo">
-  <circle cx="12" cy="12" r="10" class="ring" fill="none" stroke="currentColor" stroke-width="0.6" opacity="0.5"/>
-  <path d="M12 2.5 L9.6 11 L14.4 11 Z" fill="#27ae60"/>
-  <path d="M12 21.5 L9.6 13 L14.4 13 Z" fill="#c0392b"/>
-  <rect x="19" y="11.4" width="2.7" height="1.2" fill="#d4a017"/>
-  <rect x="2.3" y="11.4" width="2.7" height="1.2" fill="#d4a017"/>
-  <circle cx="12" cy="12" r="1.4" class="needle" fill="currentColor"/>
-</svg> Regime Compass</a>
-    <button class="nav-burger" type="button" aria-label="Menu"><span></span><span></span><span></span></button>
-    <div class="links">
-      <a href="/" data-nav="/">Home</a>
-      <span class="nav-dd">
-        <span class="dd-trigger">Signals <span class="chev">&#9662;</span></span>
-        <span class="dd-menu">
-          <a href="/composite" data-nav="/composite">Risk Score <span class="dd-note">Composite</span></a>
-          <a href="/hmm" data-nav="/hmm">HMM <span class="dd-note">Hidden Markov Model</span></a>
-          <a href="/ma" data-nav="/ma">MA <span class="dd-note">Moving Average</span></a>
-          <a href="/ema" data-nav="/ema">EMA <span class="dd-note">Exponential Moving Average</span></a>
-        </span>
-      </span>
-      <span class="nav-dd">
-        <span class="dd-trigger">Smart Money <span class="chev">&#9662;</span></span>
-        <span class="dd-menu">
-          <a href="/smartmoney" data-nav="/smartmoney">Smart Money India <span class="dd-note">FII / DII flows</span></a>
-          <span class="dd-disabled">Smart Money US <span class="dd-note">coming soon</span></span>
-        </span>
-      </span>
-      <span class="nav-dd">
-        <span class="dd-trigger">Markets <span class="chev">&#9662;</span></span>
-        <span class="dd-menu">
-          <a href="/sectors" data-nav="/sectors">Sector Heatmap <span class="dd-note">India · daily</span></a>
-          <a href="/yields" data-nav="/yields">Yield Curve</a>
-          <a href="/seasonality" data-nav="/seasonality">Seasonality</a>
-          <span class="dd-soon">More market data soon</span>
-        </span>
-      </span>
-      <a href="/subscribe" data-nav="/subscribe">Alerts</a>
-      <a href="/about" data-nav="/about">About</a>
-    </div>
-  </div>
-  <script>(function(){var s=document.currentScript,nav=s.closest("nav.top");var p=location.pathname.replace(/\/+$/,"")||"/";nav.querySelectorAll("[data-nav]").forEach(function(a){if(a.getAttribute("data-nav")===p){a.classList.add("active");var d=a.closest(".nav-dd");if(d)d.classList.add("cat-active");}});var inner=nav.querySelector(".inner"),b=nav.querySelector(".nav-burger");if(b)b.addEventListener("click",function(e){e.stopPropagation();inner.classList.toggle("menu-open");});nav.querySelectorAll(".nav-dd>.dd-trigger").forEach(function(t){t.addEventListener("click",function(e){e.stopPropagation();var dd=t.parentNode,was=dd.classList.contains("open");nav.querySelectorAll(".nav-dd.open").forEach(function(o){o.classList.remove("open");});if(!was)dd.classList.add("open");});});document.addEventListener("click",function(){nav.querySelectorAll(".nav-dd.open").forEach(function(o){o.classList.remove("open");});inner.classList.remove("menu-open");});})();</script>
-</nav>
+<script src="/shell.js?v=4.2"></script>
 
 <div class="wrap">
   <div class="hero">
-    <div class="kicker">Valuation Compass</div>
+    <div class="kicker">Valuation</div>
     <h1>Is the market cheap or expensive?</h1>
     <div class="tagline">Trailing PE, Shiller CAPE, and MVRV ratios for ten markets. Each metric is ranked against its own history to produce a percentile &mdash; higher means more expensive relative to the past. Updated daily.</div>
     <div id="share-container"></div>
@@ -224,12 +184,12 @@
       <p><strong>Trailing PE (Nifty 50)</strong> &mdash; Price divided by trailing 12-month earnings. Daily data from NSE, back to 1999. A high PE means investors are paying more per unit of earnings. Useful for gauging short-term valuation.</p>
       <p><strong>Shiller CAPE (S&amp;P 500)</strong> &mdash; Cyclically Adjusted Price-to-Earnings ratio. Price divided by inflation-adjusted average earnings over the past 10 years. Monthly data from Robert Shiller's dataset, back to 1881. Smooths out business cycles &mdash; a high CAPE has historically predicted lower 10-year forward returns.</p>
       <p><strong>MVRV Ratio (BTC / ETH)</strong> &mdash; Market Value to Realized Value. The on-chain equivalent of PE for crypto. Market cap divided by realized cap (sum of each coin valued at the price it last moved). <strong>MVRV &gt; 3 = overheated</strong>, <strong>MVRV &lt; 1 = undervalued</strong>. When MVRV is near 1, the average holder is roughly at breakeven.</p>
-      <p><strong>Korea / China</strong> &mdash; No free, reliable historical PE or CAPE data source available for KOSPI or Shanghai Composite. If you know of one, <a href="/about">get in touch</a>.</p>
+      <p><strong>Trailing PE (other equity indices)</strong> &mdash; For Nasdaq 100, Nikkei 225, KOSPI, and Shanghai Composite there is no free <em>historical</em> PE series, so we show a current-snapshot trailing PE via the closest US-listed ETF proxy (QQQ, EWJ, EWY, FXI). Snapshot only &mdash; no percentile ranking. Gold and Silver have no earnings, hence no PE.</p>
       <p><strong>Percentile rank</strong> &mdash; Shows where the current value sits within the full historical distribution. A percentile of 90 means the market is more expensive than 90% of all historical readings. Below 20 = historically cheap. Above 80 = historically expensive. 40&ndash;60 = fair value relative to history.</p>
     </div>
   </details>
 
-  <section class="panel">
+  <section class="panel reveal">
     <div class="panel-title">Valuation snapshot</div>
     <div class="val-grid" id="val-grid">
       <div class="val-card" style="opacity:0.3; display:flex; align-items:center; justify-content:center; min-height:180px;">
@@ -238,7 +198,7 @@
     </div>
   </section>
 
-  <section class="panel" style="margin-top: 24px;">
+  <section class="panel reveal reveal-d1" style="margin-top: 24px;">
     <div class="panel-title" style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
       Historical valuation
       <span class="pct-highlight" id="chart-pct"></span>
@@ -254,25 +214,7 @@
   </section>
 </div>
 
-<footer class="site">
-  <div class="inner">
-    <div class="built-by">
-      Built by
-      <a href="https://www.linkedin.com/in/aditya-s1/" target="_blank" rel="noopener">
-        Aditya Sahasrabuddhe
-        <svg class="icon-li" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-      </a>
-    </div>
-    <div class="links">
-      <a href="/about">About</a>
-      <a href="/methodology">Methodology</a>
-      <a href="/disclaimer">Disclaimer</a>
-      <a href="/terms">Terms</a>
-      <a href="/privacy">Privacy</a>
-    </div>
-  </div>
-</footer>
-
+<script src="/charts.js?v=4.0"></script>
 <script>
 function pctZone(p) {
   if (p <= 30) return "cheap";
@@ -308,10 +250,21 @@ async function loadSummary() {
   let firstAvailable = null;
 
   for (const m of data) {
+    /* No historical metric AND no PE snapshot → nothing to show; skip entirely. */
+    if (!m.available && m.pe == null) continue;
+
+    /* PE-snapshot-only card (Nasdaq / Nikkei / KOSPI / Shanghai) */
     if (!m.available) {
       const card = document.createElement("div");
-      card.className = "val-card unavailable";
-      card.innerHTML = '<div class="no-data"><span class="idx-name">' + m.index_name + '</span>No free data source</div>';
+      card.className = "val-card";
+      card.innerHTML =
+        '<div class="card-header">' +
+          '<div class="index-name">' + m.index_name + '</div>' +
+        '</div>' +
+        '<div class="metric-name">Trailing PE</div>' +
+        '<div class="current-value">' + m.pe.toFixed(2) + '</div>' +
+        '<div class="mean-compare">Snapshot via ETF proxy: <span>' + m.pe_proxy + '</span></div>' +
+        '<div class="pct-bar-wrap"><div class="pct-bar-label"><span style="opacity:0.7">No free PE history for percentile ranking</span></div></div>';
       grid.appendChild(card);
       continue;
     }
@@ -321,6 +274,11 @@ async function loadSummary() {
     const zone = pctZone(m.percentile);
     const label = zoneLabel(m.percentile);
     const zoneFromField = m.zone || label;
+
+    /* extra PE row for indices whose headline metric isn't already PE (e.g. S&P 500 CAPE) */
+    const peRow = (m.pe != null && m.metric !== "Trailing PE")
+      ? '<div class="mean-compare">Trailing PE: <span>' + m.pe.toFixed(2) + '</span> <span style="font-weight:400;color:var(--muted-2);font-size:11px">via ' + m.pe_proxy + '</span></div>'
+      : '';
 
     const card = document.createElement("div");
     card.className = "val-card";
@@ -332,6 +290,7 @@ async function loadSummary() {
       '<div class="metric-name">' + m.metric + '</div>' +
       '<div class="current-value">' + m.current.toFixed(2) + '</div>' +
       '<div class="mean-compare">Historical mean: <span>' + m.mean.toFixed(2) + '</span></div>' +
+      peRow +
       '<div class="pct-bar-wrap">' +
         '<div class="pct-bar-label"><span>Percentile rank</span><span class="pct-value">' + m.percentile.toFixed(1) + '%</span></div>' +
         '<div class="pct-bar-track"><div class="pct-bar-fill ' + zone + '" style="width:' + m.percentile + '%"></div></div>' +
@@ -367,7 +326,7 @@ async function loadChart(indexKey) {
   }
 
   const series = data.series || [];
-  const stats = data.stats || {};
+  const stats = data.stats || data;   /* API returns stats at top level */
   const metricName = data.metric || "Valuation";
   const mean = stats.mean;
   const std = stats.std;
@@ -398,27 +357,28 @@ async function loadChart(indexKey) {
   const labels = series.map(function(d) { return d.date; });
   const values = series.map(function(d) { return d.value; });
 
+  const A = RCCharts.alpha, R = RCCharts.regime;
   const annotations = {};
   if (mean != null) {
     annotations.meanLine = {
       type: "line", yMin: mean, yMax: mean,
-      borderColor: "rgba(167, 139, 250, 0.6)", borderWidth: 1.5, borderDash: [6, 4],
+      borderColor: A(RCCharts.accent, 0.6), borderWidth: 1.5, borderDash: [6, 4],
       label: { display: true, content: "Mean " + mean.toFixed(1), position: "start",
-        backgroundColor: "rgba(167,139,250,0.15)", color: "#a78bfa", font: { size: 10 } }
+        backgroundColor: A(RCCharts.accent, 0.15), color: RCCharts.accent, font: { size: 10 } }
     };
   }
   if (mean != null && std != null) {
     annotations.plusStd = {
       type: "line", yMin: mean + std, yMax: mean + std,
-      borderColor: "rgba(227, 84, 84, 0.4)", borderWidth: 1, borderDash: [4, 4],
+      borderColor: A(R.bear, 0.4), borderWidth: 1, borderDash: [4, 4],
       label: { display: true, content: "+1σ " + (mean + std).toFixed(1), position: "start",
-        backgroundColor: "rgba(227,84,84,0.12)", color: "#e35454", font: { size: 10 } }
+        backgroundColor: A(R.bear, 0.12), color: R.bear, font: { size: 10 } }
     };
     annotations.minusStd = {
       type: "line", yMin: Math.max(0, mean - std), yMax: Math.max(0, mean - std),
-      borderColor: "rgba(52, 198, 115, 0.4)", borderWidth: 1, borderDash: [4, 4],
+      borderColor: A(R.bull, 0.4), borderWidth: 1, borderDash: [4, 4],
       label: { display: true, content: "-1σ " + Math.max(0, mean - std).toFixed(1), position: "start",
-        backgroundColor: "rgba(52,198,115,0.12)", color: "#34c673", font: { size: 10 } }
+        backgroundColor: A(R.bull, 0.12), color: R.bull, font: { size: 10 } }
     };
   }
 
@@ -447,46 +407,29 @@ async function loadChart(indexKey) {
       datasets: [{
         label: metricName,
         data: values,
-        borderColor: "#6ec1ff",
-        backgroundColor: "rgba(110, 193, 255, 0.08)",
+        borderColor: RCCharts.cat[1],
+        backgroundColor: RCCharts.gradient(ctx, RCCharts.cat[1], 0.16),
         borderWidth: 1.5,
         pointRadius: 0,
         pointHitRadius: 6,
         fill: true,
-        tension: 0.15
+        tension: 0.15,
+        rcFormat: function(v) { return v.toFixed(2); }
       }]
     },
     options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      interaction: { mode: "index", intersect: false },
       scales: {
         x: {
           type: "time",
           time: { unit: "year", tooltipFormat: "MMM d, yyyy" },
-          grid: { color: "rgba(255,255,255,0.04)" },
-          ticks: { color: "var(--muted)", font: { size: 11 }, maxTicksLimit: 12 }
+          ticks: { maxTicksLimit: 12 }
         },
         y: {
-          grid: { color: "rgba(255,255,255,0.04)" },
-          ticks: { color: "var(--muted)", font: { size: 11 } },
           beginAtZero: false
         }
       },
       plugins: {
         legend: { display: false },
-        tooltip: {
-          backgroundColor: "#1c2330",
-          borderColor: "#232830",
-          borderWidth: 1,
-          titleFont: { size: 12 },
-          bodyFont: { size: 13, weight: "600" },
-          padding: 10,
-          cornerRadius: 6,
-          callbacks: {
-            label: function(ctx) { return metricName + ": " + ctx.parsed.y.toFixed(2); }
-          }
-        },
         annotation: { annotations: annotations }
       }
     }
@@ -497,28 +440,11 @@ document.getElementById("chart-select").addEventListener("change", function() {
   loadChart(this.value);
 });
 
-document.addEventListener("DOMContentLoaded", function() {
-  setTimeout(function() { document.body.classList.add("loaded"); }, 250);
-});
-
-// Stale-data check
-(async function() {
-  try {
-    var r = await fetch("/api/freshness"); var d = await r.json();
-    if (d.any_stale) {
-      var b = document.getElementById("stale-banner");
-      b.innerHTML = '<strong>Data delayed.</strong> Latest fetch is ' + d.max_age_hours.toFixed(0) + ' hours old.';
-      b.classList.add("show");
-    }
-  } catch (e) {}
-})();
-
 loadSummary();
 </script>
 <script src="/share.js?v=3.1"></script>
 <script>
 renderShareButtons("share-container", "spx", "Regime Compass");
 </script>
-<script src="/consent.js?v=3.1"></script>
 </body>
 </html>

@@ -942,8 +942,13 @@ if FRONTEND_DIR.exists():
 
     @app.get("/smartmoney")
     def smartmoney_page():
-        # SmartFlow is a same-origin static app that renders the Regime Compass nav itself.
-        return RedirectResponse("/smartflow/?embed=1")
+        return FileResponse(FRONTEND_DIR / "smartmoney.html")
+
+    @app.get("/smartflow")
+    @app.get("/smartflow/")
+    def smartflow_redirect():
+        # The old Next.js SmartFlow embed is retired; it lives natively at /smartmoney now.
+        return RedirectResponse("/smartmoney", status_code=301)
 
     @app.get("/api/smartmoney")
     def smartmoney_feed():
