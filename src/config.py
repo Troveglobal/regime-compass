@@ -76,6 +76,14 @@ INDICES = {
         "cash_rate": 0.020,
         "cash_label": "US T-bill",
     },
+    "stoxx50": {
+        "name": "Euro Stoxx 50",
+        "country": "Eurozone",
+        "currency": "EUR",
+        "tickers": {"price": "^STOXX50E", "fx": "EURUSD=X", "vix": None},
+        "cash_rate": 0.020,
+        "cash_label": "Euro MMF",
+    },
     "nifty": {
         "name": "Nifty 50",
         "country": "India",

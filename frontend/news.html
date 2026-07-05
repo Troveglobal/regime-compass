@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-94DE53GC07"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', { analytics_storage: 'denied' });
+    gtag('js', new Date());
+    gtag('config', 'G-94DE53GC07');
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Market News — Regime Compass</title>
+  <meta name="description" content="Market headlines from major publishers, tagged with each market's current regime. Aggregation only — every headline links to the original source." />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Regime Compass" />
+  <meta property="og:title" content="Market News — Regime Compass" />
+  <meta property="og:description" content="Market headlines in regime context. Aggregation only — every headline links to the original source." />
+  <meta property="og:image" content="https://www.regimecompass.com/og-image.png" />
+  <meta property="og:url" content="https://www.regimecompass.com/news" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Market News — Regime Compass" />
+  <meta name="twitter:description" content="Market headlines in regime context. Aggregation only — every headline links to the original source." />
+  <meta name="twitter:image" content="https://www.regimecompass.com/og-image.png" />
+  <meta name="theme-color" content="#07090e" />
+  <link rel="canonical" href="https://www.regimecompass.com/news" />
+  <link rel="stylesheet" href="/styles.css?v=4.1" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="manifest" href="/manifest.json" />
+  <style>
+    .news-filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+    .nf-pill {
+      padding: 6px 14px; border-radius: 999px; cursor: pointer; user-select: none;
+      font-size: 12px; font-weight: 600; color: var(--muted);
+      background: var(--panel-2); border: 1px solid var(--border);
+      transition: var(--transition);
+    }
+    .nf-pill:hover { color: var(--text); border-color: var(--border-strong); }
+    .nf-pill.active { background: var(--accent-dim); color: var(--accent-strong); border-color: var(--accent-border); }
+
+    .news-item {
+      display: flex; align-items: baseline; gap: 14px;
+      padding: 13px 4px; border-bottom: 1px solid var(--hairline);
+    }
+    .news-item:last-child { border-bottom: none; }
+    .news-item:hover { background: rgba(255,255,255,0.015); }
+    .regime-chip {
+      flex: 0 0 auto; display: inline-flex; align-items: center; gap: 6px;
+      font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px;
+      font-family: var(--font-mono); padding: 2px 9px; border-radius: 9px; white-space: nowrap;
+    }
+    .regime-chip .dot { width: 6px; height: 6px; border-radius: 50%; }
+    .regime-chip.bull    { color: var(--bull); background: rgba(52,198,115,0.12); }
+    .regime-chip.bull .dot { background: var(--bull); }
+    .regime-chip.bear    { color: var(--bear); background: rgba(227,84,84,0.12); }
+    .regime-chip.bear .dot { background: var(--bear); }
+    .regime-chip.neutral { color: var(--neutral); background: rgba(212,160,23,0.12); }
+    .regime-chip.neutral .dot { background: var(--neutral); }
+    .regime-chip.global  { color: var(--muted); background: rgba(255,255,255,0.05); }
+    .regime-chip.global .dot { background: var(--muted); }
+
+    .news-item .headline { flex: 1; min-width: 0; }
+    .news-item .headline a { color: var(--text); font-size: 14px; font-weight: 500; line-height: 1.45; text-decoration: none; }
+    .news-item .headline a:hover { color: var(--accent-strong); text-decoration: underline; text-underline-offset: 3px; }
+    .news-item .meta { flex: 0 0 auto; font-size: 11px; color: var(--muted); font-family: var(--font-mono); white-space: nowrap; }
+    .news-item .meta .src { color: var(--text); opacity: 0.65; }
+
+    .agg-note { font-size: 12px; color: var(--muted); margin-top: 16px; }
+
+    @media (max-width: 700px) {
+      .news-item { flex-wrap: wrap; gap: 8px; }
+      .news-item .meta { width: 100%; }
+    }
+  </style>
+  <script type="application/ld+json">
+  {"@context": "https://schema.org", "@type": "WebPage", "name": "Market News — Regime Compass", "description": "Market headlines from major publishers, tagged with each market's current regime. Aggregation only.", "url": "https://www.regimecompass.com/news", "isPartOf": {"@type": "WebSite", "name": "Regime Compass", "url": "https://www.regimecompass.com"}}
+  </script>
+</head>
+<body>
+<script src="/shell.js?v=4.4"></script>
+
+<div class="wrap narrow">
+  <div class="hero">
+    <div class="kicker">News</div>
+    <h1>Headlines, in regime context</h1>
+    <div class="tagline">The same headline reads differently in a bull regime than in a bear one. Market news from major publishers, tagged with what our models say about that market right now. Every headline links to the original publisher.</div>
+  </div>
+
+  <section class="panel reveal">
+    <div class="news-filters" id="filters"></div>
+    <div id="news-list"><div class="skeleton" style="height:300px;border-radius:var(--r-md);"></div></div>
+    <div class="agg-note">Aggregation only &mdash; Regime Compass republishes nothing: headlines, source names, and links are shown as provided by each publisher's public feed, and all traffic goes to the publisher. Refreshed hourly. Regime tags are our model output, not the publisher's view.</div>
+  </section>
+</div>
+
+<script>
+const esc = s => { const d = document.createElement("div"); d.textContent = s; return d.innerHTML; };
+
+const FILTERS = [
+  ["", "All"], ["global", "Macro"], ["spx", "S&P 500"], ["nasdaq", "Nasdaq"],
+  ["stoxx50", "Euro Stoxx"], ["nifty", "Nifty 50"], ["nikkei", "Nikkei"],
+  ["kospi", "KOSPI"], ["shcomp", "Shanghai"], ["btc", "Bitcoin"], ["eth", "Ethereum"],
+  ["gold", "Gold"], ["silver", "Silver"],
+];
+const NAME = Object.fromEntries(FILTERS);
+let regimes = {};   // index_key -> {state, days}
+
+function relTime(iso) {
+  if (!iso) return "";
+  const mins = Math.max(1, Math.round((Date.now() - new Date(iso).getTime()) / 60000));
+  if (mins < 60) return mins + "m ago";
+  const h = Math.round(mins / 60);
+  if (h < 24) return h + "h ago";
+  return Math.round(h / 24) + "d ago";
+}
+
+function chipFor(key) {
+  const reg = regimes[key];
+  if (!reg) return `<span class="regime-chip global"><span class="dot"></span>${esc(NAME[key] || key)}</span>`;
+  return `<span class="regime-chip ${reg.state}" title="${esc(NAME[key])} is in a ${reg.state} regime (${reg.days}d)">` +
+         `<span class="dot"></span>${esc(NAME[key] || key)} · ${reg.state}</span>`;
+}
+
+async function loadNews(key) {
+  const list = document.getElementById("news-list");
+  const q = key ? "?index=" + key + "&limit=50" : "?limit=50";
+  const r = await fetch("/api/news" + q);
+  const d = await r.json();
+  list.innerHTML = "";
+  if (!d.items.length) {
+    list.innerHTML = '<div style="color:var(--muted);font-size:13px;padding:20px 0;">No headlines yet — the feed refreshes hourly.</div>';
+    return;
+  }
+  for (const it of d.items) {
+    const el = document.createElement("div");
+    el.className = "news-item";
+    el.innerHTML = `
+      ${chipFor(it.index_key)}
+      <div class="headline"><a href="${esc(it.link)}" target="_blank" rel="noopener nofollow">${esc(it.title)}</a></div>
+      <div class="meta"><span class="src">${esc(it.source || "")}</span> · ${relTime(it.published_at)}</div>`;
+    list.appendChild(el);
+  }
+}
+
+function buildFilters() {
+  const wrap = document.getElementById("filters");
+  for (const [key, label] of FILTERS) {
+    const p = document.createElement("div");
+    p.className = "nf-pill" + (key === "" ? " active" : "");
+    p.textContent = label;
+    p.addEventListener("click", () => {
+      wrap.querySelectorAll(".nf-pill.active").forEach(a => a.classList.remove("active"));
+      p.classList.add("active");
+      loadNews(key);
+    });
+    wrap.appendChild(p);
+  }
+}
+
+(async () => {
+  buildFilters();
+  try {
+    const r = await fetch("/api/hmm/snapshot");
+    const s = await r.json();
+    for (const m of s.indices) regimes[m.index_key] = { state: m.hard_state, days: m.days_in_regime };
+  } catch (e) { /* chips fall back to plain market names */ }
+  loadNews("");
+})();
+</script>
+</body>
+</html>

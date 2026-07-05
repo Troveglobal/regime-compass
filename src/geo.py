@@ -206,7 +206,7 @@ def blocks_for(page: str) -> dict[str, str]:
         out["JSONLD"] = _jsonld(
             snap,
             "Regime Compass daily market regime classifications",
-            f"Daily bull/neutral/bear regime states from SMA, EMA and HMM models across 10 global markets. {_brief_sentence(snap)}",
+            f"Daily bull/neutral/bear regime states from SMA, EMA and HMM models across 11 global markets. {_brief_sentence(snap)}",
         )
 
     elif page == "composite":
@@ -336,7 +336,7 @@ def _today_blocks(snap: dict) -> dict[str, str]:
         "JSONLD": _jsonld(
             snap,
             f"Regime Compass daily brief — {snap['as_of']}",
-            f"Market regime daily brief for {snap['as_of']}: risk gauge {snap['gauge']:.0f}/100 across 10 global markets, NSE smart-money flows, valuation percentiles.",
+            f"Market regime daily brief for {snap['as_of']}: risk gauge {snap['gauge']:.0f}/100 across 11 global markets, NSE smart-money flows, valuation percentiles.",
         ),
     }
 

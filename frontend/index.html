@@ -13,16 +13,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Home — Regime Compass</title>
-  <meta name="description" content="Three regime models across ten markets — equities, crypto, and commodities — updated daily. SMA, EMA, and Hidden Markov Model side by side." />
+  <meta name="description" content="Three regime models across eleven markets — equities, crypto, and commodities — updated daily. SMA, EMA, and Hidden Markov Model side by side." />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Regime Compass" />
   <meta property="og:title" content="Regime Compass — What kind of market is this?" />
-  <meta property="og:description" content="Three regime models, ten markets, one snapshot. Updated daily. By iQuant Labs." />
+  <meta property="og:description" content="Three regime models, eleven markets, one snapshot. Updated daily. By iQuant Labs." />
   <meta property="og:image" content="https://www.regimecompass.com/og-image.png" />
   <meta property="og:url" content="https://regimecompass.com" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Regime Compass — What kind of market is this?" />
-  <meta name="twitter:description" content="Three regime models, ten markets, one snapshot. Updated daily. By iQuant Labs." />
+  <meta name="twitter:description" content="Three regime models, eleven markets, one snapshot. Updated daily. By iQuant Labs." />
   <meta name="twitter:image" content="https://www.regimecompass.com/og-image.png" />
   <meta name="theme-color" content="#07090e" />
   <link rel="canonical" href="https://www.regimecompass.com/" />
@@ -160,6 +160,56 @@
     /* skeleton rows while snapshots load */
     .snap-grid .sk { height: 76px; border-radius: var(--r-md); }
 
+    /* ── Global Regime Board ── */
+    .board {
+      border: 1px solid var(--border); border-radius: var(--r-lg);
+      background: linear-gradient(180deg, rgba(255,255,255,0.015), transparent 45%), var(--panel);
+      box-shadow: var(--shadow-sm), inset 0 1px 0 var(--edge-light);
+      padding: 22px 24px 18px;
+    }
+    .board-top { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin-bottom: 18px; }
+    .board-counts { display: flex; gap: 26px; }
+    .bc { display: flex; align-items: baseline; gap: 8px; }
+    .bc .n { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: 34px; font-weight: 700; letter-spacing: -0.02em; line-height: 1; }
+    .bc .l { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.4px; color: var(--muted); }
+    .bc.bull .n { color: var(--bull); }
+    .bc.neutral .n { color: var(--neutral); }
+    .bc.bear .n { color: var(--bear); }
+    .board-verdict { text-align: right; }
+    .board-pill {
+      display: inline-block; padding: 5px 14px; border-radius: 14px;
+      font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.4px;
+    }
+    .board-pill.bull { background: rgba(52,198,115,0.16); color: var(--bull); border: 1px solid rgba(52,198,115,0.4); }
+    .board-pill.bear { background: rgba(227,84,84,0.16); color: var(--bear); border: 1px solid rgba(227,84,84,0.4); }
+    .board-pill.neutral { background: rgba(212,160,23,0.16); color: var(--neutral); border: 1px solid rgba(212,160,23,0.4); }
+    .board-lastseen { font-size: 12px; color: var(--muted); margin-top: 8px; font-family: var(--font-mono); }
+    .board-markets { display: flex; gap: 2px; margin-bottom: 16px; }
+    .bseg {
+      flex: 1; text-align: center; padding: 9px 2px; cursor: pointer;
+      font-size: 10.5px; font-weight: 700; letter-spacing: 0.6px; font-family: var(--font-mono);
+      transition: transform var(--dur-1) var(--ease-out), filter var(--dur-1) ease;
+    }
+    .bseg:first-child { border-radius: 8px 0 0 8px; }
+    .bseg:last-child { border-radius: 0 8px 8px 0; }
+    .bseg:hover { transform: translateY(-2px); filter: brightness(1.25); }
+    .bseg.bull { background: rgba(52,198,115,0.22); color: var(--bull); box-shadow: inset 0 -2px 0 var(--bull); }
+    .bseg.bear { background: rgba(227,84,84,0.22); color: var(--bear); box-shadow: inset 0 -2px 0 var(--bear); }
+    .bseg.neutral { background: rgba(212,160,23,0.22); color: var(--neutral); box-shadow: inset 0 -2px 0 var(--neutral); }
+    .board-ribbon { display: flex; gap: 1px; height: 44px; align-items: stretch; }
+    .board-ribbon .day { flex: 1; display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+    .board-ribbon .day > div { border-radius: 1px; }
+    .board-ribbon .day .b { background: rgba(52,198,115,0.55); }
+    .board-ribbon .day .n { background: rgba(212,160,23,0.4); }
+    .board-ribbon .day .r { background: rgba(227,84,84,0.55); }
+    .board-ribbon-cap { display: flex; justify-content: space-between; font-size: 10px; color: var(--muted); margin-top: 6px; text-transform: uppercase; letter-spacing: 1px; }
+    @media (max-width: 700px) {
+      .board-counts { gap: 16px; }
+      .bc .n { font-size: 26px; }
+      .board-verdict { text-align: left; }
+      .bseg { font-size: 8.5px; letter-spacing: 0; }
+    }
+
     @media (max-width: 700px) {
       .snap-grid.dma, .snap-grid.hmm { grid-template-columns: 1fr; }
       .snap-grid .snap-h:not(:first-child) { display: none; }
@@ -175,7 +225,7 @@
         "@id": "https://www.regimecompass.com/#website",
         "name": "Regime Compass",
         "url": "https://www.regimecompass.com",
-        "description": "Three regime models, ten markets, updated daily. By iQuant Labs.",
+        "description": "Three regime models, eleven markets, updated daily. By iQuant Labs.",
         "publisher": { "@id": "https://www.regimecompass.com/#org" }
       },
       {
@@ -198,7 +248,7 @@
       {
         "@type": "Dataset",
         "name": "Regime Compass daily market regime classifications",
-        "description": "Daily bull/neutral/bear regime classifications for 10 global markets (S&P 500, Nasdaq 100, Nifty 50, Nikkei 225, KOSPI, Shanghai Composite, Bitcoin, Ethereum, Gold, Silver) from three independent models: a 3-state Gaussian Hidden Markov Model, 200/100/50-day simple moving averages, and exponential moving averages. Includes a blended 0-100 risk-on/risk-off gauge per market.",
+        "description": "Daily bull/neutral/bear regime classifications for 11 global markets (S&P 500, Nasdaq 100, Euro Stoxx 50, Nifty 50, Nikkei 225, KOSPI, Shanghai Composite, Bitcoin, Ethereum, Gold, Silver) from three independent models: a 3-state Gaussian Hidden Markov Model, 200/100/50-day simple moving averages, and exponential moving averages. Includes a blended 0-100 risk-on/risk-off gauge per market.",
         "url": "https://www.regimecompass.com",
         "creator": { "@id": "https://www.regimecompass.com/#org" },
         "temporalCoverage": "2010-01-01/..",
@@ -212,16 +262,16 @@
   <!--GEO:JSONLD-->
 </head>
 <body>
-<script src="/shell.js?v=4.3"></script>
+<script src="/shell.js?v=4.4"></script>
 
 <div class="wrap">
   <div class="hero hero-home">
     <div class="hero-grid">
       <div>
         <div class="kicker">Regime Compass</div>
-        <p class="above-fold"><span class="live-dot"></span> Daily regime classification across 10 global markets. Free.</p>
+        <p class="above-fold"><span class="live-dot"></span> Daily regime classification across 11 global markets. Free.</p>
         <h1>What kind of<br/><span class="grad-text">market is this?</span></h1>
-        <div class="tagline">Volatility-based <strong>SMA</strong>, faster-reacting <strong>EMA</strong>, and a probabilistic <strong>Hidden Markov Model</strong> — across US equities, crypto, commodities, and Asian indices. Updated daily after US market close. Click any cell to drill in.</div>
+        <div class="tagline">Volatility-based <strong>SMA</strong>, faster-reacting <strong>EMA</strong>, and a probabilistic <strong>Hidden Markov Model</strong> — across US and European equities, crypto, commodities, and Asian indices. Updated daily after US market close. Click any cell to drill in.</div>
         <div class="hero-ctas">
           <a href="/composite" class="btn primary">View risk-on/off gauge →</a>
           <a href="/subscribe" class="btn ghost">Get alerts</a>
@@ -260,11 +310,33 @@
 
   <!--GEO:BRIEF-->
 
+  <!-- Global Regime Board -->
+  <section class="model-section reveal" style="margin-top:34px;">
+    <h2>Global Regime Board <span class="tag">regime concordance · HMM</span></h2>
+    <div class="subline">How many of the eleven markets are risk-on right now — the whole board at a glance. Click a market to drill in.</div>
+    <div class="board">
+      <div class="board-top">
+        <div class="board-counts">
+          <div class="bc bull"><span class="n" id="bc-bull">&ndash;</span><span class="l">Bull</span></div>
+          <div class="bc neutral"><span class="n" id="bc-neutral">&ndash;</span><span class="l">Neutral</span></div>
+          <div class="bc bear"><span class="n" id="bc-bear">&ndash;</span><span class="l">Bear</span></div>
+        </div>
+        <div class="board-verdict">
+          <span class="board-pill neutral" id="board-pill">loading&hellip;</span>
+          <div class="board-lastseen" id="board-lastseen"></div>
+        </div>
+      </div>
+      <div class="board-markets" id="board-markets"></div>
+      <div class="board-ribbon" id="board-ribbon" title="Bull / neutral / bear market counts, last 90 sessions"></div>
+      <div class="board-ribbon-cap"><span>90 sessions ago</span><span>Regime mix over time</span><span>today</span></div>
+    </div>
+  </section>
+
   <!-- Count-up stats strip -->
   <div class="stats-strip reveal">
-    <div class="cell"><div class="v num" data-count="10">0</div><div class="k">Markets tracked</div></div>
+    <div class="cell"><div class="v num" data-count="11">0</div><div class="k">Markets tracked</div></div>
     <div class="cell"><div class="v num" data-count="3">0</div><div class="k">Independent models</div></div>
-    <div class="cell"><div class="v num" data-count="90">0</div><div class="k">Signals per day</div></div>
+    <div class="cell"><div class="v num" data-count="99">0</div><div class="k">Signals per day</div></div>
     <div class="cell"><div class="v num" id="stat-days" data-count="0">0</div><div class="k">Days of history</div></div>
   </div>
 
@@ -400,7 +472,60 @@ const st = document.createElement("style");
 st.textContent = "@keyframes cell-in-dim { to { opacity: 0.5; transform: translateY(0); } }";
 document.head.appendChild(st);
 
+/* ── Global Regime Board ── */
+const BOARD_ABBREV = {
+  spx: "SPX", nasdaq: "NDX", btc: "BTC", eth: "ETH", gold: "GOLD", silver: "SLV",
+  stoxx50: "SX5E", nifty: "NIFTY", nikkei: "N225", kospi: "KOSPI", shcomp: "SSE",
+};
+async function loadBoard() {
+  const r = await fetch("/api/concordance");
+  const d = await r.json();
+  ["bull", "neutral", "bear"].forEach(s =>
+    RC.countUp(document.getElementById("bc-" + s), d.counts[s], { duration: 800 }));
+
+  const pill = document.getElementById("board-pill");
+  pill.textContent = d.label;
+  pill.className = "board-pill " +
+    (d.breadth >= 30 ? "bull" : d.breadth <= -30 ? "bear" : "neutral");
+
+  const fmtD = iso => new Date(iso + "T00:00:00").toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+  if (d.last_seen) {
+    let txt = `${d.counts.bull}/${d.n_markets} bullish since ${fmtD(d.last_seen.streak_since)}`;
+    if (d.last_seen.previous) txt += ` · last seen ${fmtD(d.last_seen.previous)}`;
+    document.getElementById("board-lastseen").textContent = txt;
+  }
+
+  const seg = document.getElementById("board-markets");
+  seg.innerHTML = "";
+  for (const m of d.markets) {
+    const el = document.createElement("div");
+    el.className = "bseg " + m.state;
+    el.textContent = BOARD_ABBREV[m.index_key] || m.index_key.toUpperCase();
+    el.title = `${m.index_name} — ${m.state} (${m.confidence}% confidence)`;
+    el.addEventListener("click", () => { window.location.href = "/hmm?index=" + m.index_key; });
+    seg.appendChild(el);
+  }
+
+  const ribbon = document.getElementById("board-ribbon");
+  ribbon.innerHTML = "";
+  for (const day of d.history.slice(-90)) {
+    const total = day.bull + day.neutral + day.bear;
+    const col = document.createElement("div");
+    col.className = "day";
+    col.title = `${day.date}: ${day.bull} bull · ${day.neutral} neutral · ${day.bear} bear`;
+    for (const [cls, v] of [["b", day.bull], ["n", day.neutral], ["r", day.bear]]) {
+      if (!v) continue;
+      const s = document.createElement("div");
+      s.className = cls;
+      s.style.flexGrow = v / total;
+      col.appendChild(s);
+    }
+    ribbon.appendChild(col);
+  }
+}
+
 (async () => {
+  loadBoard().catch(e => console.error("board failed:", e));
   showSkeletons("dma-rows", 4);
   showSkeletons("ema-rows", 4);
   showSkeletons("hmm-rows", 4);

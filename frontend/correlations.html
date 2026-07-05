@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-94DE53GC07"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', { analytics_storage: 'denied' });
+    gtag('js', new Date());
+    gtag('config', 'G-94DE53GC07');
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Correlation Matrix — Regime Compass</title>
+  <meta name="description" content="Rolling cross-asset correlation matrix across eleven markets — equities, crypto, and metals. See where diversification actually exists." />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Regime Compass" />
+  <meta property="og:title" content="Correlation Matrix — Regime Compass" />
+  <meta property="og:description" content="Rolling cross-asset correlation matrix across eleven markets. See where diversification actually exists." />
+  <meta property="og:image" content="https://www.regimecompass.com/og-image.png" />
+  <meta property="og:url" content="https://www.regimecompass.com/correlations" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Correlation Matrix — Regime Compass" />
+  <meta name="twitter:description" content="Rolling cross-asset correlation matrix across eleven markets. See where diversification actually exists." />
+  <meta name="twitter:image" content="https://www.regimecompass.com/og-image.png" />
+  <meta name="theme-color" content="#07090e" />
+  <link rel="canonical" href="https://www.regimecompass.com/correlations" />
+  <link rel="stylesheet" href="/styles.css?v=4.1" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="manifest" href="/manifest.json" />
+  <style>
+    .win-tabs { margin-bottom: 18px; }
+
+    /* Matrix */
+    .matrix-scroll { overflow-x: auto; }
+    .matrix { display: grid; gap: 2px; min-width: 720px; }
+    .mx-cell {
+      border-radius: 4px; text-align: center; padding: 0 2px;
+      font-family: var(--font-mono); font-variant-numeric: tabular-nums;
+      font-size: 11.5px; line-height: 34px; height: 34px;
+      color: var(--text); position: relative;
+    }
+    .mx-cell.diag { color: var(--muted); background: var(--panel-2); opacity: 0.55; }
+    .mx-cell.val { cursor: default; transition: transform var(--dur-1) var(--ease-out); }
+    .mx-cell.val:hover { transform: scale(1.12); z-index: 2; outline: 1px solid var(--border-strong); }
+    .mx-h {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.5px; color: var(--muted);
+      text-transform: uppercase; font-family: var(--font-mono);
+      display: flex; align-items: center; justify-content: center; height: 34px;
+    }
+    .mx-h.row { justify-content: flex-end; padding-right: 8px; }
+
+    /* Legend */
+    .mx-legend { display: flex; align-items: center; gap: 10px; margin-top: 14px; font-size: 11px; color: var(--muted); }
+    .mx-legend .bar {
+      flex: 0 0 180px; height: 8px; border-radius: 4px;
+      background: linear-gradient(90deg, rgba(63,154,232,0.75), var(--panel-2) 50%, rgba(227,84,84,0.75));
+      border: 1px solid var(--border);
+    }
+
+    /* Diversifier ranking */
+    .divers-row { display: flex; align-items: center; gap: 14px; padding: 9px 0; border-bottom: 1px solid var(--hairline); }
+    .divers-row:last-child { border-bottom: none; }
+    .divers-row .nm { flex: 0 0 150px; font-size: 13.5px; font-weight: 600; color: var(--text-strong); }
+    .divers-row .track { flex: 1; height: 8px; border-radius: 4px; background: var(--panel-2); overflow: hidden; position: relative; }
+    .divers-row .fill { position: absolute; top: 0; bottom: 0; border-radius: 4px; }
+    .divers-row .v { flex: 0 0 56px; text-align: right; font-family: var(--font-mono); font-size: 12.5px; color: var(--text); }
+
+    .stat-row { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 22px; }
+    .stat-tile {
+      flex: 1 1 160px; background: var(--panel-2); border: 1px solid var(--border);
+      border-radius: var(--r-md); padding: 16px 18px; box-shadow: inset 0 1px 0 var(--edge-light);
+    }
+    .stat-tile .label { font-size: 10.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.3px; color: var(--muted); margin-bottom: 6px; }
+    .stat-tile .value { font-family: var(--font-display); font-size: 26px; font-weight: 600; color: var(--text-strong); font-variant-numeric: tabular-nums; }
+    .stat-tile .sub { font-size: 11.5px; color: var(--muted); margin-top: 4px; }
+  </style>
+  <script type="application/ld+json">
+  {"@context": "https://schema.org", "@type": "WebPage", "name": "Correlation Matrix — Regime Compass", "description": "Rolling cross-asset correlation matrix across eleven markets — equities, crypto, and metals.", "url": "https://www.regimecompass.com/correlations", "isPartOf": {"@type": "WebSite", "name": "Regime Compass", "url": "https://www.regimecompass.com"}}
+  </script>
+</head>
+<body>
+<script src="/shell.js?v=4.4"></script>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="kicker">Cross-Asset</div>
+    <h1>Where is the diversification?</h1>
+    <div class="tagline">Pairwise return correlations across all eleven markets over a rolling window. Red pairs move together — they are one bet, not two. Blue pairs hedge each other. Updated daily.</div>
+    <div id="share-container"></div>
+  </div>
+
+  <section class="panel reveal">
+    <div class="panel-title">Correlation matrix</div>
+    <div class="tabs win-tabs" id="win-tabs">
+      <button class="tab" data-tab="30">30 days</button>
+      <button class="tab active" data-tab="90">90 days</button>
+      <button class="tab" data-tab="365">1 year</button>
+    </div>
+    <div class="stat-row" id="stat-row">
+      <div class="stat-tile"><div class="label">Average pairwise correlation</div><div class="value" id="avg-corr">&mdash;</div><div class="sub" id="avg-sub"></div></div>
+      <div class="stat-tile"><div class="label">Best diversifier</div><div class="value" id="best-div" style="font-size:20px;">&mdash;</div><div class="sub" id="best-sub"></div></div>
+      <div class="stat-tile"><div class="label">Most correlated pair</div><div class="value" id="top-pair" style="font-size:20px;">&mdash;</div><div class="sub" id="top-pair-sub"></div></div>
+    </div>
+    <div class="matrix-scroll">
+      <div class="matrix" id="matrix"></div>
+    </div>
+    <div class="mx-legend">
+      <span>&minus;1 hedges</span>
+      <div class="bar"></div>
+      <span>+1 moves together</span>
+      <span style="margin-left:auto" id="period-note"></span>
+    </div>
+  </section>
+
+  <section class="panel reveal reveal-d1">
+    <div class="panel-title">Diversification ranking <span style="font-weight:400;color:var(--muted);font-size:12px;">&mdash; average correlation vs the other ten markets, low = better diversifier</span></div>
+    <div id="divers-list"></div>
+  </section>
+
+  <div class="callout reveal">
+    <strong>How to read this.</strong> Correlation is computed on daily log returns over the selected window, so it shifts with the regime &mdash; assets that diversify in calm markets often converge in a sell-off. A portfolio spread across highly red cells is more concentrated than it looks. <strong>Not investment advice.</strong>
+  </div>
+</div>
+
+<script>
+const esc = s => { const d = document.createElement("div"); d.textContent = s; return d.innerHTML; };
+
+/* diverging color: +corr → red (concentration), −corr → blue (hedge), 0 → surface */
+function corrColor(v) {
+  if (v === null) return "var(--panel-2)";
+  const a = Math.min(0.78, Math.abs(v) * 0.78 + 0.05);
+  return v >= 0 ? `rgba(227,84,84,${a.toFixed(2)})` : `rgba(63,154,232,${a.toFixed(2)})`;
+}
+
+const ABBREV = {
+  spx: "SPX", nasdaq: "NDX", btc: "BTC", eth: "ETH", gold: "GOLD", silver: "SLV",
+  stoxx50: "SX5E", nifty: "NIFTY", nikkei: "N225", kospi: "KOSPI", shcomp: "SSE",
+};
+
+function render(d) {
+  const n = d.keys.length;
+  const mx = document.getElementById("matrix");
+  mx.style.gridTemplateColumns = `90px repeat(${n}, 1fr)`;
+  mx.innerHTML = "";
+
+  mx.appendChild(document.createElement("div"));
+  for (const k of d.keys) {
+    const h = document.createElement("div");
+    h.className = "mx-h";
+    h.textContent = ABBREV[k] || k;
+    mx.appendChild(h);
+  }
+  let topPair = null;
+  for (let i = 0; i < n; i++) {
+    const rh = document.createElement("div");
+    rh.className = "mx-h row";
+    rh.textContent = ABBREV[d.keys[i]] || d.keys[i];
+    rh.title = d.names[d.keys[i]];
+    mx.appendChild(rh);
+    for (let j = 0; j < n; j++) {
+      const v = d.matrix[i][j];
+      const c = document.createElement("div");
+      if (i === j) {
+        c.className = "mx-cell diag";
+        c.textContent = "—";
+      } else {
+        c.className = "mx-cell val";
+        c.textContent = v === null ? "·" : v.toFixed(2).replace("0.", ".");
+        c.style.background = corrColor(v);
+        c.title = `${d.names[d.keys[i]]} × ${d.names[d.keys[j]]}: ${v === null ? "n/a" : v.toFixed(2)}`;
+        if (v !== null && i < j && (!topPair || v > topPair.v)) topPair = { v, i, j };
+      }
+      mx.appendChild(c);
+    }
+  }
+
+  document.getElementById("avg-corr").textContent = d.avg_overall === null ? "—" : d.avg_overall.toFixed(2);
+  document.getElementById("avg-sub").textContent = "across all 55 market pairs";
+  const best = d.avg_by_market[0];
+  if (best) {
+    document.getElementById("best-div").textContent = best.index_name;
+    document.getElementById("best-sub").textContent = "avg correlation " + best.avg_corr.toFixed(2);
+  }
+  if (topPair) {
+    document.getElementById("top-pair").textContent =
+      (ABBREV[d.keys[topPair.i]] || "") + " × " + (ABBREV[d.keys[topPair.j]] || "");
+    document.getElementById("top-pair-sub").textContent = "correlation " + topPair.v.toFixed(2);
+  }
+  if (d.period && d.period.start) {
+    document.getElementById("period-note").textContent = d.period.start + " → " + d.period.end;
+  }
+
+  const list = document.getElementById("divers-list");
+  list.innerHTML = "";
+  for (const row of d.avg_by_market) {
+    if (row.avg_corr === null) continue;
+    const el = document.createElement("div");
+    el.className = "divers-row";
+    const pct = Math.max(2, Math.min(100, Math.abs(row.avg_corr) * 100));
+    const color = corrColor(row.avg_corr);
+    el.innerHTML = `
+      <div class="nm">${esc(row.index_name)}</div>
+      <div class="track"><div class="fill" style="left:0;width:${pct.toFixed(1)}%;background:${color};"></div></div>
+      <div class="v">${row.avg_corr.toFixed(2)}</div>`;
+    list.appendChild(el);
+  }
+}
+
+async function load(win) {
+  const r = await fetch("/api/correlations?window=" + win);
+  render(await r.json());
+}
+
+RC.tabs(document.getElementById("win-tabs"), w => load(w));
+load(90);
+</script>
+<script src="/share.js?v=3.1"></script>
+<script>
+renderShareButtons("share-container", "correlations", "Cross-Asset Correlation Matrix — Regime Compass");
+</script>
+</body>
+</html>

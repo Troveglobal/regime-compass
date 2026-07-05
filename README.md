@@ -1,6 +1,6 @@
 # Regime Compass
 
-Multi-market regime detection website. Hidden Markov Models, Simple Moving Average, and Exponential Moving Average models applied to six global markets (Nifty 50, S&P 500, KOSPI, Shanghai Composite, Bitcoin, Ethereum). Free, updated daily.
+Multi-market regime detection website. Hidden Markov Models, Simple Moving Average, and Exponential Moving Average models applied to eleven global markets (S&P 500, Nasdaq 100, Euro Stoxx 50, Nifty 50, Nikkei 225, KOSPI, Shanghai Composite, Bitcoin, Ethereum, Gold, Silver). Free, updated daily.
 
 Live at: `regimecompass.com` *(once deployed)*
 

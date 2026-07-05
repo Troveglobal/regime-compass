@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-94DE53GC07"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', { analytics_storage: 'denied' });
+    gtag('js', new Date());
+    gtag('config', 'G-94DE53GC07');
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Volatility Monitor — Regime Compass</title>
+  <meta name="description" content="Realized volatility percentile for eleven markets — a VIX-style stress reading for every index, including the ones without an implied vol index." />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Regime Compass" />
+  <meta property="og:title" content="Volatility Monitor — Regime Compass" />
+  <meta property="og:description" content="Realized volatility percentile for eleven markets — a VIX-style stress reading for every index." />
+  <meta property="og:image" content="https://www.regimecompass.com/og-image.png" />
+  <meta property="og:url" content="https://www.regimecompass.com/volatility" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Volatility Monitor — Regime Compass" />
+  <meta name="twitter:description" content="Realized volatility percentile for eleven markets — a VIX-style stress reading for every index." />
+  <meta name="twitter:image" content="https://www.regimecompass.com/og-image.png" />
+  <meta name="theme-color" content="#07090e" />
+  <link rel="canonical" href="https://www.regimecompass.com/volatility" />
+  <link rel="stylesheet" href="/styles.css?v=4.1" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="manifest" href="/manifest.json" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    .vol-row {
+      display: grid; grid-template-columns: 170px 92px 1fr 140px 110px; gap: 16px;
+      align-items: center; padding: 13px 0; border-bottom: 1px solid var(--hairline);
+    }
+    .vol-row:last-child { border-bottom: none; }
+    .vol-row .nm { font-size: 14px; font-weight: 600; color: var(--text-strong); }
+    .vol-row .nm .co { display: block; font-size: 10.5px; color: var(--muted); font-weight: 400; margin-top: 2px; }
+    .vol-chip {
+      display: inline-block; padding: 3px 10px; border-radius: 10px;
+      font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.1px; text-align: center;
+    }
+    .vol-chip.low      { background: rgba(52,198,115,0.16); color: var(--bull); border: 1px solid rgba(52,198,115,0.35); }
+    .vol-chip.normal   { background: rgba(255,255,255,0.05); color: var(--muted); border: 1px solid var(--border); }
+    .vol-chip.elevated { background: rgba(212,160,23,0.16); color: var(--neutral); border: 1px solid rgba(212,160,23,0.35); }
+    .vol-chip.extreme  { background: rgba(227,84,84,0.16); color: var(--bear); border: 1px solid rgba(227,84,84,0.4); }
+
+    .pct-track { height: 10px; border-radius: 5px; background: var(--panel-2); border: 1px solid var(--border); position: relative; }
+    .pct-fill { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 5px; }
+    .pct-fill.low      { background: rgba(52,198,115,0.5); }
+    .pct-fill.normal   { background: rgba(139,111,240,0.45); }
+    .pct-fill.elevated { background: rgba(212,160,23,0.55); }
+    .pct-fill.extreme  { background: rgba(227,84,84,0.6); }
+    .pct-label { font-size: 10.5px; color: var(--muted); margin-top: 5px; font-family: var(--font-mono); }
+
+    .vol-nums { text-align: right; font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+    .vol-nums .cur { font-size: 17px; font-weight: 700; color: var(--text-strong); }
+    .vol-nums .avg { font-size: 10.5px; color: var(--muted); margin-top: 2px; }
+    .vol-spark { justify-self: end; }
+
+    .vix-strip { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 22px; }
+    .vix-tile {
+      flex: 1 1 180px; background: var(--panel-2); border: 1px solid var(--border);
+      border-radius: var(--r-md); padding: 16px 18px; box-shadow: inset 0 1px 0 var(--edge-light);
+    }
+    .vix-tile .label { font-size: 10.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.3px; color: var(--muted); margin-bottom: 6px; }
+    .vix-tile .value { font-family: var(--font-display); font-size: 26px; font-weight: 600; color: var(--text-strong); font-variant-numeric: tabular-nums; }
+    .vix-tile .sub { font-size: 11.5px; color: var(--muted); margin-top: 4px; }
+
+    @media (max-width: 860px) {
+      .vol-row { grid-template-columns: 1fr 90px 100px; }
+      .pct-wrap { grid-column: 1 / -1; }
+      .vol-spark { display: none; }
+    }
+  </style>
+  <script type="application/ld+json">
+  {"@context": "https://schema.org", "@type": "WebPage", "name": "Volatility Monitor — Regime Compass", "description": "Realized volatility percentile for eleven markets — a VIX-style stress reading for every index.", "url": "https://www.regimecompass.com/volatility", "isPartOf": {"@type": "WebSite", "name": "Regime Compass", "url": "https://www.regimecompass.com"}}
+  </script>
+</head>
+<body>
+<script src="/shell.js?v=4.4"></script>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="kicker">Volatility</div>
+    <h1>How stressed is each market?</h1>
+    <div class="tagline">Only three of our markets have a VIX. This page gives every market one: 20-day realized volatility, annualized, ranked against its own history since 2010. The percentile is the stress reading &mdash; 95th means calmer than this only 5% of the time.</div>
+    <div id="share-container"></div>
+  </div>
+
+  <section class="panel reveal">
+    <div class="panel-title">Implied volatility <span style="font-weight:400;color:var(--muted);font-size:12px;">&mdash; where an options market exists</span></div>
+    <div class="vix-strip" id="vix-strip"><div class="skeleton" style="height:80px;flex:1;border-radius:var(--r-md);"></div></div>
+  </section>
+
+  <section class="panel reveal reveal-d1">
+    <div class="panel-title">Realized volatility &mdash; all markets, ranked by stress percentile</div>
+    <div id="vol-list"><div class="skeleton" style="height:300px;border-radius:var(--r-md);"></div></div>
+  </section>
+
+  <div class="callout reveal">
+    <strong>Why realized vol percentile?</strong> Volatility is the axis that separates market regimes far more cleanly than returns do &mdash; our HMM states are effectively vol states. An index in its 90th vol percentile behaves differently from the same index at its 30th: wider swings, faster regime flips, worse tail risk. Percentile against the market's <em>own</em> history makes crypto (structurally ~3&times; equity vol) comparable with equities on one scale. <strong>Not investment advice.</strong>
+  </div>
+</div>
+
+<script src="/charts.js?v=4.0"></script>
+<script>
+const esc = s => { const d = document.createElement("div"); d.textContent = s; return d.innerHTML; };
+
+async function load() {
+  const r = await fetch("/api/vol");
+  const d = await r.json();
+
+  /* Implied vol tiles */
+  const strip = document.getElementById("vix-strip");
+  strip.innerHTML = "";
+  const withImplied = d.markets.filter(m => m.implied);
+  for (const m of withImplied) {
+    const t = document.createElement("div");
+    t.className = "vix-tile";
+    t.innerHTML = `
+      <div class="label">${esc(m.index_name)}</div>
+      <div class="value">${m.implied.value.toFixed(1)}</div>
+      <div class="sub">${m.implied.percentile.toFixed(0)}th percentile since 2010</div>`;
+    strip.appendChild(t);
+  }
+  if (!withImplied.length) strip.innerHTML = '<div style="color:var(--muted);font-size:13px;">Implied vol unavailable.</div>';
+
+  /* Ranked realized-vol rows */
+  const list = document.getElementById("vol-list");
+  list.innerHTML = "";
+  for (const m of d.markets) {
+    const row = document.createElement("div");
+    row.className = "vol-row";
+    row.innerHTML = `
+      <div class="nm">${esc(m.index_name)}<span class="co">${esc(m.country)}</span></div>
+      <div><span class="vol-chip ${m.vol_regime}">${m.vol_regime}</span></div>
+      <div class="pct-wrap">
+        <div class="pct-track"><div class="pct-fill ${m.vol_regime}" style="width:${m.percentile}%"></div></div>
+        <div class="pct-label">${m.percentile.toFixed(0)}th percentile of its own history</div>
+      </div>
+      <div class="vol-nums">
+        <div class="cur">${m.realized_vol.toFixed(1)}%</div>
+        <div class="avg">1y avg ${m.avg_vol_1y.toFixed(1)}%</div>
+      </div>
+      <canvas class="vol-spark" width="110" height="34"></canvas>`;
+    list.appendChild(row);
+    const canvas = row.querySelector("canvas");
+    const color = m.vol_regime === "extreme" ? RCCharts.regimeUI.bear
+      : m.vol_regime === "elevated" ? RCCharts.regimeUI.neutral
+      : m.vol_regime === "low" ? RCCharts.regimeUI.bull : RCCharts.accent;
+    RCCharts.sparkline(canvas, m.spark, { color, fill: true });
+  }
+}
+load();
+</script>
+<script src="/share.js?v=3.1"></script>
+<script>
+renderShareButtons("share-container", "volatility", "Volatility Monitor — Regime Compass");
+</script>
+</body>
+</html>

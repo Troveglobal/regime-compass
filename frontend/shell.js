@@ -38,11 +38,14 @@
     "</span></span>" +
     '<span class="nav-dd"><span class="dd-trigger">Markets <span class="chev">&#9662;</span></span><span class="dd-menu">' +
     '<a href="/sectors" data-nav="/sectors">Sector Heatmap <span class="dd-note">India · daily</span></a>' +
+    '<a href="/correlations" data-nav="/correlations">Correlations <span class="dd-note">cross-asset matrix</span></a>' +
+    '<a href="/volatility" data-nav="/volatility">Volatility <span class="dd-note">stress percentile</span></a>' +
     '<a href="/yields" data-nav="/yields">Yield Curve</a>' +
     '<a href="/valuation" data-nav="/valuation">Valuation</a>' +
     '<a href="/seasonality" data-nav="/seasonality">Seasonality</a>' +
     '<a href="/calendar" data-nav="/calendar">Calendar</a>' +
     "</span></span>" +
+    '<a href="/news" data-nav="/news">News</a>' +
     '<a href="/changes" data-nav="/changes">Changes</a>' +
     '<a href="/subscribe" data-nav="/subscribe">Alerts</a>' +
     '<a href="/about" data-nav="/about">About</a>' +
@@ -53,12 +56,12 @@
     '<div class="inner">' +
     '<div class="f-brand">' +
     '<span class="brand-line">' + LOGO + " Regime Compass</span>" +
-    "<p>Daily regime classification across ten global markets. Three independent models, one honest snapshot. An iQuant Labs project.</p>" +
+    "<p>Daily regime classification across eleven global markets. Three independent models, one honest snapshot. An iQuant Labs project.</p>" +
     "</div>" +
     '<div class="f-col"><h5>Signals</h5>' +
     '<a href="/today">Daily Brief</a><a href="/composite">Risk Score</a><a href="/hmm">HMM</a><a href="/ma">Moving Average</a><a href="/ema">EMA</a><a href="/smartmoney">Smart Money India</a></div>' +
     '<div class="f-col"><h5>Markets</h5>' +
-    '<a href="/sectors">Sector Heatmap</a><a href="/yields">Yield Curve</a><a href="/valuation">Valuation</a><a href="/seasonality">Seasonality</a><a href="/calendar">Calendar</a></div>' +
+    '<a href="/sectors">Sector Heatmap</a><a href="/correlations">Correlations</a><a href="/volatility">Volatility</a><a href="/yields">Yield Curve</a><a href="/valuation">Valuation</a><a href="/seasonality">Seasonality</a><a href="/calendar">Calendar</a><a href="/news">News</a></div>' +
     '<div class="f-col"><h5>Company</h5>' +
     '<a href="/about">About</a><a href="/methodology">Methodology</a><a href="/subscribe">Alerts</a><a href="/disclaimer">Disclaimer</a><a href="/terms">Terms</a><a href="/privacy">Privacy</a></div>' +
     "</div>" +

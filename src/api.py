@@ -27,6 +27,8 @@ from . import badge as badge_mod
 from . import cards as cards_mod
 from . import changes as changes_mod
 from . import composite as composite_mod
+from . import crossmarket as cross_mod
+from . import news as news_mod
 from . import digest as digest_mod
 from . import geo
 from . import email_sender
@@ -110,6 +112,15 @@ def _run_sectors() -> None:
         log.exception("[sectors] refresh failed: %s", e)
 
 
+def _run_news() -> None:
+    """Refresh the aggregated news feed (headlines + links only)."""
+    try:
+        result = news_mod.refresh()
+        log.info("[news] %s", result)
+    except Exception as e:
+        log.exception("[news] refresh failed: %s", e)
+
+
 def _run_daily() -> None:
     from .alerts import detect_and_send
     from .inference import update_today_all
@@ -157,6 +168,9 @@ def _bootstrap_async() -> None:
         if not SECTORS_FEED.exists():
             log.info("[bootstrap] No sector heatmap — generating.")
             _run_sectors()
+        if not news_mod.has_items():
+            log.info("[bootstrap] No news items — fetching feeds.")
+            _run_news()
         _bootstrap_done = True
         log.info("[bootstrap] Ready.")
 
@@ -178,6 +192,8 @@ def _start_scheduler() -> None:
     _scheduler.add_job(_run_sectors, CronTrigger(day_of_week="mon-fri", hour=12, minute=0), id="sectors_daily")
     # Weekly: Sunday 03:30 UTC.
     _scheduler.add_job(_run_weekly, CronTrigger(day_of_week="sun", hour=3, minute=30), id="weekly_refit")
+    # News aggregation: hourly at :20 (aggregation-only; headlines + links)
+    _scheduler.add_job(_run_news, CronTrigger(minute=20), id="news_hourly")
     _scheduler.start()
     log.info("[scheduler] started (daily + weekly).")
 
@@ -337,6 +353,29 @@ def _load_bundle_summary(key: str) -> dict:
 @app.get("/healthz")
 def healthz() -> dict:
     return {"ok": True, "version": "v3.1", "bootstrap_done": _bootstrap_done, "data_present": _data_is_present()}
+
+
+@app.get("/api/concordance")
+def concordance_endpoint() -> dict:
+    """Regime concordance across all markets — the global risk dial."""
+    return cross_mod.concordance()
+
+
+@app.get("/api/correlations")
+def correlations_endpoint(window: int = Query(90)) -> dict:
+    return cross_mod.correlations(window)
+
+
+@app.get("/api/vol")
+def vol_endpoint() -> dict:
+    return cross_mod.vol_monitor()
+
+
+@app.get("/api/news")
+def news_endpoint(index: str | None = Query(None), limit: int = Query(30, ge=1, le=100)) -> dict:
+    if index and index != "global" and index not in INDICES:
+        raise HTTPException(400, f"Unknown index '{index}'")
+    return {"items": news_mod.latest(index, limit)}
 
 
 @app.get("/api/composite/today")
@@ -565,7 +604,7 @@ def share_page(index_key: str):
     date, bear, neutral, bull, hard_state, price = row
     confidence = max(bear, neutral, bull) * 100
     title = f"{cfg['name']} — {hard_state.upper()} regime"
-    desc = f"{cfg['name']} is in a {hard_state} regime ({confidence:.0f}% HMM confidence) as of {date}. View all 10 markets on Regime Compass."
+    desc = f"{cfg['name']} is in a {hard_state} regime ({confidence:.0f}% HMM confidence) as of {date}. View all 11 markets on Regime Compass."
     base = os.getenv("PUBLIC_URL", "https://www.regimecompass.com")
     card_url = f"{base}/api/card/{index_key}"
     page_url = f"{base}/share/{index_key}"
@@ -988,6 +1027,18 @@ if FRONTEND_DIR.exists():
     def valuation_page():
         return geo.render_page("valuation.html", "valuation")
 
+    @app.get("/correlations")
+    def correlations_page():
+        return FileResponse(FRONTEND_DIR / "correlations.html")
+
+    @app.get("/volatility")
+    def volatility_page():
+        return FileResponse(FRONTEND_DIR / "volatility.html")
+
+    @app.get("/news")
+    def news_page():
+        return FileResponse(FRONTEND_DIR / "news.html")
+
     @app.get("/yields")
     def yields_page():
         return FileResponse(FRONTEND_DIR / "yields.html")
@@ -1004,6 +1055,7 @@ if FRONTEND_DIR.exists():
         evergreen = "2026-07-05"
         daily = [("/", "1.0"), ("/today", "1.0"), ("/composite", "0.9"), ("/hmm", "0.9"),
                  ("/ma", "0.9"), ("/ema", "0.9"), ("/smartmoney", "0.9"), ("/valuation", "0.9"),
+                 ("/correlations", "0.8"), ("/volatility", "0.8"), ("/news", "0.8"),
                  ("/changes", "0.8"), ("/yields", "0.8"), ("/sectors", "0.8")]
         weekly = [("/ma/backtest", "0.7"), ("/ema/backtest", "0.7"), ("/calendar", "0.7"),
                   ("/seasonality", "0.7")]
