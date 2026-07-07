@@ -33,7 +33,7 @@
     '<a href="/ema" data-nav="/ema">EMA <span class="dd-note">Exponential Moving Average</span></a>' +
     "</span></span>" +
     '<span class="nav-dd"><span class="dd-trigger">Smart Money <span class="chev">&#9662;</span></span><span class="dd-menu">' +
-    '<a href="/smartmoney" data-nav="/smartmoney">🇮🇳 India <span class="dd-note">deals · flows · sectors · stakes</span></a>' +
+    '<a href="/smartmoney" data-nav="/smartmoney">🇮🇳 India <span class="dd-note">deals · flows · stakes</span></a>' +
     '<a href="/smartmoney/tw" data-nav="/smartmoney/tw">🇹🇼 Taiwan <span class="dd-note">TWSE block deals</span></a>' +
     '<a href="/smartmoney/id" data-nav="/smartmoney/id">🇮🇩 Indonesia <span class="dd-note">IDX negotiated deals</span></a>' +
     '<a href="/smartmoney/us" data-nav="/smartmoney/us">🇺🇸 United States <span class="dd-note">insiders · Congress</span></a>' +

@@ -1071,6 +1071,45 @@ if FRONTEND_DIR.exists():
             return FileResponse(SMARTMONEY_FEED, media_type="application/json")
         return JSONResponse({"error": "feed unavailable"}, status_code=503)
 
+    @app.get("/api/smartmoney/summary")
+    def smartmoney_summary():
+        """Tiny cross-market digest for the home page — one line per market,
+        computed from the feed files on disk and cached by mtime."""
+        import json as _json
+        out = {}
+        try:
+            if SMARTMONEY_FEED.exists():
+                f = _json.loads(SMARTMONEY_FEED.read_text())
+                b, s = f["month"]["buy"]["kpi"], f["month"]["sell"]["kpi"]
+                flav = f["month"]["buy"]["flavour"]
+                out["in"] = {"net_cr": round(b["net_cr"] - s["net_cr"], 1),
+                             "top_sector": flav[0]["sector"] if flav else None,
+                             "latest": f["meta"]["latest_date"]}
+            for mkt in ("tw", "id"):
+                p = SMARTMONEY_OUT / f"feed_{mkt}.json"
+                if p.exists():
+                    f = _json.loads(p.read_text())
+                    k = f["month"]["kpi"]
+                    top = f["month"]["stocks"][0] if f["month"]["stocks"] else None
+                    out[mkt] = {"total": k["total_value"], "unit": f["meta"]["unit"],
+                                "top": (top or {}).get("security") or (top or {}).get("symbol"),
+                                "latest": f["meta"]["latest_date"]}
+            p = SMARTMONEY_OUT / "feed_us.json"
+            if p.exists():
+                f = _json.loads(p.read_text())
+                out["us"] = {"buy": f["month"]["buy"]["kpi"]["total_value"],
+                             "sell": f["month"]["sell"]["kpi"]["total_value"],
+                             "latest": f["meta"]["latest_date"]}
+            p = SMARTMONEY_OUT / "feed_congress.json"
+            if p.exists():
+                f = _json.loads(p.read_text())
+                tb = f["overview"]["top_bought"]
+                out["congress"] = {"top": tb[0]["symbol"] if tb else None,
+                                   "n_pol": f["meta"]["n_politicians"]}
+        except Exception as e:  # noqa: BLE001 — a partial summary beats a 500
+            log.warning("[smartmoney] summary build hiccup: %s", e)
+        return JSONResponse(out, headers={"Cache-Control": "public, max-age=600"})
+
     @app.get("/api/smartmoney/inflows")
     def smartmoney_inflows_feed():
         # India market-wide FII/DII flow layers (cash provisional + F&O positioning)

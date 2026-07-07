@@ -275,6 +275,7 @@ nav.top .nav-dd.open .chev { transform: rotate(180deg); }
 nav.top .dd-menu a, nav.top .dd-menu .dd-disabled {
   display: flex; align-items: baseline; gap: 8px; padding: 8px 12px;
   border-radius: var(--r-sm); font-size: 13px; font-weight: 500;
+  white-space: nowrap;
 }
 nav.top .dd-menu a { color: var(--text); }
 nav.top .dd-menu a:hover { background: rgba(255,255,255,0.05); color: var(--text-strong); }
