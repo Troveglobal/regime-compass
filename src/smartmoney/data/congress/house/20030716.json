@@ -1,0 +1,1 @@
+{"first": "James", "last": "Comer", "filed": "8/11/2025", "state_dst": "KY01", "chamber": "House", "txns": [{"date": "2025-07-03", "owner": "", "symbol": "T", "asset": "AT&T Inc.", "side": "SELL", "lo": 1001, "hi": 15000}, {"date": "2025-07-03", "owner": "", "symbol": "HD", "asset": "Home Depot, Inc.", "side": "SELL", "lo": 1001, "hi": 15000}]}

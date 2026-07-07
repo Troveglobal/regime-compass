@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-94DE53GC07"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', { analytics_storage: 'denied' });
+    gtag('js', new Date());
+    gtag('config', 'G-94DE53GC07');
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart Money Global — Regime Compass</title>
+  <meta name="description" content="Deal-level smart money around the world — Taiwan block trades, Indonesia negotiated deals, US insider transactions. Cleaned and refreshed daily." />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Regime Compass" />
+  <meta property="og:title" content="Smart Money Global — Regime Compass" />
+  <meta property="og:description" content="Deal-level smart money around the world — block deals and insider transactions, refreshed daily." />
+  <meta property="og:image" content="https://www.regimecompass.com/og-smartmoney.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="theme-color" content="#07090e" />
+  <link rel="stylesheet" href="/styles.css?v=4.1" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="manifest" href="/manifest.json" />
+  <style>
+    /* market switcher */
+    .mkt-switch { display: flex; gap: 8px; flex-wrap: wrap; margin: 14px 0 0; }
+    .mkt-chip {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 7px 14px; border: 1px solid var(--border); border-radius: 999px;
+      background: var(--panel); color: var(--text-body); text-decoration: none;
+      font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.4px;
+      transition: var(--transition); box-shadow: inset 0 1px 0 var(--edge-light);
+    }
+    .mkt-chip:hover { border-color: var(--border-strong); transform: translateY(-1px); }
+    .mkt-chip.active { border-color: var(--accent-border); background: var(--accent-dim); color: var(--text-strong); }
+
+    /* sticky controls bar */
+    .controls-row {
+      display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+      position: sticky; top: 60px; z-index: 40;
+      margin-top: 22px; padding: 10px 14px;
+      background: rgba(7, 9, 14, 0.78);
+      -webkit-backdrop-filter: saturate(160%) blur(14px); backdrop-filter: saturate(160%) blur(14px);
+      border: 1px solid var(--border); border-radius: var(--r-lg);
+      box-shadow: var(--shadow-sm), inset 0 1px 0 var(--edge-light);
+    }
+    .controls-row .period {
+      margin-left: auto; text-align: right; line-height: 1.5;
+      font-family: var(--font-mono); font-size: 11px; color: var(--muted);
+    }
+    .controls-row .period .upd { color: var(--accent-strong); font-size: 10px; display: block; }
+    @media (max-width: 700px) { .controls-row { top: 54px; padding: 8px 10px; } .controls-row .period { display: none; } }
+
+    .verdict {
+      display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+      margin: 20px 0 0; padding: 14px 18px;
+      border: 1px solid var(--accent-border); border-radius: var(--r-lg);
+      background: linear-gradient(90deg, var(--accent-dim), transparent 70%), var(--panel);
+      box-shadow: inset 0 1px 0 var(--edge-light);
+      font-size: 14.5px; color: var(--text-body);
+      animation: rise 0.5s var(--ease-out);
+    }
+    .verdict strong { color: var(--text-strong); }
+
+    .dir-toggle { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 22px 0 14px; }
+    .dir-btn {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      padding: 16px 20px; text-align: left; cursor: pointer;
+      background: linear-gradient(180deg, rgba(255,255,255,0.015), transparent 40%), var(--panel);
+      border: 1px solid var(--border); border-radius: var(--r-lg);
+      font-family: inherit; color: var(--text);
+      transition: var(--transition);
+      box-shadow: inset 0 1px 0 var(--edge-light);
+    }
+    .dir-btn:hover { border-color: var(--border-strong); transform: translateY(-1px); }
+    .dir-btn .sub { font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 1.6px; color: var(--muted); }
+    .dir-btn .lbl { font-family: var(--font-display); font-size: 19px; margin-top: 2px; }
+    .dir-btn .amt { font-family: var(--font-mono); font-size: 14px; font-weight: 600; }
+    .dir-btn.buy.active  { border-color: rgba(52,198,115,0.45); background: linear-gradient(180deg, rgba(52,198,115,0.06), transparent 60%), var(--panel-2); box-shadow: 0 0 22px -8px rgba(52,198,115,0.45), inset 0 1px 0 var(--edge-light); }
+    .dir-btn.buy.active .lbl, .dir-btn.buy .amt { color: var(--bull); }
+    .dir-btn.sell.active { border-color: rgba(227,84,84,0.45); background: linear-gradient(180deg, rgba(227,84,84,0.06), transparent 60%), var(--panel-2); box-shadow: 0 0 22px -8px rgba(227,84,84,0.45), inset 0 1px 0 var(--edge-light); }
+    .dir-btn.sell.active .lbl, .dir-btn.sell .amt { color: var(--bear); }
+
+    .kpi-band {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+      background: var(--border); border: 1px solid var(--border);
+      border-radius: var(--r-lg); overflow: hidden; margin: 22px 0 24px;
+    }
+    .kpi { background: var(--panel); padding: 18px 20px; min-height: 110px; display: flex; flex-direction: column; }
+    .kpi.accent { background: var(--panel-2); }
+    .kpi .lbl { font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 1.6px; color: var(--muted); }
+    .kpi .mid { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+    .kpi .val { font-size: 27px; font-weight: 700; color: var(--text-strong); letter-spacing: -0.02em; line-height: 1.15; }
+    .kpi .sub2 { font-family: var(--font-mono); font-size: 10.5px; color: var(--muted); margin-top: 5px; }
+    @media (max-width: 900px) { .kpi-band { grid-template-columns: 1fr 1fr; } }
+
+    .blk { margin-bottom: 28px; }
+    .blk-head { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 12px; gap: 12px; }
+    .blk-head h2 { font-family: var(--font-display); font-size: 21px; font-weight: 600; color: var(--text-strong); margin: 0; letter-spacing: -0.01em; }
+    .blk-head .sub { font-size: 13px; color: var(--muted); margin-top: 3px; }
+    .blk-head .right { font-family: var(--font-mono); font-size: 11px; color: var(--muted); flex: 0 0 auto; }
+
+    .surface-card {
+      border: 1px solid var(--border); border-radius: var(--r-lg);
+      background: linear-gradient(180deg, rgba(255,255,255,0.012), transparent 40%), var(--panel);
+      box-shadow: inset 0 1px 0 var(--edge-light);
+    }
+
+    .sm-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 22px; align-items: start; margin-bottom: 28px; }
+    @media (max-width: 980px) { .sm-grid { grid-template-columns: 1fr; } }
+    .side-stack > .blk { margin-bottom: 24px; }
+
+    .lead-list { overflow: hidden; }
+    .stock-row { border-bottom: 1px solid var(--hairline); }
+    .stock-row:last-child { border-bottom: none; }
+    .stock-btn {
+      width: 100%; display: flex; align-items: center; gap: 14px;
+      padding: 14px 18px; text-align: left; background: none; border: none;
+      color: var(--text); font-family: inherit; cursor: pointer;
+      transition: background 0.12s ease;
+    }
+    .stock-btn:hover { background: rgba(255,255,255,0.025); }
+    .stock-btn .rank { font-family: var(--font-mono); font-size: 11px; color: var(--muted-2); width: 18px; text-align: right; flex: 0 0 auto; }
+    .stock-btn .id { width: 170px; flex: 0 0 auto; min-width: 0; }
+    .stock-btn .sym { font-weight: 600; font-size: 14.5px; color: var(--text-strong); display: inline-flex; align-items: center; gap: 7px; }
+    .stock-btn .sig-dot { width: 6px; height: 6px; border-radius: 50%; }
+    .stock-btn .sec { font-size: 11px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 1px; display: block; }
+    .stock-btn .barwrap { flex: 1; min-width: 40px; }
+    .stock-btn .bar { height: 9px; border-radius: 999px; background: var(--bg-elev); overflow: hidden; }
+    .stock-btn .bar span { display: block; height: 100%; border-radius: 999px; }
+    .stock-btn .amt { width: 112px; flex: 0 0 auto; text-align: right; }
+    .stock-btn .amt .v { font-family: var(--font-mono); font-size: 13px; font-weight: 600; }
+    .stock-btn .amt .n { font-family: var(--font-mono); font-size: 10px; color: var(--muted); }
+    .stock-btn .prem { width: 78px; flex: 0 0 auto; text-align: right; }
+    .stock-btn .prem .v { font-family: var(--font-mono); font-size: 12.5px; font-weight: 600; }
+    .stock-btn .prem .n { font-family: var(--font-mono); font-size: 9px; color: var(--muted); }
+    .stock-btn .plus { font-family: var(--font-mono); font-size: 13px; color: var(--muted); transition: transform 0.25s var(--ease-out); flex: 0 0 auto; }
+    .stock-row.open .plus { transform: rotate(45deg); }
+    .stock-detail { display: none; padding: 4px 18px 14px 56px; background: rgba(255,255,255,0.015); }
+    .stock-row.open .stock-detail { display: block; animation: rise 0.25s var(--ease-out); }
+    .stock-detail .sec-name { font-size: 11px; color: var(--muted); margin: 6px 0 8px; }
+    .actor-row { display: flex; align-items: center; gap: 10px; font-size: 13px; padding: 3px 0; }
+    .actor-row .dot { width: 6px; height: 6px; border-radius: 50%; flex: 0 0 auto; }
+    .actor-row .who { color: var(--text-body); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .actor-row .role { font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 1px; flex: 0 0 auto; }
+    .actor-row .amt { font-family: var(--font-mono); font-size: 12px; margin-left: auto; flex: 0 0 auto; font-weight: 600; }
+    @media (max-width: 700px) { .stock-btn .prem { display: none; } .stock-btn .id { width: 130px; } }
+
+    .flav-card { padding: 16px 16px 12px; }
+    .flav-item { margin-bottom: 12px; }
+    .flav-item .row1 { display: flex; align-items: baseline; gap: 8px; font-size: 12.5px; margin-bottom: 5px; }
+    .flav-item .name { color: var(--text-body); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .flav-item .amt { font-family: var(--font-mono); font-size: 11.5px; color: var(--muted); margin-left: auto; flex: 0 0 auto; }
+    .flav-item .track { height: 6px; border-radius: 999px; background: var(--bg-elev); overflow: hidden; }
+    .flav-item .fill { display: block; height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--accent), var(--bull)); transition: width 0.7s var(--ease-out); }
+    .foot-note { font-family: var(--font-mono); font-size: 10px; color: var(--muted-2); padding-top: 4px; }
+
+    .ent-row { display: flex; align-items: center; gap: 10px; padding: 11px 14px; border-bottom: 1px solid var(--hairline); }
+    .ent-row:last-child { border-bottom: none; }
+    .ent-row .who { flex: 1; min-width: 0; }
+    .ent-row .who .nm { font-size: 12.5px; color: var(--text-body); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .ent-row .who .ty { font-family: var(--font-mono); font-size: 10px; color: var(--muted); }
+    .ent-row .amt { font-family: var(--font-mono); font-size: 12.5px; font-weight: 600; flex: 0 0 auto; }
+    .ent-row .dot { width: 6px; height: 6px; border-radius: 50%; flex: 0 0 auto; }
+
+    .conv-row { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-bottom: 1px solid var(--hairline); }
+    .conv-row:last-child { border-bottom: none; }
+    .conv-row .sym { font-weight: 600; font-size: 13px; width: 92px; flex: 0 0 auto; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--text-strong); }
+    .conv-row .ticks { flex: 1; display: flex; gap: 3px; }
+    .conv-row .ticks span { width: 5px; height: 15px; border-radius: 2px; background: var(--accent); }
+    .conv-row .n { font-family: var(--font-mono); font-size: 12px; flex: 0 0 auto; }
+    .conv-row .f { font-family: var(--font-mono); font-size: 10px; color: var(--muted); flex: 0 0 auto; }
+
+    .chartbox { padding: 16px; position: relative; }
+    .chartbox .legend-row { display: flex; align-items: center; gap: 16px; margin-bottom: 8px; padding: 0 4px; flex-wrap: wrap; }
+    .legend-key { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 10px; color: var(--muted); }
+    .legend-key i { width: 10px; height: 10px; border-radius: 3px; display: inline-block; }
+    .chartbox svg { width: 100%; height: auto; display: block; }
+    .chartbox svg text { font-family: "JetBrains Mono", monospace; fill: var(--muted); }
+    .sm-tip {
+      pointer-events: none; position: absolute; z-index: 20; top: 6px;
+      transform: translateX(-50%);
+      background: rgba(12, 15, 22, 0.94);
+      -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+      border: 1px solid var(--border-strong); border-radius: var(--r-md);
+      padding: 9px 12px; box-shadow: var(--shadow-lg); font-size: 12px;
+      display: none; min-width: 150px;
+    }
+    .sm-tip.show { display: block; }
+    .sm-tip .d { font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 5px; }
+    .sm-tip .r { display: flex; gap: 12px; margin: 2px 0; }
+    .sm-tip .r .v { font-family: var(--font-mono); margin-left: auto; font-weight: 600; }
+
+    .meth-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: var(--r-md); overflow: hidden; margin-top: 18px; }
+    .meth-grid .cell { background: var(--panel-2); padding: 14px 16px; }
+    .meth-grid .cell .v { font-family: var(--font-mono); font-size: 13.5px; color: var(--text); margin-top: 5px; }
+    .mono-lbl { font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 1.6px; color: var(--muted); }
+    @media (max-width: 700px) { .meth-grid { grid-template-columns: 1fr 1fr; } }
+
+    .empty { padding: 30px; text-align: center; color: var(--muted); font-size: 13.5px; }
+    .quiet-note { font-family: var(--font-mono); font-size: 11px; color: var(--muted); margin: -8px 0 16px; }
+
+    /* congress view (US page) */
+    .tick-row { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-bottom: 1px solid var(--hairline); }
+    .tick-row:last-child { border-bottom: none; }
+    .tick-row .sym { font-weight: 600; font-size: 14px; color: var(--text-strong); width: 64px; flex: 0 0 auto; }
+    .tick-row .who { flex: 1; min-width: 0; font-size: 11.5px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .tick-row .amt2 { font-family: var(--font-mono); font-size: 12.5px; font-weight: 600; flex: 0 0 auto; }
+    .tick-row .n { font-family: var(--font-mono); font-size: 10px; color: var(--muted); flex: 0 0 auto; width: 68px; text-align: right; }
+    .dir-controls { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; align-items: center; }
+    .dir-controls input {
+      flex: 1; min-width: 200px; padding: 10px 14px;
+      background: var(--panel); border: 1px solid var(--border); border-radius: var(--r-md);
+      color: var(--text); font-family: inherit; font-size: 13.5px; outline: none;
+    }
+    .dir-controls input:focus { border-color: var(--accent-border); }
+    .fchip {
+      padding: 8px 14px; border: 1px solid var(--border); border-radius: 999px;
+      background: var(--panel); color: var(--text-body); cursor: pointer;
+      font-family: var(--font-mono); font-size: 11px; transition: var(--transition);
+    }
+    .fchip.active { border-color: var(--accent-border); background: var(--accent-dim); color: var(--text-strong); }
+    .pol-row { border-bottom: 1px solid var(--hairline); }
+    .pol-row:last-child { border-bottom: none; }
+    .pol-btn {
+      width: 100%; display: flex; align-items: center; gap: 14px;
+      padding: 14px 18px; text-align: left; background: none; border: none;
+      color: var(--text); font-family: inherit; cursor: pointer;
+      transition: background 0.12s ease;
+    }
+    .pol-btn:hover { background: rgba(255,255,255,0.025); }
+    .pol-btn .pt { width: 34px; height: 34px; border-radius: 50%; flex: 0 0 auto;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-family: var(--font-mono); font-size: 11px; font-weight: 700; border: 1px solid; }
+    .pol-btn .id2 { flex: 1; min-width: 0; }
+    .pol-btn .nm { font-weight: 600; font-size: 14.5px; color: var(--text-strong); }
+    .pol-btn .meta2 { font-size: 11px; color: var(--muted); margin-top: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .pol-btn .amt3 { width: 130px; flex: 0 0 auto; text-align: right; }
+    .pol-btn .amt3 .v { font-family: var(--font-mono); font-size: 13px; font-weight: 600; }
+    .pol-btn .amt3 .n { font-family: var(--font-mono); font-size: 10px; color: var(--muted); }
+    .pol-btn .plus { font-family: var(--font-mono); font-size: 13px; color: var(--muted); transition: transform 0.25s var(--ease-out); flex: 0 0 auto; }
+    .pol-row.open .plus { transform: rotate(45deg); }
+    .pol-detail { display: none; padding: 6px 18px 18px 66px; background: rgba(255,255,255,0.015); }
+    .pol-row.open .pol-detail { display: block; animation: rise 0.25s var(--ease-out); }
+    @media (max-width: 700px) { .pol-detail { padding-left: 18px; } }
+    .pd-comm { font-size: 12px; color: var(--muted); line-height: 1.7; margin: 8px 0 12px; }
+    .pd-comm strong { color: var(--text-body); font-weight: 600; }
+    .pd-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 12px; }
+    @media (max-width: 700px) { .pd-grid { grid-template-columns: 1fr; } }
+    .pd-list .h { font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 1.4px; color: var(--muted); margin-bottom: 6px; }
+    .pd-item { display: flex; gap: 8px; align-items: baseline; font-size: 12.5px; padding: 3px 0; }
+    .pd-item .s { font-weight: 600; color: var(--text-strong); width: 58px; flex: 0 0 auto; }
+    .pd-item .a { flex: 1; min-width: 0; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 11px; }
+    .pd-item .v { font-family: var(--font-mono); margin-left: auto; flex: 0 0 auto; font-weight: 600; }
+    .trades-tbl { width: 100%; border-collapse: collapse; font-size: 12px; }
+    .trades-tbl th { text-align: left; font-family: var(--font-mono); font-size: 9.5px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); padding: 6px 8px; border-bottom: 1px solid var(--border); }
+    .trades-tbl td { padding: 6px 8px; border-bottom: 1px solid var(--hairline); color: var(--text-body); }
+    .trades-tbl .r { text-align: right; font-family: var(--font-mono); }
+    .filing-row { display: flex; align-items: center; gap: 10px; padding: 11px 16px; border-bottom: 1px solid var(--hairline); flex-wrap: wrap; }
+    .filing-row:last-child { border-bottom: none; }
+    .filing-row .d { font-family: var(--font-mono); font-size: 10.5px; color: var(--muted); width: 74px; flex: 0 0 auto; }
+    .filing-row .who2 { width: 200px; flex: 0 0 auto; min-width: 0; font-size: 12.5px; color: var(--text-body); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .filing-row .fsym { font-weight: 600; font-size: 13px; color: var(--text-strong); width: 60px; flex: 0 0 auto; }
+    .filing-row .side { font-family: var(--font-mono); font-size: 10px; font-weight: 700; width: 40px; flex: 0 0 auto; }
+    .filing-row .rng { font-family: var(--font-mono); font-size: 11.5px; color: var(--text-body); margin-left: auto; flex: 0 0 auto; }
+    .filing-row .lag { font-family: var(--font-mono); font-size: 9.5px; color: var(--muted-2); flex: 0 0 auto; width: 74px; text-align: right; }
+  </style>
+</head>
+<body>
+<script src="/shell.js?v=4.4"></script>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="kicker" id="hero-kicker">Smart Money Global</div>
+    <h1 id="hero-h1">Follow the big deals</h1>
+    <div class="tagline" id="hero-tagline">Deal-level smart-money disclosures, refreshed daily.</div>
+    <div class="mkt-switch" id="mkt-switch"></div>
+    <div class="controls-row">
+      <div class="tabs" id="tab-view" style="display:none">
+        <button class="tab active" data-tab="insiders">Company insiders</button>
+        <button class="tab" data-tab="congress">Congress</button>
+      </div>
+      <div class="tabs" id="tab-window">
+        <button class="tab" data-tab="today">Latest</button>
+        <button class="tab" data-tab="week">Week</button>
+        <button class="tab active" data-tab="month">Month</button>
+      </div>
+      <div class="period"><span id="period">—</span><span class="upd" id="upd">—</span></div>
+    </div>
+    <div class="verdict" id="verdict" style="display:none"></div>
+  </div>
+
+  <div id="sm-root">
+    <div class="skeleton" style="height:88px; margin:22px 0 14px;"></div>
+    <div class="skeleton" style="height:130px; margin-bottom:24px;"></div>
+    <div class="skeleton" style="height:300px;"></div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   Smart Money Global — Taiwan / Indonesia / US
+   One renderer, two feed flavours:
+     blocks — anonymous block/negotiated deals (tw, id)
+     deals  — named insider transactions with buy/sell (us)
+   Consumes /api/smartmoney/<mkt>. No framework.
+   ============================================================ */
+(function () {
+"use strict";
+
+var POS = "var(--bull)", NEG = "var(--bear)", ACC = "var(--accent)";
+
+var MARKETS = {
+  in: { flag: "🇮🇳", label: "India", href: "/smartmoney" },
+  tw: {
+    flag: "🇹🇼", label: "Taiwan", href: "/smartmoney/tw",
+    kicker: "Smart Money Taiwan", h1: "Follow the big blocks",
+    tagline: "TWSE block trades — large negotiated prints disclosed daily after close. Where size is changing hands, at a premium or a discount to the market.",
+    dealWord: "block deals", actorWord: null,
+    meth: "TWSE discloses every block trade (single-security negotiated deals) after each session: symbol, price, volume, value. We aggregate them daily, attach the market close so each print shows its premium or discount, and keep names with material block value.",
+    fmt: function (v) { v = Math.abs(v); return v >= 1000 ? "NT$" + (v / 1000).toFixed(1) + "bn" : "NT$" + Math.round(v).toLocaleString() + "m"; },
+  },
+  id: {
+    flag: "🇮🇩", label: "Indonesia", href: "/smartmoney/id",
+    kicker: "Smart Money Indonesia", h1: "Follow the negotiated deals",
+    tagline: "IDX negotiated-market deals — the crossings and block placements that never touch the regular order book, disclosed daily. Only material size is kept.",
+    dealWord: "negotiated deals", actorWord: null,
+    meth: "IDX publishes each stock's negotiated (non-regular) market turnover daily — the channel used for blocks, crossings and placements. We keep only stocks with material negotiated value each day and track where that off-book size clusters, at what price vs the regular-market close.",
+    fmt: function (v) { v = Math.abs(v); return v >= 1000 ? "Rp" + (v / 1000).toFixed(1) + "tn" : "Rp" + Math.round(v).toLocaleString() + "bn"; },
+  },
+  us: {
+    flag: "🇺🇸", label: "United States", href: "/smartmoney/us",
+    kicker: "Smart Money US", h1: "Follow the insiders",
+    tagline: "SEC Form 4 filings — officers, directors and 10% owners trading their own stock, by name, filed within two business days. Open-market buys and sells only; grants and option noise removed.",
+    dealWord: "insider trades", actorWord: "insiders",
+    meth: "Every Form 4 filed with the SEC is parsed daily. We keep only open-market purchases and sales (transaction codes P and S), net each insider per stock per day, and discard grants, awards, option exercises and small trades. What's left is real conviction: insiders paying market price with their own money.",
+    fmt: function (v) { v = Math.abs(v); return v >= 1000 ? "$" + (v / 1000).toFixed(2) + "bn" : v >= 10 ? "$" + Math.round(v).toLocaleString() + "m" : "$" + v.toFixed(1) + "m"; },
+  },
+};
+
+var mkt = location.pathname.split("/").pop();
+if (mkt === "congress") mkt = "us";
+if (!MARKETS[mkt] || mkt === "in") mkt = "tw";
+var M = MARKETS[mkt];
+var fmt = M.fmt;
+
+document.title = M.kicker + " — Regime Compass";
+document.getElementById("hero-kicker").textContent = M.kicker;
+document.getElementById("hero-h1").textContent = M.h1;
+document.getElementById("hero-tagline").textContent = M.tagline;
+document.getElementById("mkt-switch").innerHTML = ["in", "tw", "id", "us"].map(function (k) {
+  var m = MARKETS[k];
+  return '<a class="mkt-chip' + (k === mkt ? " active" : "") + '" href="' + m.href + '">' + m.flag + " " + m.label + "</a>";
+}).join("");
+
+var esc = function (s) {
+  return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
+    return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+  });
+};
+var fmtDate = function (s) {
+  return s ? new Date(s).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" }) : "";
+};
+var shortDate = function (s) { return new Date(s).toLocaleDateString("en-GB", { day: "numeric", month: "short" }); };
+var pctColor = function (n) { return n == null ? "var(--muted)" : n >= 0 ? POS : NEG; };
+var pctStr = function (n) { return (n >= 0 ? "+" : "−") + Math.abs(n).toFixed(1) + "%"; };
+
+function roleBucket(t) {
+  t = (t || "").toLowerCase();
+  if (t.indexOf("10%") >= 0) return "10% Owner";
+  if (t.indexOf("director") >= 0) return "Director";
+  if (t === "insider") return "Insider";
+  return "Officer";
+}
+var ROLE_COLOR = { "10% Owner": "var(--accent)", "Director": "#d4a94a", "Officer": "#6fb5f2", "Insider": "#9aa3b2" };
+var roleColor = function (t) { return ROLE_COLOR[roleBucket(t)] || "#9aa3b2"; };
+
+var feed = null;
+var cgFeed = null;
+var state = { tab: "month", dir: "buy", view: "insiders" };
+var cgState = { q: "", chamber: "all", party: "all" };
+var root = document.getElementById("sm-root");
+
+function blockHead(title, sub, right) {
+  return '<div class="blk-head"><div><h2>' + title + "</h2>" +
+    (sub ? '<div class="sub">' + sub + "</div>" : "") + "</div>" +
+    (right ? '<span class="right">' + right + "</span>" : "") + "</div>";
+}
+
+function kpi(lbl, val, sub, accent) {
+  return '<div class="kpi' + (accent ? " accent" : "") + '"><span class="lbl">' + lbl + '</span>' +
+    '<div class="mid"><span class="val">' + val + "</span>" +
+    (sub ? '<span class="sub2">' + sub + "</span>" : "") + "</div></div>";
+}
+
+/* ============ single-series timeline + history (blocks) ============ */
+
+function barsSVG(boxId, tipId, data, valOf, colorOf, legendHtml, labelOf) {
+  var W = 1000, H = 260, padL = 10, padR = 10, padT = 16, padB = 26;
+  var n = data.length || 1;
+  var plotW = W - padL - padR, plotH = H - padT - padB;
+  var maxV = Math.max.apply(null, data.map(function (d) { return Math.abs(valOf(d)); }).concat([1]));
+  var band = plotW / n;
+  var bw = Math.min(band * 0.62, 26);
+  var xc = function (i) { return padL + band * (i + 0.5); };
+  var tickStep = Math.ceil(n / 7);
+  var baseY = H - padB;
+
+  var bars = data.map(function (d, i) {
+    var h = Math.max((Math.abs(valOf(d)) / maxV) * plotH, 1);
+    return '<g class="g-bar" data-i="' + i + '">' +
+      '<rect x="' + (xc(i) - band / 2) + '" y="' + padT + '" width="' + band + '" height="' + plotH + '" fill="transparent"/>' +
+      '<rect x="' + (xc(i) - bw / 2) + '" y="' + (baseY - h) + '" width="' + bw + '" height="' + h + '" rx="2" fill="' + colorOf(d) + '"/>' +
+      "</g>";
+  }).join("");
+
+  var ticks = data.map(function (d, i) { return i; }).filter(function (i) { return i % tickStep === 0; })
+    .map(function (i) {
+      return '<text x="' + xc(i) + '" y="' + (H - 8) + '" text-anchor="middle" font-size="12">' + labelOf(data[i]) + "</text>";
+    }).join("");
+
+  return '<div class="surface-card chartbox" id="' + boxId + '">' +
+    '<div class="legend-row">' + legendHtml + "</div>" +
+    '<svg viewBox="0 0 ' + W + " " + H + '">' +
+      '<line x1="' + padL + '" y1="' + baseY + '" x2="' + (W - padR) + '" y2="' + baseY + '" stroke="rgba(255,255,255,0.12)"/>' +
+      bars + ticks +
+    "</svg>" +
+    '<div class="sm-tip" id="' + tipId + '"></div>' +
+  "</div>";
+}
+
+/* buy above / sell below the zero line (deals flavour) */
+function twoSideSVG(boxId, tipId, data, labelOf) {
+  var W = 1000, H = 260, padL = 10, padR = 10, padT = 16, padB = 26;
+  var n = data.length || 1;
+  var plotW = W - padL - padR, plotH = H - padT - padB;
+  var maxBuy = Math.max.apply(null, data.map(function (d) { return d.buy; }).concat([1]));
+  var maxSell = Math.max.apply(null, data.map(function (d) { return d.sell; }).concat([1]));
+  var zeroY = padT + plotH * (maxBuy / (maxBuy + maxSell));
+  var band = plotW / n;
+  var bw = Math.min(band * 0.62, 26);
+  var xc = function (i) { return padL + band * (i + 0.5); };
+  var tickStep = Math.ceil(n / 7);
+
+  var bars = data.map(function (d, i) {
+    var up = (d.buy / maxBuy) * (zeroY - padT);
+    var dn = (d.sell / maxSell) * (padT + plotH - zeroY);
+    return '<g class="g-bar" data-i="' + i + '">' +
+      '<rect x="' + (xc(i) - band / 2) + '" y="' + padT + '" width="' + band + '" height="' + plotH + '" fill="transparent"/>' +
+      '<rect x="' + (xc(i) - bw / 2) + '" y="' + (zeroY - up) + '" width="' + bw + '" height="' + Math.max(up, 0) + '" rx="2" fill="' + POS + '"/>' +
+      '<rect x="' + (xc(i) - bw / 2) + '" y="' + zeroY + '" width="' + bw + '" height="' + Math.max(dn, 0) + '" rx="2" fill="' + NEG + '" opacity="0.75"/>' +
+      "</g>";
+  }).join("");
+
+  var ticks = data.map(function (d, i) { return i; }).filter(function (i) { return i % tickStep === 0; })
+    .map(function (i) {
+      return '<text x="' + xc(i) + '" y="' + (H - 8) + '" text-anchor="middle" font-size="12">' + labelOf(data[i]) + "</text>";
+    }).join("");
+
+  return '<div class="surface-card chartbox" id="' + boxId + '">' +
+    '<div class="legend-row">' +
+      '<span class="legend-key"><i style="background:' + POS + '"></i> insider buying</span>' +
+      '<span class="legend-key"><i style="background:' + NEG + '"></i> insider selling</span>' +
+      '<span class="legend-key" style="margin-left:auto">' + feed.meta.unit + "/day · last " + n + " sessions</span>" +
+    "</div>" +
+    '<svg viewBox="0 0 ' + W + " " + H + '">' +
+      '<line x1="' + padL + '" y1="' + zeroY + '" x2="' + (W - padR) + '" y2="' + zeroY + '" stroke="rgba(255,255,255,0.12)"/>' +
+      bars + ticks +
+    "</svg>" +
+    '<div class="sm-tip" id="' + tipId + '"></div>' +
+  "</div>";
+}
+
+function bindHover(boxId, tipId, rows, htmlOf) {
+  var box = document.getElementById(boxId);
+  if (!box) return;
+  var tip = document.getElementById(tipId);
+  var groups = box.querySelectorAll("g[data-i]");
+  groups.forEach(function (g) {
+    g.addEventListener("pointerenter", function () {
+      groups.forEach(function (x) { x.style.opacity = x === g ? 1 : 0.4; });
+      tip.innerHTML = htmlOf(rows[+g.dataset.i]);
+      var gr = g.getBoundingClientRect();
+      var cx = gr.left + gr.width / 2 - box.getBoundingClientRect().left;
+      tip.style.left = Math.max(84, Math.min(cx, box.clientWidth - 84)) + "px";
+      tip.classList.add("show");
+    });
+  });
+  box.addEventListener("pointerleave", function () {
+    tip.classList.remove("show");
+    groups.forEach(function (g) { g.style.opacity = 1; });
+  });
+}
+
+/* ============ blocks flavour ============ */
+
+function renderBlocks() {
+  var w = feed[state.tab];
+  var tabWord = state.tab === "today" ? "session" : state.tab;
+  var winWord = state.tab === "today" ? "in the latest session" : "this " + tabWord;
+  var k = w.kpi;
+  var stocks = w.stocks;
+  var sessions = k.sessions || 1;
+
+  document.getElementById("period").textContent = state.tab === "today"
+    ? "Latest active session · " + fmtDate(w.date)
+    : fmtDate(w.from) + " – " + fmtDate(w.to);
+
+  /* derived, actionable views */
+  var hasSectors = stocks.some(function (s) { return s.sector; });
+  var bySec = {};
+  stocks.forEach(function (s) {
+    var key = s.sector || "Other";
+    if (!bySec[key]) bySec[key] = { sector: key, value: 0, names: [] };
+    bySec[key].value += s.value;
+    bySec[key].names.push(s);
+  });
+  var sectors = Object.keys(bySec).map(function (x) { return bySec[x]; })
+    .sort(function (a, b) { return b.value - a.value; });
+  var steady = stocks.filter(function (s) { return s.days_active >= Math.min(3, sessions); })
+    .sort(function (a, b) { return b.days_active - a.days_active || b.value - a.value; });
+  var payingUp = stocks.filter(function (s) { return s.prem_pct != null && s.prem_pct >= 1; })
+    .sort(function (a, b) { return b.prem_pct - a.prem_pct; });
+  var discounted = stocks.filter(function (s) { return s.prem_pct != null && s.prem_pct <= -3; })
+    .sort(function (a, b) { return a.prem_pct - b.prem_pct; });
+
+  /* verdict — the "so what" in one line */
+  var v = document.getElementById("verdict");
+  if (k.n_stocks) {
+    var parts = [];
+    if (hasSectors && sectors.length) {
+      parts.push("Big money is concentrating in <strong>" + esc(sectors[0].sector) + "</strong> — " +
+        fmt(sectors[0].value) + " of " + fmt(k.total_value) + " total block money " + winWord);
+    } else {
+      parts.push("<strong>" + fmt(k.total_value) + "</strong> of " + M.dealWord + " across <strong>" +
+        k.n_stocks + "</strong> stocks " + winWord);
+    }
+    if (state.tab !== "today" && steady.length) {
+      parts.push("steadiest buildup in <strong>" + esc(steady[0].security || steady[0].symbol) +
+        "</strong> (blocks on " + steady[0].days_active + " of " + sessions + " sessions)");
+    } else if (stocks[0]) {
+      parts.push("heaviest in <strong>" + esc(stocks[0].security || stocks[0].symbol) + "</strong> (" + fmt(stocks[0].value) + ")");
+    }
+    if (payingUp.length) {
+      parts.push('buyers paying above market in <strong>' + payingUp.length + "</strong> " + (payingUp.length === 1 ? "name" : "names"));
+    }
+    v.innerHTML = '<span class="live-dot"></span> <span>' + parts.join(' <span style="color:var(--muted-2)">·</span> ') + "</span>";
+    v.style.display = "";
+  } else { v.style.display = "none"; }
+
+  var html = "";
+  if (state.tab === "today" && w.date !== feed.meta.latest_date) {
+    html += '<p class="quiet-note">' + fmtDate(feed.meta.latest_date) + " was a quiet session — showing the most recent day with material deals.</p>";
+  }
+
+  html += '<div class="kpi-band reveal in">' +
+    kpi("Block money · " + tabWord, fmt(k.total_value), k.n_deals.toLocaleString() + " deals, " + k.n_stocks + " stocks", true) +
+    (hasSectors && sectors.length
+      ? kpi("Money magnet", esc(sectors[0].sector), fmt(sectors[0].value) + " — " + Math.round((sectors[0].value / Math.max(k.total_value, 1)) * 100) + "% of all block money")
+      : kpi("Heaviest name", esc(k.top_stock || "—"), stocks[0] ? fmt(stocks[0].value) : null)) +
+    kpi("Steady buildups", String(state.tab === "today" ? "—" : steady.length),
+      state.tab === "today" ? "needs a multi-day window" : "names with blocks on 3+ sessions") +
+    kpi("Buyers paying up", String(payingUp.length),
+      discounted.length + " placed at a discount") +
+    "</div>";
+
+  html += '<div class="blk">' + blockHead("Deal flow", "Total " + M.dealWord + " value per session — spikes mark days when big positions changed hands.") +
+    barsSVG("tl-box", "tl-tip", feed.timeline,
+      function (d) { return d.value; }, function () { return ACC; },
+      '<span class="legend-key"><i style="background:' + ACC + '"></i> ' + M.dealWord + ' value</span>' +
+      '<span class="legend-key" style="margin-left:auto">' + feed.meta.unit + "/day · last " + feed.timeline.length + " sessions</span>",
+      function (d) { return shortDate(d.date); }) + "</div>";
+
+  /* sector flow first — the clearest actionable read on anonymous blocks */
+  if (hasSectors && sectors.length) {
+    var smax = Math.max.apply(null, sectors.map(function (s) { return s.value; }).concat([1]));
+    html += '<div class="blk">' + blockHead("Where the money is flowing",
+        "Block money by sector " + winWord + " — follow the rotation, then pick the names below.",
+        Math.round((sectors[0].value / Math.max(k.total_value, 1)) * 100) + "% in " + esc(sectors[0].sector)) +
+      '<div class="surface-card flav-card">' +
+      sectors.slice(0, 8).map(function (f) {
+        var tops = f.names.slice(0, 3).map(function (s) { return esc(s.security || s.symbol); }).join(", ");
+        return '<div class="flav-item"><div class="row1"><span class="name"><strong style="color:var(--text-strong)">' + esc(f.sector) + "</strong>" +
+          ' <span style="color:var(--muted)">· ' + tops + "</span></span>" +
+          '<span class="amt">' + fmt(f.value) + "</span></div>" +
+          '<div class="track"><span class="fill" style="width:' + Math.max((f.value / smax) * 100, 4) + '%"></span></div></div>';
+      }).join("") + "</div></div>";
+  }
+
+  /* leaderboard */
+  var max = Math.max.apply(null, stocks.map(function (s) { return s.value; }).concat([1]));
+  var rows = stocks.map(function (s, i) {
+    var premHtml;
+    if (s.prem_pct == null) premHtml = '<span class="n">—</span>';
+    else if (s.prem_pct >= 1) premHtml = '<span class="v" style="color:' + POS + '">' + pctStr(s.prem_pct) + '</span><br/><span class="n">paying up</span>';
+    else if (s.prem_pct <= -3) premHtml = '<span class="v" style="color:' + NEG + '">' + pctStr(s.prem_pct) + '</span><br/><span class="n">at a discount</span>';
+    else premHtml = '<span class="v" style="color:var(--muted)">' + pctStr(s.prem_pct) + '</span><br/><span class="n">near market</span>';
+    var sessHtml = state.tab === "today"
+      ? s.deals + (s.deals === 1 ? " deal" : " deals")
+      : s.days_active + " of " + sessions + " sessions";
+    return '<div class="stock-row">' +
+      '<div class="stock-btn" style="cursor:default">' +
+        '<span class="rank">' + (i + 1) + "</span>" +
+        '<span class="id"><span class="sym">' + esc(s.symbol) +
+          (s.significant ? '<span class="sig-dot" style="background:' + ACC + '" title="Significant (≥ ' + fmt(feed.meta.significant) + ')"></span>' : "") +
+        '</span><span class="sec">' + esc(s.security || "") + (s.sector ? " · " + esc(s.sector) : "") + "</span></span>" +
+        '<span class="barwrap"><span class="bar"><span style="width:' + Math.max((s.value / max) * 100, 3) + "%;background:" + ACC + '"></span></span></span>' +
+        '<span class="amt"><span class="v" style="color:var(--text-strong)">' + fmt(s.value) + '</span><br/><span class="n">' + sessHtml + "</span></span>" +
+        '<span class="prem">' + premHtml + "</span>" +
+      "</div>" +
+    "</div>";
+  }).join("");
+
+  html += '<div class="sm-grid">';
+  html += '<div class="blk" style="margin-bottom:0">' + blockHead(
+      "Stocks attracting the big money",
+      "Ranked by block-deal value. \"Paying up\" = blocks struck above the market price — an eager buyer. \"At a discount\" = seller placing stock below market.",
+      stocks.length + " names") +
+    (stocks.length ? '<div class="surface-card lead-list">' + rows + "</div>"
+      : '<div class="surface-card empty">No ' + M.dealWord + " above " + fmt(feed.meta.min_value) + " this " + tabWord + ".</div>") +
+    "</div>";
+
+  html += '<div class="side-stack">';
+  if (state.tab !== "today" && steady.length) {
+    html += '<div class="blk">' + blockHead("Quiet, steady buildups",
+        "Blocks hitting the tape session after session — a large position being built (or unwound) patiently, not a one-off cross.") +
+      '<div class="surface-card">' +
+      steady.slice(0, 6).map(function (s) {
+        var ticks = "";
+        for (var i = 0; i < Math.min(s.days_active, 12); i++) {
+          ticks += '<span style="opacity:' + (0.4 + 0.6 * (1 - i / 12)).toFixed(2) + '"></span>';
+        }
+        return '<div class="conv-row"><span class="sym" title="' + esc(s.security) + '">' + esc(s.symbol) + '</span>' +
+          '<span class="ticks">' + ticks + '</span><span class="n">' + s.days_active + "/" + sessions + '</span><span class="f">sessions</span></div>';
+      }).join("") + "</div></div>";
+  }
+  if (payingUp.length) {
+    html += '<div class="blk">' + blockHead("Buyers paying up",
+        "Blocks struck above market — someone wants in badly enough to pay a premium.") +
+      '<div class="surface-card">' +
+      payingUp.slice(0, 5).map(function (s) {
+        return '<div class="ent-row"><span class="dot" style="background:' + POS + '"></span>' +
+          '<span class="who"><span class="nm">' + esc(s.security || s.symbol) + '</span><br/><span class="ty">' + fmt(s.value) + "</span></span>" +
+          '<span class="amt" style="color:' + POS + '">' + pctStr(s.prem_pct) + "</span></div>";
+      }).join("") + "</div></div>";
+  }
+  if (discounted.length) {
+    html += '<div class="blk">' + blockHead("Placed at a discount",
+        "Blocks struck well below market — typically a holder selling size to get out.") +
+      '<div class="surface-card">' +
+      discounted.slice(0, 5).map(function (s) {
+        return '<div class="ent-row"><span class="dot" style="background:' + NEG + '"></span>' +
+          '<span class="who"><span class="nm">' + esc(s.security || s.symbol) + '</span><br/><span class="ty">' + fmt(s.value) + "</span></span>" +
+          '<span class="amt" style="color:' + NEG + '">' + pctStr(s.prem_pct) + "</span></div>";
+      }).join("") + "</div></div>";
+  }
+  html += "</div></div>";
+
+  html += methodology();
+  html += '<div class="blk">' + blockHead("The long view", "Total " + M.dealWord + " value per month across the tracking history.") +
+    barsSVG("hist-box", "hist-tip", feed.history,
+      function (d) { return d.value; }, function () { return ACC; },
+      '<span class="legend-key"><i style="background:' + ACC + '"></i> monthly ' + M.dealWord + ' value</span>' +
+      '<span class="legend-key" style="margin-left:auto">' + feed.meta.unit + "/month</span>",
+      function (d) { return new Date(d.month + "-01").toLocaleDateString("en-GB", { month: "short" }); }) + "</div>";
+
+  root.innerHTML = html;
+  wireCommon();
+  bindHover("tl-box", "tl-tip", feed.timeline, function (d) {
+    return '<div class="d">' + fmtDate(d.date) + '</div>' +
+      '<div class="r"><span>Value</span><span class="v">' + fmt(d.value) + "</span></div>" +
+      '<div class="r"><span>Deals</span><span class="v">' + d.deals + "</span></div>";
+  });
+  bindHover("hist-box", "hist-tip", feed.history, function (d) {
+    return '<div class="d">' + new Date(d.month + "-01").toLocaleDateString("en-GB", { month: "long", year: "numeric" }) + '</div>' +
+      '<div class="r"><span>Value</span><span class="v">' + fmt(d.value) + "</span></div>";
+  });
+}
+
+
+
+/* ============ deals flavour (US insiders) ============ */
+
+function renderDeals() {
+  var w = feed[state.tab];
+  var side = w[state.dir];
+  var isBuy = state.dir === "buy";
+  var tabWord = state.tab === "today" ? "session" : state.tab;
+  var k = side.kpi;
+  var valColor = isBuy ? POS : NEG;
+  var sign = isBuy ? "+" : "−";
+  var stocks = side.stocks;
+
+  document.getElementById("period").textContent = state.tab === "today"
+    ? "Latest active session · " + fmtDate(w.date)
+    : fmtDate(w.from) + " – " + fmtDate(w.to);
+
+  var v = document.getElementById("verdict");
+  var net = w.buy.kpi.total_value - w.sell.kpi.total_value;
+  v.innerHTML = '<span class="live-dot"></span> <span>Insiders are <strong>net ' +
+    (net >= 0 ? "buying" : "selling") + '</strong> <span style="color:' + (net >= 0 ? POS : NEG) + ';font-weight:700">' +
+    (net >= 0 ? "+" : "−") + fmt(net) + "</span> " + (state.tab === "today" ? "in the latest session" : "this " + tabWord) +
+    ' <span style="color:var(--muted-2)">·</span> ' + w.buy.kpi.n_entities + " buying · " + w.sell.kpi.n_entities + " selling</span>";
+  v.style.display = "";
+
+  var html = "";
+  if (state.tab === "today" && w.date !== feed.meta.latest_date) {
+    html += '<p class="quiet-note">' + fmtDate(feed.meta.latest_date) + " was a quiet session — showing the most recent day with material insider activity.</p>";
+  }
+
+  html += '<div class="dir-toggle">' +
+    '<button class="dir-btn buy' + (isBuy ? " active" : "") + '" data-dir="buy"><span><span class="sub">buying ↑</span><br/><span class="lbl">Insider buys</span></span><span class="amt">+' + fmt(w.buy.kpi.total_value) + "</span></button>" +
+    '<button class="dir-btn sell' + (!isBuy ? " active" : "") + '" data-dir="sell"><span><span class="sub">selling ↓</span><br/><span class="lbl">Insider sells</span></span><span class="amt">−' + fmt(w.sell.kpi.total_value) + "</span></button>" +
+    "</div>";
+
+  html += '<div class="kpi-band reveal in">' +
+    kpi((isBuy ? "Bought" : "Sold") + " · " + tabWord, sign + fmt(k.total_value), "open-market only", true) +
+    kpi("Stocks", k.n_stocks, "with ≥ " + fmt(feed.meta.min_value)) +
+    kpi(isBuy ? "Insiders buying" : "Insiders selling", k.n_entities, null) +
+    kpi("Heaviest", esc(k.top_stock || "—"), stocks[0] ? sign + fmt(stocks[0].value) : null) +
+    "</div>";
+
+  html += '<div class="blk">' + blockHead("Insider flow", "Daily open-market insider buying vs selling.") +
+    twoSideSVG("tl-box", "tl-tip", feed.timeline, function (d) { return shortDate(d.date); }) + "</div>";
+
+  var max = Math.max.apply(null, stocks.map(function (s) { return s.value; }).concat([1]));
+  var actorNoun = isBuy ? "buyer" : "seller";
+  var rows = stocks.map(function (s, i) {
+    var actors = s.actors.map(function (a) {
+      return '<div class="actor-row"><span class="dot" style="background:' + roleColor(a.etype) + '"></span>' +
+        '<span class="who">' + esc(a.entity) + '</span>' +
+        '<span class="role" style="color:' + roleColor(a.etype) + '">' + esc(roleBucket(a.etype)) + "</span>" +
+        '<span class="amt" style="color:' + valColor + '">' + sign + fmt(a.value) + "</span></div>";
+    }).join("");
+    return '<div class="stock-row">' +
+      '<button class="stock-btn" data-i="' + i + '">' +
+        '<span class="rank">' + (i + 1) + "</span>" +
+        '<span class="id"><span class="sym">' + esc(s.symbol) +
+          (s.significant ? '<span class="sig-dot" style="background:' + valColor + '" title="Significant (≥ ' + fmt(feed.meta.significant) + ')"></span>' : "") +
+        '</span><span class="sec">' + esc(s.security || "") + "</span></span>" +
+        '<span class="barwrap"><span class="bar"><span style="width:' + Math.max((s.value / max) * 100, 3) + "%;background:" + valColor + '"></span></span></span>' +
+        '<span class="amt"><span class="v" style="color:' + valColor + '">' + sign + fmt(s.value) + '</span><br/><span class="n">' + s.n_actors + " " + (s.n_actors === 1 ? actorNoun : actorNoun + "s") + "</span></span>" +
+        '<span class="plus">+</span>' +
+      "</button>" +
+      '<div class="stock-detail"><div class="sec-name">' + esc(s.security) + "</div>" + actors + "</div>" +
+    "</div>";
+  }).join("");
+
+  html += '<div class="sm-grid">';
+  html += '<div class="blk" style="margin-bottom:0">' + blockHead(
+      isBuy ? "What insiders are buying" : "What insiders are selling",
+      "Ranked by net open-market " + (isBuy ? "purchases" : "sales") + ". Click a name to see who, by name and role.",
+      stocks.length + " names") +
+    (stocks.length ? '<div class="surface-card lead-list">' + rows + "</div>"
+      : '<div class="surface-card empty">No insider ' + (isBuy ? "buying" : "selling") + " above " + fmt(feed.meta.min_value) + " this " + tabWord + ".</div>") +
+    "</div>";
+
+  html += '<div class="side-stack">';
+  var cluster = stocks.filter(function (s) { return s.n_actors >= 2; })
+    .sort(function (a, b) { return b.n_actors - a.n_actors; }).slice(0, 6);
+  if (isBuy && cluster.length) {
+    html += '<div class="blk">' + blockHead("Cluster buys", "Multiple insiders independently buying — the classic conviction signal.") +
+      '<div class="surface-card">' +
+      cluster.map(function (s) {
+        var ticks = "";
+        for (var i = 0; i < Math.min(s.n_actors, 12); i++) {
+          ticks += '<span style="opacity:' + (0.4 + 0.6 * (1 - i / 12)).toFixed(2) + ';background:' + POS + '"></span>';
+        }
+        return '<div class="conv-row"><span class="sym">' + esc(s.symbol) + '</span>' +
+          '<span class="ticks">' + ticks + '</span><span class="n">' + s.n_actors + '</span><span class="f">insiders</span></div>';
+      }).join("") + "</div></div>";
+  }
+  html += '<div class="blk">' + blockHead(isBuy ? "Biggest buyers" : "Biggest sellers", "By name, across all their " + tabWord + " trades.") +
+    (side.top_entities.length ? '<div class="surface-card">' +
+      side.top_entities.map(function (e) {
+        return '<div class="ent-row"><span class="dot" style="background:' + roleColor(e.etype) + '"></span>' +
+          '<span class="who"><span class="nm">' + esc(e.entity) + '</span><br/><span class="ty">' + esc(e.etype) + " · " + e.n_names + (e.n_names === 1 ? " name" : " names") + "</span></span>" +
+          '<span class="amt" style="color:' + valColor + '">' + sign + fmt(e.value) + "</span></div>";
+      }).join("") + "</div>" : '<div class="surface-card empty">—</div>') + "</div>";
+  html += "</div></div>";
+
+  html += methodology();
+  html += '<div class="blk">' + blockHead("The long view", "Insider buying vs selling per month.") +
+    (function () {
+      var data = feed.history;
+      var W = 1000, H = 280, padL = 10, padR = 10, padT = 16, padB = 28;
+      var n = data.length || 1;
+      var plotW = W - padL - padR, plotH = H - padT - padB;
+      var maxBuy = Math.max.apply(null, data.map(function (d) { return d.buy; }).concat([1]));
+      var maxSell = Math.max.apply(null, data.map(function (d) { return d.sell; }).concat([1]));
+      var zeroY = padT + plotH * (maxBuy / (maxBuy + maxSell));
+      var band = plotW / n;
+      var bw = Math.min(band * 0.5, 30);
+      var bars = data.map(function (d, i) {
+        var x = padL + band * (i + 0.5);
+        var up = (d.buy / maxBuy) * (zeroY - padT);
+        var dn = (d.sell / maxSell) * (padT + plotH - zeroY);
+        return '<g class="g-bar" data-i="' + i + '">' +
+          '<rect x="' + (x - band / 2) + '" y="' + padT + '" width="' + band + '" height="' + plotH + '" fill="transparent"/>' +
+          '<rect x="' + (x - bw / 2) + '" y="' + (zeroY - up) + '" width="' + bw + '" height="' + Math.max(up, 0) + '" rx="2" fill="' + POS + '"/>' +
+          '<rect x="' + (x - bw / 2) + '" y="' + zeroY + '" width="' + bw + '" height="' + Math.max(dn, 0) + '" rx="2" fill="' + NEG + '" opacity="0.75"/>' +
+          "</g>";
+      }).join("");
+      var labels = data.map(function (d, i) {
+        return '<text x="' + (padL + band * (i + 0.5)) + '" y="' + (H - 9) + '" text-anchor="middle" font-size="11">' +
+          new Date(d.month + "-01").toLocaleDateString("en-GB", { month: "short" }) + "</text>";
+      }).join("");
+      return '<div class="surface-card chartbox" id="hist-box">' +
+        '<div class="legend-row"><span class="legend-key"><i style="background:' + POS + '"></i> bought</span>' +
+        '<span class="legend-key"><i style="background:' + NEG + '"></i> sold</span>' +
+        '<span class="legend-key" style="margin-left:auto">' + feed.meta.unit + "/month</span></div>" +
+        '<svg viewBox="0 0 ' + W + " " + H + '"><line x1="' + padL + '" y1="' + zeroY + '" x2="' + (W - padR) + '" y2="' + zeroY + '" stroke="rgba(255,255,255,0.12)"/>' + bars + labels + "</svg>" +
+        '<div class="sm-tip" id="hist-tip"></div></div>';
+    })() + "</div>";
+
+  root.innerHTML = html;
+  wireCommon();
+  root.querySelectorAll(".dir-btn").forEach(function (b) {
+    b.addEventListener("click", function () {
+      if (state.dir !== b.dataset.dir) { state.dir = b.dataset.dir; render(); }
+    });
+  });
+  bindHover("tl-box", "tl-tip", feed.timeline, function (d) {
+    return '<div class="d">' + fmtDate(d.date) + '</div>' +
+      '<div class="r"><span style="color:' + POS + '">Bought</span><span class="v">+' + fmt(d.buy) + "</span></div>" +
+      '<div class="r"><span style="color:' + NEG + '">Sold</span><span class="v">−' + fmt(d.sell) + "</span></div>" +
+      '<div class="r" style="border-top:1px solid var(--hairline);margin-top:5px;padding-top:5px"><span>Net</span><span class="v" style="color:' + pctColor(d.net) + '">' + (d.net >= 0 ? "+" : "−") + fmt(d.net) + "</span></div>";
+  });
+  bindHover("hist-box", "hist-tip", feed.history, function (d) {
+    return '<div class="d">' + new Date(d.month + "-01").toLocaleDateString("en-GB", { month: "long", year: "numeric" }) + '</div>' +
+      '<div class="r"><span style="color:' + POS + '">Bought</span><span class="v">+' + fmt(d.buy) + "</span></div>" +
+      '<div class="r"><span style="color:' + NEG + '">Sold</span><span class="v">−' + fmt(d.sell) + "</span></div>";
+  });
+}
+
+function methodology() {
+  var s = feed.stats, m = feed.meta;
+  var items = [
+    ["Coverage", fmtDate(m.earliest_date) + " → " + fmtDate(m.latest_date)],
+    ["Deals kept", (s.raw_deals || 0).toLocaleString()],
+    ["Distinct names", String(s.distinct_symbols || 0)],
+    ["Sessions", String(s.days || 0)],
+    ["Materiality", "≥ " + fmt(m.min_value) + " per name"],
+    ["Significant", "≥ " + fmt(m.significant)],
+  ];
+  if (s.distinct_entities) items[3] = ["Distinct insiders", String(s.distinct_entities)];
+  return '<div class="blk reveal"><div class="panel" style="margin-bottom:0">' +
+    '<h2 style="font-family:var(--font-display);font-size:19px;margin:0 0 6px;color:var(--text-strong)">How this is built</h2>' +
+    '<p style="font-size:13px;color:var(--muted);line-height:1.6;max-width:760px;margin:0">' + M.meth + "</p>" +
+    '<div class="meth-grid">' + items.map(function (kv) {
+      return '<div class="cell"><span class="mono-lbl">' + kv[0] + '</span><div class="v">' + kv[1] + "</div></div>";
+    }).join("") + "</div>" +
+    '<div class="foot-note" style="margin-top:14px">Source: ' + esc(m.source) + ". Generated " + fmtDate(m.generated.slice(0, 10)) + ". Not investment advice.</div>" +
+    "</div></div>";
+}
+
+function wireCommon() {
+  document.getElementById("upd").textContent = "● updated " + fmtDate(feed.meta.latest_date) + " · daily";
+  root.querySelectorAll(".stock-btn").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var row = b.closest(".stock-row");
+      if (row.querySelector(".stock-detail")) row.classList.toggle("open");
+    });
+  });
+  if (window.RC) RC.reveal(root);
+}
+
+/* ============ congress view (US page second tab) ============ */
+
+var PARTY = {
+  Democrat: { c: "#3f9ae8", t: "D" },
+  Republican: { c: "#e35454", t: "R" },
+  Independent: { c: "#9aa3b2", t: "I" },
+};
+var partyOf = function (p) { return PARTY[p] || { c: "#9aa3b2", t: "?" }; };
+function money(n) {
+  n = Math.abs(n);
+  if (n >= 1e9) return "$" + (n / 1e9).toFixed(1) + "bn";
+  if (n >= 1e6) return "$" + (n / 1e6).toFixed(1) + "m";
+  if (n >= 1e3) return "$" + Math.round(n / 1e3) + "k";
+  return "$" + Math.round(n);
+}
+var range = function (lo, hi) { return money(lo) + (hi > lo ? "–" + money(hi) : ""); };
+var lagDays = function (t, f) { return Math.round((new Date(f) - new Date(t)) / 86400000); };
+var seatOf = function (p) {
+  return (p.chamber === "Senate" ? "Senator · " : "Rep · ") + p.state +
+    (p.district != null && p.chamber === "House" ? "-" + p.district : "");
+};
+
+function cgDetail(p) {
+  var comm = p.committees.length
+    ? '<div class="pd-comm"><strong>Committees:</strong> ' + p.committees.map(esc).join(" · ") + "</div>"
+    : '<div class="pd-comm" style="color:var(--muted-2)">No current committee data.</div>';
+  var list = function (title, items, color, sign) {
+    return '<div class="pd-list"><div class="h">' + title + "</div>" +
+      (items.length ? items.map(function (t) {
+        return '<div class="pd-item"><span class="s">' + esc(t.symbol) + '</span>' +
+          '<span class="a">' + esc(t.asset) + '</span>' +
+          '<span class="v" style="color:' + color + '">' + sign + "~" + money(t.mid) +
+          (t.n > 1 ? " ×" + t.n : "") + "</span></div>";
+      }).join("") : '<div class="pd-item" style="color:var(--muted-2)">—</div>') + "</div>";
+  };
+  var rows = p.trades.slice(0, 15).map(function (t) {
+    var lag = t.filed ? lagDays(t.date, t.filed) : null;
+    return "<tr><td>" + fmtDate(t.date) + '</td><td style="font-weight:600;color:var(--text-strong)">' + esc(t.symbol) + "</td>" +
+      '<td style="color:' + (t.side === "BUY" ? POS : NEG) + ';font-weight:600">' + (t.side === "BUY" ? "Buy" : "Sell") + "</td>" +
+      '<td class="r">' + range(t.lo, t.hi) + "</td>" +
+      '<td class="r" style="color:var(--muted)">' + (lag != null ? lag + "d later" : "—") + "</td></tr>";
+  }).join("");
+  return comm +
+    '<div class="pd-grid">' +
+      list("What they've been buying", p.top_buys, POS, "+") +
+      list("What they've been selling", p.top_sells, NEG, "−") +
+    "</div>" +
+    '<table class="trades-tbl"><thead><tr><th>Traded</th><th>Stock</th><th>Side</th><th style="text-align:right">Size</th><th style="text-align:right">Disclosed</th></tr></thead><tbody>' +
+    rows + "</tbody></table>" +
+    (p.n_trades > 15 ? '<div class="foot-note" style="margin-top:8px">' + (p.n_trades - 15) + " earlier trades not shown</div>" : "");
+}
+
+function cgDirectory() {
+  var q = cgState.q.toLowerCase();
+  var pols = cgFeed.politicians.filter(function (p) {
+    if (cgState.chamber !== "all" && p.chamber !== cgState.chamber) return false;
+    if (cgState.party !== "all" && p.party !== cgState.party) return false;
+    if (q && (p.name + " " + p.state + " " + p.committees.join(" ")).toLowerCase().indexOf(q) < 0) return false;
+    return true;
+  });
+  if (!pols.length) return '<div class="surface-card empty">No politicians match.</div>';
+  return '<div class="surface-card">' + pols.slice(0, 60).map(function (p) {
+    var pc = partyOf(p.party);
+    var net = p.buy_mid - p.sell_mid;
+    return '<div class="pol-row" data-id="' + esc(p.id) + '">' +
+      '<button class="pol-btn">' +
+        '<span class="pt" style="color:' + pc.c + ";border-color:" + pc.c + "55;background:" + pc.c + '14">' + pc.t + "</span>" +
+        '<span class="id2"><span class="nm">' + esc(p.name) + '</span><br/><span class="meta2">' + seatOf(p) +
+          (p.committees.length ? " · " + esc(p.committees[0].replace(/^(House|Senate) Committee on /, "")) + (p.committees.length > 1 ? " +" + (p.committees.length - 1) : "") : "") +
+        "</span></span>" +
+        '<span class="amt3"><span class="v" style="color:' + (net >= 0 ? POS : NEG) + '">' + (net >= 0 ? "+" : "−") + "~" + money(net) + '</span><br/><span class="n">' + p.n_trades + " trades · net</span></span>" +
+        '<span class="plus">+</span>' +
+      "</button>" +
+      '<div class="pol-detail"></div>' +
+    "</div>";
+  }).join("") + "</div>" +
+  (pols.length > 60 ? '<div class="foot-note" style="margin-top:8px">Showing top 60 of ' + pols.length + " — refine the search to see more.</div>" : "");
+}
+
+function renderCongress() {
+  if (!cgFeed) {
+    root.innerHTML = '<div class="skeleton" style="height:300px;margin-top:22px"></div>';
+    fetch("/api/smartmoney/congress")
+      .then(function (r) { return r.json(); })
+      .then(function (d) { cgFeed = d; renderCongress(); })
+      .catch(function () {
+        root.innerHTML = '<div class="surface-card empty">Couldn\'t load the Congress feed. Try refreshing.</div>';
+      });
+    return;
+  }
+  if (!cgFeed.politicians || !cgFeed.politicians.length) {
+    root.innerHTML = '<div class="surface-card empty">No filings ingested yet — the first fetch is running.</div>';
+    return;
+  }
+  var o = cgFeed.overview, m = cgFeed.meta;
+  var topBuy = o.top_bought[0];
+  var mostActive = cgFeed.politicians[0];
+
+  document.getElementById("period").textContent = "STOCK Act disclosures · up to 45d lag";
+  document.getElementById("upd").textContent = "● latest trade " + fmtDate(m.latest_trade) + " · daily";
+  var v = document.getElementById("verdict");
+  if (topBuy) {
+    v.innerHTML = '<span class="live-dot"></span> <span>Congress\'s most-bought stock over the last ' + m.recent_days + " days is <strong>" +
+      esc(topBuy.symbol) + "</strong> (~" + money(topBuy.mid) + " across " + topBuy.n_politicians +
+      (topBuy.n_politicians === 1 ? " politician" : " politicians") + ")" +
+      (mostActive ? ' <span style="color:var(--muted-2)">·</span> biggest recent trader: <strong>' + esc(mostActive.name) + "</strong> (" + esc(mostActive.party) + ", " + esc(mostActive.state) + ")" : "") +
+      "</span>";
+    v.style.display = "";
+  }
+
+  var html = '<div class="kpi-band reveal in">' +
+    kpi("Politicians tracked", m.n_politicians, "with disclosed stock trades", true) +
+    kpi("Trades on file", m.n_trades.toLocaleString(), "since " + fmtDate(m.coverage_from)) +
+    kpi("Hottest buy · " + m.recent_days + "d", topBuy ? esc(topBuy.symbol) : "—", topBuy ? "~" + money(topBuy.mid) + " · " + topBuy.n_politicians + " politicians" : null) +
+    kpi("Biggest trader · " + m.recent_days + "d", mostActive ? esc(mostActive.name.split(" ").slice(-1)[0]) : "—", mostActive ? "~" + money(mostActive.recent_mid) + " · " + mostActive.n_trades + " trades on file" : null) +
+    "</div>";
+
+  var tickList = function (items, color, sign) {
+    return '<div class="surface-card">' + (items.length ? items.slice(0, 10).map(function (t) {
+      return '<div class="tick-row"><span class="sym">' + esc(t.symbol) + '</span>' +
+        '<span class="who">' + t.politicians.map(esc).join(", ") + '</span>' +
+        '<span class="amt2" style="color:' + color + '">' + sign + "~" + money(t.mid) + "</span>" +
+        '<span class="n">' + t.n_politicians + (t.n_politicians === 1 ? " member" : " members") + "</span></div>";
+    }).join("") : '<div class="empty">Nothing material in the window.</div>') + "</div>";
+  };
+
+  html += '<div class="sm-grid" style="grid-template-columns:1fr 1fr">';
+  html += '<div class="blk" style="margin-bottom:0">' + blockHead("What Congress is buying",
+    "Biggest disclosed purchases in the last " + m.recent_days + " days. More members = broader conviction.") + tickList(o.top_bought, POS, "+") + "</div>";
+  html += '<div class="blk" style="margin-bottom:0">' + blockHead("What Congress is selling",
+    "Biggest disclosed sales in the last " + m.recent_days + " days.") + tickList(o.top_sold, NEG, "−") + "</div>";
+  html += "</div>";
+
+  html += '<div class="blk">' + blockHead("Politician portfolios",
+      "Click a name for their committees, top holdings traded, and full trade log. \"Net\" = disclosed buys minus sells (range midpoints).",
+      m.n_politicians + " tracked") +
+    '<div class="dir-controls">' +
+      '<input id="cg-q" type="search" placeholder="Search name, state or committee — e.g. Pelosi, TX, Armed Services" value="' + esc(cgState.q) + '" />' +
+      '<button class="fchip' + (cgState.chamber === "all" ? " active" : "") + '" data-f="chamber:all">Both</button>' +
+      '<button class="fchip' + (cgState.chamber === "Senate" ? " active" : "") + '" data-f="chamber:Senate">Senate</button>' +
+      '<button class="fchip' + (cgState.chamber === "House" ? " active" : "") + '" data-f="chamber:House">House</button>' +
+      '<button class="fchip' + (cgState.party === "all" ? " active" : "") + '" data-f="party:all">All parties</button>' +
+      '<button class="fchip' + (cgState.party === "Democrat" ? " active" : "") + '" data-f="party:Democrat" style="color:#3f9ae8">Dem</button>' +
+      '<button class="fchip' + (cgState.party === "Republican" ? " active" : "") + '" data-f="party:Republican" style="color:#e35454">Rep</button>' +
+    "</div>" +
+    '<div id="cg-dir">' + cgDirectory() + "</div></div>";
+
+  html += '<div class="blk">' + blockHead("Latest disclosures",
+      "Newest filings first. \"After\" shows how long after the trade the filing landed — the STOCK Act allows up to 45 days.") +
+    '<div class="surface-card">' + o.recent.slice(0, 20).map(function (r) {
+      var pc = partyOf(r.party);
+      return '<div class="filing-row"><span class="d">' + fmtDate(r.filed) + "</span>" +
+        '<span class="who2"><span style="color:' + pc.c + ';font-weight:700">' + pc.t + '</span> ' + esc(r.name) + " · " + esc(r.state) + "</span>" +
+        '<span class="fsym">' + esc(r.symbol) + "</span>" +
+        '<span class="side" style="color:' + (r.side === "BUY" ? POS : NEG) + '">' + (r.side === "BUY" ? "BUY" : "SELL") + "</span>" +
+        '<span class="rng">' + range(r.lo, r.hi) + "</span>" +
+        '<span class="lag">' + lagDays(r.date, r.filed) + "d after</span></div>";
+    }).join("") + "</div></div>";
+
+  html += '<div class="blk"><div class="panel" style="margin-bottom:0">' +
+    '<h2 style="font-family:var(--font-display);font-size:19px;margin:0 0 6px;color:var(--text-strong)">How this is built</h2>' +
+    '<p style="font-size:13px;color:var(--muted);line-height:1.6;max-width:760px;margin:0">Senators and representatives must disclose every securities trade under the STOCK Act. We pull the official filings daily — Senate eFD periodic transaction reports and the House Clerk\'s disclosure files — keep stock trades, join each filer to their party, state and committees, and aggregate per politician. Amounts are legal disclosure ranges (e.g. $15k–$50k), never exact; totals use range midpoints, marked with ~. Filings may lag trades by up to 45 days: read this as positioning, not daily flow.</p>' +
+    '<div class="foot-note" style="margin-top:14px">Source: ' + esc(m.source) + ". Generated " + fmtDate(m.generated.slice(0, 10)) + ". Not investment advice.</div>" +
+    "</div></div>";
+
+  root.innerHTML = html;
+
+  var q = document.getElementById("cg-q");
+  var wireDir = function () {
+    root.querySelectorAll(".pol-btn").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var row = b.closest(".pol-row");
+        if (!row.classList.contains("open")) {
+          var p = cgFeed.politicians.filter(function (x) { return x.id === row.dataset.id; })[0];
+          if (p) row.querySelector(".pol-detail").innerHTML = cgDetail(p);
+        }
+        row.classList.toggle("open");
+      });
+    });
+  };
+  q.addEventListener("input", function () {
+    cgState.q = q.value;
+    document.getElementById("cg-dir").innerHTML = cgDirectory();
+    wireDir();
+  });
+  root.querySelectorAll(".fchip").forEach(function (c) {
+    c.addEventListener("click", function () {
+      var kv = c.dataset.f.split(":");
+      cgState[kv[0]] = kv[1];
+      renderCongress();
+      document.getElementById("cg-q").focus();
+    });
+  });
+  wireDir();
+  if (window.RC) RC.reveal(root);
+}
+
+function render() {
+  var winTabs = document.getElementById("tab-window");
+  if (mkt === "us" && state.view === "congress") {
+    winTabs.style.display = "none";
+    renderCongress();
+    return;
+  }
+  winTabs.style.display = "";
+  if (!feed || !feed.today) {
+    root.innerHTML = '<div class="surface-card empty">No data yet for this market — the first fetch runs after the next market close.</div>';
+    return;
+  }
+  if (feed.meta.flavor === "deals") renderDeals();
+  else renderBlocks();
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  if (!window.RC) return;
+  RC.tabs(document.getElementById("tab-window"), function (key) { state.tab = key; render(); });
+  if (mkt === "us") {
+    var tv = document.getElementById("tab-view");
+    tv.style.display = "";
+    RC.tabs(tv, function (key) { state.view = key; render(); });
+    if (location.pathname.indexOf("congress") >= 0 || location.hash === "#congress") {
+      state.view = "congress";
+      tv.querySelectorAll(".tab").forEach(function (t) {
+        t.classList.toggle("active", t.dataset.tab === "congress");
+      });
+      render();
+    }
+  }
+});
+
+fetch("/api/smartmoney/" + mkt)
+  .then(function (r) { return r.json(); })
+  .then(function (d) { feed = d; render(); })
+  .catch(function () {
+    root.innerHTML = '<div class="surface-card empty">Couldn\'t load the feed. Try refreshing.</div>';
+  });
+})();
+</script>
+</body>
+</html>

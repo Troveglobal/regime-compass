@@ -50,6 +50,8 @@ from .config import (
 
 FRONTEND_DIR = Path(__file__).resolve().parent.parent / "frontend"
 SMARTMONEY_FEED = Path(__file__).resolve().parent / "smartmoney" / "out" / "feed.json"
+SMARTMONEY_OUT = Path(__file__).resolve().parent / "smartmoney" / "out"
+SMARTMONEY_MARKETS = ("tw", "id", "us")  # global deal-level trackers (India is /api/smartmoney)
 SECTORS_FEED = Path(__file__).resolve().parent / "markets" / "out" / "sectors.json"
 
 log = logging.getLogger("regime_compass")
@@ -94,13 +96,53 @@ def _run_full_pipeline() -> None:
 
 
 def _run_smartmoney() -> None:
-    """Refresh the Smart Money India feed (NSE bulk/block deals + returns)."""
+    """Refresh the Smart Money India feeds (NSE bulk/block deals + FII/DII flow layers)."""
     try:
         from .smartmoney import refresh as sm_refresh
         sm_refresh.refresh()
         log.info("[smartmoney] feed refreshed.")
     except Exception as e:
         log.exception("[smartmoney] refresh failed: %s", e)
+    try:
+        from .smartmoney import flows as sm_flows
+        sm_flows.refresh()
+        log.info("[smartmoney] flows feed refreshed.")
+    except Exception as e:
+        log.exception("[smartmoney] flows refresh failed: %s", e)
+    try:
+        from .smartmoney import nsdl as sm_nsdl
+        sm_nsdl.refresh()  # cheap no-op unless a new fortnightly report is out
+    except Exception as e:
+        log.exception("[smartmoney] nsdl refresh failed: %s", e)
+
+
+def _run_stakes() -> None:
+    """Weekly FII stake-change refresh (BSE quarterly shareholding patterns)."""
+    try:
+        from .smartmoney import stakes as sm_stakes
+        sm_stakes.refresh()
+        log.info("[stakes] feed refreshed.")
+    except Exception as e:
+        log.exception("[stakes] refresh failed: %s", e)
+
+
+def _run_smartmoney_market(mkt: str) -> None:
+    """Refresh one global Smart Money market feed (deal-level disclosures only)."""
+    try:
+        from .smartmoney.markets import refresh as smg_refresh
+        smg_refresh.refresh(mkt)
+    except Exception as e:
+        log.exception("[smartmoney:%s] refresh failed: %s", mkt, e)
+
+
+def _run_congress() -> None:
+    """Refresh the US Congress trading feed (Senate eFD + House Clerk PTRs)."""
+    try:
+        from .smartmoney.congress import pipeline as cg
+        cg.refresh()
+        log.info("[congress] feed refreshed.")
+    except Exception as e:
+        log.exception("[congress] refresh failed: %s", e)
 
 
 def _run_sectors() -> None:
@@ -186,8 +228,26 @@ def _start_scheduler() -> None:
     _scheduler = BackgroundScheduler(timezone="UTC")
     # Daily 11:00 UTC = after US market close. Mon–Fri.
     _scheduler.add_job(_run_daily, CronTrigger(day_of_week="mon-fri", hour=11, minute=0), id="daily_update")
-    # Smart Money India: 15:00 UTC = ~20:30 IST, after NSE publishes the day's bulk/block deals
+    # Smart Money India: 15:00 UTC = ~20:30 IST, after NSE publishes the day's bulk/block deals,
+    # with a 17:00 UTC retry — NSE archives only serve the latest session, so a single
+    # failed fetch would otherwise lose that day entirely.
     _scheduler.add_job(_run_smartmoney, CronTrigger(day_of_week="mon-fri", hour=15, minute=0), id="smartmoney_daily")
+    _scheduler.add_job(_run_smartmoney, CronTrigger(day_of_week="mon-fri", hour=17, minute=0), id="smartmoney_retry")
+    # Smart Money global — after each exchange's end-of-day disclosures:
+    # Taiwan blocks 09:30 UTC (~17:30 TPE), Indonesia negotiated 11:30 UTC (~18:30 WIB),
+    # US Form 4 02:30 UTC Tue-Sat (after EDGAR's 22:00 ET filing cutoff).
+    _scheduler.add_job(lambda: _run_smartmoney_market("tw"),
+                       CronTrigger(day_of_week="mon-fri", hour=9, minute=30), id="smartmoney_tw")
+    _scheduler.add_job(lambda: _run_smartmoney_market("id"),
+                       CronTrigger(day_of_week="mon-fri", hour=11, minute=30), id="smartmoney_id")
+    _scheduler.add_job(lambda: _run_smartmoney_market("us"),
+                       CronTrigger(day_of_week="tue-sat", hour=2, minute=30), id="smartmoney_us")
+    # US Congress STOCK Act filings: 03:30 UTC after the US day's filings settle
+    _scheduler.add_job(_run_congress,
+                       CronTrigger(day_of_week="tue-sat", hour=3, minute=30), id="smartmoney_congress")
+    # India FII stake changes: weekly sweep (daily would be wasteful outside filing season;
+    # only missing (stock, quarter) cells are fetched, so this is cheap when nothing is new)
+    _scheduler.add_job(_run_stakes, CronTrigger(day_of_week="sun", hour=4, minute=0), id="smartmoney_stakes")
     # India sector heatmap: 12:00 UTC = ~17:30 IST, after NSE index close is published
     _scheduler.add_job(_run_sectors, CronTrigger(day_of_week="mon-fri", hour=12, minute=0), id="sectors_daily")
     # Weekly: Sunday 03:30 UTC.
@@ -1009,6 +1069,52 @@ if FRONTEND_DIR.exists():
             _run_smartmoney()
         if SMARTMONEY_FEED.exists():
             return FileResponse(SMARTMONEY_FEED, media_type="application/json")
+        return JSONResponse({"error": "feed unavailable"}, status_code=503)
+
+    @app.get("/api/smartmoney/inflows")
+    def smartmoney_inflows_feed():
+        # India market-wide FII/DII flow layers (cash provisional + F&O positioning)
+        feed = SMARTMONEY_OUT / "feed_inflows.json"
+        if not feed.exists():
+            _run_smartmoney()
+        if feed.exists():
+            return FileResponse(feed, media_type="application/json")
+        return JSONResponse({"error": "feed unavailable"}, status_code=503)
+
+    @app.get("/api/smartmoney/fpisectors")
+    def smartmoney_fpisectors_feed():
+        # NSDL fortnightly FPI sector-wise equity flows
+        feed = SMARTMONEY_OUT / "feed_fpisectors.json"
+        if feed.exists():
+            return FileResponse(feed, media_type="application/json")
+        return JSONResponse({"error": "feed unavailable"}, status_code=503)
+
+    @app.get("/api/smartmoney/stakes")
+    def smartmoney_stakes_feed():
+        # Quarterly FII stake changes across the Nifty 500
+        feed = SMARTMONEY_OUT / "feed_stakes.json"
+        if feed.exists():
+            return FileResponse(feed, media_type="application/json")
+        return JSONResponse({"error": "feed unavailable"}, status_code=503)
+
+    @app.get("/smartmoney/{mkt}")
+    def smartmoney_market_page(mkt: str):
+        if mkt == "congress":
+            # Congress lives as a view inside the US page
+            return RedirectResponse("/smartmoney/us#congress", status_code=301)
+        if mkt not in SMARTMONEY_MARKETS:
+            return geo.render_page("404.html", "404")
+        return geo.render_page("smartmoney-global.html", "smartmoney")
+
+    @app.get("/api/smartmoney/{mkt}")
+    def smartmoney_market_feed(mkt: str):
+        if mkt not in SMARTMONEY_MARKETS and mkt != "congress":
+            return JSONResponse({"error": "unknown market"}, status_code=404)
+        feed = SMARTMONEY_OUT / f"feed_{mkt}.json"
+        if not feed.exists():
+            _run_smartmoney_market(mkt)
+        if feed.exists():
+            return FileResponse(feed, media_type="application/json")
         return JSONResponse({"error": "feed unavailable"}, status_code=503)
 
     @app.get("/sectors")

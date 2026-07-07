@@ -1,0 +1,1 @@
+{"first": "Sheldon", "last": "Whitehouse", "filed": "11/03/2025", "chamber": "Senate", "txns": [{"date": "2025-10-27", "owner": "Spouse", "symbol": "PGR", "asset": "Progressive Corp", "side": "SELL", "lo": 15001, "hi": 50000}, {"date": "2025-10-20", "owner": "Self", "symbol": "NVDA", "asset": "Nvidia Corp", "side": "SELL", "lo": 15001, "hi": 50000}]}

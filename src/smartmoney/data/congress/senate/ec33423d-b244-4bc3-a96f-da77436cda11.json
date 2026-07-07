@@ -1,0 +1,1 @@
+{"first": "Tina", "last": "Smith", "filed": "03/19/2025", "chamber": "Senate", "txns": [{"date": "2025-02-11", "owner": "Spouse", "symbol": "PEP", "asset": "PepsiCo, Inc. - Common Stock", "side": "SELL", "lo": 100001, "hi": 250000}, {"date": "2025-02-11", "owner": "Spouse", "symbol": "GIS", "asset": "General Mills, Inc. Common Stock", "side": "SELL", "lo": 100001, "hi": 250000}]}

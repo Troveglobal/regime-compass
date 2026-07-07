@@ -1,5 +1,8 @@
 APScheduler==3.11.2
+curl_cffi==0.15.0
 fastapi==0.136.1
+pdfplumber==0.11.10
+PyYAML==6.0.3
 hmmlearn==0.3.3
 numpy==2.4.6
 pandas==3.0.3

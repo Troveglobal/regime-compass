@@ -43,9 +43,12 @@ notebooks/.ipynb_checkpoints/
 # macOS launchd plists (specific to local machine)
 *.plist.backup
 
-# SmartFlow (Smart Money India) — generated at runtime; seed CSV + initial feed are kept
+# SmartFlow (Smart Money India) — price caches regenerate on demand; daily deal
+# files and the global market/congress caches ARE committed so Railway deploys
+# with full history (NSE archives only serve the latest session — lost otherwise).
 src/smartmoney/store.db
 src/smartmoney/data/prices/
-src/smartmoney/data/raw/daily/
 src/smartmoney/__pycache__/
+src/smartmoney/markets/__pycache__/
+src/smartmoney/congress/__pycache__/
 src/markets/__pycache__/

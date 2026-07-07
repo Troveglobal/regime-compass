@@ -1,0 +1,9373 @@
+{
+ "meta": {
+  "market": "us",
+  "market_name": "United States (SEC insiders)",
+  "flavor": "deals",
+  "currency": "USD",
+  "unit": "US$m",
+  "generated": "2026-07-07T04:38:53",
+  "latest_date": "2026-07-02",
+  "earliest_date": "2026-03-13",
+  "min_value": 0.2,
+  "significant": 5.0,
+  "source": "SEC Form 4 filings \u2014 open-market insider purchases and sales (codes P/S)"
+ },
+ "stats": {
+  "raw_deals": 832,
+  "distinct_symbols": 392,
+  "distinct_entities": 581,
+  "days": 24
+ },
+ "timeline": [
+  {
+   "date": "2026-05-06",
+   "buy": 0.2,
+   "sell": 0.0,
+   "net": 0.2
+  },
+  {
+   "date": "2026-05-11",
+   "buy": 22.2,
+   "sell": 0.0,
+   "net": 22.2
+  },
+  {
+   "date": "2026-05-25",
+   "buy": 5.4,
+   "sell": 0.0,
+   "net": 5.4
+  },
+  {
+   "date": "2026-05-29",
+   "buy": 0.3,
+   "sell": 0.0,
+   "net": 0.3
+  },
+  {
+   "date": "2026-06-02",
+   "buy": 0.0,
+   "sell": 0.6,
+   "net": -0.6
+  },
+  {
+   "date": "2026-06-05",
+   "buy": 0.6,
+   "sell": 0.0,
+   "net": 0.6
+  },
+  {
+   "date": "2026-06-11",
+   "buy": 100.0,
+   "sell": 0.0,
+   "net": 100.0
+  },
+  {
+   "date": "2026-06-15",
+   "buy": 0.0,
+   "sell": 0.2,
+   "net": -0.2
+  },
+  {
+   "date": "2026-06-16",
+   "buy": 1.9,
+   "sell": 0.2,
+   "net": 1.7
+  },
+  {
+   "date": "2026-06-17",
+   "buy": 1.4,
+   "sell": 1.8,
+   "net": -0.4
+  },
+  {
+   "date": "2026-06-18",
+   "buy": 7.1,
+   "sell": 1440.7,
+   "net": -1433.6
+  },
+  {
+   "date": "2026-06-19",
+   "buy": 0.0,
+   "sell": 1.6,
+   "net": -1.6
+  },
+  {
+   "date": "2026-06-22",
+   "buy": 545.8,
+   "sell": 37980.0,
+   "net": -37434.3
+  },
+  {
+   "date": "2026-06-23",
+   "buy": 54.3,
+   "sell": 2445.2,
+   "net": -2390.9
+  },
+  {
+   "date": "2026-06-24",
+   "buy": 32.0,
+   "sell": 2623.4,
+   "net": -2591.4
+  },
+  {
+   "date": "2026-06-25",
+   "buy": 72.8,
+   "sell": 1003.6,
+   "net": -930.9
+  },
+  {
+   "date": "2026-06-26",
+   "buy": 167.3,
+   "sell": 3052.1,
+   "net": -2884.8
+  },
+  {
+   "date": "2026-06-29",
+   "buy": 2.8,
+   "sell": 1395.0,
+   "net": -1392.2
+  },
+  {
+   "date": "2026-06-30",
+   "buy": 6.6,
+   "sell": 216.2,
+   "net": -209.6
+  },
+  {
+   "date": "2026-07-01",
+   "buy": 4.0,
+   "sell": 70.4,
+   "net": -66.5
+  },
+  {
+   "date": "2026-07-02",
+   "buy": 21.6,
+   "sell": 9.3,
+   "net": 12.3
+  }
+ ],
+ "history": [
+  {
+   "month": "2026-03",
+   "buy": 5.3,
+   "sell": 0.0,
+   "net": 5.3
+  },
+  {
+   "month": "2026-05",
+   "buy": 28.1,
+   "sell": 0.0,
+   "net": 28.1
+  },
+  {
+   "month": "2026-06",
+   "buy": 992.6,
+   "sell": 50160.8,
+   "net": -49168.1
+  },
+  {
+   "month": "2026-07",
+   "buy": 25.6,
+   "sell": 79.7,
+   "net": -54.1
+  }
+ ],
+ "today": {
+  "buy": {
+   "stocks": [
+    {
+     "symbol": "LIME",
+     "security": "Neutron Holdings, Inc.",
+     "value": 20.0,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Uber Technologies, Inc",
+       "etype": "10% Owner",
+       "value": 20.0
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "HDSN",
+     "security": "HUDSON TECHNOLOGIES INC /NY",
+     "value": 1.6,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Hartree Partners, Lp",
+       "etype": "10% Owner",
+       "value": 1.6
+      }
+     ],
+     "significant": false
+    }
+   ],
+   "top_entities": [
+    {
+     "entity": "Uber Technologies, Inc",
+     "etype": "10% Owner",
+     "value": 20.0,
+     "n_names": 1
+    },
+    {
+     "entity": "Hartree Partners, Lp",
+     "etype": "10% Owner",
+     "value": 1.6,
+     "n_names": 1
+    }
+   ],
+   "kpi": {
+    "total_value": 21.6,
+    "n_stocks": 2,
+    "n_entities": 2,
+    "top_stock": "LIME"
+   }
+  },
+  "sell": {
+   "stocks": [
+    {
+     "symbol": "XYZ",
+     "security": "Block, Inc.",
+     "value": 5.7,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Eisen Anthony Mathew",
+       "etype": "Director",
+       "value": 5.7
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "STRS",
+     "security": "STRATUS PROPERTIES INC",
+     "value": 3.3,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Oasis Management Co Ltd.",
+       "etype": "10% Owner",
+       "value": 3.3
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "NRIX",
+     "security": "Nurix Therapeutics, Inc.",
+     "value": 0.3,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Ring Christine",
+       "etype": "Chief Legal Officer",
+       "value": 0.3
+      }
+     ],
+     "significant": false
+    }
+   ],
+   "top_entities": [
+    {
+     "entity": "Eisen Anthony Mathew",
+     "etype": "Director",
+     "value": 5.7,
+     "n_names": 1
+    },
+    {
+     "entity": "Oasis Management Co Ltd.",
+     "etype": "10% Owner",
+     "value": 3.3,
+     "n_names": 1
+    },
+    {
+     "entity": "Ring Christine",
+     "etype": "Chief Legal Officer",
+     "value": 0.3,
+     "n_names": 1
+    }
+   ],
+   "kpi": {
+    "total_value": 9.3,
+    "n_stocks": 3,
+    "n_entities": 3,
+    "top_stock": "XYZ"
+   }
+  },
+  "date": "2026-07-02"
+ },
+ "week": {
+  "buy": {
+   "stocks": [
+    {
+     "symbol": "DPC",
+     "security": "DPC Holdings Ltd",
+     "value": 151.6,
+     "n_actors": 9,
+     "actors": [
+      {
+       "entity": "Charles Dirkson R",
+       "etype": "Director",
+       "value": 73.6
+      },
+      {
+       "entity": "Quinn Michael (Mike) Joseph",
+       "etype": "CEO & Executive Director",
+       "value": 28.7
+      },
+      {
+       "entity": "Sanders Nick",
+       "etype": "Director",
+       "value": 19.4
+      },
+      {
+       "entity": "Egan David John",
+       "etype": "CFO & Executive Director",
+       "value": 18.2
+      },
+      {
+       "entity": "Mays Jason",
+       "etype": "Chief Operating Officer",
+       "value": 5.7
+      },
+      {
+       "entity": "Danmola Taiwo K.",
+       "etype": "Director",
+       "value": 4.0
+      },
+      {
+       "entity": "Deal Stanley A",
+       "etype": "Director",
+       "value": 1.1
+      },
+      {
+       "entity": "Brooks Henry F",
+       "etype": "Director",
+       "value": 0.7
+      },
+      {
+       "entity": "Meixner Willibald",
+       "etype": "Director",
+       "value": 0.2
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "LIME",
+     "security": "Neutron Holdings, Inc.",
+     "value": 20.0,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Uber Technologies, Inc",
+       "etype": "10% Owner",
+       "value": 20.0
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "COE",
+     "security": "51Talk Online Education Group",
+     "value": 4.7,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Huang Jack Jiajia",
+       "etype": "10% Owner",
+       "value": 4.7
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "HDSN",
+     "security": "HUDSON TECHNOLOGIES INC /NY",
+     "value": 4.5,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Hartree Partners, Lp",
+       "etype": "10% Owner",
+       "value": 4.5
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "WBX",
+     "security": "Wallbox N.V.",
+     "value": 4.1,
+     "n_actors": 3,
+     "actors": [
+      {
+       "entity": "Mera Francisco Jose Riberas",
+       "etype": "Director",
+       "value": 1.4
+      },
+      {
+       "entity": "Richer Marc Sabe",
+       "etype": "Director",
+       "value": 1.4
+      },
+      {
+       "entity": "Aguera Pedro Alonso",
+       "etype": "Director",
+       "value": 1.4
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "NXST",
+     "security": "NEXSTAR MEDIA GROUP, INC.",
+     "value": 4.0,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Sook Perry A",
+       "etype": "Chief Executive Officer",
+       "value": 4.0
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "ACOG",
+     "security": "Alpha Cognition Inc.",
+     "value": 2.0,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Opaleye Management Inc.",
+       "etype": "10% Owner",
+       "value": 2.0
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "BBD",
+     "security": "BANK BRADESCO",
+     "value": 2.0,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Bueno Julio Cesar",
+       "etype": "CLO and Executive Officer",
+       "value": 2.0
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "PAM",
+     "security": "Pampa Energy Inc.",
+     "value": 1.9,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Mindlin Marcos Marcelo",
+       "etype": "10% Owner",
+       "value": 1.9
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "FUND",
+     "security": "SPROTT FOCUS TRUST INC.",
+     "value": 1.7,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "George W Whitney",
+       "etype": "10% Owner",
+       "value": 1.7
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "BOLD",
+     "security": "Boundless Bio, Inc.",
+     "value": 1.1,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Tang Kevin",
+       "etype": "10% Owner",
+       "value": 1.1
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "AVO",
+     "security": "Mission Produce, Inc.",
+     "value": 1.0,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Pack Jay A",
+       "etype": "Director",
+       "value": 1.0
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "SBSW",
+     "security": "Sibanye Stillwater Ltd",
+     "value": 0.9,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Keyter Charl",
+       "etype": "Chief Financial Officer",
+       "value": 0.9
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "NYC",
+     "security": "American Strategic Investment Co.",
+     "value": 0.7,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Schorsch Nicholas S",
+       "etype": "10% Owner",
+       "value": 0.7
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "PRQR",
+     "security": "ProQR Therapeutics N.V.",
+     "value": 0.5,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Filius Bart",
+       "etype": "Director",
+       "value": 0.5
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "CASY",
+     "security": "CASEYS GENERAL STORES INC",
+     "value": 0.4,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Spanos Mike",
+       "etype": "Director",
+       "value": 0.4
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "FTH",
+     "security": "Faeth Therapeutics, Inc.",
+     "value": 0.3,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Stephenson Brian C",
+       "etype": "Chief Financial Officer",
+       "value": 0.3
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "HNRG",
+     "security": "HALLADOR ENERGY CO",
+     "value": 0.3,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Hudson Daniel Timothy",
+       "etype": "Director",
+       "value": 0.3
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "HTO",
+     "security": "H2O AMERICA",
+     "value": 0.3,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Atlas Infrastructure Partners (Uk) Ltd.",
+       "etype": "10% Owner",
+       "value": 0.3
+      }
+     ],
+     "significant": false
+    }
+   ],
+   "top_entities": [
+    {
+     "entity": "Charles Dirkson R",
+     "etype": "Director",
+     "value": 73.6,
+     "n_names": 1
+    },
+    {
+     "entity": "Quinn Michael (Mike) Joseph",
+     "etype": "CEO & Executive Director",
+     "value": 28.7,
+     "n_names": 1
+    },
+    {
+     "entity": "Uber Technologies, Inc",
+     "etype": "10% Owner",
+     "value": 20.0,
+     "n_names": 1
+    },
+    {
+     "entity": "Sanders Nick",
+     "etype": "Director",
+     "value": 19.4,
+     "n_names": 1
+    },
+    {
+     "entity": "Egan David John",
+     "etype": "CFO & Executive Director",
+     "value": 18.2,
+     "n_names": 1
+    },
+    {
+     "entity": "Mays Jason",
+     "etype": "Chief Operating Officer",
+     "value": 5.7,
+     "n_names": 1
+    },
+    {
+     "entity": "Huang Jack Jiajia",
+     "etype": "10% Owner",
+     "value": 4.7,
+     "n_names": 1
+    },
+    {
+     "entity": "Hartree Partners, Lp",
+     "etype": "10% Owner",
+     "value": 4.5,
+     "n_names": 1
+    },
+    {
+     "entity": "Danmola Taiwo K.",
+     "etype": "Director",
+     "value": 4.0,
+     "n_names": 1
+    },
+    {
+     "entity": "Sook Perry A",
+     "etype": "Chief Executive Officer",
+     "value": 4.0,
+     "n_names": 1
+    },
+    {
+     "entity": "Opaleye Management Inc.",
+     "etype": "10% Owner",
+     "value": 2.0,
+     "n_names": 1
+    },
+    {
+     "entity": "Bueno Julio Cesar",
+     "etype": "CLO and Executive Officer",
+     "value": 2.0,
+     "n_names": 1
+    }
+   ],
+   "kpi": {
+    "total_value": 202.0,
+    "n_stocks": 19,
+    "n_entities": 31,
+    "top_stock": "DPC"
+   }
+  },
+  "sell": {
+   "stocks": [
+    {
+     "symbol": "KYMR",
+     "security": "Kymera Therapeutics, Inc.",
+     "value": 2030.1,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Bvf Partners L P/Il",
+       "etype": "Director",
+       "value": 1910.3
+      },
+      {
+       "entity": "Booth Bruce",
+       "etype": "Director",
+       "value": 119.8
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "HNGE",
+     "security": "Hinge Health, Inc.",
+     "value": 971.9,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Insight Holdings Group, Llc",
+       "etype": "10% Owner",
+       "value": 971.9
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "PRM",
+     "security": "Perimeter Solutions, Inc.",
+     "value": 391.2,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Windacre Partnership Llc",
+       "etype": "10% Owner",
+       "value": 391.2
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "ROIV",
+     "security": "Roivant Sciences Ltd.",
+     "value": 344.4,
+     "n_actors": 4,
+     "actors": [
+      {
+       "entity": "Manchester Keith S",
+       "etype": "Director",
+       "value": 112.9
+      },
+      {
+       "entity": "Qvt Financial Lp",
+       "etype": "Insider",
+       "value": 98.7
+      },
+      {
+       "entity": "Gold Daniel Allen",
+       "etype": "Director",
+       "value": 98.7
+      },
+      {
+       "entity": "Sukhatme Mayukh",
+       "etype": "President & CIO",
+       "value": 34.1
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "MU",
+     "security": "MICRON TECHNOLOGY INC",
+     "value": 92.7,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Mehrotra Sanjay",
+       "etype": "President and CEO",
+       "value": 92.7
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "NRDS",
+     "security": "NERDWALLET, INC.",
+     "value": 89.3,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Topline Capital Management, Llc",
+       "etype": "Insider",
+       "value": 53.6
+      },
+      {
+       "entity": "Topline Capital Partners, Lp",
+       "etype": "10% Owner",
+       "value": 35.7
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "GH",
+     "security": "Guardant Health, Inc.",
+     "value": 78.6,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Talasaz Amirali",
+       "etype": "Co-Chief Executive Officer",
+       "value": 78.6
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "VSCO",
+     "security": "Victoria's Secret & Co.",
+     "value": 48.9,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Bbrc International Pte Ltd",
+       "etype": "10% Owner",
+       "value": 48.9
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "BBY",
+     "security": "BEST BUY CO INC",
+     "value": 35.1,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Schulze Richard M",
+       "etype": "Insider",
+       "value": 35.1
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "OSCR",
+     "security": "Oscar Health, Inc.",
+     "value": 34.6,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Bertolini Mark T",
+       "etype": "Chief Executive Officer",
+       "value": 34.6
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "DBD",
+     "security": "DIEBOLD NIXDORF, Inc",
+     "value": 33.9,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Millstreet Capital Management Llc",
+       "etype": "10% Owner",
+       "value": 33.9
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "VICR",
+     "security": "VICOR CORP",
+     "value": 27.3,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Vinciarelli Patrizio",
+       "etype": "10% Owner",
+       "value": 27.1
+      },
+      {
+       "entity": "D'Amico Andrew",
+       "etype": "Director",
+       "value": 0.2
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "LOCO",
+     "security": "El Pollo Loco Holdings, Inc.",
+     "value": 26.0,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Biglari, Sardar",
+       "etype": "10% Owner",
+       "value": 26.0
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "DYN",
+     "security": "Dyne Therapeutics, Inc.",
+     "value": 21.4,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Rhodes Jason P",
+       "etype": "Director",
+       "value": 21.4
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "UTHR",
+     "security": "UNITED THERAPEUTICS Corp",
+     "value": 20.7,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Rothblatt Martine A",
+       "etype": "Chairperson & CEO",
+       "value": 20.7
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "DELL",
+     "security": "Dell Technologies Inc.",
+     "value": 19.8,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Silver Lake Group, L.L.C.",
+       "etype": "10% Owner",
+       "value": 19.8
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "AVAH",
+     "security": "Aveanna Healthcare Holdings, Inc.",
+     "value": 19.4,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "J.H. Whitney Equity Partners Vii, Llc",
+       "etype": "10% Owner",
+       "value": 19.4
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "LFST",
+     "security": "LifeStance Health Group, Inc.",
+     "value": 18.1,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Bessler Robert",
+       "etype": "Director",
+       "value": 18.1
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "V",
+     "security": "VISA INC.",
+     "value": 17.9,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Mcinerney Ryan",
+       "etype": "Chief Executive Officer",
+       "value": 17.9
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "BEAM",
+     "security": "Beam Therapeutics Inc.",
+     "value": 17.7,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Fmr Llc",
+       "etype": "10% Owner",
+       "value": 17.7
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "PBF",
+     "security": "PBF Energy Inc.",
+     "value": 17.1,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Control Empresarial De Capitales S.A. De C.V.",
+       "etype": "10% Owner",
+       "value": 17.1
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "CBLL",
+     "security": "Ceribell, Inc.",
+     "value": 16.3,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Tpg Gp A, Llc",
+       "etype": "Insider",
+       "value": 16.3
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "AFRM",
+     "security": "Affirm Holdings, Inc.",
+     "value": 16.0,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Linford Michael",
+       "etype": "Chief Operating Officer",
+       "value": 16.0
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "IONS",
+     "security": "IONIS PHARMACEUTICALS INC",
+     "value": 13.7,
+     "n_actors": 4,
+     "actors": [
+      {
+       "entity": "Monia Brett P",
+       "etype": "Chief Executive Officer",
+       "value": 8.1
+      },
+      {
+       "entity": "Schneider Eugene",
+       "etype": "EVP, Chf Clinical Develop Ofcr",
+       "value": 4.2
+      },
+      {
+       "entity": "Baroldi Joseph",
+       "etype": "EVP, Chief Business Officer",
+       "value": 0.9
+      },
+      {
+       "entity": "O'Neil Patrick R.",
+       "etype": "EVP CLO & General Counsel",
+       "value": 0.5
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "WYY",
+     "security": "WIDEPOINT CORP",
+     "value": 12.6,
+     "n_actors": 3,
+     "actors": [
+      {
+       "entity": "Holloway Jason",
+       "etype": "EVP and Chief Sales and Market",
+       "value": 6.3
+      },
+      {
+       "entity": "Sparling Ian",
+       "etype": "CEO, Soft-Ex",
+       "value": 5.2
+      },
+      {
+       "entity": "George Robert J",
+       "etype": "Chief Financial Officer",
+       "value": 1.1
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "ELF",
+     "security": "e.l.f. Beauty, Inc.",
+     "value": 11.9,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Amin Tarang",
+       "etype": "Chief Executive Officer",
+       "value": 7.8
+      },
+      {
+       "entity": "Hartnett Jennifer Catherine",
+       "etype": "Chief Commercial Officer",
+       "value": 4.1
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "IRM",
+     "security": "IRON MOUNTAIN INC",
+     "value": 10.2,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Meaney William L",
+       "etype": "President and CEO",
+       "value": 9.5
+      },
+      {
+       "entity": "Kidd Mark",
+       "etype": "EVP, GM Data Centers & ALM",
+       "value": 0.8
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "CACC",
+     "security": "CREDIT ACCEPTANCE CORP",
+     "value": 10.1,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Kerber Erin J",
+       "etype": "Chief Legal Officer",
+       "value": 7.2
+      },
+      {
+       "entity": "Elliott Nicholas J",
+       "etype": "Chief Transformation Officer",
+       "value": 2.9
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "SEIC",
+     "security": "SEI INVESTMENTS CO",
+     "value": 10.0,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "West Alfred P Jr",
+       "etype": "Insider",
+       "value": 10.0
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "AXON",
+     "security": "AXON ENTERPRISE, INC.",
+     "value": 10.0,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Smith Patrick W",
+       "etype": "CHIEF EXECUTIVE OFFICER",
+       "value": 10.0
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "XYZ",
+     "security": "Block, Inc.",
+     "value": 9.5,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Eisen Anthony Mathew",
+       "etype": "Director",
+       "value": 9.5
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "CRWD",
+     "security": "CrowdStrike Holdings, Inc.",
+     "value": 9.3,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Kurtz George",
+       "etype": "PRESIDENT AND CEO",
+       "value": 5.4
+      },
+      {
+       "entity": "Gandhi Sameer K",
+       "etype": "Director",
+       "value": 3.9
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "ECAT",
+     "security": "BlackRock ESG Capital Allocation Term Trust",
+     "value": 9.3,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Saba Capital Management, L.P.",
+       "etype": "10% Owner",
+       "value": 9.3
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "MLYS",
+     "security": "Mineralys Therapeutics, Inc.",
+     "value": 9.3,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Warren Eric",
+       "etype": "Chief Commercial Officer",
+       "value": 5.4
+      },
+      {
+       "entity": "Congleton Jon",
+       "etype": "Chief Executive Officer",
+       "value": 3.9
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "ABNB",
+     "security": "Airbnb, Inc.",
+     "value": 9.1,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Blecharczyk Nathan",
+       "etype": "10% Owner",
+       "value": 9.1
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "PRVA",
+     "security": "Privia Health Group, Inc.",
+     "value": 8.5,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Morris Matthew Shawn",
+       "etype": "Director",
+       "value": 7.7
+      },
+      {
+       "entity": "Mountcastle David",
+       "etype": "EVP & Chief Financial Officer",
+       "value": 0.9
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "CBRS",
+     "security": "Cerebras Systems Inc.",
+     "value": 8.3,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Mallick Dhiraj",
+       "etype": "Chief Operating Officer",
+       "value": 6.9
+      },
+      {
+       "entity": "Patel Yagnesh",
+       "etype": "Chief Accounting Officer",
+       "value": 1.4
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "SNX",
+     "security": "TD SYNNEX CORP",
+     "value": 8.0,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Polk Dennis",
+       "etype": "Chair, Hyve Solutions",
+       "value": 8.0
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "WRBY",
+     "security": "Warby Parker Inc.",
+     "value": 7.9,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Gilboa David Abraham",
+       "etype": "Co-Chief Executive Officer",
+       "value": 7.2
+      },
+      {
+       "entity": "Raider Jeffrey Jacob",
+       "etype": "Director",
+       "value": 0.7
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "UTI",
+     "security": "UNIVERSAL TECHNICAL INSTITUTE INC",
+     "value": 7.8,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Grant Jerome Alan",
+       "etype": "Chief Executive Officer",
+       "value": 7.8
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "ADPT",
+     "security": "Adaptive Biotechnologies Corp",
+     "value": 7.0,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Benzeno Sharon",
+       "etype": "Chief Commercial Ofc Imm Med",
+       "value": 7.0
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "IMVT",
+     "security": "Immunovant, Inc.",
+     "value": 6.6,
+     "n_actors": 4,
+     "actors": [
+      {
+       "entity": "Stout Jay S",
+       "etype": "Chief Technology Officer",
+       "value": 3.1
+      },
+      {
+       "entity": "Van Tuyl Christopher",
+       "etype": "Chief Legal Officer",
+       "value": 1.4
+      },
+      {
+       "entity": "Gloria Melanie",
+       "etype": "Chief Operating Officer",
+       "value": 1.4
+      },
+      {
+       "entity": "Girao Tiago",
+       "etype": "Chief Financial Officer",
+       "value": 0.8
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "FNF",
+     "security": "Fidelity National Financial, Inc.",
+     "value": 6.3,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Sadowski Peter T",
+       "etype": "EVP, Chief Legal Officer",
+       "value": 6.3
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "ALAB",
+     "security": "Astera Labs, Inc.",
+     "value": 5.6,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Dyckerhoff Stefan A",
+       "etype": "Director",
+       "value": 5.6
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "ASX",
+     "security": "ASE Technology Holding Co., Ltd.",
+     "value": 5.5,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Uang Du-Tsuen",
+       "etype": "Chief Administration Officer",
+       "value": 5.5
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "ATLC",
+     "security": "Atlanticus Holdings Corp",
+     "value": 5.4,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Mccamey William",
+       "etype": "Chief Financial Officer",
+       "value": 3.2
+      },
+      {
+       "entity": "Howard Jeffrey A.",
+       "etype": "President & CEO",
+       "value": 2.2
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "LWAY",
+     "security": "Lifeway Foods, Inc.",
+     "value": 5.2,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Smolyansky Edward",
+       "etype": "10% Owner",
+       "value": 5.2
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "PACS",
+     "security": "PACS Group, Inc.",
+     "value": 5.0,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Hancock Mark",
+       "etype": "10% Owner",
+       "value": 5.0
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "QLYS",
+     "security": "QUALYS, INC.",
+     "value": 4.9,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Thakar Sumedh S",
+       "etype": "CEO & PRESIDENT",
+       "value": 4.9
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "PFGC",
+     "security": "Performance Food Group Co",
+     "value": 4.3,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Holm George L",
+       "etype": "See Remarks",
+       "value": 3.7
+      },
+      {
+       "entity": "Davis Erika T",
+       "etype": "See Remarks",
+       "value": 0.6
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "PSNL",
+     "security": "Personalis, Inc.",
+     "value": 4.0,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Hall Christopher M",
+       "etype": "Chief Executive Officer",
+       "value": 2.6
+      },
+      {
+       "entity": "Tachibana Aaron",
+       "etype": "CFO AND COO",
+       "value": 1.4
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "ARX",
+     "security": "Accelerant Holdings",
+     "value": 4.0,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Radke Jeffrey L",
+       "etype": "10% Owner",
+       "value": 2.1
+      },
+      {
+       "entity": "Oneill Francis James",
+       "etype": "Co-Founder, Chief U/W Officer",
+       "value": 1.9
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "VLO",
+     "security": "VALERO ENERGY CORP/TX",
+     "value": 4.0,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Fisher Eric A",
+       "etype": "SVP",
+       "value": 4.0
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "BKR",
+     "security": "Baker Hughes Co",
+     "value": 4.0,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Borras Maria C",
+       "etype": "Chief Growth & Experience Ofcr",
+       "value": 4.0
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "MATX",
+     "security": "Matson, Inc.",
+     "value": 3.9,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Cox Matthew J",
+       "etype": "Chairman & CEO",
+       "value": 3.9
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "RSKD",
+     "security": "RISKIFIED LTD.",
+     "value": 3.6,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Shachar Erez",
+       "etype": "Director",
+       "value": 3.6
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "HSY",
+     "security": "HERSHEY CO",
+     "value": 3.6,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Hershey Trust Co Trustee In Trust For Milton Hershey School",
+       "etype": "10% Owner",
+       "value": 3.6
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "STRS",
+     "security": "STRATUS PROPERTIES INC",
+     "value": 3.6,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Oasis Management Co Ltd.",
+       "etype": "10% Owner",
+       "value": 3.6
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "UMC",
+     "security": "UNITED MICROELECTRONICS CORP",
+     "value": 3.4,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Hu Che-Jen",
+       "etype": "Vice President",
+       "value": 3.4
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "NBIX",
+     "security": "NEUROCRINE BIOSCIENCES INC",
+     "value": 3.3,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Lippoldt Darin",
+       "etype": "Chief Legal Officer",
+       "value": 3.3
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "CASY",
+     "security": "CASEYS GENERAL STORES INC",
+     "value": 3.2,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Lindsey Katrina S",
+       "etype": "Chief Legal Officer",
+       "value": 3.2
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "VCEL",
+     "security": "Vericel Corp",
+     "value": 3.0,
+     "n_actors": 4,
+     "actors": [
+      {
+       "entity": "Flynn Sean C.",
+       "etype": "Chief Legal Officer",
+       "value": 1.4
+      },
+      {
+       "entity": "Hopper Jonathan Mark",
+       "etype": "Chief Medical Officer",
+       "value": 0.9
+      },
+      {
+       "entity": "Mara Joseph Anthony Jr",
+       "etype": "Chief Financial Officer",
+       "value": 0.4
+      },
+      {
+       "entity": "Siegal Jonathan",
+       "etype": "Principal Accounting Officer",
+       "value": 0.2
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "AUGO",
+     "security": "Aura Minerals Inc.",
+     "value": 2.9,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Rosa Luvizotto Glauber",
+       "etype": "Chief Operating Officer",
+       "value": 2.9
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "TWLO",
+     "security": "TWILIO INC",
+     "value": 2.8,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Shipchandler Khozema",
+       "etype": "Chief Executive Officer",
+       "value": 2.8
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "PCVX",
+     "security": "Vaxcyte, Inc.",
+     "value": 2.7,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Pickering Grant",
+       "etype": "CHIEF EXECUTIVE OFFICER",
+       "value": 2.7
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "IDT",
+     "security": "IDT CORP",
+     "value": 2.7,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Fischer Marcelo",
+       "etype": "Chief Financial Officer",
+       "value": 2.7
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "OMDA",
+     "security": "Omada Health, Inc.",
+     "value": 2.6,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Cook Steven L.",
+       "etype": "Chief Financial Officer",
+       "value": 2.1
+      },
+      {
+       "entity": "Duffy Sean P.",
+       "etype": "Chief Executive Officer",
+       "value": 0.6
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "NTES",
+     "security": "NetEase, Inc.",
+     "value": 2.6,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Boltz Paul William Jr",
+       "etype": "General Counsel",
+       "value": 2.6
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "AHR",
+     "security": "American Healthcare REIT, Inc.",
+     "value": 2.5,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Peay Brian",
+       "etype": "Chief Financial Officer",
+       "value": 2.5
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "TRLV",
+     "security": "Trulieve Cannabis Corp.",
+     "value": 2.4,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Rivers Kim A.",
+       "etype": "10% Owner",
+       "value": 2.4
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "QURE",
+     "security": "uniQure N.V.",
+     "value": 2.4,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Abi-Saab Walid",
+       "etype": "Chief Medical Officer",
+       "value": 1.4
+      },
+      {
+       "entity": "Kaye Jack",
+       "etype": "Director",
+       "value": 1.0
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "CDNA",
+     "security": "CareDx, Inc.",
+     "value": 2.3,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Hanna John Walter Jr",
+       "etype": "President and CEO",
+       "value": 2.3
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "SJM",
+     "security": "J M SMUCKER Co",
+     "value": 2.2,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Penrose Jill R",
+       "etype": "Chief People Officer",
+       "value": 1.2
+      },
+      {
+       "entity": "Knudsen Jeannette L",
+       "etype": "Chief Legal Officer",
+       "value": 1.0
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "GLBE",
+     "security": "Global-E Online Ltd.",
+     "value": 2.1,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Tamari Shahar",
+       "etype": "COO",
+       "value": 2.1
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "PINS",
+     "security": "PINTEREST, INC.",
+     "value": 2.0,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Silbermann Benjamin",
+       "etype": "10% Owner",
+       "value": 2.0
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "SEZL",
+     "security": "Sezzle Inc.",
+     "value": 1.9,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Brading Lee Dickson",
+       "etype": "Chief Financial Officer",
+       "value": 1.9
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "CRUS",
+     "security": "CIRRUS LOGIC, INC.",
+     "value": 1.9,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Brannan Andrew",
+       "etype": "EVP, Worldwide Sales",
+       "value": 1.9
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "TGT",
+     "security": "TARGET CORP",
+     "value": 1.9,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Roath Lisa R",
+       "etype": "Executive Officer",
+       "value": 1.9
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "GILD",
+     "security": "GILEAD SCIENCES, INC.",
+     "value": 1.9,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "O'Day Daniel Patrick",
+       "etype": "Chairman & CEO",
+       "value": 1.9
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "SE",
+     "security": "Sea Ltd",
+     "value": 1.8,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Ye Gang",
+       "etype": "COO",
+       "value": 1.8
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "PAYS",
+     "security": "Paysign, Inc.",
+     "value": 1.6,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Herman Joan M",
+       "etype": "EVP, Operations",
+       "value": 1.6
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "AFYA",
+     "security": "Afya Ltd",
+     "value": 1.5,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Junior Lelio De Souza",
+       "etype": "Vice President",
+       "value": 1.2
+      },
+      {
+       "entity": "Basolli Gomiero Mirella",
+       "etype": "Vice President",
+       "value": 0.3
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "RELY",
+     "security": "Remitly Global, Inc.",
+     "value": 1.5,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Hug Joshua",
+       "etype": "Director",
+       "value": 1.5
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "CIEN",
+     "security": "CIENA CORP",
+     "value": 1.5,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Cumello Joseph",
+       "etype": "SVP, General Mgr. Blue Planet",
+       "value": 1.5
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "AMBA",
+     "security": "AMBARELLA INC",
+     "value": 1.5,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Wang Feng-Ming",
+       "etype": "CEO",
+       "value": 1.5
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "PTCT",
+     "security": "PTC THERAPEUTICS, INC.",
+     "value": 1.4,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Almstead Neil Gregory",
+       "etype": "CHIEF TECHNICAL OPS OFFICER",
+       "value": 1.4
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "NYSE: KRC",
+     "security": "KILROY REALTY CORP",
+     "value": 1.2,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Hunt Jolie A.",
+       "etype": "Director",
+       "value": 1.2
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "ALHC",
+     "security": "Alignment Healthcare, Inc.",
+     "value": 1.1,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Konowiecki Joseph S",
+       "etype": "EVP, Corporate Affairs",
+       "value": 1.1
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "HALO",
+     "security": "HALOZYME THERAPEUTICS, INC.",
+     "value": 1.1,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Krishnan Mahesh",
+       "etype": "Director",
+       "value": 1.1
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "LZB",
+     "security": "LA-Z-BOY INC",
+     "value": 1.1,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Richmond Raphaell Z.",
+       "etype": "VP, GC & Chief Compliance Off",
+       "value": 1.1
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "AIAI",
+     "security": "AIAI Holdings Corp",
+     "value": 1.1,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Liebman Stephanie",
+       "etype": "EVP/CFO",
+       "value": 0.7
+      },
+      {
+       "entity": "Weiszhaar Barbara Barton",
+       "etype": "SVP/CAO",
+       "value": 0.4
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "PHVS",
+     "security": "Pharvaris N.V.",
+     "value": 1.0,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Lu Peng",
+       "etype": "Chief Medical Officer",
+       "value": 1.0
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "S",
+     "security": "SentinelOne, Inc.",
+     "value": 1.0,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Weingarten Tomer",
+       "etype": "President, CEO",
+       "value": 1.0
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "MLTX",
+     "security": "MoonLake Immunotherapeutics",
+     "value": 1.0,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Santos Da Silva Jorge",
+       "etype": "Chief Executive Officer",
+       "value": 1.0
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "RLAY",
+     "security": "Relay Therapeutics, Inc.",
+     "value": 1.0,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Rahmer Peter",
+       "etype": "See remarks",
+       "value": 1.0
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "ZLAB",
+     "security": "Zai Lab Ltd",
+     "value": 0.9,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Du Ying",
+       "etype": "Chairperson & CEO",
+       "value": 0.9
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "RYAAY",
+     "security": "RYANAIR HOLDINGS PLC",
+     "value": 0.9,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Hurley John Jh",
+       "etype": "Ryanair DAC CTO",
+       "value": 0.9
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "ORMP",
+     "security": "ORAMED PHARMACEUTICALS INC.",
+     "value": 0.9,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Hexter Joshua",
+       "etype": "COO & CBO",
+       "value": 0.6
+      },
+      {
+       "entity": "Gabay Avraham",
+       "etype": "Chief Financial Officer",
+       "value": 0.3
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "PAYX",
+     "security": "PAYCHEX INC",
+     "value": 0.8,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Tucci Joseph M",
+       "etype": "Director",
+       "value": 0.8
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "OMF",
+     "security": "OneMain Holdings, Inc.",
+     "value": 0.8,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Conrad Micah R.",
+       "etype": "EVP & COO",
+       "value": 0.6
+      },
+      {
+       "entity": "Hedlund Michael A",
+       "etype": "pao, SVP and Group Controller",
+       "value": 0.2
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "CLYM",
+     "security": "Climb Bio, Inc.",
+     "value": 0.8,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Brennan Aoife",
+       "etype": "President and CEO",
+       "value": 0.8
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "WMT",
+     "security": "Walmart Inc.",
+     "value": 0.8,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Bartlett Daniel J",
+       "etype": "Executive Vice President",
+       "value": 0.8
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "MTG",
+     "security": "MGIC INVESTMENT CORP",
+     "value": 0.8,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Miosi Salvatore A",
+       "etype": "President & COO",
+       "value": 0.8
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "TLS",
+     "security": "TELOS CORP",
+     "value": 0.7,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Bendza Gary Mark",
+       "etype": "EVP, CFO",
+       "value": 0.7
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "GALT",
+     "security": "GALECTIN THERAPEUTICS INC",
+     "value": 0.7,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Jamil Khurram",
+       "etype": "Chief Medical Officer",
+       "value": 0.5
+      },
+      {
+       "entity": "Shlevin Harold H.",
+       "etype": "Director",
+       "value": 0.2
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "ESNT",
+     "security": "Essent Group Ltd.",
+     "value": 0.7,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Weinstock David B",
+       "etype": "SVP and CFO",
+       "value": 0.7
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "MAIN",
+     "security": "Main Street Capital CORP",
+     "value": 0.7,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Beauvais Jason B",
+       "etype": "EVP, GC, SECRETARY",
+       "value": 0.7
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "INTA",
+     "security": "Intapp, Inc.",
+     "value": 0.7,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Murgel Michele",
+       "etype": "Chief People & Places Officer",
+       "value": 0.7
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "GLUE",
+     "security": "Monte Rosa Therapeutics, Inc.",
+     "value": 0.7,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Manning Anthony M.",
+       "etype": "Director",
+       "value": 0.5
+      },
+      {
+       "entity": "Janku Filip",
+       "etype": "Chief Medical Officer",
+       "value": 0.3
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "GL",
+     "security": "GLOBE LIFE INC.",
+     "value": 0.7,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Skarjune Dolores L",
+       "etype": "EVP and Chief Admin. Officer",
+       "value": 0.7
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "TRU",
+     "security": "TransUnion",
+     "value": 0.7,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Chaouki Steven M",
+       "etype": "President, US Markets",
+       "value": 0.7
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "KEYS",
+     "security": "Keysight Technologies, Inc.",
+     "value": 0.7,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Estrada Ingrid A",
+       "etype": "SVP",
+       "value": 0.7
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "STUB",
+     "security": "StubHub Holdings, Inc.",
+     "value": 0.6,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Islam Nayaab",
+       "etype": "See Remarks",
+       "value": 0.6
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "RBRK",
+     "security": "Rubrik, Inc.",
+     "value": 0.6,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Mhatre Ravi",
+       "etype": "Director",
+       "value": 0.6
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "SLDE",
+     "security": "Slide Insurance Holdings, Inc.",
+     "value": 0.6,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Wright Andrew Pardo",
+       "etype": "Director",
+       "value": 0.6
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "ACAD",
+     "security": "ACADIA PHARMACEUTICALS INC",
+     "value": 0.6,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Kihara James",
+       "etype": "PRINCIPAL ACCOUNTING OFFICER",
+       "value": 0.6
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "SOPH",
+     "security": "SOPHiA GENETICS SA",
+     "value": 0.6,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Camblong Jurgi",
+       "etype": "Chief Executive Officer",
+       "value": 0.6
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "VRTX",
+     "security": "VERTEX PHARMACEUTICALS INC / MA",
+     "value": 0.6,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Bozic Carmen",
+       "etype": "EVP and CMO",
+       "value": 0.6
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "ASPI",
+     "security": "ASP Isotopes Inc.",
+     "value": 0.6,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Ainscow Donald George",
+       "etype": "EVP, Gen Counsel, Secretary",
+       "value": 0.6
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "BETA",
+     "security": "BETA Technologies, Inc.",
+     "value": 0.5,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Clark Kyle",
+       "etype": "SEE REMARKS",
+       "value": 0.5
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "GPC",
+     "security": "GENUINE PARTS CO",
+     "value": 0.5,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Galla Christopher T",
+       "etype": "SVP, GC, and Corp. Secretary",
+       "value": 0.5
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "CYTK",
+     "security": "CYTOKINETICS INC",
+     "value": 0.5,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Lee Sung",
+       "etype": "EVP, Chief Financial Officer",
+       "value": 0.5
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "ATAI",
+     "security": "AtaiBeckley Inc.",
+     "value": 0.5,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Kochendoerfer Gerd",
+       "etype": "Chief Operating Officer",
+       "value": 0.5
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "ANIP",
+     "security": "ANI PHARMACEUTICALS INC",
+     "value": 0.5,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Carey Stephen P.",
+       "etype": "SVP & CFO",
+       "value": 0.5
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "PGC",
+     "security": "PEAPACK GLADSTONE FINANCIAL CORP",
+     "value": 0.5,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Babcock John P",
+       "etype": "SEVP & Pres of Priv Wealth Mgt",
+       "value": 0.5
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "PKOH",
+     "security": "PARK OHIO HOLDINGS CORP",
+     "value": 0.5,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Vilsack Robert D",
+       "etype": "Secretary & CLO",
+       "value": 0.5
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "AMZN",
+     "security": "AMAZON COM INC",
+     "value": 0.5,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Herrington Douglas J",
+       "etype": "CEO Worldwide Amazon Stores",
+       "value": 0.5
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "AI",
+     "security": "C3.ai, Inc.",
+     "value": 0.5,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Ehikian Stephen Bradley",
+       "etype": "Chief Executive Officer",
+       "value": 0.5
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "TTI",
+     "security": "TETRA TECHNOLOGIES INC",
+     "value": 0.5,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Murphy Brady M",
+       "etype": "President & CEO",
+       "value": 0.5
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "EOSE",
+     "security": "Eos Energy Enterprises, Inc.",
+     "value": 0.4,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Kroeker Nathan",
+       "etype": "CCO and Interim CFO",
+       "value": 0.4
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "GRND",
+     "security": "Grindr Inc.",
+     "value": 0.4,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Katz Zachary",
+       "etype": "CLO and Head of Global Affairs",
+       "value": 0.4
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "HMN",
+     "security": "HORACE MANN EDUCATORS CORP /DE/",
+     "value": 0.4,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Zuraitis Marita",
+       "etype": "President & CEO",
+       "value": 0.4
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "WRLD",
+     "security": "WORLD ACCEPTANCE CORP",
+     "value": 0.3,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Way Charles D",
+       "etype": "Director",
+       "value": 0.3
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "OLP",
+     "security": "ONE LIBERTY PROPERTIES INC",
+     "value": 0.3,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Ricketts Lawrence",
+       "etype": "Exec.Vice President and COO",
+       "value": 0.3
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "GWRE",
+     "security": "Guidewire Software, Inc.",
+     "value": 0.3,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Rosenbaum Michael George",
+       "etype": "Chief Executive Officer",
+       "value": 0.3
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "GOOGL",
+     "security": "Alphabet Inc.",
+     "value": 0.3,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Saraci Marsida",
+       "etype": "VP, Chief Accounting Officer",
+       "value": 0.3
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "TTC",
+     "security": "TORO CO",
+     "value": 0.3,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Funk Edric C",
+       "etype": "President & COO",
+       "value": 0.3
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "WHG",
+     "security": "WESTWOOD HOLDINGS GROUP INC",
+     "value": 0.3,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Byrne Susan M",
+       "etype": "Insider",
+       "value": 0.3
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "CERS",
+     "security": "CERUS CORP",
+     "value": 0.3,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Greenman William Mariner",
+       "etype": "President and CEO",
+       "value": 0.3
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "MQ",
+     "security": "Marqeta, Inc.",
+     "value": 0.3,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Pollak Todd",
+       "etype": "Chief Revenue Officer",
+       "value": 0.3
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "NRIX",
+     "security": "Nurix Therapeutics, Inc.",
+     "value": 0.3,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Ring Christine",
+       "etype": "Chief Legal Officer",
+       "value": 0.3
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "PED",
+     "security": "PEDEVCO CORP",
+     "value": 0.3,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Clark Moore",
+       "etype": "Executive VP",
+       "value": 0.3
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "COMP",
+     "security": "Compass, Inc.",
+     "value": 0.3,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Reffkin Robert L.",
+       "etype": "Chairman and CEO",
+       "value": 0.3
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "NAVN",
+     "security": "Navan, Inc.",
+     "value": 0.3,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Lightspeed Venture Partners Select Ii, L.P.",
+       "etype": "10% Owner",
+       "value": 0.3
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "AIP",
+     "security": "Arteris, Inc.",
+     "value": 0.3,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Alpern Paul L",
+       "etype": "VP and General Counsel",
+       "value": 0.3
+      }
+     ],
+     "significant": false
+    }
+   ],
+   "top_entities": [
+    {
+     "entity": "Bvf Partners L P/Il",
+     "etype": "Director",
+     "value": 1910.3,
+     "n_names": 1
+    },
+    {
+     "entity": "Insight Holdings Group, Llc",
+     "etype": "10% Owner",
+     "value": 971.9,
+     "n_names": 1
+    },
+    {
+     "entity": "Windacre Partnership Llc",
+     "etype": "10% Owner",
+     "value": 391.2,
+     "n_names": 1
+    },
+    {
+     "entity": "Booth Bruce",
+     "etype": "Director",
+     "value": 119.8,
+     "n_names": 1
+    },
+    {
+     "entity": "Manchester Keith S",
+     "etype": "Director",
+     "value": 112.9,
+     "n_names": 1
+    },
+    {
+     "entity": "Qvt Financial Lp",
+     "etype": "Insider",
+     "value": 98.7,
+     "n_names": 1
+    },
+    {
+     "entity": "Gold Daniel Allen",
+     "etype": "Director",
+     "value": 98.7,
+     "n_names": 1
+    },
+    {
+     "entity": "Mehrotra Sanjay",
+     "etype": "President and CEO",
+     "value": 92.7,
+     "n_names": 1
+    },
+    {
+     "entity": "Talasaz Amirali",
+     "etype": "Co-Chief Executive Officer",
+     "value": 78.6,
+     "n_names": 1
+    },
+    {
+     "entity": "Topline Capital Management, Llc",
+     "etype": "Insider",
+     "value": 53.6,
+     "n_names": 1
+    },
+    {
+     "entity": "Bbrc International Pte Ltd",
+     "etype": "10% Owner",
+     "value": 48.9,
+     "n_names": 1
+    },
+    {
+     "entity": "Topline Capital Partners, Lp",
+     "etype": "10% Owner",
+     "value": 35.7,
+     "n_names": 1
+    }
+   ],
+   "kpi": {
+    "total_value": 4740.8,
+    "n_stocks": 145,
+    "n_entities": 193,
+    "top_stock": "KYMR"
+   }
+  },
+  "from": "2026-06-26",
+  "to": "2026-07-02"
+ },
+ "month": {
+  "buy": {
+   "stocks": [
+    {
+     "symbol": "KARD",
+     "security": "Kardigan, Inc.",
+     "value": 500.0,
+     "n_actors": 3,
+     "actors": [
+      {
+       "entity": "Hrtg Gpe, Llc",
+       "etype": "10% Owner",
+       "value": 300.0
+      },
+      {
+       "entity": "Arch Venture Partners Xiii, Llc",
+       "etype": "10% Owner",
+       "value": 160.0
+      },
+      {
+       "entity": "Berns Paul L",
+       "etype": "10% Owner",
+       "value": 40.0
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "DPC",
+     "security": "DPC Holdings Ltd",
+     "value": 151.6,
+     "n_actors": 9,
+     "actors": [
+      {
+       "entity": "Charles Dirkson R",
+       "etype": "Director",
+       "value": 73.6
+      },
+      {
+       "entity": "Quinn Michael (Mike) Joseph",
+       "etype": "CEO & Executive Director",
+       "value": 28.7
+      },
+      {
+       "entity": "Sanders Nick",
+       "etype": "Director",
+       "value": 19.4
+      },
+      {
+       "entity": "Egan David John",
+       "etype": "CFO & Executive Director",
+       "value": 18.2
+      },
+      {
+       "entity": "Mays Jason",
+       "etype": "Chief Operating Officer",
+       "value": 5.7
+      },
+      {
+       "entity": "Danmola Taiwo K.",
+       "etype": "Director",
+       "value": 4.0
+      },
+      {
+       "entity": "Deal Stanley A",
+       "etype": "Director",
+       "value": 1.1
+      },
+      {
+       "entity": "Brooks Henry F",
+       "etype": "Director",
+       "value": 0.7
+      },
+      {
+       "entity": "Meixner Willibald",
+       "etype": "Director",
+       "value": 0.2
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "PBLS",
+     "security": "Parabilis Medicines, Inc.",
+     "value": 100.0,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Levy Guy",
+       "etype": "10% Owner",
+       "value": 100.0
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "LILA",
+     "security": "Liberty Latin America Ltd.",
+     "value": 66.0,
+     "n_actors": 4,
+     "actors": [
+      {
+       "entity": "Malone John C",
+       "etype": "Insider",
+       "value": 62.7
+      },
+      {
+       "entity": "Nair Balan",
+       "etype": "President and CEO",
+       "value": 2.0
+      },
+      {
+       "entity": "Paddick Brendan J",
+       "etype": "Director",
+       "value": 1.0
+      },
+      {
+       "entity": "Bracken Charles H R",
+       "etype": "Director",
+       "value": 0.4
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "CGON",
+     "security": "CG Oncology, Inc.",
+     "value": 49.6,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Liu Brian Guan-Chyun",
+       "etype": "Director",
+       "value": 49.6
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "COE",
+     "security": "51Talk Online Education Group",
+     "value": 42.2,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Huang Jack Jiajia",
+       "etype": "10% Owner",
+       "value": 42.2
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "LIME",
+     "security": "Neutron Holdings, Inc.",
+     "value": 20.0,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Uber Technologies, Inc",
+       "etype": "10% Owner",
+       "value": 20.0
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "TAKAX",
+     "security": "Carlyle Tactical Private Credit Fund",
+     "value": 10.0,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Thrivent Financial For Lutherans",
+       "etype": "Insider",
+       "value": 10.0
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "PAM",
+     "security": "Pampa Energy Inc.",
+     "value": 9.5,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Mindlin Marcos Marcelo",
+       "etype": "10% Owner",
+       "value": 9.5
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "PSEC",
+     "security": "PROSPECT CAPITAL CORP",
+     "value": 9.3,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Barry John F",
+       "etype": "10% Owner",
+       "value": 9.3
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "ENR",
+     "security": "ENERGIZER HOLDINGS, INC.",
+     "value": 5.9,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Aqua Capital, Ltd.",
+       "etype": "10% Owner",
+       "value": 5.9
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "HDSN",
+     "security": "HUDSON TECHNOLOGIES INC /NY",
+     "value": 4.5,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Hartree Partners, Lp",
+       "etype": "10% Owner",
+       "value": 4.5
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "WBX",
+     "security": "Wallbox N.V.",
+     "value": 4.1,
+     "n_actors": 3,
+     "actors": [
+      {
+       "entity": "Mera Francisco Jose Riberas",
+       "etype": "Director",
+       "value": 1.4
+      },
+      {
+       "entity": "Richer Marc Sabe",
+       "etype": "Director",
+       "value": 1.4
+      },
+      {
+       "entity": "Aguera Pedro Alonso",
+       "etype": "Director",
+       "value": 1.4
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "NXST",
+     "security": "NEXSTAR MEDIA GROUP, INC.",
+     "value": 4.0,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Sook Perry A",
+       "etype": "Chief Executive Officer",
+       "value": 4.0
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "ADBE",
+     "security": "ADOBE INC.",
+     "value": 3.9,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Ricks David A",
+       "etype": "Director",
+       "value": 3.9
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "AVO",
+     "security": "Mission Produce, Inc.",
+     "value": 3.2,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Taylor Bruce C.",
+       "etype": "Director",
+       "value": 2.3
+      },
+      {
+       "entity": "Pack Jay A",
+       "etype": "Director",
+       "value": 1.0
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "AMS",
+     "security": "AMERICAN SHARED HOSPITAL SERVICES",
+     "value": 2.7,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Stachowiak Raymond C",
+       "etype": "10% Owner",
+       "value": 2.7
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "KMX",
+     "security": "CARMAX INC",
+     "value": 2.5,
+     "n_actors": 4,
+     "actors": [
+      {
+       "entity": "Oneil Mark F",
+       "etype": "Director",
+       "value": 1.0
+      },
+      {
+       "entity": "Barr Keith",
+       "etype": "President and CEO",
+       "value": 1.0
+      },
+      {
+       "entity": "Bensen Peter J",
+       "etype": "Director",
+       "value": 0.3
+      },
+      {
+       "entity": "Chawla Sona",
+       "etype": "Director",
+       "value": 0.2
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "TXO",
+     "security": "TXO Partners, L.P.",
+     "value": 2.5,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Simpson Bob R",
+       "etype": "10% Owner",
+       "value": 2.5
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "BOLD",
+     "security": "Boundless Bio, Inc.",
+     "value": 2.1,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Tang Kevin",
+       "etype": "10% Owner",
+       "value": 2.1
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "ACOG",
+     "security": "Alpha Cognition Inc.",
+     "value": 2.0,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Opaleye Management Inc.",
+       "etype": "10% Owner",
+       "value": 2.0
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "BBD",
+     "security": "BANK BRADESCO",
+     "value": 2.0,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Bueno Julio Cesar",
+       "etype": "CLO and Executive Officer",
+       "value": 2.0
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "CRT",
+     "security": "CROSS TIMBERS ROYALTY TRUST",
+     "value": 1.9,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Oliver Eric L",
+       "etype": "10% Owner",
+       "value": 1.9
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "ARTV",
+     "security": "Artiva Biotherapeutics, Inc.",
+     "value": 1.9,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Ra Capital Management, L.P.",
+       "etype": "10% Owner",
+       "value": 1.9
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "FUND",
+     "security": "SPROTT FOCUS TRUST INC.",
+     "value": 1.7,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "George W Whitney",
+       "etype": "10% Owner",
+       "value": 1.7
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "FTH",
+     "security": "Faeth Therapeutics, Inc.",
+     "value": 1.6,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Stephenson Brian C",
+       "etype": "Chief Financial Officer",
+       "value": 1.6
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "N O G",
+     "security": "NORTHERN OIL & GAS, INC.",
+     "value": 1.0,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Akradi Bahram",
+       "etype": "Director",
+       "value": 1.0
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "MXF",
+     "security": "MEXICO FUND INC",
+     "value": 0.9,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Saba Capital Management, L.P.",
+       "etype": "10% Owner",
+       "value": 0.9
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "SBSW",
+     "security": "Sibanye Stillwater Ltd",
+     "value": 0.9,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Keyter Charl",
+       "etype": "Chief Financial Officer",
+       "value": 0.9
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "ADSK",
+     "security": "Autodesk, Inc.",
+     "value": 0.8,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Cahill John T",
+       "etype": "Director",
+       "value": 0.8
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "GTE",
+     "security": "GRAN TIERRA ENERGY INC.",
+     "value": 0.8,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Lm Asset Management Inc.",
+       "etype": "10% Owner",
+       "value": 0.8
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "NYC",
+     "security": "American Strategic Investment Co.",
+     "value": 0.7,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Schorsch Nicholas S",
+       "etype": "10% Owner",
+       "value": 0.7
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "PWRL",
+     "security": "Powerlaw Corp.",
+     "value": 0.6,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Dinsdale Mike John",
+       "etype": "Chief Executive Officer",
+       "value": 0.4
+      },
+      {
+       "entity": "Black Benjamin David",
+       "etype": "Chief Investment Officer",
+       "value": 0.2
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "PASG",
+     "security": "Passage BIO, Inc.",
+     "value": 0.6,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Lynx1 Capital Management Lp",
+       "etype": "10% Owner",
+       "value": 0.6
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "PSBD",
+     "security": "Palmer Square Capital BDC Inc.",
+     "value": 0.6,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Bicknell Martin C",
+       "etype": "10% Owner",
+       "value": 0.6
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "SPTX",
+     "security": "Seaport Therapeutics, Inc.",
+     "value": 0.5,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Hombach Robert J.",
+       "etype": "Director",
+       "value": 0.5
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "OXY",
+     "security": "OCCIDENTAL PETROLEUM CORP /DE/",
+     "value": 0.5,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Jackson Richard A.",
+       "etype": "President and CEO",
+       "value": 0.5
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "EPSN",
+     "security": "Epsilon Energy Ltd.",
+     "value": 0.5,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Stabell Jason",
+       "etype": "Chief Executive Officer",
+       "value": 0.5
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "PGY",
+     "security": "Pagaya Technologies Ltd.",
+     "value": 0.5,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Krubiner Gal",
+       "etype": "Chief Executive Officer",
+       "value": 0.5
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "PRQR",
+     "security": "ProQR Therapeutics N.V.",
+     "value": 0.5,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Filius Bart",
+       "etype": "Director",
+       "value": 0.5
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "KYN",
+     "security": "Kayne Anderson Energy Infrastructure Fund, Inc.",
+     "value": 0.4,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Hennigan Michael J",
+       "etype": "Director",
+       "value": 0.4
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "YYGH",
+     "security": "YY Group Holding Ltd.",
+     "value": 0.4,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Hrt Financial Lp",
+       "etype": "10% Owner",
+       "value": 0.4
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "CALC",
+     "security": "CalciMedica, Inc.",
+     "value": 0.4,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Middleton Fred A",
+       "etype": "10% Owner",
+       "value": 0.4
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "CASY",
+     "security": "CASEYS GENERAL STORES INC",
+     "value": 0.4,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Spanos Mike",
+       "etype": "Director",
+       "value": 0.4
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "CNXU",
+     "security": "Conexeu Sciences Inc.",
+     "value": 0.3,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Purcell Lynn Sebastian",
+       "etype": "10% Owner",
+       "value": 0.3
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "F",
+     "security": "FORD MOTOR CO",
+     "value": 0.3,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Thornton John L",
+       "etype": "Director",
+       "value": 0.3
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "COR",
+     "security": "Cencora, Inc.",
+     "value": 0.3,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Tyler Lauren M",
+       "etype": "Director",
+       "value": 0.3
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "TYG",
+     "security": "TORTOISE ENERGY INFRASTRUCTURE CORP",
+     "value": 0.3,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Ciccotello Conrad S",
+       "etype": "Director",
+       "value": 0.3
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "GDC",
+     "security": "GD Culture Group Ltd",
+     "value": 0.3,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Hrt Financial Lp",
+       "etype": "10% Owner",
+       "value": 0.3
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "HNRG",
+     "security": "HALLADOR ENERGY CO",
+     "value": 0.3,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Hudson Daniel Timothy",
+       "etype": "Director",
+       "value": 0.3
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "HTO",
+     "security": "H2O AMERICA",
+     "value": 0.3,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Atlas Infrastructure Partners (Uk) Ltd.",
+       "etype": "10% Owner",
+       "value": 0.3
+      }
+     ],
+     "significant": false
+    }
+   ],
+   "top_entities": [
+    {
+     "entity": "Hrtg Gpe, Llc",
+     "etype": "10% Owner",
+     "value": 300.0,
+     "n_names": 1
+    },
+    {
+     "entity": "Arch Venture Partners Xiii, Llc",
+     "etype": "10% Owner",
+     "value": 160.0,
+     "n_names": 1
+    },
+    {
+     "entity": "Levy Guy",
+     "etype": "10% Owner",
+     "value": 100.0,
+     "n_names": 1
+    },
+    {
+     "entity": "Charles Dirkson R",
+     "etype": "Director",
+     "value": 73.6,
+     "n_names": 1
+    },
+    {
+     "entity": "Malone John C",
+     "etype": "Insider",
+     "value": 62.7,
+     "n_names": 1
+    },
+    {
+     "entity": "Liu Brian Guan-Chyun",
+     "etype": "Director",
+     "value": 49.6,
+     "n_names": 1
+    },
+    {
+     "entity": "Huang Jack Jiajia",
+     "etype": "10% Owner",
+     "value": 42.2,
+     "n_names": 1
+    },
+    {
+     "entity": "Berns Paul L",
+     "etype": "10% Owner",
+     "value": 40.0,
+     "n_names": 1
+    },
+    {
+     "entity": "Quinn Michael (Mike) Joseph",
+     "etype": "CEO & Executive Director",
+     "value": 28.7,
+     "n_names": 1
+    },
+    {
+     "entity": "Uber Technologies, Inc",
+     "etype": "10% Owner",
+     "value": 20.0,
+     "n_names": 1
+    },
+    {
+     "entity": "Sanders Nick",
+     "etype": "Director",
+     "value": 19.4,
+     "n_names": 1
+    },
+    {
+     "entity": "Egan David John",
+     "etype": "CFO & Executive Director",
+     "value": 18.2,
+     "n_names": 1
+    }
+   ],
+   "kpi": {
+    "total_value": 1017.8,
+    "n_stocks": 51,
+    "n_entities": 72,
+    "top_stock": "KARD"
+   }
+  },
+  "sell": {
+   "stocks": [
+    {
+     "symbol": "STNG",
+     "security": "Scorpio Tankers Inc.",
+     "value": 36913.1,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Okland Marianne",
+       "etype": "Director",
+       "value": 36913.1
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "KYMR",
+     "security": "Kymera Therapeutics, Inc.",
+     "value": 2188.8,
+     "n_actors": 3,
+     "actors": [
+      {
+       "entity": "Bvf Partners L P/Il",
+       "etype": "Director",
+       "value": 1910.3
+      },
+      {
+       "entity": "Booth Bruce",
+       "etype": "Director",
+       "value": 277.4
+      },
+      {
+       "entity": "Goodman Noah",
+       "etype": "Chief Business Officer",
+       "value": 1.1
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "SYRE",
+     "security": "Spyre Therapeutics, Inc.",
+     "value": 2004.9,
+     "n_actors": 3,
+     "actors": [
+      {
+       "entity": "Fairmount Funds Management Llc",
+       "etype": "Director",
+       "value": 1998.3
+      },
+      {
+       "entity": "Henderson Michael Thomas",
+       "etype": "Director",
+       "value": 4.0
+      },
+      {
+       "entity": "Burrows Scott L",
+       "etype": "Chief Financial Officer",
+       "value": 2.6
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "HNGE",
+     "security": "Hinge Health, Inc.",
+     "value": 1776.3,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Insight Holdings Group, Llc",
+       "etype": "10% Owner",
+       "value": 1771.7
+      },
+      {
+       "entity": "Pursley James",
+       "etype": "President",
+       "value": 4.6
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "DLTR",
+     "security": "DOLLAR TREE, INC.",
+     "value": 993.1,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Mantle Ridge Lp",
+       "etype": "Insider",
+       "value": 993.1
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "PTRN",
+     "security": "Pattern Group Inc.",
+     "value": 834.7,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Kl Pattern Holdings Lp",
+       "etype": "10% Owner",
+       "value": 834.7
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "AVGO",
+     "security": "Broadcom Inc.",
+     "value": 519.4,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Samueli Henry",
+       "etype": "Director",
+       "value": 500.0
+      },
+      {
+       "entity": "Brazeal Mark David",
+       "etype": "Chief Legal & Corp Affairs Ofc",
+       "value": 19.4
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "ROIV",
+     "security": "Roivant Sciences Ltd.",
+     "value": 391.8,
+     "n_actors": 5,
+     "actors": [
+      {
+       "entity": "Manchester Keith S",
+       "etype": "Director",
+       "value": 112.9
+      },
+      {
+       "entity": "Qvt Financial Lp",
+       "etype": "Insider",
+       "value": 98.7
+      },
+      {
+       "entity": "Gold Daniel Allen",
+       "etype": "Director",
+       "value": 98.7
+      },
+      {
+       "entity": "Sukhatme Mayukh",
+       "etype": "President & CIO",
+       "value": 68.2
+      },
+      {
+       "entity": "Venker Eric",
+       "etype": "President & Immunovant CEO",
+       "value": 13.3
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "PRM",
+     "security": "Perimeter Solutions, Inc.",
+     "value": 391.2,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Windacre Partnership Llc",
+       "etype": "10% Owner",
+       "value": 391.2
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "NVDA",
+     "security": "NVIDIA CORP",
+     "value": 372.0,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Stevens Mark A",
+       "etype": "Director",
+       "value": 372.0
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "WBI",
+     "security": "WaterBridge Infrastructure LLC",
+     "value": 263.7,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Devon Energy Corp/De",
+       "etype": "10% Owner",
+       "value": 263.7
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "ELVN",
+     "security": "Enliven Therapeutics, Inc.",
+     "value": 156.1,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Orbimed Advisors Llc",
+       "etype": "10% Owner",
+       "value": 156.1
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "CRWV",
+     "security": "CoreWeave, Inc.",
+     "value": 137.0,
+     "n_actors": 3,
+     "actors": [
+      {
+       "entity": "Intrator Michael N",
+       "etype": "10% Owner",
+       "value": 65.7
+      },
+      {
+       "entity": "Mcbee Brannin",
+       "etype": "Chief Development Officer",
+       "value": 55.6
+      },
+      {
+       "entity": "Venturo Brian M",
+       "etype": "Chief Strategy Officer",
+       "value": 15.6
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "OSCR",
+     "security": "Oscar Health, Inc.",
+     "value": 130.2,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Bertolini Mark T",
+       "etype": "Chief Executive Officer",
+       "value": 69.8
+      },
+      {
+       "entity": "Schlosser Mario",
+       "etype": "Director",
+       "value": 60.4
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "ORCL",
+     "security": "ORACLE CORP",
+     "value": 127.3,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Henley Jeffrey",
+       "etype": "Vice Chairman",
+       "value": 127.3
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "DBD",
+     "security": "DIEBOLD NIXDORF, Inc",
+     "value": 111.7,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Millstreet Capital Management Llc",
+       "etype": "10% Owner",
+       "value": 111.7
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "NESR",
+     "security": "National Energy Services Reunited Corp.",
+     "value": 102.9,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Al-Nowais Yousif Mohammed Ali Nasser",
+       "etype": "Director",
+       "value": 102.9
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "MU",
+     "security": "MICRON TECHNOLOGY INC",
+     "value": 92.7,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Mehrotra Sanjay",
+       "etype": "President and CEO",
+       "value": 92.7
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "NRDS",
+     "security": "NERDWALLET, INC.",
+     "value": 89.3,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Topline Capital Management, Llc",
+       "etype": "Insider",
+       "value": 53.6
+      },
+      {
+       "entity": "Topline Capital Partners, Lp",
+       "etype": "10% Owner",
+       "value": 35.7
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "VICR",
+     "security": "VICOR CORP",
+     "value": 85.8,
+     "n_actors": 3,
+     "actors": [
+      {
+       "entity": "Vinciarelli Patrizio",
+       "etype": "10% Owner",
+       "value": 81.3
+      },
+      {
+       "entity": "Schmidt James F",
+       "etype": "CFO, Treasurer, Secretary",
+       "value": 2.9
+      },
+      {
+       "entity": "D'Amico Andrew",
+       "etype": "Director",
+       "value": 1.6
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "CTRN",
+     "security": "Citi Trends Inc",
+     "value": 84.8,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Fund 1 Investments, Llc",
+       "etype": "10% Owner",
+       "value": 84.8
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "CRWD",
+     "security": "CrowdStrike Holdings, Inc.",
+     "value": 81.3,
+     "n_actors": 5,
+     "actors": [
+      {
+       "entity": "Kurtz George",
+       "etype": "PRESIDENT AND CEO",
+       "value": 44.7
+      },
+      {
+       "entity": "Sentonas Michael",
+       "etype": "PRESIDENT",
+       "value": 16.7
+      },
+      {
+       "entity": "Podbere Burt W.",
+       "etype": "CHIEF FINANCIAL OFFICER",
+       "value": 11.6
+      },
+      {
+       "entity": "Saha Anurag",
+       "etype": "CHIEF ACCOUNTING OFFICER",
+       "value": 4.4
+      },
+      {
+       "entity": "Gandhi Sameer K",
+       "etype": "Director",
+       "value": 3.9
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "GH",
+     "security": "Guardant Health, Inc.",
+     "value": 79.5,
+     "n_actors": 3,
+     "actors": [
+      {
+       "entity": "Talasaz Amirali",
+       "etype": "Co-Chief Executive Officer",
+       "value": 78.6
+      },
+      {
+       "entity": "Tariq Musa",
+       "etype": "Director",
+       "value": 0.5
+      },
+      {
+       "entity": "Potter Myrtle S",
+       "etype": "Director",
+       "value": 0.4
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "AGX",
+     "security": "ARGAN INC",
+     "value": 74.0,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Griffin William F Jr",
+       "etype": "Director",
+       "value": 74.0
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "UTHR",
+     "security": "UNITED THERAPEUTICS Corp",
+     "value": 71.6,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Rothblatt Martine A",
+       "etype": "Chairperson & CEO",
+       "value": 62.1
+      },
+      {
+       "entity": "Edgemond James",
+       "etype": "CFO AND TREASURER",
+       "value": 9.4
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "CRCL",
+     "security": "Circle Internet Group, Inc.",
+     "value": 70.9,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Chandhok Nikhil",
+       "etype": "Chief Product & Tech. Officer",
+       "value": 70.9
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "NET",
+     "security": "Cloudflare, Inc.",
+     "value": 69.9,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Prince Matthew",
+       "etype": "10% Owner",
+       "value": 69.9
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "AVAH",
+     "security": "Aveanna Healthcare Holdings, Inc.",
+     "value": 66.1,
+     "n_actors": 3,
+     "actors": [
+      {
+       "entity": "J.H. Whitney Equity Partners Vii, Llc",
+       "etype": "10% Owner",
+       "value": 34.1
+      },
+      {
+       "entity": "Vigano Paul R",
+       "etype": "10% Owner",
+       "value": 16.0
+      },
+      {
+       "entity": "Williams Robert M Jr",
+       "etype": "10% Owner",
+       "value": 16.0
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "BBY",
+     "security": "BEST BUY CO INC",
+     "value": 65.4,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Schulze Richard M",
+       "etype": "Insider",
+       "value": 65.4
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "SN",
+     "security": "SharkNinja, Inc.",
+     "value": 57.0,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Barrocas Mark",
+       "etype": "Chief Executive Officer",
+       "value": 57.0
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "YOU",
+     "security": "Clear Secure, Inc.",
+     "value": 52.5,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Seidman Becker Caryn",
+       "etype": "10% Owner",
+       "value": 26.3
+      },
+      {
+       "entity": "Alclear Investments, Llc",
+       "etype": "10% Owner",
+       "value": 26.3
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "WDAY",
+     "security": "Workday, Inc.",
+     "value": 49.4,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Duffield David A",
+       "etype": "10% Owner",
+       "value": 49.4
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "VSCO",
+     "security": "Victoria's Secret & Co.",
+     "value": 48.9,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Bbrc International Pte Ltd",
+       "etype": "10% Owner",
+       "value": 48.9
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "H",
+     "security": "Hyatt Hotels Corp",
+     "value": 47.7,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Hoplamazian Mark Samuel",
+       "etype": "See Remarks",
+       "value": 47.7
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "TTAN",
+     "security": "ServiceTitan, Inc.",
+     "value": 44.2,
+     "n_actors": 3,
+     "actors": [
+      {
+       "entity": "Iconiq Strategic Partners V, L.P.",
+       "etype": "10% Owner",
+       "value": 29.9
+      },
+      {
+       "entity": "Griffith William J.G.",
+       "etype": "10% Owner",
+       "value": 12.0
+      },
+      {
+       "entity": "Deeter Byron B",
+       "etype": "10% Owner",
+       "value": 2.3
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "DYN",
+     "security": "Dyne Therapeutics, Inc.",
+     "value": 43.6,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Rhodes Jason P",
+       "etype": "Director",
+       "value": 32.7
+      },
+      {
+       "entity": "Kersten Dirk",
+       "etype": "Director",
+       "value": 10.9
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "RVI",
+     "security": "Robinhood Ventures Fund I",
+     "value": 43.3,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Robinhood Markets, Inc.",
+       "etype": "10% Owner",
+       "value": 43.3
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "CACC",
+     "security": "CREDIT ACCEPTANCE CORP",
+     "value": 40.7,
+     "n_actors": 4,
+     "actors": [
+      {
+       "entity": "Kerber Erin J",
+       "etype": "Chief Legal Officer",
+       "value": 21.3
+      },
+      {
+       "entity": "Elliott Nicholas J",
+       "etype": "Chief Transformation Officer",
+       "value": 8.6
+      },
+      {
+       "entity": "Lum Jonathan",
+       "etype": "Chief Operating Officer",
+       "value": 7.2
+      },
+      {
+       "entity": "Martin Jay D",
+       "etype": "Chief Financial Officer",
+       "value": 3.6
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "CBRS",
+     "security": "Cerebras Systems Inc.",
+     "value": 37.2,
+     "n_actors": 4,
+     "actors": [
+      {
+       "entity": "Mallick Dhiraj",
+       "etype": "Chief Operating Officer",
+       "value": 24.1
+      },
+      {
+       "entity": "Feldman Andrew D.",
+       "etype": "CEO, President",
+       "value": 6.2
+      },
+      {
+       "entity": "Patel Yagnesh",
+       "etype": "Chief Accounting Officer",
+       "value": 3.5
+      },
+      {
+       "entity": "Lie Sean",
+       "etype": "Chief Technology Officer",
+       "value": 3.4
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "DDOG",
+     "security": "Datadog, Inc.",
+     "value": 36.7,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Le-Quoc Alexis",
+       "etype": "Chief Technology Officer",
+       "value": 19.1
+      },
+      {
+       "entity": "Agarwal Amit",
+       "etype": "Director",
+       "value": 17.6
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "ABNB",
+     "security": "Airbnb, Inc.",
+     "value": 35.5,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Blecharczyk Nathan",
+       "etype": "10% Owner",
+       "value": 35.5
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "TTMI",
+     "security": "TTM TECHNOLOGIES INC",
+     "value": 34.4,
+     "n_actors": 10,
+     "actors": [
+      {
+       "entity": "Powers Shawn A.",
+       "etype": "EVP, CHRO",
+       "value": 5.5
+      },
+      {
+       "entity": "Gridley Catherine A",
+       "etype": "EVP, A&D Sector President",
+       "value": 5.0
+      },
+      {
+       "entity": "Soder Douglas L",
+       "etype": "EVP, Commercial Sector Pres.",
+       "value": 4.9
+      },
+      {
+       "entity": "Weber Daniel J",
+       "etype": "EVP, CLO & Secretary",
+       "value": 4.8
+      },
+      {
+       "entity": "Boehle Daniel L.",
+       "etype": "EVP and CFO",
+       "value": 4.4
+      },
+      {
+       "entity": "Knecht Dale Martin",
+       "etype": "SVP Information Technology",
+       "value": 3.7
+      },
+      {
+       "entity": "Walsh James P",
+       "etype": "Chief Operating Officer",
+       "value": 2.1
+      },
+      {
+       "entity": "Clapprood Tom",
+       "etype": "PresA&D Interconnect Solutions",
+       "value": 1.8
+      },
+      {
+       "entity": "Farrell Robert P.",
+       "etype": "President C&C",
+       "value": 1.8
+      },
+      {
+       "entity": "Romo Elizabeth",
+       "etype": "Chief Accounting Officer",
+       "value": 0.3
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "PBF",
+     "security": "PBF Energy Inc.",
+     "value": 34.4,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Control Empresarial De Capitales S.A. De C.V.",
+       "etype": "10% Owner",
+       "value": 34.4
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "PLBY",
+     "security": "Playboy, Inc.",
+     "value": 30.0,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Fig Buyer Gp, Llc",
+       "etype": "10% Owner",
+       "value": 22.0
+      },
+      {
+       "entity": "Drawbridge Special Opportunities Fund Lp",
+       "etype": "10% Owner",
+       "value": 8.0
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "DELL",
+     "security": "Dell Technologies Inc.",
+     "value": 30.0,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Silver Lake Group, L.L.C.",
+       "etype": "10% Owner",
+       "value": 19.8
+      },
+      {
+       "entity": "Radakovich Lynn Vojvodich",
+       "etype": "Director",
+       "value": 10.1
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "APGE",
+     "security": "Apogee Therapeutics, Inc.",
+     "value": 28.2,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Henderson Michael Thomas",
+       "etype": "Chief Executive Officer",
+       "value": 21.2
+      },
+      {
+       "entity": "Dambkowski Carl",
+       "etype": "Chief Medical Officer",
+       "value": 7.0
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "JOE",
+     "security": "ST JOE Co",
+     "value": 27.7,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Berkowitz Bruce R",
+       "etype": "10% Owner",
+       "value": 27.7
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "FIX",
+     "security": "COMFORT SYSTEMS USA INC",
+     "value": 26.2,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Myers Franklin",
+       "etype": "Director",
+       "value": 26.2
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "LOCO",
+     "security": "El Pollo Loco Holdings, Inc.",
+     "value": 26.0,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Biglari, Sardar",
+       "etype": "10% Owner",
+       "value": 26.0
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "BKR",
+     "security": "Baker Hughes Co",
+     "value": 25.2,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Simonelli Lorenzo",
+       "etype": "Chairman, President and CEO",
+       "value": 21.2
+      },
+      {
+       "entity": "Borras Maria C",
+       "etype": "Chief Growth & Experience Ofcr",
+       "value": 4.0
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "NTRA",
+     "security": "Natera, Inc.",
+     "value": 25.2,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Rabinowitz Daniel",
+       "etype": "SEC. AND CHIEF LEGAL OFFICER",
+       "value": 16.9
+      },
+      {
+       "entity": "Rosenman Herm",
+       "etype": "Director",
+       "value": 8.3
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "ECAT",
+     "security": "BlackRock ESG Capital Allocation Term Trust",
+     "value": 21.0,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Saba Capital Management, L.P.",
+       "etype": "10% Owner",
+       "value": 21.0
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "IONS",
+     "security": "IONIS PHARMACEUTICALS INC",
+     "value": 20.9,
+     "n_actors": 5,
+     "actors": [
+      {
+       "entity": "Monia Brett P",
+       "etype": "Chief Executive Officer",
+       "value": 13.7
+      },
+      {
+       "entity": "Schneider Eugene",
+       "etype": "EVP, Chf Clinical Develop Ofcr",
+       "value": 4.2
+      },
+      {
+       "entity": "Swayze Eric",
+       "etype": "EVP Research",
+       "value": 1.7
+      },
+      {
+       "entity": "Baroldi Joseph",
+       "etype": "EVP, Chief Business Officer",
+       "value": 0.9
+      },
+      {
+       "entity": "O'Neil Patrick R.",
+       "etype": "EVP CLO & General Counsel",
+       "value": 0.5
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "TRLV",
+     "security": "Trulieve Cannabis Corp.",
+     "value": 20.3,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Rivers Kim A.",
+       "etype": "10% Owner",
+       "value": 20.3
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "BEAM",
+     "security": "Beam Therapeutics Inc.",
+     "value": 20.1,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Fmr Llc",
+       "etype": "10% Owner",
+       "value": 20.1
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "ASX",
+     "security": "ASE Technology Holding Co., Ltd.",
+     "value": 20.0,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Uang Du-Tsuen",
+       "etype": "Chief Administration Officer",
+       "value": 20.0
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "POWL",
+     "security": "POWELL INDUSTRIES INC",
+     "value": 20.0,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Powell Thomas W",
+       "etype": "10% Owner",
+       "value": 20.0
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "CECO",
+     "security": "CECO ENVIRONMENTAL CORP",
+     "value": 19.0,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Dezwirek Jason",
+       "etype": "Director",
+       "value": 13.2
+      },
+      {
+       "entity": "Johansson Peter K.",
+       "etype": "SVP, Chief Financial Officer",
+       "value": 5.8
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "LFST",
+     "security": "LifeStance Health Group, Inc.",
+     "value": 18.1,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Bessler Robert",
+       "etype": "Director",
+       "value": 18.1
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "V",
+     "security": "VISA INC.",
+     "value": 17.9,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Mcinerney Ryan",
+       "etype": "Chief Executive Officer",
+       "value": 17.9
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "HSY",
+     "security": "HERSHEY CO",
+     "value": 17.7,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Hershey Trust Co Trustee In Trust For Milton Hershey School",
+       "etype": "10% Owner",
+       "value": 17.7
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "PACS",
+     "security": "PACS Group, Inc.",
+     "value": 17.4,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Hancock Mark",
+       "etype": "10% Owner",
+       "value": 16.2
+      },
+      {
+       "entity": "Lewis Michelle Renee",
+       "etype": "Chief Accounting Officer",
+       "value": 1.2
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "RPRX",
+     "security": "Royalty Pharma plc",
+     "value": 17.3,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Hite Christopher",
+       "etype": "EVP & Chairman, Partnering",
+       "value": 16.3
+      },
+      {
+       "entity": "Urist Marshall",
+       "etype": "EVP, Research & Investments",
+       "value": 1.0
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "CBLL",
+     "security": "Ceribell, Inc.",
+     "value": 16.3,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Tpg Gp A, Llc",
+       "etype": "Insider",
+       "value": 16.3
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "AFRM",
+     "security": "Affirm Holdings, Inc.",
+     "value": 16.0,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Linford Michael",
+       "etype": "Chief Operating Officer",
+       "value": 16.0
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "ETSY",
+     "security": "ETSY INC",
+     "value": 15.4,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Silverman Josh",
+       "etype": "Director",
+       "value": 15.4
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "NTAP",
+     "security": "NetApp, Inc.",
+     "value": 15.3,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Cernuda Cesar",
+       "etype": "President",
+       "value": 15.3
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "LQDA",
+     "security": "Liquidia Corp",
+     "value": 15.1,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Bloch Stephen M",
+       "etype": "Director",
+       "value": 15.1
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "ANET",
+     "security": "Arista Networks, Inc.",
+     "value": 14.9,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Duda Kenneth",
+       "etype": "President and CTO",
+       "value": 14.9
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "CRDO",
+     "security": "Credo Technology Group Holding Ltd",
+     "value": 14.9,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Cheng Chi Fung",
+       "etype": "Chief Technology Officer",
+       "value": 14.9
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "FNF",
+     "security": "Fidelity National Financial, Inc.",
+     "value": 14.3,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Dhanidina Halim",
+       "etype": "Director",
+       "value": 8.0
+      },
+      {
+       "entity": "Sadowski Peter T",
+       "etype": "EVP, Chief Legal Officer",
+       "value": 6.3
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "WYY",
+     "security": "WIDEPOINT CORP",
+     "value": 13.7,
+     "n_actors": 4,
+     "actors": [
+      {
+       "entity": "Holloway Jason",
+       "etype": "EVP and Chief Sales and Market",
+       "value": 6.3
+      },
+      {
+       "entity": "Sparling Ian",
+       "etype": "CEO, Soft-Ex",
+       "value": 5.2
+      },
+      {
+       "entity": "Dzyak Todd",
+       "etype": "COO",
+       "value": 1.1
+      },
+      {
+       "entity": "George Robert J",
+       "etype": "Chief Financial Officer",
+       "value": 1.1
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "LEA",
+     "security": "LEAR CORP",
+     "value": 13.5,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Scott Raymond E",
+       "etype": "President and CEO",
+       "value": 13.5
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "SEZL",
+     "security": "Sezzle Inc.",
+     "value": 13.1,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Paradis Paul",
+       "etype": "Director & President",
+       "value": 8.5
+      },
+      {
+       "entity": "Brading Lee Dickson",
+       "etype": "Chief Financial Officer",
+       "value": 4.6
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "XYZ",
+     "security": "Block, Inc.",
+     "value": 13.0,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Eisen Anthony Mathew",
+       "etype": "Director",
+       "value": 13.0
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "ARX",
+     "security": "Accelerant Holdings",
+     "value": 12.8,
+     "n_actors": 3,
+     "actors": [
+      {
+       "entity": "Oneill Francis James",
+       "etype": "Co-Founder, Chief U/W Officer",
+       "value": 7.7
+      },
+      {
+       "entity": "Radke Jeffrey L",
+       "etype": "10% Owner",
+       "value": 4.2
+      },
+      {
+       "entity": "Hasley Nancy",
+       "etype": "Director",
+       "value": 0.9
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "SE",
+     "security": "Sea Ltd",
+     "value": 12.7,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Ye Gang",
+       "etype": "COO",
+       "value": 10.9
+      },
+      {
+       "entity": "Hou Tianyu",
+       "etype": "CFO",
+       "value": 1.8
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "LWAY",
+     "security": "Lifeway Foods, Inc.",
+     "value": 12.6,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Smolyansky Edward",
+       "etype": "10% Owner",
+       "value": 7.5
+      },
+      {
+       "entity": "Smolyansky Ludmila",
+       "etype": "Insider",
+       "value": 5.1
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "ELF",
+     "security": "e.l.f. Beauty, Inc.",
+     "value": 11.9,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Amin Tarang",
+       "etype": "Chief Executive Officer",
+       "value": 7.8
+      },
+      {
+       "entity": "Hartnett Jennifer Catherine",
+       "etype": "Chief Commercial Officer",
+       "value": 4.1
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "CDT",
+     "security": "CDT Equity Inc.",
+     "value": 11.8,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Taylor Mark Andrew",
+       "etype": "10% Owner",
+       "value": 11.8
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "RLAY",
+     "security": "Relay Therapeutics, Inc.",
+     "value": 10.5,
+     "n_actors": 3,
+     "actors": [
+      {
+       "entity": "Catinazzo Thomas",
+       "etype": "Chief Financial Officer",
+       "value": 6.4
+      },
+      {
+       "entity": "Bergstrom Donald A",
+       "etype": "President, R&D",
+       "value": 3.2
+      },
+      {
+       "entity": "Rahmer Peter",
+       "etype": "See remarks",
+       "value": 1.0
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "RSKD",
+     "security": "RISKIFIED LTD.",
+     "value": 10.3,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Shachar Erez",
+       "etype": "Director",
+       "value": 9.7
+      },
+      {
+       "entity": "Kumaraswami Ravi",
+       "etype": "Pres. Worldwide Field Ops.",
+       "value": 0.7
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "AFL",
+     "security": "AFLAC INC",
+     "value": 10.2,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Japan Post Holdings Co., Ltd.",
+       "etype": "10% Owner",
+       "value": 7.3
+      },
+      {
+       "entity": "Moskowitz Joseph L",
+       "etype": "Director",
+       "value": 2.9
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "IRM",
+     "security": "IRON MOUNTAIN INC",
+     "value": 10.2,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Meaney William L",
+       "etype": "President and CEO",
+       "value": 9.5
+      },
+      {
+       "entity": "Kidd Mark",
+       "etype": "EVP, GM Data Centers & ALM",
+       "value": 0.8
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "SEIC",
+     "security": "SEI INVESTMENTS CO",
+     "value": 10.0,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "West Alfred P Jr",
+       "etype": "Insider",
+       "value": 10.0
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "AXON",
+     "security": "AXON ENTERPRISE, INC.",
+     "value": 10.0,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Smith Patrick W",
+       "etype": "CHIEF EXECUTIVE OFFICER",
+       "value": 10.0
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "PTCT",
+     "security": "PTC THERAPEUTICS, INC.",
+     "value": 9.7,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Almstead Neil Gregory",
+       "etype": "CHIEF TECHNICAL OPS OFFICER",
+       "value": 9.7
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "ADPT",
+     "security": "Adaptive Biotechnologies Corp",
+     "value": 9.3,
+     "n_actors": 3,
+     "actors": [
+      {
+       "entity": "Benzeno Sharon",
+       "etype": "Chief Commercial Ofc Imm Med",
+       "value": 7.0
+      },
+      {
+       "entity": "Griffin Michelle Renee",
+       "etype": "Director",
+       "value": 2.1
+      },
+      {
+       "entity": "Bobulsky Susan",
+       "etype": "Chief Commercial Officer, MRD",
+       "value": 0.2
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "MLYS",
+     "security": "Mineralys Therapeutics, Inc.",
+     "value": 9.3,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Warren Eric",
+       "etype": "Chief Commercial Officer",
+       "value": 5.4
+      },
+      {
+       "entity": "Congleton Jon",
+       "etype": "Chief Executive Officer",
+       "value": 3.9
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "DCOM",
+     "security": "Dime Commercial Bancshares, Inc. /NY/",
+     "value": 8.9,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Basswood Capital Management, L.L.C.",
+       "etype": "Director",
+       "value": 8.9
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "PRVA",
+     "security": "Privia Health Group, Inc.",
+     "value": 8.5,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Morris Matthew Shawn",
+       "etype": "Director",
+       "value": 7.7
+      },
+      {
+       "entity": "Mountcastle David",
+       "etype": "EVP & Chief Financial Officer",
+       "value": 0.9
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "ATI",
+     "security": "ATI INC",
+     "value": 8.3,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Fields Kimberly A",
+       "etype": "Chair, President and CEO",
+       "value": 8.3
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "UTI",
+     "security": "UNIVERSAL TECHNICAL INSTITUTE INC",
+     "value": 8.2,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Grant Jerome Alan",
+       "etype": "Chief Executive Officer",
+       "value": 7.8
+      },
+      {
+       "entity": "Prehn Kevin",
+       "etype": "Concorde Division President",
+       "value": 0.4
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "ENVA",
+     "security": "Enova International, Inc.",
+     "value": 8.1,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Tebbe Mark",
+       "etype": "Director",
+       "value": 8.1
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "SNX",
+     "security": "TD SYNNEX CORP",
+     "value": 8.0,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Polk Dennis",
+       "etype": "Chair, Hyve Solutions",
+       "value": 8.0
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "WRBY",
+     "security": "Warby Parker Inc.",
+     "value": 7.9,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Gilboa David Abraham",
+       "etype": "Co-Chief Executive Officer",
+       "value": 7.2
+      },
+      {
+       "entity": "Raider Jeffrey Jacob",
+       "etype": "Director",
+       "value": 0.7
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "CYTK",
+     "security": "CYTOKINETICS INC",
+     "value": 7.5,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Lee Sung",
+       "etype": "EVP, Chief Financial Officer",
+       "value": 6.9
+      },
+      {
+       "entity": "Malik Fady Ibraham",
+       "etype": "EVP Research & Development",
+       "value": 0.6
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "IRON",
+     "security": "Disc Medicine, Inc.",
+     "value": 7.5,
+     "n_actors": 3,
+     "actors": [
+      {
+       "entity": "Quisel John D",
+       "etype": "Chief Executive Officer",
+       "value": 4.8
+      },
+      {
+       "entity": "Yu Jonathan Yen-Wen",
+       "etype": "Chief Operating Officer",
+       "value": 1.4
+      },
+      {
+       "entity": "Khara Rahul",
+       "etype": "Chief Legal Officer",
+       "value": 1.3
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "RYTM",
+     "security": "RHYTHM PHARMACEUTICALS, INC.",
+     "value": 7.4,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Tetrault Lynn A.",
+       "etype": "Director",
+       "value": 7.4
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "VST",
+     "security": "Vistra Corp.",
+     "value": 7.2,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Acosta Arcilia",
+       "etype": "Director",
+       "value": 5.0
+      },
+      {
+       "entity": "Sult John R",
+       "etype": "Director",
+       "value": 2.2
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "PRAX",
+     "security": "Praxis Precision Medicines, Inc.",
+     "value": 7.2,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Desimone Jill",
+       "etype": "Director",
+       "value": 7.2
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "RVMD",
+     "security": "Revolution Medicines, Inc.",
+     "value": 6.7,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Anders Jack",
+       "etype": "Chief Financial Officer",
+       "value": 6.7
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "IMVT",
+     "security": "Immunovant, Inc.",
+     "value": 6.6,
+     "n_actors": 4,
+     "actors": [
+      {
+       "entity": "Stout Jay S",
+       "etype": "Chief Technology Officer",
+       "value": 3.1
+      },
+      {
+       "entity": "Van Tuyl Christopher",
+       "etype": "Chief Legal Officer",
+       "value": 1.4
+      },
+      {
+       "entity": "Gloria Melanie",
+       "etype": "Chief Operating Officer",
+       "value": 1.4
+      },
+      {
+       "entity": "Girao Tiago",
+       "etype": "Chief Financial Officer",
+       "value": 0.8
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "TWST",
+     "security": "Twist Bioscience Corp",
+     "value": 6.4,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Leproust Emily M.",
+       "etype": "Chief Executive Officer",
+       "value": 3.9
+      },
+      {
+       "entity": "Cho Dennis",
+       "etype": "See Remarks",
+       "value": 2.5
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "SNOW",
+     "security": "Snowflake Inc.",
+     "value": 6.4,
+     "n_actors": 3,
+     "actors": [
+      {
+       "entity": "Beaulier Jonathan Mead",
+       "etype": "Chief Revenue Officer",
+       "value": 4.3
+      },
+      {
+       "entity": "Kleinerman Christian",
+       "etype": "EVP, Product Management",
+       "value": 1.2
+      },
+      {
+       "entity": "Ho Emily",
+       "etype": "Chief Accounting Officer",
+       "value": 0.9
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "PINS",
+     "security": "PINTEREST, INC.",
+     "value": 6.3,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Silbermann Benjamin",
+       "etype": "10% Owner",
+       "value": 5.8
+      },
+      {
+       "entity": "Walcott Wanjiku Juanita",
+       "etype": "Chief Legal & Bus Affairs Ofc.",
+       "value": 0.6
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "BBIO",
+     "security": "BridgeBio Pharma, Inc.",
+     "value": 6.2,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Cook Jennifer E.",
+       "etype": "Director",
+       "value": 5.5
+      },
+      {
+       "entity": "Valantine Hannah",
+       "etype": "Director",
+       "value": 0.7
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "ALAB",
+     "security": "Astera Labs, Inc.",
+     "value": 6.2,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Dyckerhoff Stefan A",
+       "etype": "Director",
+       "value": 5.6
+      },
+      {
+       "entity": "Mayer Bethany",
+       "etype": "Director",
+       "value": 0.5
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "SUI",
+     "security": "SUN COMMUNITIES INC",
+     "value": 6.0,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Shiffman Gary A",
+       "etype": "Director",
+       "value": 6.0
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "QURE",
+     "security": "uniQure N.V.",
+     "value": 5.9,
+     "n_actors": 3,
+     "actors": [
+      {
+       "entity": "Kapusta Matthew C",
+       "etype": "CEO, Managing Director",
+       "value": 3.5
+      },
+      {
+       "entity": "Abi-Saab Walid",
+       "etype": "Chief Medical Officer",
+       "value": 1.4
+      },
+      {
+       "entity": "Kaye Jack",
+       "etype": "Director",
+       "value": 1.0
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "ATLC",
+     "security": "Atlanticus Holdings Corp",
+     "value": 5.4,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Mccamey William",
+       "etype": "Chief Financial Officer",
+       "value": 3.2
+      },
+      {
+       "entity": "Howard Jeffrey A.",
+       "etype": "President & CEO",
+       "value": 2.2
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "RIOT",
+     "security": "Riot Platforms, Inc.",
+     "value": 5.3,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Les Jason",
+       "etype": "CEO",
+       "value": 3.8
+      },
+      {
+       "entity": "Werner Ryan D.",
+       "etype": "SVP, CAO",
+       "value": 1.5
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "LZB",
+     "security": "LA-Z-BOY INC",
+     "value": 5.2,
+     "n_actors": 4,
+     "actors": [
+      {
+       "entity": "Whittington Melinda D",
+       "etype": "President & CEO",
+       "value": 2.7
+      },
+      {
+       "entity": "Richmond Raphaell Z.",
+       "etype": "VP, GC & Chief Compliance Off",
+       "value": 1.1
+      },
+      {
+       "entity": "Leggett Michael Adam",
+       "etype": "Sr VP & Chief Supply Chain Off",
+       "value": 0.7
+      },
+      {
+       "entity": "Mccurry Jennifer Lynn",
+       "etype": "Chief Accounting Officer",
+       "value": 0.6
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "DFTX",
+     "security": "Definium Therapeutics, Inc.",
+     "value": 5.2,
+     "n_actors": 5,
+     "actors": [
+      {
+       "entity": "Barrow Robert",
+       "etype": "Chief Executive Officer",
+       "value": 2.6
+      },
+      {
+       "entity": "Sullivan Mark",
+       "etype": "Chief Legal Officer",
+       "value": 1.2
+      },
+      {
+       "entity": "Karlin Daniel",
+       "etype": "Chief Medical Officer",
+       "value": 0.9
+      },
+      {
+       "entity": "Roberts Brandi",
+       "etype": "Chief Financial Officer",
+       "value": 0.3
+      },
+      {
+       "entity": "Wiley Matthew T.",
+       "etype": "Chief Commercial Officer",
+       "value": 0.3
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "LTH",
+     "security": "Life Time Group Holdings, Inc.",
+     "value": 5.2,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Singh Ritadhwaja Jebens",
+       "etype": "EVP & CHIEF DIGITAL OFFICER",
+       "value": 5.2
+      }
+     ],
+     "significant": true
+    },
+    {
+     "symbol": "QLYS",
+     "security": "QUALYS, INC.",
+     "value": 4.9,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Thakar Sumedh S",
+       "etype": "CEO & PRESIDENT",
+       "value": 4.9
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "KRRO",
+     "security": "Korro Bio, Inc.",
+     "value": 4.8,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Formela Jean Francois",
+       "etype": "Director",
+       "value": 4.8
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "INSM",
+     "security": "INSMED Inc",
+     "value": 4.8,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Lewis William",
+       "etype": "Chair and CEO",
+       "value": 4.4
+      },
+      {
+       "entity": "Smith Michael Alexander",
+       "etype": "Chief Legal Officer",
+       "value": 0.3
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "BABA",
+     "security": "Alibaba Group Holding Ltd",
+     "value": 4.6,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Xu Hong",
+       "etype": "Chief Financial Officer",
+       "value": 4.3
+      },
+      {
+       "entity": "Jiang Fan (Fj)",
+       "etype": "CEO of Business Group",
+       "value": 0.3
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "AAL",
+     "security": "American Airlines Group Inc.",
+     "value": 4.4,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Seymour David",
+       "etype": "EVP Chief Operating Officer",
+       "value": 4.4
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "STRL",
+     "security": "STERLING INFRASTRUCTURE, INC.",
+     "value": 4.4,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Wolf Mark D.",
+       "etype": "General Counsel, Corporate Sec",
+       "value": 4.4
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "BETA",
+     "security": "BETA Technologies, Inc.",
+     "value": 4.3,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Clark Kyle",
+       "etype": "SEE REMARKS",
+       "value": 4.3
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "PFGC",
+     "security": "Performance Food Group Co",
+     "value": 4.3,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Holm George L",
+       "etype": "See Remarks",
+       "value": 3.7
+      },
+      {
+       "entity": "Davis Erika T",
+       "etype": "See Remarks",
+       "value": 0.6
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "CDRE",
+     "security": "Cadre Holdings, Inc.",
+     "value": 4.1,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Kanders Warren B",
+       "etype": "10% Owner",
+       "value": 4.1
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "GLBE",
+     "security": "Global-E Online Ltd.",
+     "value": 4.0,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Tamari Shahar",
+       "etype": "COO",
+       "value": 3.1
+      },
+      {
+       "entity": "Debbi Nir",
+       "etype": "President",
+       "value": 0.8
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "PSNL",
+     "security": "Personalis, Inc.",
+     "value": 4.0,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Hall Christopher M",
+       "etype": "Chief Executive Officer",
+       "value": 2.6
+      },
+      {
+       "entity": "Tachibana Aaron",
+       "etype": "CFO AND COO",
+       "value": 1.4
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "VLO",
+     "security": "VALERO ENERGY CORP/TX",
+     "value": 4.0,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Fisher Eric A",
+       "etype": "SVP",
+       "value": 4.0
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "MATX",
+     "security": "Matson, Inc.",
+     "value": 3.9,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Cox Matthew J",
+       "etype": "Chairman & CEO",
+       "value": 3.9
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "NVMI",
+     "security": "NOVA LTD.",
+     "value": 3.8,
+     "n_actors": 4,
+     "actors": [
+      {
+       "entity": "Oppenhaim Eitan",
+       "etype": "Director",
+       "value": 1.5
+      },
+      {
+       "entity": "Sagiv Sarit",
+       "etype": "Director",
+       "value": 0.9
+      },
+      {
+       "entity": "Simon Zehava",
+       "etype": "Director",
+       "value": 0.9
+      },
+      {
+       "entity": "Garty Yaniv",
+       "etype": "Director",
+       "value": 0.4
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "AIZ",
+     "security": "ASSURANT, INC.",
+     "value": 3.7,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Lonergan Robert",
+       "etype": "EVP, CSTO",
+       "value": 3.7
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "AFG",
+     "security": "AMERICAN FINANCIAL GROUP INC",
+     "value": 3.7,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Thompson David Lawrence Jr",
+       "etype": "President of Subsidiary",
+       "value": 3.1
+      },
+      {
+       "entity": "Gillis Michelle A",
+       "etype": "Senior Vice President",
+       "value": 0.6
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "LQDT",
+     "security": "LIQUIDITY SERVICES INC",
+     "value": 3.7,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Mateus-Tique Jaime",
+       "etype": "Director",
+       "value": 2.9
+      },
+      {
+       "entity": "Daunt John",
+       "etype": "EVP, Chief Commercial Officer",
+       "value": 0.8
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "AUGO",
+     "security": "Aura Minerals Inc.",
+     "value": 3.7,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Rosa Luvizotto Glauber",
+       "etype": "Chief Operating Officer",
+       "value": 3.7
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "EQH",
+     "security": "Equitable Holdings, Inc.",
+     "value": 3.6,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Pearson Mark",
+       "etype": "President and CEO",
+       "value": 3.6
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "GL",
+     "security": "GLOBE LIFE INC.",
+     "value": 3.6,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Alston Cheryl",
+       "etype": "Director",
+       "value": 3.0
+      },
+      {
+       "entity": "Skarjune Dolores L",
+       "etype": "EVP and Chief Admin. Officer",
+       "value": 0.7
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "STRS",
+     "security": "STRATUS PROPERTIES INC",
+     "value": 3.6,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Oasis Management Co Ltd.",
+       "etype": "10% Owner",
+       "value": 3.6
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "PGR",
+     "security": "PROGRESSIVE CORP/OH/",
+     "value": 3.5,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Kelly Jeffrey D",
+       "etype": "Director",
+       "value": 3.0
+      },
+      {
+       "entity": "Broz Steven",
+       "etype": "Chief Information Officer",
+       "value": 0.5
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "CDNS",
+     "security": "CADENCE DESIGN SYSTEMS INC",
+     "value": 3.5,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Teng Chin-Chi",
+       "etype": "Sr. Vice President",
+       "value": 3.5
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "HOV",
+     "security": "HOVNANIAN ENTERPRISES INC",
+     "value": 3.5,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Hovnanian Ara K",
+       "etype": "10% Owner",
+       "value": 3.2
+      },
+      {
+       "entity": "Sorsby J Larry",
+       "etype": "Director",
+       "value": 0.3
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "UMC",
+     "security": "UNITED MICROELECTRONICS CORP",
+     "value": 3.4,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Hu Che-Jen",
+       "etype": "Vice President",
+       "value": 3.4
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "OMDA",
+     "security": "Omada Health, Inc.",
+     "value": 3.3,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Cook Steven L.",
+       "etype": "Chief Financial Officer",
+       "value": 2.7
+      },
+      {
+       "entity": "Duffy Sean P.",
+       "etype": "Chief Executive Officer",
+       "value": 0.6
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "NBIX",
+     "security": "NEUROCRINE BIOSCIENCES INC",
+     "value": 3.3,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Lippoldt Darin",
+       "etype": "Chief Legal Officer",
+       "value": 3.3
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "ONC",
+     "security": "BeOne Medicines Ltd.",
+     "value": 3.2,
+     "n_actors": 3,
+     "actors": [
+      {
+       "entity": "Oyler John",
+       "etype": "Chief Executive Officer",
+       "value": 1.9
+      },
+      {
+       "entity": "Wu Xiaobin",
+       "etype": "President and COO",
+       "value": 0.7
+      },
+      {
+       "entity": "Wang Lai",
+       "etype": "President, Global Head of R&D",
+       "value": 0.6
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "CASY",
+     "security": "CASEYS GENERAL STORES INC",
+     "value": 3.2,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Lindsey Katrina S",
+       "etype": "Chief Legal Officer",
+       "value": 3.2
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "CCK",
+     "security": "CROWN HOLDINGS, INC.",
+     "value": 3.1,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Donahue Timothy J",
+       "etype": "President & CEO",
+       "value": 3.1
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "NAVN",
+     "security": "Navan, Inc.",
+     "value": 3.1,
+     "n_actors": 3,
+     "actors": [
+      {
+       "entity": "Cohen Ariel M.",
+       "etype": "Chairperson and CEO",
+       "value": 1.7
+      },
+      {
+       "entity": "Twig Ilan Ezra",
+       "etype": "Chief Technology Officer",
+       "value": 1.0
+      },
+      {
+       "entity": "Lightspeed Venture Partners Select Ii, L.P.",
+       "etype": "10% Owner",
+       "value": 0.3
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "SJM",
+     "security": "J M SMUCKER Co",
+     "value": 3.0,
+     "n_actors": 3,
+     "actors": [
+      {
+       "entity": "Penrose Jill R",
+       "etype": "Chief People Officer",
+       "value": 1.2
+      },
+      {
+       "entity": "Knudsen Jeannette L",
+       "etype": "Chief Legal Officer",
+       "value": 1.0
+      },
+      {
+       "entity": "Marshall Tucker H",
+       "etype": "Chief Financial Officer",
+       "value": 0.8
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "VCEL",
+     "security": "Vericel Corp",
+     "value": 3.0,
+     "n_actors": 4,
+     "actors": [
+      {
+       "entity": "Flynn Sean C.",
+       "etype": "Chief Legal Officer",
+       "value": 1.4
+      },
+      {
+       "entity": "Hopper Jonathan Mark",
+       "etype": "Chief Medical Officer",
+       "value": 0.9
+      },
+      {
+       "entity": "Mara Joseph Anthony Jr",
+       "etype": "Chief Financial Officer",
+       "value": 0.4
+      },
+      {
+       "entity": "Siegal Jonathan",
+       "etype": "Principal Accounting Officer",
+       "value": 0.2
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "HIMS",
+     "security": "Hims & Hers Health, Inc.",
+     "value": 2.9,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Carroll Patrick Harrison",
+       "etype": "Chief Medical Officer",
+       "value": 1.7
+      },
+      {
+       "entity": "Okupe Oluyemi",
+       "etype": "Chief Financial Officer",
+       "value": 1.2
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "PANW",
+     "security": "Palo Alto Networks Inc",
+     "value": 2.9,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Golechha Dipak",
+       "etype": "EVP, Chief Financial Officer",
+       "value": 2.9
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "CAPR",
+     "security": "CAPRICOR THERAPEUTICS, INC.",
+     "value": 2.9,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Krasney Karen",
+       "etype": "EVP, GENERAL COUNSEL",
+       "value": 1.5
+      },
+      {
+       "entity": "Bergmann Anthony",
+       "etype": "CHIEF FINANCIAL OFFICER",
+       "value": 1.5
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "NUVB",
+     "security": "Nuvation Bio Inc.",
+     "value": 2.8,
+     "n_actors": 3,
+     "actors": [
+      {
+       "entity": "Markel Stacy",
+       "etype": "CHIEF PEOPLE OFFICER",
+       "value": 1.5
+      },
+      {
+       "entity": "Wentworth Kerry",
+       "etype": "CHIEF REGULATORY OFFICER",
+       "value": 0.8
+      },
+      {
+       "entity": "Sauvage Philippe",
+       "etype": "Chief Financial Officer",
+       "value": 0.6
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "AHR",
+     "security": "American Healthcare REIT, Inc.",
+     "value": 2.8,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Peay Brian",
+       "etype": "Chief Financial Officer",
+       "value": 2.5
+      },
+      {
+       "entity": "Foster Mark E.",
+       "etype": "EVP, GC & Secretary",
+       "value": 0.2
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "TWLO",
+     "security": "TWILIO INC",
+     "value": 2.8,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Shipchandler Khozema",
+       "etype": "Chief Executive Officer",
+       "value": 2.8
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "MLTX",
+     "security": "MoonLake Immunotherapeutics",
+     "value": 2.7,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Bodenstedt Matthias",
+       "etype": "Chief Financial Officer",
+       "value": 1.7
+      },
+      {
+       "entity": "Santos Da Silva Jorge",
+       "etype": "Chief Executive Officer",
+       "value": 1.0
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "PCVX",
+     "security": "Vaxcyte, Inc.",
+     "value": 2.7,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Pickering Grant",
+       "etype": "CHIEF EXECUTIVE OFFICER",
+       "value": 2.7
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "HTFL",
+     "security": "Heartflow, Inc.",
+     "value": 2.7,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Farquhar John C.M.",
+       "etype": "Chief Executive Officer",
+       "value": 2.7
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "IDT",
+     "security": "IDT CORP",
+     "value": 2.7,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Fischer Marcelo",
+       "etype": "Chief Financial Officer",
+       "value": 2.7
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "FDMT",
+     "security": "4D Molecular Therapeutics, Inc.",
+     "value": 2.6,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Kirn David",
+       "etype": "See Remarks",
+       "value": 2.4
+      },
+      {
+       "entity": "Bizily Scott",
+       "etype": "Chief Legal Officer",
+       "value": 0.2
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "TLS",
+     "security": "TELOS CORP",
+     "value": 2.6,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Bendza Gary Mark",
+       "etype": "EVP, CFO",
+       "value": 2.2
+      },
+      {
+       "entity": "Jacobs Bradley W.",
+       "etype": "Director",
+       "value": 0.5
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "NTES",
+     "security": "NetEase, Inc.",
+     "value": 2.6,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Boltz Paul William Jr",
+       "etype": "General Counsel",
+       "value": 2.6
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "SIMO",
+     "security": "Silicon Motion Technology CORP",
+     "value": 2.5,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Lin Kuan-Ming",
+       "etype": "Director",
+       "value": 1.9
+      },
+      {
+       "entity": "Shieh Han-Ping",
+       "etype": "Director",
+       "value": 0.7
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "DFH",
+     "security": "Dream Finders Homes, Inc.",
+     "value": 2.5,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Lovett William Radford Ii",
+       "etype": "10% Owner",
+       "value": 2.5
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "GLUE",
+     "security": "Monte Rosa Therapeutics, Inc.",
+     "value": 2.5,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Janku Filip",
+       "etype": "Chief Medical Officer",
+       "value": 2.0
+      },
+      {
+       "entity": "Manning Anthony M.",
+       "etype": "Director",
+       "value": 0.5
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "NHC",
+     "security": "NATIONAL HEALTHCARE CORP",
+     "value": 2.4,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Hassan Emil E",
+       "etype": "Director",
+       "value": 2.4
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "NAMS",
+     "security": "NewAmsterdam Pharma Co N.V.",
+     "value": 2.4,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Kooij Louise Frederika",
+       "etype": "Chief Accounting Officer",
+       "value": 2.4
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "GFF",
+     "security": "GRIFFON CORP",
+     "value": 2.4,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Mehmel Robert F",
+       "etype": "President and COO",
+       "value": 2.4
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "PHVS",
+     "security": "Pharvaris N.V.",
+     "value": 2.4,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Lu Peng",
+       "etype": "Chief Medical Officer",
+       "value": 2.0
+      },
+      {
+       "entity": "Lesage Anne",
+       "etype": "Chief Early Development",
+       "value": 0.3
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "CBIO",
+     "security": "CRESCENT BIOPHARMA, INC.",
+     "value": 2.3,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Brumm Joshua T",
+       "etype": "Chief Executive Officer",
+       "value": 1.5
+      },
+      {
+       "entity": "Mcneill Jonathan",
+       "etype": "President and COO",
+       "value": 0.7
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "CRUS",
+     "security": "CIRRUS LOGIC, INC.",
+     "value": 2.3,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Brannan Andrew",
+       "etype": "EVP, Worldwide Sales",
+       "value": 1.9
+      },
+      {
+       "entity": "Baumgartner Jeffrey W",
+       "etype": "EVP, R&D",
+       "value": 0.4
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "CDNA",
+     "security": "CareDx, Inc.",
+     "value": 2.3,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Hanna John Walter Jr",
+       "etype": "President and CEO",
+       "value": 2.3
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "IMNM",
+     "security": "Immunome Inc.",
+     "value": 2.2,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Lechleider Robert",
+       "etype": "Chief Medical Officer",
+       "value": 2.2
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "SHO",
+     "security": "Sunstone Hotel Investors, Inc.",
+     "value": 2.1,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Springer Robert C",
+       "etype": "PRESIDENT AND CIO",
+       "value": 2.1
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "TXG",
+     "security": "10x Genomics, Inc.",
+     "value": 2.1,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Saxonov Serge",
+       "etype": "Chief Executive Officer",
+       "value": 2.1
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "PTGX",
+     "security": "Protagonist Therapeutics, Inc",
+     "value": 2.1,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Waddill William D.",
+       "etype": "Director",
+       "value": 2.1
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "CNXN",
+     "security": "PC CONNECTION INC",
+     "value": 2.0,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Gallup Patricia",
+       "etype": "10% Owner",
+       "value": 2.0
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "DASH",
+     "security": "DoorDash, Inc.",
+     "value": 2.0,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Fang Andy",
+       "etype": "Director",
+       "value": 1.8
+      },
+      {
+       "entity": "Brown Shona L",
+       "etype": "Director",
+       "value": 0.2
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "MTSI",
+     "security": "MACOM Technology Solutions Holdings, Inc.",
+     "value": 2.0,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Hwang Donghyun Thomas",
+       "etype": "SVP, Global Sales",
+       "value": 2.0
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "SMTC",
+     "security": "SEMTECH CORP",
+     "value": 1.9,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Wilson John Michael",
+       "etype": "Chief Quality Officer and CTO",
+       "value": 1.9
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "MTG",
+     "security": "MGIC INVESTMENT CORP",
+     "value": 1.9,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Colson Nathaniel H",
+       "etype": "Officer EVP, CFO & CRO",
+       "value": 1.1
+      },
+      {
+       "entity": "Miosi Salvatore A",
+       "etype": "President & COO",
+       "value": 0.8
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "TGT",
+     "security": "TARGET CORP",
+     "value": 1.9,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Roath Lisa R",
+       "etype": "Executive Officer",
+       "value": 1.9
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "GILD",
+     "security": "GILEAD SCIENCES, INC.",
+     "value": 1.9,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "O'Day Daniel Patrick",
+       "etype": "Chairman & CEO",
+       "value": 1.9
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "HPE",
+     "security": "Hewlett Packard Enterprise Co",
+     "value": 1.8,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Karros Kirt P",
+       "etype": "SVP, Treasurer, Corp Dev",
+       "value": 1.8
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "CAVA",
+     "security": "CAVA GROUP, INC.",
+     "value": 1.8,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Kochevar Karen",
+       "etype": "Director",
+       "value": 1.8
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "HLIO",
+     "security": "HELIOS TECHNOLOGIES, INC.",
+     "value": 1.8,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Arduini Matteo",
+       "etype": "President of Hydraulics, FCT",
+       "value": 1.8
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "OOMA",
+     "security": "OOMA INC",
+     "value": 1.8,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Stang Eric B",
+       "etype": "CEO and Pres.",
+       "value": 1.0
+      },
+      {
+       "entity": "Mann Russell",
+       "etype": "Director",
+       "value": 0.7
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "RCUS",
+     "security": "Arcus Biosciences, Inc.",
+     "value": 1.8,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Jaen Juan C.",
+       "etype": "President",
+       "value": 1.8
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "NYSE: KRC",
+     "security": "KILROY REALTY CORP",
+     "value": 1.8,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Hunt Jolie A.",
+       "etype": "Director",
+       "value": 1.2
+      },
+      {
+       "entity": "Paratte A. Robert",
+       "etype": "See Remarks",
+       "value": 0.6
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "CVCO",
+     "security": "CAVCO INDUSTRIES, INC.",
+     "value": 1.8,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Aden Allison",
+       "etype": "EVP, CFO & Treasurer",
+       "value": 1.8
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "BLLN",
+     "security": "BillionToOne, Inc.",
+     "value": 1.8,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Sakakibara Shan Riku",
+       "etype": "Chief Product Officer",
+       "value": 1.8
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "UGI",
+     "security": "UGI CORP /PA/",
+     "value": 1.7,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Shea-Ballay Kathleen",
+       "etype": "GC and Chief Legal Officer",
+       "value": 1.7
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "COST",
+     "security": "COSTCO WHOLESALE CORP /NEW",
+     "value": 1.7,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Denman Kenneth D",
+       "etype": "Director",
+       "value": 1.7
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "SLDE",
+     "security": "Slide Insurance Holdings, Inc.",
+     "value": 1.7,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Wright Andrew Pardo",
+       "etype": "Director",
+       "value": 1.7
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "HIVE",
+     "security": "HIVE Digital Technologies Ltd.",
+     "value": 1.6,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Perrill Dave",
+       "etype": "Director",
+       "value": 1.6
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "VRSN",
+     "security": "VERISIGN INC/CA",
+     "value": 1.6,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Bidzos D James",
+       "etype": "Exec. Chairman, Pres, & CEO",
+       "value": 1.6
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "NRIX",
+     "security": "Nurix Therapeutics, Inc.",
+     "value": 1.6,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Ring Christine",
+       "etype": "Chief Legal Officer",
+       "value": 1.4
+      },
+      {
+       "entity": "Hansen Gwenn",
+       "etype": "Chief Scientific Officer",
+       "value": 0.2
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "VTRS",
+     "security": "Viatris Inc",
+     "value": 1.6,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Campbell Paul",
+       "etype": "See Remarks",
+       "value": 1.6
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "CBU",
+     "security": "COMMUNITY FINANCIAL SYSTEM, INC.",
+     "value": 1.6,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Bolus Mark J.",
+       "etype": "Director",
+       "value": 1.6
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "TEM",
+     "security": "Tempus AI, Inc.",
+     "value": 1.6,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Rogers James William",
+       "etype": "Chief Financial Officer",
+       "value": 1.3
+      },
+      {
+       "entity": "Doudna Jennifer A",
+       "etype": "Director",
+       "value": 0.3
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "PAYS",
+     "security": "Paysign, Inc.",
+     "value": 1.6,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Herman Joan M",
+       "etype": "EVP, Operations",
+       "value": 1.6
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "LIF",
+     "security": "Life360, Inc.",
+     "value": 1.5,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Hulls Chris",
+       "etype": "Director",
+       "value": 1.5
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "OKTA",
+     "security": "Okta, Inc.",
+     "value": 1.5,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Kelleher Eric Robert",
+       "etype": "See Remarks",
+       "value": 0.9
+      },
+      {
+       "entity": "Schwartz Larissa",
+       "etype": "See Remarks",
+       "value": 0.6
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "VRTX",
+     "security": "VERTEX PHARMACEUTICALS INC / MA",
+     "value": 1.5,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Bozic Carmen",
+       "etype": "EVP and CMO",
+       "value": 1.5
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "SFIX",
+     "security": "Stitch Fix, Inc.",
+     "value": 1.5,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Bacos Anthony",
+       "etype": "Chief Prod/Technology Officer",
+       "value": 1.5
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "TTC",
+     "security": "TORO CO",
+     "value": 1.5,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Svendsen Kurt D",
+       "etype": "VP, Technology",
+       "value": 1.2
+      },
+      {
+       "entity": "Funk Edric C",
+       "etype": "President & COO",
+       "value": 0.3
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "MAZE",
+     "security": "Maze Therapeutics, Inc.",
+     "value": 1.5,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Coloma Jason V",
+       "etype": "Chief Executive Officer",
+       "value": 1.5
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "FLNC",
+     "security": "Fluence Energy, Inc.",
+     "value": 1.5,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Zahurancik John",
+       "etype": "SVP & CCSO",
+       "value": 1.5
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "SODI",
+     "security": "SOLITRON DEVICES INC",
+     "value": 1.5,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Olesen Value Fund L.P.",
+       "etype": "10% Owner",
+       "value": 1.5
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "AFYA",
+     "security": "Afya Ltd",
+     "value": 1.5,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Junior Lelio De Souza",
+       "etype": "Vice President",
+       "value": 1.2
+      },
+      {
+       "entity": "Basolli Gomiero Mirella",
+       "etype": "Vice President",
+       "value": 0.3
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "RELY",
+     "security": "Remitly Global, Inc.",
+     "value": 1.5,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Hug Joshua",
+       "etype": "Director",
+       "value": 1.5
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "CIEN",
+     "security": "CIENA CORP",
+     "value": 1.5,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Cumello Joseph",
+       "etype": "SVP, General Mgr. Blue Planet",
+       "value": 1.5
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "AMBA",
+     "security": "AMBARELLA INC",
+     "value": 1.5,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Wang Feng-Ming",
+       "etype": "CEO",
+       "value": 1.5
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "CGON",
+     "security": "CG Oncology, Inc.",
+     "value": 1.4,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Post Leonard E",
+       "etype": "Director",
+       "value": 1.4
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "ZS",
+     "security": "Zscaler, Inc.",
+     "value": 1.4,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Rubin Kevin",
+       "etype": "Chief Financial Officer",
+       "value": 0.7
+      },
+      {
+       "entity": "Geller Adam",
+       "etype": "Chief Product Officer",
+       "value": 0.7
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "P",
+     "security": "Everpure, Inc.",
+     "value": 1.4,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Yen Mallun",
+       "etype": "Director",
+       "value": 0.7
+      },
+      {
+       "entity": "Brown Andrew William Fraser",
+       "etype": "Director",
+       "value": 0.7
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "VERA",
+     "security": "Vera Therapeutics, Inc.",
+     "value": 1.4,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Fordyce Marshall",
+       "etype": "PRESIDENT AND CEO",
+       "value": 1.4
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "OUT",
+     "security": "OUTFRONT Media Inc.",
+     "value": 1.3,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Sauer Richard H.",
+       "etype": "EVP, General Counsel",
+       "value": 1.3
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "MRVL",
+     "security": "Marvell Technology, Inc.",
+     "value": 1.3,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Durn Daniel",
+       "etype": "Chief Financial Officer",
+       "value": 1.3
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "M",
+     "security": "Macy's, Inc.",
+     "value": 1.3,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Edwards Thomas Jr.",
+       "etype": "EVP, COO & CFO",
+       "value": 0.8
+      },
+      {
+       "entity": "Griscom Paul",
+       "etype": "SVP and Controller",
+       "value": 0.5
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "BOX",
+     "security": "BOX INC",
+     "value": 1.2,
+     "n_actors": 3,
+     "actors": [
+      {
+       "entity": "Levie Aaron",
+       "etype": "Chief Executive Officer",
+       "value": 0.7
+      },
+      {
+       "entity": "Nottebohm Olivia",
+       "etype": "Chief Operating Officer",
+       "value": 0.3
+      },
+      {
+       "entity": "Mayer Bethany",
+       "etype": "Director",
+       "value": 0.2
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "EVMN",
+     "security": "Evommune, Inc.",
+     "value": 1.2,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Drew Janice Suzann",
+       "etype": "Chief of Dev. Operations",
+       "value": 0.9
+      },
+      {
+       "entity": "Pena Luis C.",
+       "etype": "President & CEO",
+       "value": 0.3
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "WOK",
+     "security": "WORK Medical Technology Group LTD",
+     "value": 1.1,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Hrt Financial Lp",
+       "etype": "10% Owner",
+       "value": 1.1
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "ZLAB",
+     "security": "Zai Lab Ltd",
+     "value": 1.1,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Du Ying",
+       "etype": "Chairperson & CEO",
+       "value": 0.9
+      },
+      {
+       "entity": "Lis William",
+       "etype": "Director",
+       "value": 0.3
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "SEPN",
+     "security": "Septerna, Inc.",
+     "value": 1.1,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Long Daniel D.",
+       "etype": "SVP, Drug Discovery",
+       "value": 1.1
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "RBC",
+     "security": "RBC Bearings INC",
+     "value": 1.1,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Ennico Dolores J",
+       "etype": "Director",
+       "value": 0.8
+      },
+      {
+       "entity": "Feeney John J.",
+       "etype": "Vice President and Secretary",
+       "value": 0.3
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "ALHC",
+     "security": "Alignment Healthcare, Inc.",
+     "value": 1.1,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Konowiecki Joseph S",
+       "etype": "EVP, Corporate Affairs",
+       "value": 1.1
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "HAPN",
+     "security": "Happen, Inc.",
+     "value": 1.1,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Sanborn Scott",
+       "etype": "CEO",
+       "value": 1.1
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "ETR",
+     "security": "ENTERGY CORP /DE/",
+     "value": 1.1,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Cook-Nelson Kimberly",
+       "etype": "EVP & Chief Operating Officer",
+       "value": 1.1
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "HALO",
+     "security": "HALOZYME THERAPEUTICS, INC.",
+     "value": 1.1,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Krishnan Mahesh",
+       "etype": "Director",
+       "value": 1.1
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "AIAI",
+     "security": "AIAI Holdings Corp",
+     "value": 1.1,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Liebman Stephanie",
+       "etype": "EVP/CFO",
+       "value": 0.7
+      },
+      {
+       "entity": "Weiszhaar Barbara Barton",
+       "etype": "SVP/CAO",
+       "value": 0.4
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "ESP",
+     "security": "ESPEY MFG & ELECTRONICS CORP",
+     "value": 1.0,
+     "n_actors": 3,
+     "actors": [
+      {
+       "entity": "Oneil David A",
+       "etype": "President & CEO",
+       "value": 0.3
+      },
+      {
+       "entity": "Corr Paul J",
+       "etype": "Director",
+       "value": 0.3
+      },
+      {
+       "entity": "Pickering Jennifer Michele",
+       "etype": "CHRO & Corporate Secretary",
+       "value": 0.3
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "MLAB",
+     "security": "MESA LABORATORIES INC /CO/",
+     "value": 1.0,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Sakys John",
+       "etype": "CFO",
+       "value": 0.5
+      },
+      {
+       "entity": "Archbold Brian David",
+       "etype": "SVP Operations",
+       "value": 0.5
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "HR",
+     "security": "Healthcare Realty Trust Inc",
+     "value": 1.0,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Callaway Amanda L",
+       "etype": "SVP & Chief Accounting Officer",
+       "value": 1.0
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "EPR",
+     "security": "EPR PROPERTIES",
+     "value": 1.0,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Turvey Paul Robert",
+       "etype": "SVP,  General Counsel",
+       "value": 0.7
+      },
+      {
+       "entity": "Johnson Gwendolyn Mary",
+       "etype": "SVP - Asset Management",
+       "value": 0.2
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "DOMO",
+     "security": "DOMO, INC.",
+     "value": 1.0,
+     "n_actors": 3,
+     "actors": [
+      {
+       "entity": "James Joshua G",
+       "etype": "10% Owner",
+       "value": 0.5
+      },
+      {
+       "entity": "Crane Tod",
+       "etype": "Chief Financial Officer",
+       "value": 0.3
+      },
+      {
+       "entity": "Thayne Daren",
+       "etype": "CTO & EVP  of Product",
+       "value": 0.2
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "UNFI",
+     "security": "UNITED NATURAL FOODS INC",
+     "value": 1.0,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Bushway Mark",
+       "etype": "President, Natural & CSCO",
+       "value": 1.0
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "MASS",
+     "security": "908 Devices Inc.",
+     "value": 1.0,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Knopp Kevin J.",
+       "etype": "President and CEO",
+       "value": 1.0
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "GRAB",
+     "security": "Grab Holdings Ltd",
+     "value": 1.0,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Hungate Alexander Charles",
+       "etype": "President and COO",
+       "value": 1.0
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "BIRD",
+     "security": "Smartbird, Inc.",
+     "value": 1.0,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Carlsten Nadia Catherine",
+       "etype": "Chief Executive Officer",
+       "value": 1.0
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "KEYS",
+     "security": "Keysight Technologies, Inc.",
+     "value": 1.0,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Estrada Ingrid A",
+       "etype": "SVP",
+       "value": 0.7
+      },
+      {
+       "entity": "Dhanasekaran Satish",
+       "etype": "President and CEO",
+       "value": 0.4
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "S",
+     "security": "SentinelOne, Inc.",
+     "value": 1.0,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Weingarten Tomer",
+       "etype": "President, CEO",
+       "value": 1.0
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "CIFR",
+     "security": "Cipher Digital Inc.",
+     "value": 0.9,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Grossman Cary M",
+       "etype": "Director",
+       "value": 0.9
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "ZVRA",
+     "security": "ZEVRA THERAPEUTICS, INC.",
+     "value": 0.9,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Thompson Rahsaan",
+       "etype": "Chief Legal & Compliance",
+       "value": 0.9
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "MRDN",
+     "security": "Meridian Holdings Inc./NV",
+     "value": 0.9,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Goodman Anthony Brian",
+       "etype": "Insider",
+       "value": 0.9
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "IBTA",
+     "security": "Ibotta, Inc.",
+     "value": 0.9,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Leach Bryan",
+       "etype": "10% Owner",
+       "value": 0.9
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "ATAI",
+     "security": "AtaiBeckley Inc.",
+     "value": 0.9,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Kochendoerfer Gerd",
+       "etype": "Chief Operating Officer",
+       "value": 0.5
+      },
+      {
+       "entity": "Craig Kevin James",
+       "etype": "Chief Medical Officer",
+       "value": 0.4
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "RYAAY",
+     "security": "RYANAIR HOLDINGS PLC",
+     "value": 0.9,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Hurley John Jh",
+       "etype": "Ryanair DAC CTO",
+       "value": 0.9
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "ORMP",
+     "security": "ORAMED PHARMACEUTICALS INC.",
+     "value": 0.9,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Hexter Joshua",
+       "etype": "COO & CBO",
+       "value": 0.6
+      },
+      {
+       "entity": "Gabay Avraham",
+       "etype": "Chief Financial Officer",
+       "value": 0.3
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "PKOH",
+     "security": "PARK OHIO HOLDINGS CORP",
+     "value": 0.8,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Vilsack Robert D",
+       "etype": "Secretary & CLO",
+       "value": 0.5
+      },
+      {
+       "entity": "Grampa John D",
+       "etype": "Director",
+       "value": 0.4
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "SVV",
+     "security": "Savers Value Village, Inc.",
+     "value": 0.8,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Walsh Mark T.",
+       "etype": "CEO & Director",
+       "value": 0.8
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "ASAN",
+     "security": "Asana, Inc.",
+     "value": 0.8,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Megji Aziz",
+       "etype": "Chief Financial Officer",
+       "value": 0.4
+      },
+      {
+       "entity": "Rogers Daniel Mark",
+       "etype": "Chief Executive Officer",
+       "value": 0.4
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "PLMR",
+     "security": "Palomar Holdings, Inc.",
+     "value": 0.8,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Armstrong Mac",
+       "etype": "CEO and Chairman",
+       "value": 0.8
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "DRTS",
+     "security": "Alpha Tau Medical Ltd.",
+     "value": 0.8,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Levy Raphi",
+       "etype": "Chief Financial Officer",
+       "value": 0.8
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "PAYX",
+     "security": "PAYCHEX INC",
+     "value": 0.8,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Tucci Joseph M",
+       "etype": "Director",
+       "value": 0.8
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "OMF",
+     "security": "OneMain Holdings, Inc.",
+     "value": 0.8,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Conrad Micah R.",
+       "etype": "EVP & COO",
+       "value": 0.6
+      },
+      {
+       "entity": "Hedlund Michael A",
+       "etype": "pao, SVP and Group Controller",
+       "value": 0.2
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "CLYM",
+     "security": "Climb Bio, Inc.",
+     "value": 0.8,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Brennan Aoife",
+       "etype": "President and CEO",
+       "value": 0.8
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "WMT",
+     "security": "Walmart Inc.",
+     "value": 0.8,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Bartlett Daniel J",
+       "etype": "Executive Vice President",
+       "value": 0.8
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "FMNB",
+     "security": "FARMERS NATIONAL BANC CORP /OH/",
+     "value": 0.7,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Voinovich Michael C",
+       "etype": "Director",
+       "value": 0.7
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "PGY",
+     "security": "Pagaya Technologies Ltd.",
+     "value": 0.7,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Das Sanjiv",
+       "etype": "President",
+       "value": 0.4
+      },
+      {
+       "entity": "Rosen Tami",
+       "etype": "Director",
+       "value": 0.3
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "ALH",
+     "security": "Alliance Laundry Holdings Inc.",
+     "value": 0.7,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Kopetsky Amanda Brooke",
+       "etype": "CHIEF HUMAN RESOURCES OFFICER",
+       "value": 0.7
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "HRTG",
+     "security": "Heritage Insurance Holdings, Inc.",
+     "value": 0.7,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Binnun Sharon",
+       "etype": "Chief Accounting Officer",
+       "value": 0.7
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "URGN",
+     "security": "UroGen Pharma Ltd.",
+     "value": 0.7,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Schoenberg Mark",
+       "etype": "Chief Medical Officer",
+       "value": 0.7
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "LOB",
+     "security": "Live Oak Bancshares, Inc.",
+     "value": 0.7,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Williams William L. Iii",
+       "etype": "Director",
+       "value": 0.7
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "KRYS",
+     "security": "Krystal Biotech, Inc.",
+     "value": 0.7,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Thomas John Charles",
+       "etype": "EVP, General Counsel",
+       "value": 0.7
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "VMD",
+     "security": "VIEMED HEALTHCARE, INC.",
+     "value": 0.7,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Smokoff Timothy",
+       "etype": "Director",
+       "value": 0.5
+      },
+      {
+       "entity": "Frazier William",
+       "etype": "Chief Medical Officer",
+       "value": 0.2
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "GALT",
+     "security": "GALECTIN THERAPEUTICS INC",
+     "value": 0.7,
+     "n_actors": 2,
+     "actors": [
+      {
+       "entity": "Jamil Khurram",
+       "etype": "Chief Medical Officer",
+       "value": 0.5
+      },
+      {
+       "entity": "Shlevin Harold H.",
+       "etype": "Director",
+       "value": 0.2
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "ESNT",
+     "security": "Essent Group Ltd.",
+     "value": 0.7,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Weinstock David B",
+       "etype": "SVP and CFO",
+       "value": 0.7
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "MAIN",
+     "security": "Main Street Capital CORP",
+     "value": 0.7,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Beauvais Jason B",
+       "etype": "EVP, GC, SECRETARY",
+       "value": 0.7
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "INTA",
+     "security": "Intapp, Inc.",
+     "value": 0.7,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Murgel Michele",
+       "etype": "Chief People & Places Officer",
+       "value": 0.7
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "TRU",
+     "security": "TransUnion",
+     "value": 0.7,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Chaouki Steven M",
+       "etype": "President, US Markets",
+       "value": 0.7
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "APG",
+     "security": "APi Group Corp",
+     "value": 0.6,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Malkin Anthony E",
+       "etype": "Director",
+       "value": 0.6
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "CORZ",
+     "security": "Core Scientific, Inc./tx",
+     "value": 0.6,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Duchene Todd M",
+       "etype": "See remarks",
+       "value": 0.6
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "STUB",
+     "security": "StubHub Holdings, Inc.",
+     "value": 0.6,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Islam Nayaab",
+       "etype": "See Remarks",
+       "value": 0.6
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "RBRK",
+     "security": "Rubrik, Inc.",
+     "value": 0.6,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Mhatre Ravi",
+       "etype": "Director",
+       "value": 0.6
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "RSI",
+     "security": "Rush Street Interactive, Inc.",
+     "value": 0.6,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Wierbicki Paul",
+       "etype": "Chief Legal Officer",
+       "value": 0.6
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "ACAD",
+     "security": "ACADIA PHARMACEUTICALS INC",
+     "value": 0.6,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Kihara James",
+       "etype": "PRINCIPAL ACCOUNTING OFFICER",
+       "value": 0.6
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "SOPH",
+     "security": "SOPHiA GENETICS SA",
+     "value": 0.6,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Camblong Jurgi",
+       "etype": "Chief Executive Officer",
+       "value": 0.6
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "ASPI",
+     "security": "ASP Isotopes Inc.",
+     "value": 0.6,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Ainscow Donald George",
+       "etype": "EVP, Gen Counsel, Secretary",
+       "value": 0.6
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "PFSI",
+     "security": "PennyMac Financial Services, Inc.",
+     "value": 0.5,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Hendry Gregory L",
+       "etype": "MD, Chief Accounting Officer",
+       "value": 0.5
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "SMHI",
+     "security": "SEACOR Marine Holdings Inc.",
+     "value": 0.5,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Llorca Jesus",
+       "etype": "EVP & CFO",
+       "value": 0.5
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "VSAT",
+     "security": "VIASAT INC",
+     "value": 0.5,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Chase Garrett L.",
+       "etype": "SVP, Chief Financial Officer",
+       "value": 0.5
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "FRHC",
+     "security": "Freedom Holding Corp.",
+     "value": 0.5,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Tukanov Renat",
+       "etype": "CHIEF TECHNOLOGY OFFICER",
+       "value": 0.5
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "PEG",
+     "security": "PUBLIC SERVICE ENTERPRISE GROUP INC",
+     "value": 0.5,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Hanemann Kim C",
+       "etype": "President and COO - PSE&G",
+       "value": 0.5
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "GFS",
+     "security": "GLOBALFOUNDRIES Inc.",
+     "value": 0.5,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Hogan Michael James",
+       "etype": "Chief Strategy Officer",
+       "value": 0.5
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "GPC",
+     "security": "GENUINE PARTS CO",
+     "value": 0.5,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Galla Christopher T",
+       "etype": "SVP, GC, and Corp. Secretary",
+       "value": 0.5
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "NCMI",
+     "security": "National CineMedia, Inc.",
+     "value": 0.5,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Lesinski Thomas F.",
+       "etype": "Chief Executive Officer",
+       "value": 0.5
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "MGRC",
+     "security": "MCGRATH RENTCORP",
+     "value": 0.5,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Lieffrig John",
+       "etype": "VP and Division Manager",
+       "value": 0.5
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "ANIP",
+     "security": "ANI PHARMACEUTICALS INC",
+     "value": 0.5,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Carey Stephen P.",
+       "etype": "SVP & CFO",
+       "value": 0.5
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "PGC",
+     "security": "PEAPACK GLADSTONE FINANCIAL CORP",
+     "value": 0.5,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Babcock John P",
+       "etype": "SEVP & Pres of Priv Wealth Mgt",
+       "value": 0.5
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "AMZN",
+     "security": "AMAZON COM INC",
+     "value": 0.5,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Herrington Douglas J",
+       "etype": "CEO Worldwide Amazon Stores",
+       "value": 0.5
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "AI",
+     "security": "C3.ai, Inc.",
+     "value": 0.5,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Ehikian Stephen Bradley",
+       "etype": "Chief Executive Officer",
+       "value": 0.5
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "TTI",
+     "security": "TETRA TECHNOLOGIES INC",
+     "value": 0.5,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Murphy Brady M",
+       "etype": "President & CEO",
+       "value": 0.5
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "IPGP",
+     "security": "IPG PHOTONICS CORP",
+     "value": 0.4,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Agnes Tang",
+       "etype": "Director",
+       "value": 0.4
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "UPWK",
+     "security": "UPWORK, INC",
+     "value": 0.4,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Brown Hayden",
+       "etype": "President & CEO",
+       "value": 0.4
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "SOFI",
+     "security": "SoFi Technologies, Inc.",
+     "value": 0.4,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Keough Kelli",
+       "etype": "EVP, GBUL, SIPS",
+       "value": 0.4
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "UP",
+     "security": "Wheels Up Experience Inc.",
+     "value": 0.4,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Ck Wheels Llc",
+       "etype": "10% Owner",
+       "value": 0.4
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "ARQQ",
+     "security": "Arqit Quantum Inc.",
+     "value": 0.4,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Bers Jennifer",
+       "etype": "Chief Revenue Officer",
+       "value": 0.4
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "IBRX",
+     "security": "ImmunityBio, Inc.",
+     "value": 0.4,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Simon Barry J.",
+       "etype": "Director",
+       "value": 0.4
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "GTX",
+     "security": "Garrett Motion Inc.",
+     "value": 0.4,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Rodrigues Mark Albert",
+       "etype": "SVP, GM GBEs Turbo Tech",
+       "value": 0.4
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "HBAN",
+     "security": "HUNTINGTON BANCSHARES INC /MD/",
+     "value": 0.4,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Hingst Marcy C",
+       "etype": "SEVP and General Counsel",
+       "value": 0.4
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "EOSE",
+     "security": "Eos Energy Enterprises, Inc.",
+     "value": 0.4,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Kroeker Nathan",
+       "etype": "CCO and Interim CFO",
+       "value": 0.4
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "GRND",
+     "security": "Grindr Inc.",
+     "value": 0.4,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Katz Zachary",
+       "etype": "CLO and Head of Global Affairs",
+       "value": 0.4
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "HMN",
+     "security": "HORACE MANN EDUCATORS CORP /DE/",
+     "value": 0.4,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Zuraitis Marita",
+       "etype": "President & CEO",
+       "value": 0.4
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "KOP",
+     "security": "Koppers Holdings Inc.",
+     "value": 0.3,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Ball M Leroy",
+       "etype": "CEO",
+       "value": 0.3
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "CDRO",
+     "security": "Codere Online Luxembourg, S.A.",
+     "value": 0.3,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Iglesias Sanchez Oscar",
+       "etype": "Director",
+       "value": 0.3
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "WSBC",
+     "security": "WESBANCO INC",
+     "value": 0.3,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Pattishall-Krupinski Jan",
+       "etype": "SEVP - Chief Admin Officer",
+       "value": 0.3
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "GLOO",
+     "security": "Gloo Holdings, Inc.",
+     "value": 0.3,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Thrivent Financial For Lutherans",
+       "etype": "10% Owner",
+       "value": 0.3
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "MSTR",
+     "security": "Strategy Inc",
+     "value": 0.3,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Patten Jarrod M",
+       "etype": "Director",
+       "value": 0.3
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "GLRE",
+     "security": "GREENLIGHT CAPITAL RE, LTD.",
+     "value": 0.3,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Isaacs Ian",
+       "etype": "Director",
+       "value": 0.3
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "AQST",
+     "security": "Aquestive Therapeutics, Inc.",
+     "value": 0.3,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Krop Julie",
+       "etype": "Director",
+       "value": 0.3
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "FMAO",
+     "security": "FARMERS & MERCHANTS BANCORP INC",
+     "value": 0.3,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Briggs Andrew J",
+       "etype": "Director",
+       "value": 0.3
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "TIMB",
+     "security": "TIM S.A.",
+     "value": 0.3,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Viegas Marques Andrea Palma",
+       "etype": "Chief Financial Officer",
+       "value": 0.3
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "BDX",
+     "security": "BECTON DICKINSON & CO",
+     "value": 0.3,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Garrison Michael David",
+       "etype": "EVP & Pres Med.Essntl&BioPharm",
+       "value": 0.3
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "WRLD",
+     "security": "WORLD ACCEPTANCE CORP",
+     "value": 0.3,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Way Charles D",
+       "etype": "Director",
+       "value": 0.3
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "OLP",
+     "security": "ONE LIBERTY PROPERTIES INC",
+     "value": 0.3,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Ricketts Lawrence",
+       "etype": "Exec.Vice President and COO",
+       "value": 0.3
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "GWRE",
+     "security": "Guidewire Software, Inc.",
+     "value": 0.3,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Rosenbaum Michael George",
+       "etype": "Chief Executive Officer",
+       "value": 0.3
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "GOOGL",
+     "security": "Alphabet Inc.",
+     "value": 0.3,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Saraci Marsida",
+       "etype": "VP, Chief Accounting Officer",
+       "value": 0.3
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "WHG",
+     "security": "WESTWOOD HOLDINGS GROUP INC",
+     "value": 0.3,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Byrne Susan M",
+       "etype": "Insider",
+       "value": 0.3
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "CERS",
+     "security": "CERUS CORP",
+     "value": 0.3,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Greenman William Mariner",
+       "etype": "President and CEO",
+       "value": 0.3
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "MQ",
+     "security": "Marqeta, Inc.",
+     "value": 0.3,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Pollak Todd",
+       "etype": "Chief Revenue Officer",
+       "value": 0.3
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "PED",
+     "security": "PEDEVCO CORP",
+     "value": 0.3,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Clark Moore",
+       "etype": "Executive VP",
+       "value": 0.3
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "COMP",
+     "security": "Compass, Inc.",
+     "value": 0.3,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Reffkin Robert L.",
+       "etype": "Chairman and CEO",
+       "value": 0.3
+      }
+     ],
+     "significant": false
+    },
+    {
+     "symbol": "AIP",
+     "security": "Arteris, Inc.",
+     "value": 0.3,
+     "n_actors": 1,
+     "actors": [
+      {
+       "entity": "Alpern Paul L",
+       "etype": "VP and General Counsel",
+       "value": 0.3
+      }
+     ],
+     "significant": false
+    }
+   ],
+   "top_entities": [
+    {
+     "entity": "Okland Marianne",
+     "etype": "Director",
+     "value": 36913.1,
+     "n_names": 1
+    },
+    {
+     "entity": "Fairmount Funds Management Llc",
+     "etype": "Director",
+     "value": 1998.3,
+     "n_names": 1
+    },
+    {
+     "entity": "Bvf Partners L P/Il",
+     "etype": "Director",
+     "value": 1910.3,
+     "n_names": 1
+    },
+    {
+     "entity": "Insight Holdings Group, Llc",
+     "etype": "10% Owner",
+     "value": 1771.7,
+     "n_names": 1
+    },
+    {
+     "entity": "Mantle Ridge Lp",
+     "etype": "Insider",
+     "value": 993.1,
+     "n_names": 1
+    },
+    {
+     "entity": "Kl Pattern Holdings Lp",
+     "etype": "10% Owner",
+     "value": 834.7,
+     "n_names": 1
+    },
+    {
+     "entity": "Samueli Henry",
+     "etype": "Director",
+     "value": 500.0,
+     "n_names": 1
+    },
+    {
+     "entity": "Windacre Partnership Llc",
+     "etype": "10% Owner",
+     "value": 391.2,
+     "n_names": 1
+    },
+    {
+     "entity": "Stevens Mark A",
+     "etype": "Director",
+     "value": 372.0,
+     "n_names": 1
+    },
+    {
+     "entity": "Booth Bruce",
+     "etype": "Director",
+     "value": 277.4,
+     "n_names": 1
+    },
+    {
+     "entity": "Devon Energy Corp/De",
+     "etype": "10% Owner",
+     "value": 263.7,
+     "n_names": 1
+    },
+    {
+     "entity": "Orbimed Advisors Llc",
+     "etype": "10% Owner",
+     "value": 156.1,
+     "n_names": 1
+    }
+   ],
+   "kpi": {
+    "total_value": 50236.8,
+    "n_stocks": 323,
+    "n_entities": 507,
+    "top_stock": "STNG"
+   }
+  },
+  "from": "2026-06-03",
+  "to": "2026-07-02"
+ }
+}

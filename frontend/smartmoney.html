@@ -81,6 +81,18 @@
     .sm-delta { filter: drop-shadow(0 0 7px rgba(52,198,115,0.35)); animation: sm-breathe 6s ease-in-out infinite; }
     @keyframes sm-breathe { 0%,100% { opacity: 0.88; } 50% { opacity: 1; } }
 
+    /* market switcher */
+    .mkt-switch { display: flex; gap: 8px; flex-wrap: wrap; margin: 14px 0 0; }
+    .mkt-chip {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 7px 14px; border: 1px solid var(--border); border-radius: 999px;
+      background: var(--panel); color: var(--text-body); text-decoration: none;
+      font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.4px;
+      transition: var(--transition); box-shadow: inset 0 1px 0 var(--edge-light);
+    }
+    .mkt-chip:hover { border-color: var(--border-strong); transform: translateY(-1px); }
+    .mkt-chip.active { border-color: var(--accent-border); background: var(--accent-dim); color: var(--text-strong); }
+
     /* sticky controls bar */
     .controls-row {
       display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
@@ -301,6 +313,12 @@
         <div class="kicker">Smart Money India</div>
         <h1>Follow the smart money</h1>
         <div class="tagline">NSE bulk &amp; block deals, cleaned, classified and netted daily. Who's accumulating, who's exiting, and whether following them would have paid. <strong>FII</strong> = foreign institutions, <strong>DII</strong> = domestic funds.</div>
+        <div class="mkt-switch">
+          <a class="mkt-chip active" href="/smartmoney">🇮🇳 India</a>
+          <a class="mkt-chip" href="/smartmoney/tw">🇹🇼 Taiwan</a>
+          <a class="mkt-chip" href="/smartmoney/id">🇮🇩 Indonesia</a>
+          <a class="mkt-chip" href="/smartmoney/us">🇺🇸 United States</a>
+        </div>
       </div>
       <div class="sm-hero-logo" aria-hidden="true">
         <svg class="sm-logo-svg" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
@@ -337,6 +355,12 @@
       </div>
     </div>
     <div class="controls-row">
+      <div class="tabs" id="tab-view">
+        <button class="tab active" data-tab="deals">Deals</button>
+        <button class="tab" data-tab="flows">Flows &amp; F&amp;O</button>
+        <button class="tab" data-tab="sectors">FPI Sectors</button>
+        <button class="tab" data-tab="stakes">FII Stakes</button>
+      </div>
       <div class="tabs" id="tab-window">
         <button class="tab" data-tab="today">Latest</button>
         <button class="tab" data-tab="week">Week</button>
@@ -409,7 +433,10 @@ var metric = function (s, m) { return m === "fii" ? s.fii_cr : m === "dii" ? s.d
 
 /* ---- state ---- */
 var feed = null;
-var state = { tab: "month", mode: "all", dir: "buy" };
+var flowsFeed = null;
+var sectorsFeed = null;
+var stakesFeed = null;
+var state = { tab: "month", mode: "all", dir: "buy", view: "deals", stakeDir: "up", stakeQ: "" };
 var root = document.getElementById("sm-root");
 
 function flavourTop(flavour, mode) {
@@ -734,9 +761,316 @@ function bindChartHover(boxId, tipId, rows, titleOf) {
   });
 }
 
+/* ============ flows & F&O view ============ */
+
+function fmtContracts(n) {
+  var v = Math.abs(n);
+  return (v >= 100000 ? (v / 100000).toFixed(1) + "L" : v >= 1000 ? (v / 1000).toFixed(0) + "k" : String(Math.round(v)));
+}
+
+function renderFlows() {
+  if (!flowsFeed) {
+    root.innerHTML = '<div class="skeleton" style="height:300px;margin-top:22px"></div>';
+    fetch("/api/smartmoney/inflows")
+      .then(function (r) { return r.json(); })
+      .then(function (d) { flowsFeed = d; renderFlows(); })
+      .catch(function () {
+        root.innerHTML = '<div class="surface-card empty">Couldn\'t load the flows feed. Try refreshing.</div>';
+      });
+    return;
+  }
+  var F = flowsFeed;
+  var cash = F.cash.latest;
+  var oi = F.derivs.latest, oiPrev = F.derivs.prev;
+
+  document.getElementById("period").textContent = "Whole-market context · provisional, T+0 evening";
+  document.getElementById("upd").textContent = "● cash " + fmtDate(F.meta.cash_latest) + " · F&O " + fmtDate(F.meta.oi_latest);
+
+  var v = document.getElementById("verdict");
+  if (cash && cash.fii != null) {
+    var fiiWord = cash.fii >= 0 ? "bought" : "sold";
+    var diiWord = cash.dii >= 0 ? "bought" : "sold";
+    v.innerHTML = '<span class="live-dot"></span> <span>On ' + fmtDate(cash.date) + ", FIIs net <strong>" + fiiWord +
+      ' <span class="num mono" style="color:' + pctColor(cash.fii) + '">' + (cash.fii >= 0 ? "+" : "−") + inr(cash.fii) + "</span></strong>" +
+      " and DIIs net <strong>" + diiWord + ' <span class="num mono" style="color:' + pctColor(cash.dii) + '">' + (cash.dii >= 0 ? "+" : "−") + inr(cash.dii) + "</span></strong> in the cash market" +
+      (oi && oi.fii.long_pct != null ? ' <span class="sep">·</span> FII index futures book is <strong>' + oi.fii.long_pct + "% long</strong>" : "") +
+      "</span>";
+    v.style.display = "";
+    var gb = document.querySelector(".geo-brief");
+    if (gb) gb.style.display = "none";
+  }
+
+  var html = "";
+  html += '<p class="quiet-note" style="margin:16px 0 0">These are <strong>whole-market provisional totals</strong> — the context layer. They do not overlap with the Deals tab, which tracks only disclosed bulk/block deals (single trades &gt; 0.5% of a company).</p>';
+
+  var dNet = oi && oiPrev ? oi.fii.fut_idx_net - oiPrev.fii.fut_idx_net : null;
+  html += '<div class="kpi-band reveal in" style="margin-top:14px">' +
+    '<div class="kpi accent"><span class="lbl">FII cash · ' + (cash ? fmtDate(cash.date) : "—") + '</span><div class="mid">' +
+      '<span class="val num" style="color:' + pctColor(cash ? cash.fii : 0) + '">' + (cash && cash.fii != null ? (cash.fii >= 0 ? "+" : "−") + inr(cash.fii) : "—") + "</span>" +
+      '<div class="hint-sub">provisional net, cash market</div></div></div>' +
+    '<div class="kpi"><span class="lbl">DII cash</span><div class="mid">' +
+      '<span class="val num" style="color:' + pctColor(cash ? cash.dii : 0) + '">' + (cash && cash.dii != null ? (cash.dii >= 0 ? "+" : "−") + inr(cash.dii) : "—") + "</span>" +
+      '<div class="hint-sub">mutual funds, insurers, banks</div></div></div>' +
+    '<div class="kpi"><span class="lbl">FII index futures</span><div class="mid">' +
+      '<span class="val num">' + (oi && oi.fii.long_pct != null ? oi.fii.long_pct + "% long" : "—") + "</span>" +
+      '<div class="hint-sub">' + (oi ? fmtContracts(oi.fii.fut_idx_long) + " long / " + fmtContracts(oi.fii.fut_idx_short) + " short" : "") + "</div></div></div>" +
+    '<div class="kpi"><span class="lbl">Positioning shift · 1d</span><div class="mid">' +
+      '<span class="val num" style="color:' + pctColor(dNet == null ? 0 : dNet) + '">' + (dNet != null ? (dNet >= 0 ? "+" : "−") + fmtContracts(dNet) : "—") + "</span>" +
+      '<div class="hint-sub">net index futures contracts added</div></div></div>' +
+    "</div>";
+
+  var cashData = F.cash.timeline.map(function (d) { return { date: d.date, fii_cr: d.fii || 0, dii_cr: d.dii || 0 }; });
+  html += '<div class="blk">' + blockHead("Daily cash flows — FII vs DII",
+    "Whole-market provisional net buying per session. This is the number the news quotes each evening.") +
+    flowTimelineSVG(cashData) + "</div>";
+
+  /* FII index futures net positioning bars */
+  var tl = F.derivs.timeline;
+  if (tl.length) {
+    var W = 1000, H = 260, padL = 10, padR = 10, padT = 16, padB = 26;
+    var n = tl.length;
+    var plotW = W - padL - padR, plotH = H - padT - padB;
+    var maxP = Math.max.apply(null, tl.map(function (d) { return Math.max(d.net, 0); }).concat([1]));
+    var maxN = Math.max.apply(null, tl.map(function (d) { return Math.max(-d.net, 0); }).concat([1]));
+    var zeroY = padT + plotH * (maxP / (maxP + maxN));
+    var band = plotW / n, bw = Math.min(band * 0.62, 24);
+    var bars = tl.map(function (d, i) {
+      var x = padL + band * (i + 0.5);
+      var up = (Math.max(d.net, 0) / maxP) * (zeroY - padT);
+      var dn = (Math.max(-d.net, 0) / maxN) * (padT + plotH - zeroY);
+      return '<g class="oi-bar" data-i="' + i + '">' +
+        '<rect x="' + (x - band / 2) + '" y="' + padT + '" width="' + band + '" height="' + plotH + '" fill="transparent"/>' +
+        (d.net >= 0
+          ? '<rect x="' + (x - bw / 2) + '" y="' + (zeroY - up) + '" width="' + bw + '" height="' + Math.max(up, 1) + '" rx="2" fill="' + POS + '"/>'
+          : '<rect x="' + (x - bw / 2) + '" y="' + zeroY + '" width="' + bw + '" height="' + Math.max(dn, 1) + '" rx="2" fill="' + NEG + '" opacity="0.8"/>') +
+        "</g>";
+    }).join("");
+    var step = Math.ceil(n / 7);
+    var ticks = tl.map(function (d, i) { return i; }).filter(function (i) { return i % step === 0; })
+      .map(function (i) {
+        return '<text x="' + (padL + band * (i + 0.5)) + '" y="' + (H - 8) + '" text-anchor="middle" font-size="12">' + shortDate(tl[i].date) + "</text>";
+      }).join("");
+    html += '<div class="blk">' + blockHead("FII index-futures positioning",
+      "Net index futures contracts held by FIIs — long above the line, short below. The fastest-turning FII sentiment gauge.") +
+      '<div class="surface-card chartbox" id="oi-box">' +
+      '<div class="legend-row"><span class="legend-key"><i style="background:' + POS + '"></i> net long</span>' +
+      '<span class="legend-key"><i style="background:' + NEG + '"></i> net short</span>' +
+      '<span class="legend-key" style="margin-left:auto">contracts · last ' + n + " sessions</span></div>" +
+      '<svg viewBox="0 0 ' + W + " " + H + '"><line x1="' + padL + '" y1="' + zeroY + '" x2="' + (W - padR) + '" y2="' + zeroY + '" stroke="rgba(255,255,255,0.12)"/>' + bars + ticks + "</svg>" +
+      '<div class="sm-tip" id="oi-tip"></div></div></div>';
+  }
+
+  /* latest option book */
+  if (oi) {
+    var f = oi.fii;
+    var cell = function (lbl, v2) {
+      return '<div class="cell"><span class="mono-lbl">' + lbl + '</span><div class="v">' + fmtContracts(v2) + "</div></div>";
+    };
+    html += '<div class="blk"><div class="panel" style="margin-bottom:0">' +
+      '<h2 style="font-family:var(--font-display);font-size:19px;margin:0 0 6px;color:var(--text-strong)">FII option book · ' + fmtDate(oi.date) + "</h2>" +
+      '<p style="font-size:13px;color:var(--muted);max-width:760px;margin:0">Index option open interest held by FIIs. Heavy put-long/call-short = hedged or bearish; call-long/put-short = leaning bullish.</p>' +
+      '<div class="meth-grid">' +
+      cell("Index calls long", f.opt_idx_call_long) + cell("Index puts long", f.opt_idx_put_long) +
+      cell("Index calls short", f.opt_idx_call_short) + cell("Index puts short", f.opt_idx_put_short) +
+      cell("Client net idx futures", oi.client_fut_idx_net) + cell("Prop net idx futures", oi.pro_fut_idx_net) +
+      "</div>" +
+      '<div class="foot-note" style="margin-top:14px">' + esc(F.meta.source) + ". Not investment advice.</div>" +
+      "</div></div>";
+  }
+
+  root.innerHTML = html;
+  bindChartHover("tl-box", "tl-tip", cashData, function (d) { return fmtDate(d.date); });
+  var oiBox = document.getElementById("oi-box");
+  if (oiBox) {
+    var tip = document.getElementById("oi-tip");
+    oiBox.querySelectorAll("g[data-i]").forEach(function (g) {
+      g.addEventListener("pointerenter", function () {
+        var d = tl[+g.dataset.i];
+        tip.innerHTML = '<div class="d">' + fmtDate(d.date) + '</div>' +
+          '<div class="r"><span>Net futures</span><span class="v" style="color:' + pctColor(d.net) + '">' + (d.net >= 0 ? "+" : "−") + fmtContracts(d.net) + "</span></div>" +
+          (d.long_pct != null ? '<div class="r"><span>Book</span><span class="v">' + d.long_pct + "% long</span></div>" : "");
+        var gr = g.getBoundingClientRect();
+        tip.style.left = Math.max(84, Math.min(gr.left + gr.width / 2 - oiBox.getBoundingClientRect().left, oiBox.clientWidth - 84)) + "px";
+        tip.classList.add("show");
+      });
+    });
+    oiBox.addEventListener("pointerleave", function () { tip.classList.remove("show"); });
+  }
+  if (window.RC) RC.reveal(root);
+}
+
+/* ============ FPI sector rotation (fortnightly NSDL) ============ */
+
+function renderSectors() {
+  if (!sectorsFeed) {
+    root.innerHTML = '<div class="skeleton" style="height:300px;margin-top:22px"></div>';
+    fetch("/api/smartmoney/fpisectors")
+      .then(function (r) { return r.json(); })
+      .then(function (d) { sectorsFeed = d; renderSectors(); })
+      .catch(function () {
+        root.innerHTML = '<div class="surface-card empty">Couldn\'t load the FPI sector feed.</div>';
+      });
+    return;
+  }
+  var F = sectorsFeed;
+  if (!F.latest) {
+    root.innerHTML = '<div class="surface-card empty">No NSDL reports ingested yet.</div>';
+    return;
+  }
+  var secs = F.latest.sectors;
+  var ins = secs.filter(function (s) { return s.net > 0; });
+  var outs = secs.filter(function (s) { return s.net < 0; }).sort(function (a, b) { return a.net - b.net; });
+  var total = secs.reduce(function (x, s) { return x + s.net; }, 0);
+
+  document.getElementById("period").textContent = "Fortnightly NSDL release · equity sleeve";
+  document.getElementById("upd").textContent = "● fortnight ended " + fmtDate(F.latest.date);
+
+  var v = document.getElementById("verdict");
+  v.innerHTML = '<span class="live-dot"></span> <span>In the fortnight to ' + fmtDate(F.latest.date) +
+    ", FPIs put the most money into <strong>" + esc(ins[0] ? ins[0].sector : "—") + "</strong>" +
+    (ins[0] ? ' (<span class="num mono" style="color:var(--bull)">+' + inr(ins[0].net) + "</span>)" : "") +
+    (outs[0] ? ' and pulled hardest from <strong>' + esc(outs[0].sector) + '</strong> (<span class="num mono" style="color:var(--bear)">−' + inr(Math.abs(outs[0].net)) + "</span>)" : "") +
+    ' <span class="sep">·</span> net equity flow <span class="num mono" style="color:' + pctColor(total) + '">' + (total >= 0 ? "+" : "−") + inr(total) + "</span></span>";
+  v.style.display = "";
+  var gb = document.querySelector(".geo-brief");
+  if (gb) gb.style.display = "none";
+
+  var html = '<p class="quiet-note" style="margin:16px 0 0">Sector-level FPI money — the layer between daily whole-market flows and quarterly stock-level stakes. Published by NSDL every 15th and month-end.</p>';
+
+  html += '<div class="kpi-band reveal in" style="margin-top:14px">' +
+    '<div class="kpi accent"><span class="lbl">Net FPI equity flow · fortnight</span><div class="mid"><span class="val num" style="color:' + pctColor(total) + '">' + (total >= 0 ? "+" : "−") + inr(total) + "</span></div></div>" +
+    '<div class="kpi"><span class="lbl">Money moving in</span><div class="mid"><span class="val">' + (ins[0] ? esc(ins[0].sector) : "—") + '</span><div class="hint-sub">' + (ins[0] ? "+" + inr(ins[0].net) + (ins[1] ? " · then " + esc(ins[1].sector) : "") : "") + "</div></div></div>" +
+    '<div class="kpi"><span class="lbl">Money moving out</span><div class="mid"><span class="val">' + (outs[0] ? esc(outs[0].sector) : "—") + '</span><div class="hint-sub">' + (outs[0] ? "−" + inr(Math.abs(outs[0].net)) + (outs[1] ? " · then " + esc(outs[1].sector) : "") : "") + "</div></div></div>" +
+    '<div class="kpi"><span class="lbl">Sectors rising</span><div class="mid"><span class="val">' + ins.length + " of " + secs.length + '</span><div class="hint-sub">with net FPI inflow</div></div></div>' +
+    "</div>";
+
+  var maxAbs = Math.max.apply(null, secs.map(function (s) { return Math.abs(s.net); }).concat([1]));
+  html += '<div class="blk">' + blockHead("Where FPI money moved",
+      "Net equity investment per sector over the fortnight, against the size of FPI holdings (AUC) in that sector.") +
+    '<div class="surface-card flav-card">' +
+    secs.map(function (s) {
+      var w = Math.max(Math.abs(s.net) / maxAbs * 100, 2);
+      var c = s.net >= 0 ? "var(--bull)" : "var(--bear)";
+      return '<div class="flav-item"><div class="row1">' +
+        '<span class="name">' + esc(s.sector) + "</span>" +
+        '<span class="idx" style="width:auto;color:var(--muted)" title="FPI assets in this sector">AUC ' + inr(s.auc) + "</span>" +
+        '<span class="amt" style="color:' + c + ';font-weight:600">' + (s.net >= 0 ? "+" : "−") + inr(Math.abs(s.net)) + "</span>" +
+        '</div><div class="track"><span class="fill" style="width:' + w + "%;background:" + c + '"></span></div></div>';
+    }).join("") +
+    '<div class="foot-note">' + esc(F.meta.source) + "</div>" +
+    "</div></div>";
+
+  root.innerHTML = html;
+  if (window.RC) RC.reveal(root);
+}
+
+/* ============ FII stake changes (quarterly shareholding) ============ */
+
+function renderStakes() {
+  if (!stakesFeed) {
+    root.innerHTML = '<div class="skeleton" style="height:300px;margin-top:22px"></div>';
+    fetch("/api/smartmoney/stakes")
+      .then(function (r) { return r.json(); })
+      .then(function (d) { stakesFeed = d; renderStakes(); })
+      .catch(function () {
+        root.innerHTML = '<div class="surface-card empty">Couldn\'t load the stakes feed.</div>';
+      });
+    return;
+  }
+  var F = stakesFeed;
+  if (!F.stocks || !F.stocks.length) {
+    root.innerHTML = '<div class="surface-card empty">Stake data is still being ingested — check back shortly.</div>';
+    return;
+  }
+  document.getElementById("period").textContent = "Quarterly shareholding filings · up to 21-day lag";
+  document.getElementById("upd").textContent = "● latest quarter " + F.meta.latest_quarter + " · Nifty 500";
+
+  var ups = F.stocks.filter(function (s) { return s.delta_q > 0.05; }).sort(function (a, b) { return b.delta_q - a.delta_q; });
+  var downs = F.stocks.filter(function (s) { return s.delta_q < -0.05; }).sort(function (a, b) { return a.delta_q - b.delta_q; });
+
+  var v = document.getElementById("verdict");
+  v.innerHTML = '<span class="live-dot"></span> <span>In the <strong>' + F.meta.latest_quarter + "</strong> quarter, FIIs raised their stake most in <strong>" +
+    (ups[0] ? esc(ups[0].symbol) : "—") + "</strong>" +
+    (ups[0] ? ' (<span class="num mono" style="color:var(--bull)">+' + ups[0].delta_q.toFixed(1) + ' pts</span> to ' + ups[0].pct.toFixed(1) + "%)" : "") +
+    (downs[0] ? ' and cut hardest in <strong>' + esc(downs[0].symbol) + '</strong> (<span class="num mono" style="color:var(--bear)">' + downs[0].delta_q.toFixed(1) + " pts</span>)" : "") +
+    ' <span class="sep">·</span> ' + ups.length + " stocks saw FII stakes rise, " + downs.length + " fall</span>";
+  v.style.display = "";
+  var gb = document.querySelector(".geo-brief");
+  if (gb) gb.style.display = "none";
+
+  var html = '<p class="quiet-note" style="margin:16px 0 0">The stock-level ground truth: exact FII holding % from mandatory quarterly filings. Lagged (up to 21 days after quarter end) but definitive — this is which stocks FIIs actually bought.</p>';
+
+  var q = state.stakeQ.toLowerCase();
+  var spark = function (s) {
+    var pts = s.series.filter(function (x) { return x.pct != null; });
+    if (pts.length < 2) return "";
+    var w = 64, h = 18;
+    var vals = pts.map(function (x) { return x.pct; });
+    var mn = Math.min.apply(null, vals), mx = Math.max.apply(null, vals);
+    var span = mx - mn || 1;
+    var path = pts.map(function (x, i) {
+      return (i ? "L" : "M") + (i / (pts.length - 1) * w).toFixed(1) + "," + (h - 2 - (x.pct - mn) / span * (h - 4)).toFixed(1);
+    }).join(" ");
+    return '<svg width="' + w + '" height="' + h + '" style="flex:0 0 auto"><path d="' + path + '" fill="none" stroke="' + (s.delta_q >= 0 ? "var(--bull)" : "var(--bear)") + '" stroke-width="1.6"/></svg>';
+  };
+  var list = function (items, color, sign) {
+    items = items.filter(function (s) {
+      return !q || (s.symbol + " " + s.name + " " + s.industry).toLowerCase().indexOf(q) >= 0;
+    }).slice(0, 15);
+    if (!items.length) return '<div class="surface-card empty">—</div>';
+    return '<div class="surface-card">' + items.map(function (s) {
+      return '<div class="ent-row">' +
+        '<span class="who"><span class="nm" style="font-weight:600">' + esc(s.symbol) + ' <span style="color:var(--muted);font-weight:400;font-size:11px">' + esc(s.industry) + "</span></span>" +
+        '<br/><span class="ty">FII ' + s.pct.toFixed(1) + "% now · " + F.meta.quarters.length + "q trend</span></span>" +
+        spark(s) +
+        '<span class="amt" style="color:' + color + '">' + sign + Math.abs(s.delta_q).toFixed(1) + " pts</span></div>";
+    }).join("") + "</div>";
+  };
+
+  html += '<div class="kpi-band reveal in" style="margin-top:14px">' +
+    '<div class="kpi accent"><span class="lbl">Quarter</span><div class="mid"><span class="val">' + F.meta.latest_quarter + '</span><div class="hint-sub">filings within 21 days of quarter end</div></div></div>' +
+    '<div class="kpi"><span class="lbl">Coverage</span><div class="mid"><span class="val">' + F.meta.n_stocks + '</span><div class="hint-sub">Nifty 500 with filed data</div></div></div>' +
+    '<div class="kpi"><span class="lbl">FII stakes rising</span><div class="mid"><span class="val" style="color:var(--bull)">' + ups.length + "</span></div></div>" +
+    '<div class="kpi"><span class="lbl">FII stakes falling</span><div class="mid"><span class="val" style="color:var(--bear)">' + downs.length + "</span></div></div>" +
+    "</div>";
+
+  html += '<div style="margin:0 0 14px"><input id="stake-q" type="search" placeholder="Search stock, name or industry…" value="' + esc(state.stakeQ) + '" style="width:100%;max-width:420px;padding:10px 14px;background:var(--panel);border:1px solid var(--border);border-radius:var(--r-md);color:var(--text);font-family:inherit;font-size:13.5px;outline:none" /></div>';
+
+  html += '<div class="sm-grid" style="grid-template-columns:1fr 1fr">';
+  html += '<div class="blk" style="margin-bottom:0">' + blockHead("FIIs accumulated", "Biggest quarter-on-quarter increases in FII holding.") + list(ups, "var(--bull)", "+") + "</div>";
+  html += '<div class="blk" style="margin-bottom:0">' + blockHead("FIIs exited", "Biggest quarter-on-quarter cuts in FII holding.") + list(downs, "var(--bear)", "−") + "</div>";
+  html += "</div>";
+
+  html += '<div class="foot-note" style="margin-top:6px">' + esc(F.meta.source) + " Deltas in percentage points of total shares.</div>";
+
+  root.innerHTML = html;
+  var qi = document.getElementById("stake-q");
+  qi.addEventListener("input", function () {
+    state.stakeQ = qi.value;
+    var pos = qi.selectionStart;
+    renderStakes();
+    var again = document.getElementById("stake-q");
+    again.focus();
+    again.setSelectionRange(pos, pos);
+  });
+  if (window.RC) RC.reveal(root);
+}
+
 /* ============ render ============ */
 
 function render() {
+  var winTabs = document.getElementById("tab-window");
+  var modeTabs = document.getElementById("tab-mode");
+  if (state.view !== "deals") {
+    winTabs.style.display = "none";
+    modeTabs.style.display = "none";
+    if (state.view === "flows") renderFlows();
+    else if (state.view === "sectors") renderSectors();
+    else renderStakes();
+    return;
+  }
+  winTabs.style.display = "";
+  modeTabs.style.display = "";
   if (!feed) return;
   var w = feed[state.tab];
   var side = w[state.dir];
@@ -849,6 +1183,7 @@ function render() {
 /* ---- tabs ---- */
 document.addEventListener("DOMContentLoaded", function () {
   if (!window.RC) return;
+  RC.tabs(document.getElementById("tab-view"), function (key) { state.view = key; render(); });
   RC.tabs(document.getElementById("tab-window"), function (key) { state.tab = key; render(); });
   RC.tabs(document.getElementById("tab-mode"), function (key) { state.mode = key; render(); });
 });

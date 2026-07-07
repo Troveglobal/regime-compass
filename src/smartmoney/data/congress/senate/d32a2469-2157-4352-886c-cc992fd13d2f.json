@@ -1,0 +1,1 @@
+{"first": "John", "last": "Boozman", "filed": "07/09/2025", "chamber": "Senate", "txns": [{"date": "2025-06-11", "owner": "Joint", "symbol": "TBLL", "asset": "Invesco Short Term Treasury ETF", "side": "BUY", "lo": 1001, "hi": 15000}, {"date": "2025-06-11", "owner": "Joint", "symbol": "AVGO", "asset": "Broadcom Inc. - Common Stock", "side": "BUY", "lo": 1001, "hi": 15000}]}

@@ -1,0 +1,1 @@
+{"first": "John", "last": "Boozman", "filed": "04/20/2025", "chamber": "Senate", "txns": [{"date": "2025-03-19", "owner": "Joint", "symbol": "IVW", "asset": "iShares S&amp;P 500 Growth ETF", "side": "SELL", "lo": 1001, "hi": 15000}, {"date": "2025-03-19", "owner": "Joint", "symbol": "DTE", "asset": "Dte Energy Company", "side": "SELL", "lo": 1001, "hi": 15000}]}
