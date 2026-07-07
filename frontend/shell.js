@@ -33,6 +33,12 @@
     '<a href="/ema" data-nav="/ema">EMA <span class="dd-note">Exponential Moving Average</span></a>' +
     '<a href="/validation" data-nav="/validation">Validation <span class="dd-note">HMM accuracy audit</span></a>' +
     "</span></span>" +
+    '<span class="nav-dd"><span class="dd-trigger">Quant <span class="chev">&#9662;</span></span><span class="dd-menu">' +
+    '<a href="/movers" data-nav="/movers">Regime Movers <span class="dd-note">today&#39;s abnormal moves</span></a>' +
+    '<a href="/systemic" data-nav="/systemic">Systemic Risk <span class="dd-note">turbulence &middot; absorption</span></a>' +
+    '<a href="/volatility" data-nav="/volatility">Volatility <span class="dd-note">stress percentile</span></a>' +
+    '<a href="/correlations" data-nav="/correlations">Correlations <span class="dd-note">cross-asset matrix</span></a>' +
+    "</span></span>" +
     '<span class="nav-dd"><span class="dd-trigger">Smart Money <span class="chev">&#9662;</span></span><span class="dd-menu">' +
     '<a href="/smartmoney" data-nav="/smartmoney">🇮🇳 India <span class="dd-note">deals · flows · stakes</span></a>' +
     '<a href="/smartmoney/tw" data-nav="/smartmoney/tw">🇹🇼 Taiwan <span class="dd-note">TWSE block deals</span></a>' +
@@ -41,8 +47,6 @@
     "</span></span>" +
     '<span class="nav-dd"><span class="dd-trigger">Markets <span class="chev">&#9662;</span></span><span class="dd-menu">' +
     '<a href="/sectors" data-nav="/sectors">Sector Heatmap <span class="dd-note">India · daily</span></a>' +
-    '<a href="/correlations" data-nav="/correlations">Correlations <span class="dd-note">cross-asset matrix</span></a>' +
-    '<a href="/volatility" data-nav="/volatility">Volatility <span class="dd-note">stress percentile</span></a>' +
     '<a href="/yields" data-nav="/yields">Yield Curve</a>' +
     '<a href="/valuation" data-nav="/valuation">Valuation</a>' +
     '<a href="/seasonality" data-nav="/seasonality">Seasonality</a>' +
@@ -63,8 +67,10 @@
     "</div>" +
     '<div class="f-col"><h5>Signals</h5>' +
     '<a href="/today">Daily Brief</a><a href="/composite">Risk Score</a><a href="/hmm">HMM</a><a href="/ma">Moving Average</a><a href="/ema">EMA</a><a href="/smartmoney">Smart Money India</a><a href="/smartmoney/tw">Smart Money Taiwan</a><a href="/smartmoney/id">Smart Money Indonesia</a><a href="/smartmoney/us">Smart Money US</a></div>' +
+    '<div class="f-col"><h5>Quant</h5>' +
+    '<a href="/movers">Regime Movers</a><a href="/systemic">Systemic Risk</a><a href="/volatility">Volatility</a><a href="/correlations">Correlations</a><a href="/validation">Validation</a></div>' +
     '<div class="f-col"><h5>Markets</h5>' +
-    '<a href="/sectors">Sector Heatmap</a><a href="/correlations">Correlations</a><a href="/volatility">Volatility</a><a href="/yields">Yield Curve</a><a href="/valuation">Valuation</a><a href="/seasonality">Seasonality</a><a href="/calendar">Calendar</a><a href="/news">News</a></div>' +
+    '<a href="/sectors">Sector Heatmap</a><a href="/yields">Yield Curve</a><a href="/valuation">Valuation</a><a href="/seasonality">Seasonality</a><a href="/calendar">Calendar</a><a href="/news">News</a></div>' +
     '<div class="f-col"><h5>Company</h5>' +
     '<a href="/about">About</a><a href="/methodology">Methodology</a><a href="/validation">Validation</a><a href="/subscribe">Alerts</a><a href="/disclaimer">Disclaimer</a><a href="/terms">Terms</a><a href="/privacy">Privacy</a></div>' +
     "</div>" +

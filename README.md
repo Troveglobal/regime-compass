@@ -92,6 +92,10 @@ uvicorn src.api:app --host 127.0.0.1 --port 8001
 | `src/ma_backtest.py` | Walk-forward backtest with 2-day confirmation |
 | `src/composite.py` | Per-market risk score |
 | `src/inference.py` | Filtered probabilities (causal) |
+| `src/analytics.py` | Pure stats: regime z-score, calendar alignment, turbulence, absorption ratio |
+| `src/movers.py` | Regime Movers feed (regime-conditional z-scores) |
+| `src/sparklines.py` | Regime-ribbon sparkline feed for the home grid |
+| `src/systemic.py` | Systemic Risk feed (turbulence + absorption ratio) |
 | `src/subscriptions.py` | Email subscriber database |
 | `src/email_sender.py` | Resend integration |
 | `src/alerts.py` | Daily alert detection + dispatch |

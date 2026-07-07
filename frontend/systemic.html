@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-94DE53GC07"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', { analytics_storage: 'denied' });
+    gtag('js', new Date());
+    gtag('config', 'G-94DE53GC07');
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Systemic Risk — Regime Compass</title>
+  <meta name="description" content="Financial Turbulence and the Absorption Ratio across eleven markets — Kritzman-style measures of cross-asset fragility, updated daily." />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Regime Compass" />
+  <meta property="og:title" content="Systemic Risk — Regime Compass" />
+  <meta property="og:description" content="Financial Turbulence and the Absorption Ratio — how fragile is the cross-asset system right now?" />
+  <meta property="og:image" content="https://www.regimecompass.com/og-image.png" />
+  <meta property="og:url" content="https://www.regimecompass.com/systemic" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Systemic Risk — Regime Compass" />
+  <meta name="twitter:description" content="Financial Turbulence and the Absorption Ratio — how fragile is the cross-asset system right now?" />
+  <meta name="twitter:image" content="https://www.regimecompass.com/og-image.png" />
+  <meta name="theme-color" content="#07090e" />
+  <link rel="canonical" href="https://www.regimecompass.com/systemic" />
+  <link rel="stylesheet" href="/styles.css?v=4.3" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="manifest" href="/manifest.json" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    .sys-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 22px; }
+    @media (max-width: 860px) { .sys-strip { grid-template-columns: 1fr; } }
+    .sys-tile {
+      background: linear-gradient(180deg, rgba(255,255,255,0.015), transparent 40%), var(--panel);
+      border: 1px solid var(--border); border-radius: var(--r-lg);
+      padding: 18px 20px; box-shadow: var(--shadow-sm), inset 0 1px 0 var(--edge-light);
+    }
+    .sys-tile .label { font-size: 10.5px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 1.4px; margin-bottom: 8px; }
+    .sys-tile .value { font-family: var(--font-display); font-size: 30px; font-weight: 600; color: var(--text-strong); font-variant-numeric: tabular-nums; line-height: 1.1; }
+    .sys-tile .value .unit { font-size: 14px; color: var(--muted); font-family: var(--font-mono); margin-left: 4px; }
+    .sys-tile .read { font-size: 12.5px; color: var(--text-body); margin-top: 8px; line-height: 1.5; }
+    .sys-tile.flag { border-color: rgba(227,84,84,0.4); box-shadow: 0 0 18px rgba(227,84,84,0.1), inset 0 1px 0 var(--edge-light); }
+    .sys-tile.flag .value { color: #f09c9c; }
+    .sys-tile.warn { border-color: rgba(212,160,23,0.4); }
+
+    .chart-head { display: flex; align-items: baseline; justify-content: space-between; gap: 14px; flex-wrap: wrap; margin-bottom: 10px; }
+    .chart-head .sub { font-size: 12px; color: var(--muted); }
+    .provenance { font-size: 12px; color: var(--muted-2); font-family: var(--font-mono); margin-top: 18px; }
+  </style>
+  <script type="application/ld+json">
+  {"@context": "https://schema.org", "@type": "WebPage", "name": "Systemic Risk — Regime Compass", "description": "Financial Turbulence and the Absorption Ratio across eleven markets — measures of cross-asset fragility, updated daily.", "url": "https://www.regimecompass.com/systemic", "isPartOf": {"@type": "WebSite", "name": "Regime Compass", "url": "https://www.regimecompass.com"}}
+  </script>
+</head>
+<body>
+<script src="/shell.js?v=4.9"></script>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="kicker">Systemic Risk</div>
+    <h1>How fragile is the whole system?</h1>
+    <div class="tagline">Two institutional statistics computed jointly across all eleven markets. <strong>Turbulence</strong> asks whether today's cross-asset moves are strange relative to recent history &mdash; not just big, but wrong-shaped. The <strong>Absorption Ratio</strong> asks how unified markets have become: when a couple of hidden factors explain most of the variance, shocks propagate instead of dissipating.</div>
+    <div id="share-container"></div>
+  </div>
+
+  <div class="sys-strip reveal" id="sys-strip">
+    <div class="skeleton" style="height:110px;border-radius:var(--r-lg);"></div>
+    <div class="skeleton" style="height:110px;border-radius:var(--r-lg);"></div>
+    <div class="skeleton" style="height:110px;border-radius:var(--r-lg);"></div>
+  </div>
+
+  <div style="display:flex;justify-content:flex-end;margin-bottom:14px;" class="reveal">
+    <div class="tabs" id="range-tabs">
+      <button class="tab active" data-tab="weekly">10 years</button>
+      <button class="tab" data-tab="daily">90 days</button>
+    </div>
+  </div>
+
+  <section class="chart-card reveal" style="margin-bottom:20px;">
+    <div class="chart-head">
+      <div class="panel-title" style="margin:0;">Financial Turbulence &mdash; Mahalanobis distance, 11 markets</div>
+      <div class="sub">dotted lines: 90th / 99th percentile of the last 5 years</div>
+    </div>
+    <div class="chart-wrap"><canvas id="turb-chart"></canvas></div>
+  </section>
+
+  <section class="chart-card reveal reveal-d1" style="margin-bottom:20px;">
+    <div class="chart-head">
+      <div class="panel-title" style="margin:0;">Absorption Ratio &mdash; share of variance in the top 2 factors</div>
+      <div class="sub" id="ar-sub"></div>
+    </div>
+    <div class="chart-wrap"><canvas id="ar-chart"></canvas></div>
+  </section>
+
+  <div class="section reveal">
+    <h2>Methodology</h2>
+    <p><strong>Financial Turbulence</strong> measures how statistically unusual today's cross-asset return vector is, in one number. We take the eleven markets' daily returns and compute the Mahalanobis distance <code>d_t = (r_t &minus; &mu;)&#7511; &Sigma;&#8315;&sup1; (r_t &minus; &mu;)</code>, where the mean and covariance are estimated on the trailing 500 trading days ending the day before &mdash; today never informs its own baseline. The covariance uses Ledoit-Wolf shrinkage for stability. High turbulence means assets are moving unusually far, in unusual combinations &mdash; correlations breaking, hedges failing &mdash; which is when risk models built on calm data understate losses. Introduced by Kritzman &amp; Li (2010), <em>"Skulls, Financial Turbulence, and Risk Management."</em></p>
+    <p><strong>The Absorption Ratio</strong> measures how tightly unified markets are. Each day we take the covariance matrix of the eleven return series over the trailing 250 days and ask: how much of the total variance is absorbed by the top two principal components &mdash; two hidden common factors? A high ratio means markets are moving as one bloc, so a shock anywhere transmits everywhere; a low ratio means risk is spread across independent drivers. The standardized 15-day shift (&Delta;AR) is the early-warning version: a rise of more than +1&sigma; says markets are unifying quickly. In both the original research and our own sample, forward returns after unification ran worse than after de-coupling &mdash; treat it as a fragility flag, not a timing signal. From Kritzman, Li, Page &amp; Rigobon (2011), <em>"Principal Components as a Measure of Systemic Risk."</em></p>
+    <p>All markets are first aligned to a common trading calendar: dates where every market traded, with single-day holiday gaps carried forward (one day max). Markets with under three years of history would be excluded (none currently are). Both series are precomputed in the daily pipeline; regime-state models play no role here &mdash; this page is pure price statistics. Fragility measures say nothing about direction: turbulent markets fall <em>and</em> rally hard. Educational, not investment advice &mdash; see the <a href="/disclaimer">Disclaimer</a>.</p>
+  </div>
+
+  <div class="provenance reveal" id="provenance">Data: Yahoo Finance daily closes &middot; loading&hellip;</div>
+</div>
+
+<script src="/charts.js?v=4.0"></script>
+<script>
+const fmtD = iso => new Date(iso + "T00:00:00").toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+
+/* dotted horizontal reference lines, labelled at the right edge */
+const refLines = {
+  id: "refLines",
+  afterDatasetsDraw(chart) {
+    const lines = chart.config.options.rcRefLines || [];
+    const { ctx, chartArea: a, scales: { y } } = chart;
+    ctx.save();
+    for (const ln of lines) {
+      const py = y.getPixelForValue(ln.value);
+      if (py < a.top || py > a.bottom) continue;
+      ctx.setLineDash([4, 4]);
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = ln.color;
+      ctx.beginPath(); ctx.moveTo(a.left, py); ctx.lineTo(a.right, py); ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.font = "10px " + '"JetBrains Mono", monospace';
+      ctx.fillStyle = ln.color;
+      ctx.textAlign = "right";
+      ctx.fillText(ln.label, a.right - 4, py - 4);
+    }
+    ctx.restore();
+  },
+};
+
+let turbChart = null, arChart = null, feed = null;
+
+function seriesFrom(points) {
+  return {
+    labels: points.map(p => p[0]),
+    raw: points.map(p => p[1]),
+    smooth: points.map(p => p[2]),
+  };
+}
+
+function renderCharts(range) {
+  const t = seriesFrom(range === "daily" ? feed.turbulence.daily_90d : feed.turbulence.weekly);
+  const a = seriesFrom(range === "daily" ? feed.absorption.daily_90d : feed.absorption.weekly);
+  const tickCfg = { maxTicksLimit: 8, callback(v) {
+    const d = this.getLabelForValue(v);
+    return range === "daily" ? d.slice(5) : d.slice(0, 4);
+  }};
+  const common = {
+    plugins: { legend: { display: true } },
+    scales: { x: { ticks: tickCfg, grid: { display: false } }, y: { beginAtZero: false } },
+  };
+
+  if (turbChart) turbChart.destroy();
+  turbChart = new Chart(document.getElementById("turb-chart"), {
+    type: "line",
+    data: { labels: t.labels, datasets: [
+      { label: "Turbulence", data: t.raw, borderColor: RCCharts.alpha(RCCharts.accent, 0.35), borderWidth: 1.2, tension: 0.2 },
+      { label: "10-day smoothed", data: t.smooth, borderColor: RCCharts.accent, borderWidth: 2 },
+    ]},
+    options: { ...common,
+      rcRefLines: [
+        { value: feed.turbulence.p90, color: RCCharts.alpha(RCCharts.regimeUI.neutral, 0.8), label: "90th" },
+        { value: feed.turbulence.p99, color: RCCharts.alpha(RCCharts.regimeUI.bear, 0.8), label: "99th" },
+      ],
+      scales: { ...common.scales, y: { beginAtZero: true } },
+    },
+    plugins: [refLines],
+  });
+
+  if (arChart) arChart.destroy();
+  arChart = new Chart(document.getElementById("ar-chart"), {
+    type: "line",
+    data: { labels: a.labels, datasets: [
+      { label: "Absorption Ratio", data: a.raw, borderColor: RCCharts.alpha(RCCharts.cat[1], 0.35), borderWidth: 1.2, tension: 0.2 },
+      { label: "10-day smoothed", data: a.smooth, borderColor: RCCharts.cat[1], borderWidth: 2 },
+    ]},
+    options: { ...common,
+      scales: { ...common.scales, y: { min: 0.4, max: 1,
+        ticks: { callback: v => (v * 100).toFixed(0) + "%" } } },
+    },
+  });
+}
+
+async function load() {
+  feed = await (await fetch("/api/systemic")).json();
+  const tb = feed.turbulence, ab = feed.absorption;
+
+  const turbRead = tb.current_percentile >= 99 ? "Extreme stress — cross-asset moves are badly out of character."
+    : tb.current_percentile >= 90 ? "Elevated — assets are moving in unusual combinations. Trim assumptions built on calm markets."
+    : tb.current_percentile >= 60 ? "Slightly above normal — worth watching, not alarming."
+    : "Calm — today's cross-asset moves look like the recent past.";
+  const arRead = `${(ab.current * 100).toFixed(0)}% of all variance across ${ab.n_assets} markets sits in just ${ab.n_components} hidden factors — ` +
+    (ab.current_percentile >= 80 ? "markets are tightly coupled; shocks travel." :
+     ab.current_percentile >= 25 ? "typical coupling for this universe." :
+     "risk is unusually well spread across independent drivers.");
+  const darFlag = ab.delta_ar != null && ab.delta_ar > 1;
+  const darRead = ab.delta_ar == null ? "Insufficient history for the shift signal."
+    : darFlag ? "Markets unifying — fragility rising. The coupling jumped over the last 15 sessions."
+    : ab.delta_ar < -1 ? "Markets de-coupling — the system is diversifying versus its one-year norm."
+    : "No unification signal — coupling is near its one-year norm.";
+
+  const strip = document.getElementById("sys-strip");
+  strip.innerHTML = `
+    <div class="sys-tile ${tb.current_percentile >= 99 ? "flag" : tb.current_percentile >= 90 ? "warn" : ""}">
+      <div class="label">Turbulence percentile</div>
+      <div class="value">${tb.current_percentile.toFixed(0)}<span class="unit">th of 5y</span></div>
+      <div class="read">${turbRead}</div>
+    </div>
+    <div class="sys-tile">
+      <div class="label">Absorption ratio</div>
+      <div class="value">${(ab.current * 100).toFixed(1)}<span class="unit">%</span></div>
+      <div class="read">${arRead}</div>
+    </div>
+    <div class="sys-tile ${darFlag ? "flag" : ""}">
+      <div class="label">&Delta;AR &mdash; 15d shift</div>
+      <div class="value">${ab.delta_ar == null ? "—" : (ab.delta_ar > 0 ? "+" : "") + ab.delta_ar.toFixed(2)}<span class="unit">&sigma;</span></div>
+      <div class="read">${darRead}</div>
+    </div>`;
+
+  document.getElementById("ar-sub").textContent =
+    `top ${ab.n_components} of ${ab.n_assets} principal components · ${ab.window}-day window`;
+  document.getElementById("provenance").textContent =
+    `Data: ${feed.source} · common calendar ${fmtD(feed.calendar.start)} → ${fmtD(feed.calendar.end)} · As of ${fmtD(feed.as_of)} close`;
+
+  renderCharts("weekly");
+  RC.tabs(document.getElementById("range-tabs"), tab => renderCharts(tab));
+}
+load().catch(e => {
+  document.getElementById("sys-strip").innerHTML =
+    '<div class="sys-tile" style="grid-column:1/-1;color:var(--muted);">Feed unavailable — try again shortly.</div>';
+  console.error(e);
+});
+</script>
+<script src="/share.js?v=3.1"></script>
+<script>
+renderShareButtons("share-container", "systemic", "Systemic Risk — Regime Compass");
+</script>
+</body>
+</html>

@@ -26,7 +26,7 @@
   <meta name="twitter:image" content="https://www.regimecompass.com/og-image.png" />
   <meta name="theme-color" content="#07090e" />
   <link rel="canonical" href="https://www.regimecompass.com/" />
-  <link rel="stylesheet" href="/styles.css?v=4.2" />
+  <link rel="stylesheet" href="/styles.css?v=4.3" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="manifest" href="/manifest.json" />
   <style>
@@ -104,6 +104,7 @@
     .sm-card .sm-mkt { font-weight: 650; font-size: 14.5px; color: var(--text-strong); margin-top: 4px; }
     .sm-card .sm-line { font-size: 12px; color: var(--muted); line-height: 1.5; }
     .sm-card .sm-line strong { color: var(--text-body); font-weight: 600; }
+    .qt-glyph { font-family: var(--font-mono); font-weight: 700; color: var(--accent-strong); font-size: 19px; }
 
     /* Model sections */
     .model-section { margin-bottom: 44px; }
@@ -233,6 +234,26 @@
       .snap-grid .snap-h:not(:first-child) { display: none; }
       .snap-row-label { padding: 12px; }
     }
+
+    /* ── Regime-ribbon sparklines (HMM grid) ── */
+    .spark-ribbon { margin-top: 9px; }
+    .spark-ribbon svg { display: block; width: 100%; height: 34px; border-radius: 4px; }
+    .spark-legend {
+      display: inline-flex; align-items: center; gap: 12px; flex-wrap: wrap;
+      font-size: 11px; color: var(--muted); margin-left: 10px;
+    }
+    .spark-legend .sw { display: inline-block; width: 10px; height: 10px; border-radius: 2px; vertical-align: -1px; margin-right: 4px; }
+    #spark-tt {
+      position: fixed; z-index: 300; pointer-events: none;
+      background: rgba(12, 15, 22, 0.92);
+      -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+      border: 1px solid var(--border-strong); border-radius: var(--r-md);
+      padding: 8px 11px; box-shadow: var(--shadow-lg);
+      font-size: 11.5px; line-height: 1.5; font-family: var(--font-mono);
+      opacity: 0; transition: opacity 0.12s ease;
+    }
+    #spark-tt.show { opacity: 1; }
+    #spark-tt .d { color: var(--muted); font-size: 10.5px; }
   </style>
   <script type="application/ld+json">
   {
@@ -280,7 +301,7 @@
   <!--GEO:JSONLD-->
 </head>
 <body>
-<script src="/shell.js?v=4.7"></script>
+<script src="/shell.js?v=4.9"></script>
 
 <div class="wrap">
   <div class="hero hero-home">
@@ -374,6 +395,30 @@
     </div>
   </section>
 
+  <!-- Quant Toolkit strip -->
+  <section class="model-section reveal" id="qt-strip-section">
+    <h2>Quant Toolkit <span class="tag">cross-market statistics · daily</span></h2>
+    <div class="subline">The numbers behind the regimes — how abnormal today's moves were, and how fragile the system is underneath.</div>
+    <div class="sm-strip" id="qt-strip">
+      <a class="sm-card" href="/movers">
+        <span class="sm-flag qt-glyph">σ</span><span class="sm-mkt">Regime Movers</span>
+        <span class="sm-line" id="qts-movers">Today's moves scored inside each market's own regime</span>
+      </a>
+      <a class="sm-card" href="/systemic">
+        <span class="sm-flag qt-glyph">Σ</span><span class="sm-mkt">Systemic Risk</span>
+        <span class="sm-line" id="qts-systemic">Turbulence &amp; absorption ratio across all 11 markets</span>
+      </a>
+      <a class="sm-card" href="/volatility">
+        <span class="sm-flag qt-glyph">√</span><span class="sm-mkt">Volatility</span>
+        <span class="sm-line" id="qts-vol">A VIX-style stress percentile for every market</span>
+      </a>
+      <a class="sm-card" href="/correlations">
+        <span class="sm-flag qt-glyph">ρ</span><span class="sm-mkt">Correlations</span>
+        <span class="sm-line" id="qts-corr">Cross-asset correlation matrix, three windows</span>
+      </a>
+    </div>
+  </section>
+
   <!-- Count-up stats strip -->
   <div class="stats-strip reveal">
     <div class="cell"><div class="v num" data-count="11">0</div><div class="k">Markets tracked</div></div>
@@ -411,7 +456,13 @@
   <!-- HMM snapshot section -->
   <section class="model-section reveal">
     <h2>Hidden Markov Model Regime <span class="tag">3-state Gaussian HMM</span></h2>
-    <div class="subline">Filtered probabilities of bear / neutral / bull for each index. <a href="/hmm">Drill into detail →</a></div>
+    <div class="subline">Filtered probabilities of bear / neutral / bull for each index. <a href="/hmm">Drill into detail →</a>
+      <span class="spark-legend" id="spark-legend" style="display:none;">90-session price, shaded by daily regime:
+        <span><span class="sw" style="background:rgba(52,198,115,0.35);"></span>bull</span>
+        <span><span class="sw" style="background:rgba(212,160,23,0.32);"></span>neutral</span>
+        <span><span class="sw" style="background:rgba(227,84,84,0.35);"></span>bear</span>
+      </span>
+    </div>
     <div class="snap-grid hmm">
       <div class="snap-h">Index</div>
       <div class="snap-h">Bear</div>
@@ -486,6 +537,7 @@ async function loadHmmSnapshot() {
   for (const row of s.indices) {
     const label = document.createElement("div");
     label.className = "snap-row-label";
+    label.dataset.sparkKey = row.index_key;
     const nm = document.createElement("div"); nm.className = "name"; nm.textContent = row.index_name;
     const co = document.createElement("div"); co.className = "country"; co.textContent = row.country;
     label.appendChild(nm); label.appendChild(co);
@@ -566,6 +618,82 @@ async function loadBoard() {
   }
 }
 
+/* ── Regime-ribbon sparklines: 90 sessions of price over HMM state bands ── */
+const SPARK_BAND = ["rgba(227,84,84,0.15)", "rgba(212,160,23,0.13)", "rgba(52,198,115,0.15)"]; // bear, neutral, bull @ ~12–18% opacity
+const SVG_NS = "http://www.w3.org/2000/svg";
+
+function buildSpark(container, mkt, stateLabels) {
+  const pts = mkt.points;               // [[date, close, stateIdx], ...]
+  if (!pts || pts.length < 2) return;
+  const W = 200, H = 34, PAD = 3;       // small vertical padding around the price range
+  const svg = document.createElementNS(SVG_NS, "svg");
+  svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+  svg.setAttribute("preserveAspectRatio", "none");
+  svg.setAttribute("aria-label", mkt.name + " — 90-session price with regime shading");
+
+  const x = i => (i / (pts.length - 1)) * W;
+
+  /* contiguous same-state runs merge into single background rects */
+  let runStart = 0;
+  for (let i = 1; i <= pts.length; i++) {
+    if (i === pts.length || pts[i][2] !== pts[runStart][2]) {
+      const rect = document.createElementNS(SVG_NS, "rect");
+      rect.setAttribute("x", x(runStart === 0 ? 0 : runStart - 0.5));
+      rect.setAttribute("width", x(i === pts.length ? pts.length - 1 : i - 0.5) - x(runStart === 0 ? 0 : runStart - 0.5));
+      rect.setAttribute("y", 0); rect.setAttribute("height", H);
+      rect.setAttribute("fill", SPARK_BAND[pts[runStart][2]]);
+      svg.appendChild(rect);
+      runStart = i;
+    }
+  }
+
+  /* price line, normalized to its own min/max */
+  const closes = pts.map(p => p[1]);
+  const lo = Math.min(...closes), hi = Math.max(...closes);
+  const span = hi - lo || 1;
+  const y = v => H - PAD - ((v - lo) / span) * (H - 2 * PAD);
+  const line = document.createElementNS(SVG_NS, "polyline");
+  line.setAttribute("points", pts.map((p, i) => `${x(i).toFixed(1)},${y(p[1]).toFixed(1)}`).join(" "));
+  line.setAttribute("fill", "none");
+  line.setAttribute("stroke", "rgba(198,207,218,0.85)");   /* --text-body, subtle */
+  line.setAttribute("stroke-width", "2");
+  line.setAttribute("vector-effect", "non-scaling-stroke");
+  line.setAttribute("stroke-linejoin", "round");
+  svg.appendChild(line);
+
+  const wrap = document.createElement("div");
+  wrap.className = "spark-ribbon";
+  wrap.appendChild(svg);
+  container.appendChild(wrap);
+
+  /* hover tooltip — desktop only; touch keeps the plain visual */
+  if (window.matchMedia("(hover: hover)").matches) {
+    let tt = document.getElementById("spark-tt");
+    if (!tt) { tt = document.createElement("div"); tt.id = "spark-tt"; document.body.appendChild(tt); }
+    svg.addEventListener("mousemove", e => {
+      const r = svg.getBoundingClientRect();
+      const i = Math.max(0, Math.min(pts.length - 1, Math.round(((e.clientX - r.left) / r.width) * (pts.length - 1))));
+      const [d, c, st] = pts[i];
+      tt.innerHTML = `<span class="d">${d}</span><br>${c.toLocaleString("en-US", { maximumFractionDigits: 2 })} · ${stateLabels[st]}`;
+      tt.style.left = Math.min(e.clientX + 12, window.innerWidth - tt.offsetWidth - 10) + "px";
+      tt.style.top = (r.top - tt.offsetHeight - 8) + "px";
+      tt.classList.add("show");
+    });
+    svg.addEventListener("mouseleave", () => tt.classList.remove("show"));
+    window.addEventListener("scroll", () => tt.classList.remove("show"), { passive: true });
+  }
+}
+
+async function loadSparklines() {
+  const d = await (await fetch("/api/sparklines")).json();
+  const byKey = Object.fromEntries(d.markets.map(m => [m.index_key, m]));
+  document.querySelectorAll('#hmm-rows [data-spark-key]').forEach(label => {
+    const mkt = byKey[label.dataset.sparkKey];
+    if (mkt) buildSpark(label, mkt, d.state_labels);
+  });
+  document.getElementById("spark-legend").style.display = "";
+}
+
 (async () => {
   loadBoard().catch(e => console.error("board failed:", e));
   showSkeletons("dma-rows", 4);
@@ -576,6 +704,7 @@ async function loadBoard() {
     loadMaSnapshot("/api/ema/snapshot", "ema-rows", "/ema"),
     loadHmmSnapshot(),
   ]);
+  loadSparklines().catch(e => console.error("sparklines failed:", e));
   const now = new Date();
   const utc = now.toISOString().replace("T", " ").slice(0, 16) + " UTC";
   document.getElementById("updated").textContent = "Last refresh: " + utc + " · updated daily after US close";
@@ -631,6 +760,36 @@ async function loadBoard() {
         (s.congress && s.congress.top ? " · Congress's hottest buy: <strong>" + s.congress.top + "</strong>" : ""));
     }
   } catch (e) { /* static card copy stays */ }
+})();
+
+/* Quant Toolkit strip — live one-liners; static copy stays on any failure */
+(async () => {
+  const set = (id, html) => { const el = document.getElementById(id); if (el) el.innerHTML = html; };
+  try {
+    const d = await (await fetch("/api/movers")).json();
+    const t = d.markets[0];
+    if (t && t.z != null) set("qts-movers",
+      `Most abnormal today: <strong>${t.name} ${(t.z > 0 ? "+" : "") + t.z.toFixed(1)}σ</strong> within its ${t.regime} regime (${(t.pct_1d >= 0 ? "+" : "") + t.pct_1d.toFixed(1)}%)`);
+  } catch (e) {}
+  try {
+    const s = await (await fetch("/api/systemic")).json();
+    const dar = s.absorption.delta_ar;
+    set("qts-systemic",
+      `Turbulence at the <strong>${s.turbulence.current_percentile.toFixed(0)}th percentile</strong>` +
+      (dar != null && dar > 1 ? " · <strong>markets unifying — fragility rising</strong>"
+        : ` · ${(s.absorption.current * 100).toFixed(0)}% of variance in 2 factors`));
+  } catch (e) {}
+  try {
+    const v = await (await fetch("/api/vol")).json();
+    const top = v.markets[0];
+    if (top) set("qts-vol",
+      `Most stressed: <strong>${top.index_name}</strong> at its <strong>${top.percentile.toFixed(0)}th</strong> vol percentile`);
+  } catch (e) {}
+  try {
+    const c = await (await fetch("/api/correlations?window=90")).json();
+    if (c.avg_overall != null) set("qts-corr",
+      `Average pairwise correlation: <strong>${c.avg_overall.toFixed(2)}</strong> over 90 days`);
+  } catch (e) {}
 })();
 </script>
 </body>

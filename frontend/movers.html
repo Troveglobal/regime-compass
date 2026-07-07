@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-94DE53GC07"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', { analytics_storage: 'denied' });
+    gtag('js', new Date());
+    gtag('config', 'G-94DE53GC07');
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Regime Movers — Regime Compass</title>
+  <meta name="description" content="Markets ranked by how abnormal today's move is inside their current regime — a regime-conditional z-score, not a raw % change leaderboard." />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Regime Compass" />
+  <meta property="og:title" content="Regime Movers — Regime Compass" />
+  <meta property="og:description" content="Markets ranked by how abnormal today's move is inside their current regime." />
+  <meta property="og:image" content="https://www.regimecompass.com/og-image.png" />
+  <meta property="og:url" content="https://www.regimecompass.com/movers" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Regime Movers — Regime Compass" />
+  <meta name="twitter:description" content="Markets ranked by how abnormal today's move is inside their current regime." />
+  <meta name="twitter:image" content="https://www.regimecompass.com/og-image.png" />
+  <meta name="theme-color" content="#07090e" />
+  <link rel="canonical" href="https://www.regimecompass.com/movers" />
+  <link rel="stylesheet" href="/styles.css?v=4.3" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="manifest" href="/manifest.json" />
+  <style>
+    table.t td .mkt-name { font-weight: 600; color: var(--text-strong); font-size: 13.5px; }
+    table.t td .mkt-tkr { display: block; font-size: 10.5px; color: var(--muted); font-family: var(--font-mono); margin-top: 2px; }
+
+    .z-cell {
+      display: inline-block; min-width: 64px; text-align: center;
+      padding: 4px 10px; border-radius: 8px;
+      font-family: var(--font-mono); font-variant-numeric: tabular-nums;
+      font-size: 13px; font-weight: 700;
+      background: rgba(255,255,255,0.04); border: 1px solid var(--border); color: var(--text);
+    }
+    /* emphasis follows the site's risk semantics: amber = notable, red = extreme */
+    .z-cell.mild {
+      background: rgba(212,160,23,0.16); color: #ecc76a;
+      border-color: rgba(212,160,23,0.4); box-shadow: 0 0 14px rgba(212,160,23,0.1);
+    }
+    .z-cell.strong {
+      background: rgba(227,84,84,0.18); color: #f09c9c;
+      border-color: rgba(227,84,84,0.45); box-shadow: 0 0 16px rgba(227,84,84,0.16);
+    }
+    .fb-mark { color: var(--neutral); font-weight: 700; cursor: help; }
+
+    .pct-bar { display: flex; align-items: center; gap: 8px; }
+    .pct-bar .track { width: 74px; height: 6px; border-radius: 3px; background: var(--panel-2); border: 1px solid var(--border); position: relative; flex: 0 0 auto; }
+    .pct-bar .fill { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 3px; background: rgba(139,111,240,0.5); }
+
+    .provenance { font-size: 12px; color: var(--muted-2); font-family: var(--font-mono); margin-top: 18px; }
+
+    details.method {
+      background: linear-gradient(180deg, rgba(255,255,255,0.015), transparent 40%), var(--panel);
+      border: 1px solid var(--border); border-radius: var(--r-lg);
+      padding: 0; margin: 20px 0;
+      box-shadow: var(--shadow-sm), inset 0 1px 0 var(--edge-light);
+    }
+    details.method summary {
+      cursor: pointer; list-style: none; padding: 18px 24px;
+      font-size: 11px; font-weight: 700; color: var(--muted);
+      text-transform: uppercase; letter-spacing: 2px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    details.method summary::-webkit-details-marker { display: none; }
+    details.method summary .chev { transition: transform var(--dur-2) var(--ease-out); font-size: 10px; }
+    details.method[open] summary .chev { transform: rotate(180deg); }
+    details.method .body { padding: 0 24px 22px; color: var(--text-body); font-size: 14.5px; line-height: 1.65; }
+    details.method .body code {
+      background: var(--panel-2); border: 1px solid var(--border);
+      padding: 1px 7px; border-radius: 4px;
+      font-family: var(--font-mono); font-size: 13px; color: #f5d99c;
+    }
+  </style>
+  <script type="application/ld+json">
+  {"@context": "https://schema.org", "@type": "WebPage", "name": "Regime Movers — Regime Compass", "description": "Markets ranked by how abnormal today's move is inside their current regime — a regime-conditional z-score.", "url": "https://www.regimecompass.com/movers", "isPartOf": {"@type": "WebSite", "name": "Regime Compass", "url": "https://www.regimecompass.com"}}
+  </script>
+</head>
+<body>
+<script src="/shell.js?v=4.9"></script>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="kicker">Regime Movers</div>
+    <h1>Whose move was actually abnormal today?</h1>
+    <div class="tagline">A raw % change hides the context: &minus;1.8% is a shrug for Bitcoin and a siren for the Nikkei in a quiet regime. Each market's move is scored against the returns of its <em>own current regime</em> &mdash; the z-score tells you how many standard deviations today sits from normal, given the regime the market is in.</div>
+    <div id="share-container"></div>
+  </div>
+
+  <section class="panel reveal">
+    <div class="panel-title">Today's moves, ranked by regime-conditional surprise</div>
+    <div class="table-scroll">
+      <table class="t" id="movers-table" style="min-width:760px;">
+        <thead><tr>
+          <th>Market</th>
+          <th class="right">Price</th>
+          <th class="right">1D %</th>
+          <th>Current Regime</th>
+          <th class="right">Regime Z-Score</th>
+          <th class="right">Move Percentile</th>
+          <th class="right">20D Vol %ile</th>
+        </tr></thead>
+        <tbody id="movers-body">
+          <tr><td colspan="7"><div class="skeleton" style="height:260px;"></div></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="provenance" id="fb-note" style="display:none;">&dagger; This regime has under 100 observed days &mdash; the score falls back to the market's full return history.</div>
+  </section>
+
+  <details class="method reveal">
+    <summary><span class="chev">&#9662;</span> Methodology</summary>
+    <div class="body">
+      <p>For each market we take daily log returns over its full history and collect the returns of every past day the HMM classified in the same regime the market is in <em>today</em> (filtered, causal states &mdash; no hindsight). With <code>&mu;_s</code> and <code>&sigma;_s</code> the mean and standard deviation of those same-regime returns:</p>
+      <p><code>z = (r_today &minus; &mu;_s) / &sigma;_s</code></p>
+      <p>Today's return is excluded from its own baseline. If the current regime has fewer than 100 observed days, we fall back to the full-history distribution and mark the row with &dagger;. <strong>Move percentile</strong> is where today's return ranks inside that same-regime distribution. <strong>20D vol %ile</strong> is the market's 20-day realized volatility (annualized) ranked against its own trailing five years. Regime states are decoded causally each day, using model parameters from the latest weekly fit.</p>
+      <p>Educational, not investment advice &mdash; see the <a href="/disclaimer">Disclaimer</a>.</p>
+    </div>
+  </details>
+
+  <div class="provenance reveal" id="provenance">Data: Yahoo Finance daily closes &middot; HMM filtered states &middot; loading&hellip;</div>
+</div>
+
+<script>
+const esc = s => { const d = document.createElement("div"); d.textContent = s; return d.innerHTML; };
+const fmtD = iso => new Date(iso + "T00:00:00").toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+
+async function load() {
+  const r = await fetch("/api/movers");
+  const d = await r.json();
+  const body = document.getElementById("movers-body");
+  body.innerHTML = "";
+  let anyFallback = false;
+  for (const m of d.markets) {
+    anyFallback = anyFallback || m.fallback;
+    const az = m.z == null ? 0 : Math.abs(m.z);
+    const zCls = az >= 2 ? "strong" : az >= 1.5 ? "mild" : "";
+    const zTxt = m.z == null ? "—" : (m.z > 0 ? "+" : "") + m.z.toFixed(2) + "σ";
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td><span class="mkt-name">${esc(m.name)}</span><span class="mkt-tkr">${esc(m.ticker)}</span></td>
+      <td class="right">${m.price.toLocaleString("en-US", { maximumFractionDigits: 2 })}</td>
+      <td class="right ${m.pct_1d >= 0 ? "positive" : "negative"}">${(m.pct_1d >= 0 ? "+" : "") + m.pct_1d.toFixed(2)}%</td>
+      <td><span class="pill ${esc(m.regime)}">${esc(m.regime)}</span>${m.fallback ? ' <span class="fb-mark" title="Under 100 days in this regime — scored vs full history">&dagger;</span>' : ""}</td>
+      <td class="right"><span class="z-cell ${zCls}">${zTxt}</span></td>
+      <td class="right">${m.percentile == null ? "—" : m.percentile.toFixed(0) + "th"}</td>
+      <td class="right">
+        <div class="pct-bar" style="justify-content:flex-end;">
+          <span>${m.vol_percentile == null ? "—" : m.vol_percentile.toFixed(0) + "th"}</span>
+          <span class="track"><span class="fill" style="width:${m.vol_percentile || 0}%"></span></span>
+        </div>
+      </td>`;
+    body.appendChild(tr);
+  }
+  document.getElementById("fb-note").style.display = anyFallback ? "block" : "none";
+  document.getElementById("provenance").textContent =
+    "Data: Yahoo Finance daily closes · HMM filtered states · As of " + fmtD(d.as_of) + " close";
+}
+load().catch(e => {
+  document.getElementById("movers-body").innerHTML =
+    '<tr><td colspan="7" style="color:var(--muted);">Feed unavailable — try again shortly.</td></tr>';
+  console.error(e);
+});
+</script>
+<script src="/share.js?v=3.1"></script>
+<script>
+renderShareButtons("share-container", "movers", "Regime Movers — Regime Compass");
+</script>
+</body>
+</html>

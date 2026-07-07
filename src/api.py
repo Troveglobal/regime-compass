@@ -54,6 +54,7 @@ SMARTMONEY_FEED = Path(__file__).resolve().parent / "smartmoney" / "out" / "feed
 SMARTMONEY_OUT = Path(__file__).resolve().parent / "smartmoney" / "out"
 SMARTMONEY_MARKETS = ("tw", "id", "us")  # global deal-level trackers (India is /api/smartmoney)
 SECTORS_FEED = Path(__file__).resolve().parent / "markets" / "out" / "sectors.json"
+ANALYTICS_DIR = DATA_DIR / "analytics"
 
 log = logging.getLogger("regime_compass")
 logging.basicConfig(level=logging.INFO, format="[%(asctime)s] %(levelname)s %(name)s — %(message)s")
@@ -164,6 +165,20 @@ def _run_news() -> None:
         log.exception("[news] refresh failed: %s", e)
 
 
+def _run_analytics() -> None:
+    """Refresh the precomputed analytics feeds (Regime Movers, sparkline
+    ribbons, Systemic Risk). Each module is wrapped separately: a failure in
+    any of them logs an error but never blocks the daily regime update."""
+    from . import movers as movers_mod
+    from . import sparklines as sparks_mod
+    from . import systemic as systemic_mod
+    for name, mod in (("movers", movers_mod), ("sparklines", sparks_mod), ("systemic", systemic_mod)):
+        try:
+            mod.refresh()
+        except Exception as e:
+            log.exception("[analytics:%s] refresh failed: %s", name, e)
+
+
 def _run_daily() -> None:
     from .alerts import detect_and_send
     from .inference import update_today_all
@@ -172,6 +187,7 @@ def _run_daily() -> None:
         log.info("Daily inference update done.")
     except Exception as e:
         log.exception("Daily inference failed: %s", e)
+    _run_analytics()  # derived feeds; internally fault-isolated
     try:
         result = detect_and_send()
         log.info("Daily alerts: %s", result)
@@ -184,6 +200,7 @@ def _run_weekly() -> None:
         _run_full_pipeline()
     except Exception as e:
         log.exception("Weekly retrain failed: %s", e)
+    _run_analytics()  # regime history changed under the feeds — rebuild them
     try:
         result = digest_mod.send_weekly_digest()
         log.info("Weekly digest: %s", result)
@@ -214,6 +231,9 @@ def _bootstrap_async() -> None:
         if not news_mod.has_items():
             log.info("[bootstrap] No news items — fetching feeds.")
             _run_news()
+        if not ANALYTICS_DIR.joinpath("movers.json").exists():
+            log.info("[bootstrap] No analytics feeds — generating.")
+            _run_analytics()
         _bootstrap_done = True
         log.info("[bootstrap] Ready.")
 
@@ -964,6 +984,33 @@ def ema_backtest_endpoint(
     return ma_backtest.backtest(key, period, confirm_days, kind="ema")
 
 
+# Analytics feeds (Regime Movers, sparkline ribbons, Systemic Risk) —
+# precomputed by the daily pipeline (src/movers.py, src/sparklines.py,
+# src/systemic.py), served straight from data/analytics/.
+def _analytics_feed(name: str) -> Response:
+    path = ANALYTICS_DIR / f"{name}.json"
+    if not path.exists():
+        _run_analytics()
+    if path.exists():
+        return FileResponse(path, media_type="application/json")
+    return JSONResponse({"error": f"{name} feed unavailable"}, status_code=503)
+
+
+@app.get("/api/movers")
+def movers_feed() -> Response:
+    return _analytics_feed("movers")
+
+
+@app.get("/api/sparklines")
+def sparklines_feed() -> Response:
+    return _analytics_feed("sparklines")
+
+
+@app.get("/api/systemic")
+def systemic_feed() -> Response:
+    return _analytics_feed("systemic")
+
+
 # HMM validation (walk-forward accuracy audit) — precomputed by scripts/hmm_backtest.py,
 # served straight from data/validation/. Regenerate by rerunning the script.
 VALIDATION_DIR = DATA_DIR / "validation"
@@ -1207,6 +1254,14 @@ if FRONTEND_DIR.exists():
     def volatility_page():
         return FileResponse(FRONTEND_DIR / "volatility.html")
 
+    @app.get("/movers")
+    def movers_page():
+        return FileResponse(FRONTEND_DIR / "movers.html")
+
+    @app.get("/systemic")
+    def systemic_page():
+        return FileResponse(FRONTEND_DIR / "systemic.html")
+
     @app.get("/news")
     def news_page():
         return FileResponse(FRONTEND_DIR / "news.html")
@@ -1227,6 +1282,7 @@ if FRONTEND_DIR.exists():
         evergreen = "2026-07-05"
         daily = [("/", "1.0"), ("/today", "1.0"), ("/composite", "0.9"), ("/hmm", "0.9"),
                  ("/ma", "0.9"), ("/ema", "0.9"), ("/smartmoney", "0.9"), ("/valuation", "0.9"),
+                 ("/movers", "0.9"), ("/systemic", "0.8"),
                  ("/correlations", "0.8"), ("/volatility", "0.8"), ("/news", "0.8"),
                  ("/changes", "0.8"), ("/yields", "0.8"), ("/sectors", "0.8")]
         weekly = [("/ma/backtest", "0.7"), ("/ema/backtest", "0.7"), ("/calendar", "0.7"),
