@@ -31,6 +31,7 @@
     '<a href="/hmm" data-nav="/hmm">HMM <span class="dd-note">Hidden Markov Model</span></a>' +
     '<a href="/ma" data-nav="/ma">MA <span class="dd-note">Moving Average</span></a>' +
     '<a href="/ema" data-nav="/ema">EMA <span class="dd-note">Exponential Moving Average</span></a>' +
+    '<a href="/validation" data-nav="/validation">Validation <span class="dd-note">HMM accuracy audit</span></a>' +
     "</span></span>" +
     '<span class="nav-dd"><span class="dd-trigger">Smart Money <span class="chev">&#9662;</span></span><span class="dd-menu">' +
     '<a href="/smartmoney" data-nav="/smartmoney">🇮🇳 India <span class="dd-note">deals · flows · stakes</span></a>' +
@@ -65,7 +66,7 @@
     '<div class="f-col"><h5>Markets</h5>' +
     '<a href="/sectors">Sector Heatmap</a><a href="/correlations">Correlations</a><a href="/volatility">Volatility</a><a href="/yields">Yield Curve</a><a href="/valuation">Valuation</a><a href="/seasonality">Seasonality</a><a href="/calendar">Calendar</a><a href="/news">News</a></div>' +
     '<div class="f-col"><h5>Company</h5>' +
-    '<a href="/about">About</a><a href="/methodology">Methodology</a><a href="/subscribe">Alerts</a><a href="/disclaimer">Disclaimer</a><a href="/terms">Terms</a><a href="/privacy">Privacy</a></div>' +
+    '<a href="/about">About</a><a href="/methodology">Methodology</a><a href="/validation">Validation</a><a href="/subscribe">Alerts</a><a href="/disclaimer">Disclaimer</a><a href="/terms">Terms</a><a href="/privacy">Privacy</a></div>' +
     "</div>" +
     '<div class="f-bottom">' +
     '<span class="built-by">Built by <a href="https://www.linkedin.com/in/aditya-s1/" target="_blank" rel="noopener">Aditya Sahasrabuddhe' +

@@ -21,6 +21,7 @@ Regime Compass publishes regime *probabilities and states*, never buy/sell signa
 ## Methodology & background
 
 - [Methodology](https://www.regimecompass.com/methodology): model spec (GaussianHMM, Baum-Welch, z-scored features), state-labeling rule (volatility-dominant), filtered-vs-smoothed rationale, data sources, update cadence, honest limitations
+- [Model Validation](https://www.regimecompass.com/validation): walk-forward out-of-sample audit across all 11 markets — bear-labelled days run ~2.3× the next-day volatility of bull days; drawdown reduction in 9 of 11 markets; honest disclosure that the model does not beat buy-and-hold as a return-timing strategy
 - [About](https://www.regimecompass.com/about): what the tool is, how to use regime probabilities as a filter, author background
 - [Alerts](https://www.regimecompass.com/subscribe): free email alerts on regime flips and risk-gauge extremes
 

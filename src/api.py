@@ -40,6 +40,7 @@ from . import ma_regime
 from . import subscriptions
 from .config import (
     API_CORS_ORIGINS,
+    DATA_DIR,
     DB_PATH,
     DEFAULT_INDEX,
     INDICES,
@@ -963,6 +964,28 @@ def ema_backtest_endpoint(
     return ma_backtest.backtest(key, period, confirm_days, kind="ema")
 
 
+# HMM validation (walk-forward accuracy audit) — precomputed by scripts/hmm_backtest.py,
+# served straight from data/validation/. Regenerate by rerunning the script.
+VALIDATION_DIR = DATA_DIR / "validation"
+
+
+@app.get("/api/validation")
+def validation_summary() -> Response:
+    path = VALIDATION_DIR / "summary.json"
+    if not path.exists():
+        return JSONResponse({"error": "validation data not generated"}, status_code=503)
+    return FileResponse(path, media_type="application/json")
+
+
+@app.get("/api/validation/{index}")
+def validation_detail(index: str) -> Response:
+    key = _validate(index)
+    path = VALIDATION_DIR / f"{key}.json"
+    if not path.exists():
+        return JSONResponse({"error": "validation data not generated"}, status_code=503)
+    return FileResponse(path, media_type="application/json")
+
+
 @app.get("/api/model_info")
 def model_info(index: str = Query(DEFAULT_INDEX)) -> dict:
     key = _validate(index)
@@ -995,6 +1018,10 @@ if FRONTEND_DIR.exists():
     @app.get("/methodology")
     def methodology_page():
         return FileResponse(FRONTEND_DIR / "methodology.html")
+
+    @app.get("/validation")
+    def validation_page():
+        return FileResponse(FRONTEND_DIR / "validation.html")
 
     @app.get("/hmm")
     def hmm_page():
@@ -1203,7 +1230,7 @@ if FRONTEND_DIR.exists():
                  ("/correlations", "0.8"), ("/volatility", "0.8"), ("/news", "0.8"),
                  ("/changes", "0.8"), ("/yields", "0.8"), ("/sectors", "0.8")]
         weekly = [("/ma/backtest", "0.7"), ("/ema/backtest", "0.7"), ("/calendar", "0.7"),
-                  ("/seasonality", "0.7")]
+                  ("/seasonality", "0.7"), ("/validation", "0.7")]
         stable = [("/subscribe", "0.6"), ("/about", "0.5"), ("/methodology", "0.6"), ("/embed", "0.4"),
                   ("/disclaimer", "0.3"), ("/terms", "0.3"), ("/privacy", "0.3")]
         entries = []
