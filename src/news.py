@@ -21,20 +21,25 @@ import xml.etree.ElementTree as ET
 from datetime import datetime, timedelta, timezone
 from urllib.parse import quote
 
-from .config import DB_PATH
+from .config import COUNTRIES, DB_PATH
 
 log = logging.getLogger("regime_compass.news")
 
 FETCH_TIMEOUT_SEC = 12
 MAX_ITEMS_PER_FEED = 25
 RETENTION_DAYS = 10
+ENTITY_REFRESH_HOURS = 20   # per-entity feeds are cached ~a day; base feeds stay hourly
+ENTITY_KEEP = 8             # top headlines kept per entity page
 _UA = "Mozilla/5.0 (compatible; RegimeCompass/1.0; +https://www.regimecompass.com)"
 
+_DEFAULT_LOCALE = ("en-IN", "IN", "IN:en")  # (hl, gl, ceid) — historical default
 
-def _gnews(query: str) -> str:
+
+def _gnews(query: str, locale: tuple[str, str, str] = _DEFAULT_LOCALE) -> str:
+    hl, gl, ceid = locale
     return (
         "https://news.google.com/rss/search?q=" + quote(query + " when:2d")
-        + "&hl=en-IN&gl=IN&ceid=IN:en"
+        + f"&hl={hl}&gl={gl}&ceid={ceid}"
     )
 
 
@@ -59,6 +64,19 @@ FEEDS: list[tuple[str, str | None, list[str]]] = [
 ]
 
 
+def entity_feeds() -> list[tuple[str, str | None, list[str]]]:
+    """Per-entity feeds for the country hub pages, derived from
+    config.COUNTRIES (query + locale per country). Same engine, same
+    schema — each country slug becomes an index_key tag."""
+    return [
+        (_gnews(cfg["news_query"], cfg.get("news_locale", _DEFAULT_LOCALE)), None, [slug])
+        for slug, cfg in COUNTRIES.items()
+    ]
+
+
+ENTITY_KEYS = set(COUNTRIES.keys())
+
+
 # ---------------- storage ----------------
 
 def _conn() -> sqlite3.Connection:
@@ -75,7 +93,20 @@ def _conn() -> sqlite3.Connection:
         )"""
     )
     conn.execute("CREATE INDEX IF NOT EXISTS ix_news_key_pub ON news_items (index_key, published_at DESC)")
+    # norm_title supports cross-entity same-story dedupe on the country pages
+    try:
+        conn.execute("ALTER TABLE news_items ADD COLUMN norm_title TEXT")
+    except sqlite3.OperationalError:
+        pass  # already migrated
+    conn.execute(
+        "CREATE TABLE IF NOT EXISTS news_meta (feed_key TEXT PRIMARY KEY, last_fetch TEXT)"
+    )
     return conn
+
+
+def _norm_title(title: str) -> str:
+    """Lowercased, punctuation-stripped title for same-story comparison."""
+    return " ".join("".join(c if c.isalnum() or c.isspace() else " " for c in title.lower()).split())
 
 
 # ---------------- parsing ----------------
@@ -130,38 +161,77 @@ def _clean_gnews_title(title: str) -> tuple[str, str | None]:
 
 # ---------------- refresh ----------------
 
+def _fetch_feed(url: str) -> list[dict]:
+    req = urllib.request.Request(url, headers={"User-Agent": _UA})
+    with urllib.request.urlopen(req, timeout=FETCH_TIMEOUT_SEC) as resp:
+        return _parse_feed(resp.read())
+
+
+def _upsert(conn: sqlite3.Connection, parsed: list[dict], source_label: str | None,
+            index_keys: list[str], now_iso: str) -> int:
+    """Store parsed items under each tag. Country-page tags additionally skip
+    stories whose normalized title already sits under ANOTHER country tag —
+    the same global story shouldn't appear on six country pages."""
+    added = 0
+    dedupe_cutoff = (datetime.now(timezone.utc) - timedelta(days=3)).isoformat()
+    entity_ph = ",".join("?" * len(ENTITY_KEYS))
+    for it in parsed:
+        title, src = it["title"], it["source"] or source_label
+        if source_label is None:
+            title, gsrc = _clean_gnews_title(title)
+            src = it["source"] or gsrc or "Google News"
+        norm = _norm_title(title)
+        for key in index_keys:
+            if key in ENTITY_KEYS and norm:
+                dup = conn.execute(
+                    f"SELECT 1 FROM news_items WHERE norm_title = ? AND index_key != ? "
+                    f"AND index_key IN ({entity_ph}) AND COALESCE(published_at, fetched_at) >= ? LIMIT 1",
+                    (norm, key, *ENTITY_KEYS, dedupe_cutoff),
+                ).fetchone()
+                if dup:
+                    continue
+            row_id = hashlib.sha256((key + "|" + it["link"]).encode()).hexdigest()[:24]
+            try:
+                cur = conn.execute(
+                    "INSERT OR IGNORE INTO news_items "
+                    "(id, index_key, title, link, source, published_at, fetched_at, norm_title) "
+                    "VALUES (?,?,?,?,?,?,?,?)",
+                    (row_id, key, title[:300], it["link"], src, it["published_at"], now_iso, norm),
+                )
+                added += cur.rowcount
+            except sqlite3.Error as e:
+                log.warning("[news] insert failed: %r", e)
+    return added
+
+
+def _entities_due(conn: sqlite3.Connection) -> list[tuple[str, str | None, list[str]]]:
+    """Entity feeds refresh at most every ENTITY_REFRESH_HOURS (the base
+    feeds stay hourly, unchanged)."""
+    cutoff = (datetime.now(timezone.utc) - timedelta(hours=ENTITY_REFRESH_HOURS)).isoformat()
+    due = []
+    for url, src, keys in entity_feeds():
+        row = conn.execute("SELECT last_fetch FROM news_meta WHERE feed_key = ?", (keys[0],)).fetchone()
+        if row is None or (row[0] or "") < cutoff:
+            due.append((url, src, keys))
+    return due
+
+
 def refresh() -> dict:
     """Fetch all feeds and upsert new headlines. Returns per-feed counts."""
     now_iso = datetime.now(timezone.utc).isoformat()
     conn = _conn()
     added, failed = 0, 0
-    for url, source_label, index_keys in FEEDS:
+    for url, source_label, index_keys in FEEDS + _entities_due(conn):
         try:
-            req = urllib.request.Request(url, headers={"User-Agent": _UA})
-            with urllib.request.urlopen(req, timeout=FETCH_TIMEOUT_SEC) as resp:
-                raw = resp.read()
-            parsed = _parse_feed(raw)
+            parsed = _fetch_feed(url)
         except Exception as e:
             failed += 1
             log.warning("[news] feed failed %s: %r", url.split("?")[0], e)
             continue
-
-        for it in parsed:
-            title, src = it["title"], it["source"] or source_label
-            if source_label is None:
-                title, gsrc = _clean_gnews_title(title)
-                src = it["source"] or gsrc or "Google News"
-            for key in index_keys:
-                row_id = hashlib.sha256((key + "|" + it["link"]).encode()).hexdigest()[:24]
-                try:
-                    cur = conn.execute(
-                        "INSERT OR IGNORE INTO news_items (id, index_key, title, link, source, published_at, fetched_at) "
-                        "VALUES (?,?,?,?,?,?,?)",
-                        (row_id, key, title[:300], it["link"], src, it["published_at"], now_iso),
-                    )
-                    added += cur.rowcount
-                except sqlite3.Error as e:
-                    log.warning("[news] insert failed: %r", e)
+        added += _upsert(conn, parsed, source_label, index_keys, now_iso)
+        if index_keys[0] in ENTITY_KEYS:
+            conn.execute("INSERT OR REPLACE INTO news_meta (feed_key, last_fetch) VALUES (?,?)",
+                         (index_keys[0], now_iso))
 
     cutoff = (datetime.now(timezone.utc) - timedelta(days=RETENTION_DAYS)).isoformat()
     conn.execute(

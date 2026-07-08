@@ -1,10 +1,10 @@
 {
  "meta": {
-  "generated": "2026-07-07T02:15:36",
-  "coverage_from": "2023-01-03",
+  "generated": "2026-07-08T03:30:04",
+  "coverage_from": "2025-01-02",
   "latest_trade": "2026-06-30",
-  "n_politicians": 79,
-  "n_trades": 1801,
+  "n_politicians": 75,
+  "n_trades": 1671,
   "unmatched": [],
   "recent_days": 90,
   "source": "Senate eFD + House Clerk periodic transaction reports (STOCK Act); amounts are disclosed ranges; filings may lag trades by up to 45 days"
@@ -867,9 +867,9 @@
     "Senate Committee on Veterans' Affairs",
     "Commission on Security and Cooperation in Europe"
    ],
-   "n_trades": 329,
+   "n_trades": 328,
    "buy_mid": 1680086,
-   "sell_mid": 1569579,
+   "sell_mid": 1561578,
    "recent_mid": 593024,
    "last_traded": "2026-05-27",
    "top_buys": [
@@ -1590,9 +1590,9 @@
     "United States Senate Caucus on International Narcotics Control (Chairman)",
     "Commission on Security and Cooperation in Europe"
    ],
-   "n_trades": 44,
+   "n_trades": 42,
    "buy_mid": 24002,
-   "sell_mid": 1176520,
+   "sell_mid": 1111520,
    "recent_mid": 415002,
    "last_traded": "2026-05-08",
    "top_buys": [
@@ -1623,12 +1623,6 @@
      "asset": "Nvidia Corp"
     },
     {
-     "symbol": "AAPL",
-     "mid": 97502,
-     "n": 3,
-     "asset": "Apple Inc"
-    },
-    {
      "symbol": "UNH",
      "mid": 65001,
      "n": 2,
@@ -1641,10 +1635,10 @@
      "asset": "Honeywell International Inc"
     },
     {
-     "symbol": "LRCX",
+     "symbol": "AAPL",
      "mid": 65001,
      "n": 2,
-     "asset": "Lam Research Corp"
+     "asset": "Apple Inc"
     },
     {
      "symbol": "SBUX",
@@ -1663,6 +1657,12 @@
      "mid": 32500,
      "n": 1,
      "asset": "JP Morgan Chase &amp; Co. Common Stock"
+    },
+    {
+     "symbol": "MCD",
+     "mid": 32500,
+     "n": 1,
+     "asset": "McDonald&#x27;s Corp"
     }
    ],
    "trades": [
@@ -2081,26 +2081,6 @@
      "owner": "Self",
      "symbol": "NVDA",
      "asset": "Nvidia Corp",
-     "side": "SELL",
-     "lo": 15001,
-     "hi": 50000,
-     "filed": "2025-01-08"
-    },
-    {
-     "date": "2024-12-19",
-     "owner": "Self",
-     "symbol": "LRCX",
-     "asset": "Lam Research Corp",
-     "side": "SELL",
-     "lo": 15001,
-     "hi": 50000,
-     "filed": "2025-01-08"
-    },
-    {
-     "date": "2024-12-19",
-     "owner": "Self",
-     "symbol": "AAPL",
-     "asset": "Apple Inc",
      "side": "SELL",
      "lo": 15001,
      "hi": 50000,
@@ -2996,9 +2976,9 @@
     "House Permanent Select Committee on Intelligence",
     "House Committee on Financial Services"
    ],
-   "n_trades": 67,
-   "buy_mid": 192012,
-   "sell_mid": 393022,
+   "n_trades": 61,
+   "buy_mid": 184012,
+   "sell_mid": 353019,
    "recent_mid": 113004,
    "last_traded": "2026-05-14",
    "top_buys": [
@@ -3021,16 +3001,16 @@
      "asset": "Fabrinet Ordinary Shares"
     },
     {
-     "symbol": "GS",
-     "mid": 16001,
-     "n": 2,
-     "asset": "Morgan Stanley - Select UMA Account # 1 JT Goldman Sachs Gro"
-    },
-    {
      "symbol": "KO",
      "mid": 16001,
      "n": 2,
      "asset": "Morgan Stanley - Select UMA Account # 1 JT Coca-Cola Company"
+    },
+    {
+     "symbol": "GS",
+     "mid": 8000,
+     "n": 1,
+     "asset": "Morgan Stanley - Select UMA Account # 1 JT Goldman Sachs Gro"
     },
     {
      "symbol": "CBZ",
@@ -3072,15 +3052,9 @@
     },
     {
      "symbol": "NSRGY",
-     "mid": 40002,
-     "n": 5,
-     "asset": "; Expires 9/19/2025 JT NESTLE S.A S/ADR"
-    },
-    {
-     "symbol": "TT",
      "mid": 32002,
      "n": 4,
-     "asset": "Morgan Stanley - Select UMA Account # 1 JT Trane Technologie"
+     "asset": "; Expires 6/18/2026 JT NESTLE S.A S/ADR"
     },
     {
      "symbol": "CBZ",
@@ -3095,10 +3069,16 @@
      "asset": "Morgan Stanley - Select UMA Account # 1 JT Diageo plc Common"
     },
     {
-     "symbol": "KO",
+     "symbol": "NTDOY",
      "mid": 16001,
      "n": 2,
-     "asset": "Morgan Stanley - Select UMA Account # 1 JT Coca-Cola Company"
+     "asset": "Nintendo Co Ltd ADR"
+    },
+    {
+     "symbol": "TT",
+     "mid": 16001,
+     "n": 2,
+     "asset": "Morgan Stanley - Select UMA Account # 1 JT Trane Technologie"
     }
    ],
    "trades": [
@@ -4656,16 +4636,16 @@
     "Senate Committee on Veterans' Affairs (Chairman)",
     "Senate Select Committee on Intelligence"
    ],
-   "n_trades": 13,
-   "buy_mid": 80005,
+   "n_trades": 12,
+   "buy_mid": 72004,
    "sell_mid": 24002,
    "recent_mid": 40002,
    "last_traded": "2026-05-27",
    "top_buys": [
     {
      "symbol": "BRK.B",
-     "mid": 48003,
-     "n": 6,
+     "mid": 40002,
+     "n": 5,
      "asset": "Berkshire Hathaway Cl B"
     },
     {
@@ -4803,16 +4783,6 @@
      "lo": 1001,
      "hi": 15000,
      "filed": "2025-06-18"
-    },
-    {
-     "date": "2024-12-16",
-     "owner": "Self",
-     "symbol": "BRK.B",
-     "asset": "Berkshire Hathaway Cl B",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-01-18"
     }
    ]
   },
@@ -4867,9 +4837,9 @@
     "Senate Committee on Environment and Public Works (Chairman)",
     "Senate Committee on Rules and Administration"
    ],
-   "n_trades": 83,
-   "buy_mid": 168509,
-   "sell_mid": 618032,
+   "n_trades": 78,
+   "buy_mid": 152508,
+   "sell_mid": 594031,
    "recent_mid": 24002,
    "last_traded": "2026-04-17",
    "top_buys": [
@@ -4892,12 +4862,6 @@
      "asset": "Alphabet Cl A"
     },
     {
-     "symbol": "AVGO",
-     "mid": 16001,
-     "n": 2,
-     "asset": "Broadcom Inc. - Common Stock"
-    },
-    {
      "symbol": "CEG",
      "mid": 16001,
      "n": 2,
@@ -4916,6 +4880,12 @@
      "asset": "PNC Financial Services Group, Inc. (The) Common Stock"
     },
     {
+     "symbol": "AVGO",
+     "mid": 8000,
+     "n": 1,
+     "asset": "Broadcom Inc. - Common Stock"
+    },
+    {
      "symbol": "LLY",
      "mid": 8000,
      "n": 1,
@@ -4925,8 +4895,8 @@
    "top_sells": [
     {
      "symbol": "MSFT",
-     "mid": 129005,
-     "n": 10,
+     "mid": 121004,
+     "n": 9,
      "asset": "Microsoft Corp"
     },
     {
@@ -4936,16 +4906,16 @@
      "asset": "Apple Inc"
     },
     {
-     "symbol": "LOW",
-     "mid": 40002,
-     "n": 5,
-     "asset": "Lowe&#x27;s Companies"
-    },
-    {
      "symbol": "IBM",
      "mid": 32500,
      "n": 1,
      "asset": "Intl Business Machines"
+    },
+    {
+     "symbol": "LOW",
+     "mid": 32002,
+     "n": 4,
+     "asset": "Lowe&#x27;s Companies"
     },
     {
      "symbol": "FDS",
@@ -5892,29 +5862,29 @@
     "House Committee on Ways and Means",
     "House Committee on the Budget"
    ],
-   "n_trades": 14,
-   "buy_mid": 112007,
+   "n_trades": 12,
+   "buy_mid": 96006,
    "sell_mid": 0,
    "recent_mid": 8000,
    "last_traded": "2026-05-15",
    "top_buys": [
     {
-     "symbol": "KO",
-     "mid": 40002,
-     "n": 5,
-     "asset": "Coca-Cola Company"
-    },
-    {
-     "symbol": "HD",
-     "mid": 40002,
-     "n": 5,
-     "asset": "Reinvest Shares Home Depot, Inc."
-    },
-    {
      "symbol": "PG",
      "mid": 32002,
      "n": 4,
      "asset": "Procter & Gamble Company"
+    },
+    {
+     "symbol": "KO",
+     "mid": 32002,
+     "n": 4,
+     "asset": "Coca-Cola Company"
+    },
+    {
+     "symbol": "HD",
+     "mid": 32002,
+     "n": 4,
+     "asset": "Home Depot, Inc."
     }
    ],
    "top_sells": [],
@@ -6038,26 +6008,6 @@
      "lo": 1001,
      "hi": 15000,
      "filed": "2025-03-10"
-    },
-    {
-     "date": "2024-12-16",
-     "owner": "",
-     "symbol": "KO",
-     "asset": "Coca-Cola Company",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-01-08"
-    },
-    {
-     "date": "2024-12-12",
-     "owner": "",
-     "symbol": "HD",
-     "asset": "Reinvest Shares Home Depot, Inc.",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-01-08"
     }
    ]
   },
@@ -6075,16 +6025,16 @@
     "Joint Committee on Printing (Chairman)",
     "Joint Committee of Congress on the Library (Vice Chairman)"
    ],
-   "n_trades": 9,
-   "buy_mid": 56004,
+   "n_trades": 8,
+   "buy_mid": 48003,
    "sell_mid": 40501,
    "recent_mid": 8000,
    "last_traded": "2026-06-01",
    "top_buys": [
     {
      "symbol": "WFC",
-     "mid": 56004,
-     "n": 7,
+     "mid": 48003,
+     "n": 6,
      "asset": "Wells Fargo &amp; Company"
     }
    ],
@@ -6176,16 +6126,6 @@
      "lo": 1001,
      "hi": 15000,
      "filed": "2025-03-12"
-    },
-    {
-     "date": "2024-12-02",
-     "owner": "Spouse",
-     "symbol": "WFC",
-     "asset": "Wells Fargo &amp; Company",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-01-04"
     }
    ]
   },
@@ -6197,9 +6137,9 @@
    "state": "OK",
    "district": null,
    "committees": [],
-   "n_trades": 250,
-   "buy_mid": 6956582,
-   "sell_mid": 3503042,
+   "n_trades": 182,
+   "buy_mid": 5256060,
+   "sell_mid": 2927531,
    "recent_mid": 0,
    "last_traded": "2026-02-25",
    "top_buys": [
@@ -6210,34 +6150,10 @@
      "asset": "Microsoft Corp"
     },
     {
-     "symbol": "PDBC",
-     "mid": 407501,
-     "n": 2,
-     "asset": "Invesco Optimum Yield Diversified Commodity Strate"
-    },
-    {
-     "symbol": "PCLPX",
-     "mid": 375000,
-     "n": 1,
-     "asset": "Pimco Commoditiesplus Strategy Fund Class I-2"
-    },
-    {
-     "symbol": "AAPL",
-     "mid": 250001,
-     "n": 2,
-     "asset": "Apple Inc. - Common Stock"
-    },
-    {
      "symbol": "AMZN",
      "mid": 207501,
      "n": 2,
      "asset": "Amazon.com Inc"
-    },
-    {
-     "symbol": "NVDA",
-     "mid": 207501,
-     "n": 2,
-     "asset": "NVIDIA Corporation - Common Stock"
     },
     {
      "symbol": "COF",
@@ -6250,6 +6166,30 @@
      "mid": 175000,
      "n": 1,
      "asset": "Alphabet Inc. - Class A Common Stock"
+    },
+    {
+     "symbol": "NVDA",
+     "mid": 175000,
+     "n": 1,
+     "asset": "NVIDIA Corporation - Common Stock"
+    },
+    {
+     "symbol": "AAPL",
+     "mid": 175000,
+     "n": 1,
+     "asset": "Apple Inc. - Common Stock"
+    },
+    {
+     "symbol": "LRN",
+     "mid": 170503,
+     "n": 6,
+     "asset": "Stride Inc"
+    },
+    {
+     "symbol": "ADBE",
+     "mid": 130002,
+     "n": 4,
+     "asset": "Adobe Systems Inc"
     }
    ],
    "top_sells": [
@@ -6258,12 +6198,6 @@
      "mid": 750000,
      "n": 1,
      "asset": "SPDR S&amp;P 500"
-    },
-    {
-     "symbol": "PDBC",
-     "mid": 375000,
-     "n": 1,
-     "asset": "Invesco Optimum Yield Diversified Commodity Strate"
     },
     {
      "symbol": "VAW",
@@ -6300,6 +6234,12 @@
      "mid": 97502,
      "n": 3,
      "asset": "Coherent Corp. Common Stock"
+    },
+    {
+     "symbol": "AZO",
+     "mid": 75000,
+     "n": 1,
+     "asset": "AutoZone, Inc. Common Stock"
     }
    ],
    "trades": [
@@ -6916,8 +6856,8 @@
     "House Committee on Financial Services",
     "House Committee on Education and Workforce"
    ],
-   "n_trades": 157,
-   "buy_mid": 624039,
+   "n_trades": 152,
+   "buy_mid": 584036,
    "sell_mid": 632040,
    "recent_mid": 0,
    "last_traded": "2025-10-31",
@@ -9499,535 +9439,6 @@
    ]
   },
   {
-   "id": "H001094",
-   "name": "Val T. Hoyle",
-   "party": "Democrat",
-   "chamber": "House",
-   "state": "OR",
-   "district": 4,
-   "committees": [
-    "House Committee on Natural Resources",
-    "House Committee on Transportation and Infrastructure"
-   ],
-   "n_trades": 41,
-   "buy_mid": 128008,
-   "sell_mid": 200012,
-   "recent_mid": 0,
-   "last_traded": "2025-09-23",
-   "top_buys": [
-    {
-     "symbol": "KR",
-     "mid": 8000,
-     "n": 1,
-     "asset": "Fidelity Rollover IRA SP Kroger Company"
-    },
-    {
-     "symbol": "PGR",
-     "mid": 8000,
-     "n": 1,
-     "asset": "Fidelity Rollover IRA SP Progressive Corporation"
-    },
-    {
-     "symbol": "PANW",
-     "mid": 8000,
-     "n": 1,
-     "asset": "Fidelity Rollover IRA SP Palo Alto Networks, Inc."
-    },
-    {
-     "symbol": "AME",
-     "mid": 8000,
-     "n": 1,
-     "asset": "Fidelity Rollover IRA SP AMETEK, Inc."
-    },
-    {
-     "symbol": "BA",
-     "mid": 8000,
-     "n": 1,
-     "asset": "Fidelity Rollover IRA SP Boeing Company"
-    },
-    {
-     "symbol": "KO",
-     "mid": 8000,
-     "n": 1,
-     "asset": "Fidelity Rollover IRA SP Coca-Cola Company"
-    },
-    {
-     "symbol": "CCK",
-     "mid": 8000,
-     "n": 1,
-     "asset": "Fidelity Rollover IRA SP Crown Holdings, Inc."
-    },
-    {
-     "symbol": "DEO",
-     "mid": 8000,
-     "n": 1,
-     "asset": "Fidelity Rollover IRA SP Diageo plc Common Stock"
-    }
-   ],
-   "top_sells": [
-    {
-     "symbol": "PG",
-     "mid": 16001,
-     "n": 2,
-     "asset": "Fidelity Rollover IRA SP Procter & Gamble Company"
-    },
-    {
-     "symbol": "BA",
-     "mid": 8000,
-     "n": 1,
-     "asset": "Fidelity Rollover IRA SP Boeing Company"
-    },
-    {
-     "symbol": "KO",
-     "mid": 8000,
-     "n": 1,
-     "asset": "Fidelity Rollover IRA SP Coca-Cola Company"
-    },
-    {
-     "symbol": "CRH",
-     "mid": 8000,
-     "n": 1,
-     "asset": "Fidelity Rollover IRA SP CRH PLC Ordinary Shares"
-    },
-    {
-     "symbol": "CCK",
-     "mid": 8000,
-     "n": 1,
-     "asset": "Fidelity Rollover IRA SP Crown Holdings, Inc."
-    },
-    {
-     "symbol": "CSX",
-     "mid": 8000,
-     "n": 1,
-     "asset": "Fidelity Rollover IRA SP CSX Corporation"
-    },
-    {
-     "symbol": "DEO",
-     "mid": 8000,
-     "n": 1,
-     "asset": "Fidelity Rollover IRA SP Diageo plc Common Stock"
-    },
-    {
-     "symbol": "ES",
-     "mid": 8000,
-     "n": 1,
-     "asset": "Fidelity Rollover IRA SP Eversource Energy"
-    }
-   ],
-   "trades": [
-    {
-     "date": "2025-09-23",
-     "owner": "",
-     "symbol": "BA",
-     "asset": "Fidelity Rollover IRA SP Boeing Company",
-     "side": "SELL",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-10-10"
-    },
-    {
-     "date": "2025-09-23",
-     "owner": "",
-     "symbol": "KO",
-     "asset": "Fidelity Rollover IRA SP Coca-Cola Company",
-     "side": "SELL",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-10-10"
-    },
-    {
-     "date": "2025-09-23",
-     "owner": "",
-     "symbol": "CRH",
-     "asset": "Fidelity Rollover IRA SP CRH PLC Ordinary Shares",
-     "side": "SELL",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-10-10"
-    },
-    {
-     "date": "2025-09-23",
-     "owner": "",
-     "symbol": "CCK",
-     "asset": "Fidelity Rollover IRA SP Crown Holdings, Inc.",
-     "side": "SELL",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-10-10"
-    },
-    {
-     "date": "2025-09-23",
-     "owner": "",
-     "symbol": "CSX",
-     "asset": "Fidelity Rollover IRA SP CSX Corporation",
-     "side": "SELL",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-10-10"
-    },
-    {
-     "date": "2025-09-23",
-     "owner": "",
-     "symbol": "DEO",
-     "asset": "Fidelity Rollover IRA SP Diageo plc Common Stock",
-     "side": "SELL",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-10-10"
-    },
-    {
-     "date": "2025-09-23",
-     "owner": "",
-     "symbol": "ES",
-     "asset": "Fidelity Rollover IRA SP Eversource Energy",
-     "side": "SELL",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-10-10"
-    },
-    {
-     "date": "2025-09-23",
-     "owner": "",
-     "symbol": "KDP",
-     "asset": "Fidelity Rollover IRA SP Keurig Dr Pepper Inc.",
-     "side": "SELL",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-10-10"
-    },
-    {
-     "date": "2025-09-23",
-     "owner": "",
-     "symbol": "KR",
-     "asset": "Fidelity Rollover IRA SP Kroger Company",
-     "side": "SELL",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-10-10"
-    },
-    {
-     "date": "2025-09-23",
-     "owner": "",
-     "symbol": "MOS",
-     "asset": "Fidelity Rollover IRA SP Mosaic Company",
-     "side": "SELL",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-10-10"
-    },
-    {
-     "date": "2025-09-23",
-     "owner": "",
-     "symbol": "NEM",
-     "asset": "Fidelity Rollover IRA SP Newmont Corporation",
-     "side": "SELL",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-10-10"
-    },
-    {
-     "date": "2025-09-23",
-     "owner": "",
-     "symbol": "NKE",
-     "asset": "Fidelity Rollover IRA SP Nike, Inc. Common Stock",
-     "side": "SELL",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-10-10"
-    },
-    {
-     "date": "2025-09-23",
-     "owner": "",
-     "symbol": "PG",
-     "asset": "Procter & Gamble Company",
-     "side": "SELL",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-10-10"
-    },
-    {
-     "date": "2025-09-23",
-     "owner": "",
-     "symbol": "PGR",
-     "asset": "Fidelity Rollover IRA SP Progressive Corporation",
-     "side": "SELL",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-10-10"
-    },
-    {
-     "date": "2025-09-23",
-     "owner": "",
-     "symbol": "SAP",
-     "asset": "Fidelity Rollover IRA SP SAP SE ADS",
-     "side": "SELL",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-10-10"
-    },
-    {
-     "date": "2025-09-23",
-     "owner": "",
-     "symbol": "SO",
-     "asset": "Fidelity Rollover IRA SP Southern Company",
-     "side": "SELL",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-10-10"
-    },
-    {
-     "date": "2025-09-23",
-     "owner": "",
-     "symbol": "TT",
-     "asset": "Fidelity Rollover IRA SP Trane Technologies plc",
-     "side": "SELL",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-10-10"
-    },
-    {
-     "date": "2025-09-23",
-     "owner": "",
-     "symbol": "UCBJY",
-     "asset": "Fidelity Rollover IRA SP UCB SA UNSP/ADR",
-     "side": "SELL",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-10-10"
-    },
-    {
-     "date": "2025-09-23",
-     "owner": "",
-     "symbol": "V",
-     "asset": "Fidelity Rollover IRA SP Visa Inc.",
-     "side": "SELL",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-10-10"
-    },
-    {
-     "date": "2025-09-23",
-     "owner": "",
-     "symbol": "DIS",
-     "asset": "Fidelity Rollover IRA SP Walt Disney Company",
-     "side": "SELL",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-10-10"
-    },
-    {
-     "date": "2025-08-19",
-     "owner": "",
-     "symbol": "PANW",
-     "asset": "Fidelity Rollover IRA SP Palo Alto Networks, Inc.",
-     "side": "SELL",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-09-12"
-    },
-    {
-     "date": "2025-07-28",
-     "owner": "",
-     "symbol": "GS",
-     "asset": "Fidelity Rollover IRA SP Goldman Sachs Group, Inc.",
-     "side": "SELL",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-09-12"
-    },
-    {
-     "date": "2025-07-28",
-     "owner": "",
-     "symbol": "KR",
-     "asset": "Fidelity Rollover IRA SP Kroger Company",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-09-12"
-    },
-    {
-     "date": "2025-07-02",
-     "owner": "",
-     "symbol": "PG",
-     "asset": "Fidelity Rollover IRA SP Procter & Gamble Company",
-     "side": "SELL",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-09-12"
-    },
-    {
-     "date": "2025-06-26",
-     "owner": "",
-     "symbol": "IT",
-     "asset": "Fidelity Rollover IRA SP Gartner, Inc. Common Stock",
-     "side": "SELL",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-09-12"
-    },
-    {
-     "date": "2025-06-06",
-     "owner": "",
-     "symbol": "PGR",
-     "asset": "Fidelity Rollover IRA SP Progressive Corporation",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-09-12"
-    },
-    {
-     "date": "2025-03-13",
-     "owner": "",
-     "symbol": "PANW",
-     "asset": "Fidelity Rollover IRA SP Palo Alto Networks, Inc.",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-09-12"
-    },
-    {
-     "date": "2025-01-24",
-     "owner": "",
-     "symbol": "AME",
-     "asset": "Fidelity Rollover IRA SP AMETEK, Inc.",
-     "side": "SELL",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-09-12"
-    },
-    {
-     "date": "2024-10-29",
-     "owner": "",
-     "symbol": "AME",
-     "asset": "Fidelity Rollover IRA SP AMETEK, Inc.",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-09-12"
-    },
-    {
-     "date": "2024-10-29",
-     "owner": "",
-     "symbol": "BA",
-     "asset": "Fidelity Rollover IRA SP Boeing Company",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-09-12"
-    },
-    {
-     "date": "2024-10-29",
-     "owner": "",
-     "symbol": "KO",
-     "asset": "Fidelity Rollover IRA SP Coca-Cola Company",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-09-12"
-    },
-    {
-     "date": "2024-10-29",
-     "owner": "",
-     "symbol": "CCK",
-     "asset": "Fidelity Rollover IRA SP Crown Holdings, Inc.",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-09-12"
-    },
-    {
-     "date": "2024-10-29",
-     "owner": "",
-     "symbol": "DEO",
-     "asset": "Fidelity Rollover IRA SP Diageo plc Common Stock",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-09-12"
-    },
-    {
-     "date": "2024-10-29",
-     "owner": "",
-     "symbol": "IT",
-     "asset": "Fidelity Rollover IRA SP Gartner, Inc. Common Stock",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-09-12"
-    },
-    {
-     "date": "2024-10-29",
-     "owner": "",
-     "symbol": "KDP",
-     "asset": "Fidelity Rollover IRA SP Keurig Dr Pepper Inc.",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-09-12"
-    },
-    {
-     "date": "2024-10-29",
-     "owner": "",
-     "symbol": "PG",
-     "asset": "Fidelity Rollover IRA SP Procter & Gamble Company",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-09-12"
-    },
-    {
-     "date": "2024-10-29",
-     "owner": "",
-     "symbol": "SAP",
-     "asset": "Fidelity Rollover IRA SP SAP SE ADS",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-09-12"
-    },
-    {
-     "date": "2024-10-29",
-     "owner": "",
-     "symbol": "SO",
-     "asset": "Fidelity Rollover IRA SP Southern Company",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-09-12"
-    },
-    {
-     "date": "2024-10-29",
-     "owner": "",
-     "symbol": "TT",
-     "asset": "Fidelity Rollover IRA SP Trane Technologies plc",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-09-12"
-    },
-    {
-     "date": "2024-10-29",
-     "owner": "",
-     "symbol": "V",
-     "asset": "Fidelity Rollover IRA SP Visa Inc.",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-09-12"
-    },
-    {
-     "date": "2024-10-29",
-     "owner": "",
-     "symbol": "DIS",
-     "asset": "Walt Disney Company",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-09-12"
-    }
-   ]
-  },
-  {
    "id": "K000383",
    "name": "Angus S. King, Jr.",
    "party": "Independent",
@@ -12043,6 +11454,375 @@
    ]
   },
   {
+   "id": "H001094",
+   "name": "Val T. Hoyle",
+   "party": "Democrat",
+   "chamber": "House",
+   "state": "OR",
+   "district": 4,
+   "committees": [
+    "House Committee on Natural Resources",
+    "House Committee on Transportation and Infrastructure"
+   ],
+   "n_trades": 28,
+   "buy_mid": 24002,
+   "sell_mid": 200012,
+   "recent_mid": 0,
+   "last_traded": "2025-09-23",
+   "top_buys": [
+    {
+     "symbol": "KR",
+     "mid": 8000,
+     "n": 1,
+     "asset": "Fidelity Rollover IRA SP Kroger Company"
+    },
+    {
+     "symbol": "PGR",
+     "mid": 8000,
+     "n": 1,
+     "asset": "Fidelity Rollover IRA SP Progressive Corporation"
+    },
+    {
+     "symbol": "PANW",
+     "mid": 8000,
+     "n": 1,
+     "asset": "Fidelity Rollover IRA SP Palo Alto Networks, Inc."
+    }
+   ],
+   "top_sells": [
+    {
+     "symbol": "PG",
+     "mid": 16001,
+     "n": 2,
+     "asset": "Fidelity Rollover IRA SP Procter & Gamble Company"
+    },
+    {
+     "symbol": "BA",
+     "mid": 8000,
+     "n": 1,
+     "asset": "Fidelity Rollover IRA SP Boeing Company"
+    },
+    {
+     "symbol": "KO",
+     "mid": 8000,
+     "n": 1,
+     "asset": "Fidelity Rollover IRA SP Coca-Cola Company"
+    },
+    {
+     "symbol": "CRH",
+     "mid": 8000,
+     "n": 1,
+     "asset": "Fidelity Rollover IRA SP CRH PLC Ordinary Shares"
+    },
+    {
+     "symbol": "CCK",
+     "mid": 8000,
+     "n": 1,
+     "asset": "Fidelity Rollover IRA SP Crown Holdings, Inc."
+    },
+    {
+     "symbol": "CSX",
+     "mid": 8000,
+     "n": 1,
+     "asset": "Fidelity Rollover IRA SP CSX Corporation"
+    },
+    {
+     "symbol": "DEO",
+     "mid": 8000,
+     "n": 1,
+     "asset": "Fidelity Rollover IRA SP Diageo plc Common Stock"
+    },
+    {
+     "symbol": "ES",
+     "mid": 8000,
+     "n": 1,
+     "asset": "Fidelity Rollover IRA SP Eversource Energy"
+    }
+   ],
+   "trades": [
+    {
+     "date": "2025-09-23",
+     "owner": "",
+     "symbol": "BA",
+     "asset": "Fidelity Rollover IRA SP Boeing Company",
+     "side": "SELL",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-10-10"
+    },
+    {
+     "date": "2025-09-23",
+     "owner": "",
+     "symbol": "KO",
+     "asset": "Fidelity Rollover IRA SP Coca-Cola Company",
+     "side": "SELL",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-10-10"
+    },
+    {
+     "date": "2025-09-23",
+     "owner": "",
+     "symbol": "CRH",
+     "asset": "Fidelity Rollover IRA SP CRH PLC Ordinary Shares",
+     "side": "SELL",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-10-10"
+    },
+    {
+     "date": "2025-09-23",
+     "owner": "",
+     "symbol": "CCK",
+     "asset": "Fidelity Rollover IRA SP Crown Holdings, Inc.",
+     "side": "SELL",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-10-10"
+    },
+    {
+     "date": "2025-09-23",
+     "owner": "",
+     "symbol": "CSX",
+     "asset": "Fidelity Rollover IRA SP CSX Corporation",
+     "side": "SELL",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-10-10"
+    },
+    {
+     "date": "2025-09-23",
+     "owner": "",
+     "symbol": "DEO",
+     "asset": "Fidelity Rollover IRA SP Diageo plc Common Stock",
+     "side": "SELL",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-10-10"
+    },
+    {
+     "date": "2025-09-23",
+     "owner": "",
+     "symbol": "ES",
+     "asset": "Fidelity Rollover IRA SP Eversource Energy",
+     "side": "SELL",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-10-10"
+    },
+    {
+     "date": "2025-09-23",
+     "owner": "",
+     "symbol": "KDP",
+     "asset": "Fidelity Rollover IRA SP Keurig Dr Pepper Inc.",
+     "side": "SELL",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-10-10"
+    },
+    {
+     "date": "2025-09-23",
+     "owner": "",
+     "symbol": "KR",
+     "asset": "Fidelity Rollover IRA SP Kroger Company",
+     "side": "SELL",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-10-10"
+    },
+    {
+     "date": "2025-09-23",
+     "owner": "",
+     "symbol": "MOS",
+     "asset": "Fidelity Rollover IRA SP Mosaic Company",
+     "side": "SELL",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-10-10"
+    },
+    {
+     "date": "2025-09-23",
+     "owner": "",
+     "symbol": "NEM",
+     "asset": "Fidelity Rollover IRA SP Newmont Corporation",
+     "side": "SELL",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-10-10"
+    },
+    {
+     "date": "2025-09-23",
+     "owner": "",
+     "symbol": "NKE",
+     "asset": "Fidelity Rollover IRA SP Nike, Inc. Common Stock",
+     "side": "SELL",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-10-10"
+    },
+    {
+     "date": "2025-09-23",
+     "owner": "",
+     "symbol": "PG",
+     "asset": "Procter & Gamble Company",
+     "side": "SELL",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-10-10"
+    },
+    {
+     "date": "2025-09-23",
+     "owner": "",
+     "symbol": "PGR",
+     "asset": "Fidelity Rollover IRA SP Progressive Corporation",
+     "side": "SELL",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-10-10"
+    },
+    {
+     "date": "2025-09-23",
+     "owner": "",
+     "symbol": "SAP",
+     "asset": "Fidelity Rollover IRA SP SAP SE ADS",
+     "side": "SELL",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-10-10"
+    },
+    {
+     "date": "2025-09-23",
+     "owner": "",
+     "symbol": "SO",
+     "asset": "Fidelity Rollover IRA SP Southern Company",
+     "side": "SELL",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-10-10"
+    },
+    {
+     "date": "2025-09-23",
+     "owner": "",
+     "symbol": "TT",
+     "asset": "Fidelity Rollover IRA SP Trane Technologies plc",
+     "side": "SELL",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-10-10"
+    },
+    {
+     "date": "2025-09-23",
+     "owner": "",
+     "symbol": "UCBJY",
+     "asset": "Fidelity Rollover IRA SP UCB SA UNSP/ADR",
+     "side": "SELL",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-10-10"
+    },
+    {
+     "date": "2025-09-23",
+     "owner": "",
+     "symbol": "V",
+     "asset": "Fidelity Rollover IRA SP Visa Inc.",
+     "side": "SELL",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-10-10"
+    },
+    {
+     "date": "2025-09-23",
+     "owner": "",
+     "symbol": "DIS",
+     "asset": "Fidelity Rollover IRA SP Walt Disney Company",
+     "side": "SELL",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-10-10"
+    },
+    {
+     "date": "2025-08-19",
+     "owner": "",
+     "symbol": "PANW",
+     "asset": "Fidelity Rollover IRA SP Palo Alto Networks, Inc.",
+     "side": "SELL",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-09-12"
+    },
+    {
+     "date": "2025-07-28",
+     "owner": "",
+     "symbol": "GS",
+     "asset": "Fidelity Rollover IRA SP Goldman Sachs Group, Inc.",
+     "side": "SELL",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-09-12"
+    },
+    {
+     "date": "2025-07-28",
+     "owner": "",
+     "symbol": "KR",
+     "asset": "Fidelity Rollover IRA SP Kroger Company",
+     "side": "BUY",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-09-12"
+    },
+    {
+     "date": "2025-07-02",
+     "owner": "",
+     "symbol": "PG",
+     "asset": "Fidelity Rollover IRA SP Procter & Gamble Company",
+     "side": "SELL",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-09-12"
+    },
+    {
+     "date": "2025-06-26",
+     "owner": "",
+     "symbol": "IT",
+     "asset": "Fidelity Rollover IRA SP Gartner, Inc. Common Stock",
+     "side": "SELL",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-09-12"
+    },
+    {
+     "date": "2025-06-06",
+     "owner": "",
+     "symbol": "PGR",
+     "asset": "Fidelity Rollover IRA SP Progressive Corporation",
+     "side": "BUY",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-09-12"
+    },
+    {
+     "date": "2025-03-13",
+     "owner": "",
+     "symbol": "PANW",
+     "asset": "Fidelity Rollover IRA SP Palo Alto Networks, Inc.",
+     "side": "BUY",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-09-12"
+    },
+    {
+     "date": "2025-01-24",
+     "owner": "",
+     "symbol": "AME",
+     "asset": "Fidelity Rollover IRA SP AMETEK, Inc.",
+     "side": "SELL",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-09-12"
+    }
+   ]
+  },
+  {
    "id": "M001217",
    "name": "Jared Moskowitz",
    "party": "Democrat",
@@ -13377,18 +13157,12 @@
     "House Committee on Appropriations",
     "House Committee on Education and Workforce"
    ],
-   "n_trades": 20,
-   "buy_mid": 120008,
+   "n_trades": 13,
+   "buy_mid": 64004,
    "sell_mid": 40002,
    "recent_mid": 0,
    "last_traded": "2026-02-20",
    "top_buys": [
-    {
-     "symbol": "BA",
-     "mid": 16001,
-     "n": 2,
-     "asset": "Merrill Lynch Investment Account #025 Boeing Company"
-    },
     {
      "symbol": "PG",
      "mid": 16001,
@@ -13396,16 +13170,16 @@
      "asset": "Merrill Lynch Investment Account #025 Procter & Gamble Compa"
     },
     {
-     "symbol": "V",
-     "mid": 16001,
-     "n": 2,
-     "asset": "Corporate Bond Visa Inc."
-    },
-    {
      "symbol": "PEP",
      "mid": 8000,
      "n": 1,
      "asset": "Merrill Lynch Investment Account #025 Pepsico, Inc."
+    },
+    {
+     "symbol": "BA",
+     "mid": 8000,
+     "n": 1,
+     "asset": "Merrill Lynch Investment Account #025 Boeing Company"
     },
     {
      "symbol": "KO",
@@ -13420,16 +13194,16 @@
      "asset": "Corporate Bond Walt Disney Company"
     },
     {
+     "symbol": "V",
+     "mid": 8000,
+     "n": 1,
+     "asset": "Merrill Lynch Investment Account #025 Visa Inc."
+    },
+    {
      "symbol": "PFE",
      "mid": 8000,
      "n": 1,
      "asset": "rrill Lynch Investment Account #025 D          : Corporate B"
-    },
-    {
-     "symbol": "T",
-     "mid": 8000,
-     "n": 1,
-     "asset": "Merrill Lynch Investment Account #025 AT&T Inc."
     }
    ],
    "top_sells": [
@@ -13588,323 +13362,6 @@
      "lo": 1001,
      "hi": 15000,
      "filed": "2026-01-13"
-    },
-    {
-     "date": "2024-10-23",
-     "owner": "",
-     "symbol": "T",
-     "asset": "Merrill Lynch Investment Account #025 AT&T Inc.",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2026-01-13"
-    },
-    {
-     "date": "2024-10-23",
-     "owner": "",
-     "symbol": "BA",
-     "asset": "Merrill Lynch Investment Account #025 Boeing Company",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2026-01-13"
-    },
-    {
-     "date": "2024-10-23",
-     "owner": "",
-     "symbol": "BXP",
-     "asset": "Merrill Lynch Investment Account #025 BXP, Inc. Common Stock",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2026-01-13"
-    },
-    {
-     "date": "2024-10-23",
-     "owner": "",
-     "symbol": "DUK",
-     "asset": "Merrill Lynch Investment Account #025 Duke Energy Corporation",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2026-01-13"
-    },
-    {
-     "date": "2024-10-23",
-     "owner": "",
-     "symbol": "GS",
-     "asset": "Merrill Lynch Investment Account #025 Goldman Sachs Group, Inc.",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2026-01-13"
-    },
-    {
-     "date": "2024-10-23",
-     "owner": "",
-     "symbol": "V",
-     "asset": "Corporate Bond Visa Inc.",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2026-01-13"
-    },
-    {
-     "date": "2024-10-23",
-     "owner": "",
-     "symbol": "HCN",
-     "asset": "Merrill Lynch Investment Account #025 Welltower Inc.",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2026-01-13"
-    }
-   ]
-  },
-  {
-   "id": "T000486",
-   "name": "Ritchie Torres",
-   "party": "Democrat",
-   "chamber": "House",
-   "state": "NY",
-   "district": 15,
-   "committees": [
-    "House Committee on Financial Services",
-    "House Select Committee on the Strategic Competition Between the United States and the Chinese Communist Party"
-   ],
-   "n_trades": 14,
-   "buy_mid": 56004,
-   "sell_mid": 56004,
-   "recent_mid": 0,
-   "last_traded": "2025-07-11",
-   "top_buys": [
-    {
-     "symbol": "APPL",
-     "mid": 8000,
-     "n": 1,
-     "asset": "e made solely by the independent manager, without my input o"
-    },
-    {
-     "symbol": "KO",
-     "mid": 8000,
-     "n": 1,
-     "asset": "made solely by the independent manager, without my input or "
-    },
-    {
-     "symbol": "HD",
-     "mid": 8000,
-     "n": 1,
-     "asset": "e made solely by the independent manager, without my input o"
-    },
-    {
-     "symbol": "NSRGY",
-     "mid": 8000,
-     "n": 1,
-     "asset": "e made solely by the independent manager, without my input o"
-    },
-    {
-     "symbol": "PG",
-     "mid": 8000,
-     "n": 1,
-     "asset": "olely by the independent manager, without my input or direct"
-    },
-    {
-     "symbol": "TMUS",
-     "mid": 8000,
-     "n": 1,
-     "asset": "made solely by the independent manager, without my input or "
-    },
-    {
-     "symbol": "WMB",
-     "mid": 8000,
-     "n": 1,
-     "asset": "olely by the independent manager, without my input or direct"
-    }
-   ],
-   "top_sells": [
-    {
-     "symbol": "KO",
-     "mid": 8000,
-     "n": 1,
-     "asset": "made solely by the independent manager, without my input or "
-    },
-    {
-     "symbol": "GS",
-     "mid": 8000,
-     "n": 1,
-     "asset": "lely by the independent manager, without my input or directi"
-    },
-    {
-     "symbol": "HD",
-     "mid": 8000,
-     "n": 1,
-     "asset": "e made solely by the independent manager, without my input o"
-    },
-    {
-     "symbol": "PEP",
-     "mid": 8000,
-     "n": 1,
-     "asset": "Pepsico, Inc."
-    },
-    {
-     "symbol": "PG",
-     "mid": 8000,
-     "n": 1,
-     "asset": "olely by the independent manager, without my input or direct"
-    },
-    {
-     "symbol": "TMUS",
-     "mid": 8000,
-     "n": 1,
-     "asset": "T-Mobile US, Inc."
-    },
-    {
-     "symbol": "WMB",
-     "mid": 8000,
-     "n": 1,
-     "asset": "olely by the independent manager, without my input or direct"
-    }
-   ],
-   "trades": [
-    {
-     "date": "2025-07-11",
-     "owner": "",
-     "symbol": "KO",
-     "asset": "made solely by the independent manager, without my input or direction. Coca-Cola Company",
-     "side": "SELL",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-08-20"
-    },
-    {
-     "date": "2025-07-11",
-     "owner": "",
-     "symbol": "GS",
-     "asset": "lely by the independent manager, without my input or direction. Goldman Sachs Group, Inc.",
-     "side": "SELL",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-08-20"
-    },
-    {
-     "date": "2025-07-11",
-     "owner": "",
-     "symbol": "HD",
-     "asset": "e made solely by the independent manager, without my input or direction. Home Depot, Inc.",
-     "side": "SELL",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-08-20"
-    },
-    {
-     "date": "2025-07-11",
-     "owner": "",
-     "symbol": "PEP",
-     "asset": "Pepsico, Inc.",
-     "side": "SELL",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-08-20"
-    },
-    {
-     "date": "2025-07-11",
-     "owner": "",
-     "symbol": "PG",
-     "asset": "olely by the independent manager, without my input or direction. Procter & Gamble Company",
-     "side": "SELL",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-08-20"
-    },
-    {
-     "date": "2025-07-11",
-     "owner": "",
-     "symbol": "TMUS",
-     "asset": "T-Mobile US, Inc.",
-     "side": "SELL",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-08-20"
-    },
-    {
-     "date": "2025-07-11",
-     "owner": "",
-     "symbol": "WMB",
-     "asset": "olely by the independent manager, without my input or direction. Williams Companies, Inc.",
-     "side": "SELL",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-08-20"
-    },
-    {
-     "date": "2024-09-26",
-     "owner": "",
-     "symbol": "APPL",
-     "asset": "e made solely by the independent manager, without my input or direction. Appell Pete Corp",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-08-20"
-    },
-    {
-     "date": "2024-09-26",
-     "owner": "",
-     "symbol": "KO",
-     "asset": "made solely by the independent manager, without my input or direction. Coca-Cola Company",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-08-20"
-    },
-    {
-     "date": "2024-09-26",
-     "owner": "",
-     "symbol": "HD",
-     "asset": "e made solely by the independent manager, without my input or direction. Home Depot, Inc.",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-08-20"
-    },
-    {
-     "date": "2024-09-26",
-     "owner": "",
-     "symbol": "NSRGY",
-     "asset": "e made solely by the independent manager, without my input or direction. NESTLE S.A S/ADR",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-08-20"
-    },
-    {
-     "date": "2024-09-26",
-     "owner": "",
-     "symbol": "PG",
-     "asset": "olely by the independent manager, without my input or direction. Procter & Gamble Company",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-08-20"
-    },
-    {
-     "date": "2024-09-26",
-     "owner": "",
-     "symbol": "TMUS",
-     "asset": "made solely by the independent manager, without my input or direction. T-Mobile US, Inc.",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-08-20"
-    },
-    {
-     "date": "2024-09-26",
-     "owner": "",
-     "symbol": "WMB",
-     "asset": "olely by the independent manager, without my input or direction. Williams Companies, Inc.",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-08-20"
     }
    ]
   },
@@ -14228,284 +13685,6 @@
    ]
   },
   {
-   "id": "F000472",
-   "name": "Scott Franklin",
-   "party": "Republican",
-   "chamber": "House",
-   "state": "FL",
-   "district": 18,
-   "committees": [
-    "House Committee on Science, Space, and Technology",
-    "House Committee on Appropriations"
-   ],
-   "n_trades": 8,
-   "buy_mid": 32002,
-   "sell_mid": 105502,
-   "recent_mid": 0,
-   "last_traded": "2025-06-16",
-   "top_buys": [
-    {
-     "symbol": "HD",
-     "mid": 8000,
-     "n": 1,
-     "asset": "o reconcile our investment holdings for my 2024 Financial Di"
-    },
-    {
-     "symbol": "PEP",
-     "mid": 8000,
-     "n": 1,
-     "asset": "g to reconcile our investment holdings for my 2024 Financial"
-    },
-    {
-     "symbol": "PG",
-     "mid": 8000,
-     "n": 1,
-     "asset": "ile our investment holdings for my 2024 Financial Disclosure"
-    },
-    {
-     "symbol": "V",
-     "mid": 8000,
-     "n": 1,
-     "asset": "pting to reconcile our investment holdings for my 2024 Finan"
-    }
-   ],
-   "top_sells": [
-    {
-     "symbol": "HD",
-     "mid": 32500,
-     "n": 1,
-     "asset": "Fidelity Joint TBE JT Home Depot, Inc."
-    },
-    {
-     "symbol": "PG",
-     "mid": 32500,
-     "n": 1,
-     "asset": "Fidelity Joint TBE JT Procter & Gamble Company"
-    },
-    {
-     "symbol": "V",
-     "mid": 32500,
-     "n": 1,
-     "asset": "Fidelity Joint TBE JT Visa Inc."
-    },
-    {
-     "symbol": "PEP",
-     "mid": 8000,
-     "n": 1,
-     "asset": "Fidelity Joint TBE JT Pepsico, Inc."
-    }
-   ],
-   "trades": [
-    {
-     "date": "2025-06-16",
-     "owner": "",
-     "symbol": "HD",
-     "asset": "Fidelity Joint TBE JT Home Depot, Inc.",
-     "side": "SELL",
-     "lo": 15001,
-     "hi": 50000,
-     "filed": "2025-07-14"
-    },
-    {
-     "date": "2025-06-16",
-     "owner": "",
-     "symbol": "PEP",
-     "asset": "Fidelity Joint TBE JT Pepsico, Inc.",
-     "side": "SELL",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-07-14"
-    },
-    {
-     "date": "2025-06-16",
-     "owner": "",
-     "symbol": "PG",
-     "asset": "Fidelity Joint TBE JT Procter & Gamble Company",
-     "side": "SELL",
-     "lo": 15001,
-     "hi": 50000,
-     "filed": "2025-07-14"
-    },
-    {
-     "date": "2025-06-16",
-     "owner": "",
-     "symbol": "V",
-     "asset": "Fidelity Joint TBE JT Visa Inc.",
-     "side": "SELL",
-     "lo": 15001,
-     "hi": 50000,
-     "filed": "2025-07-14"
-    },
-    {
-     "date": "2024-08-07",
-     "owner": "",
-     "symbol": "HD",
-     "asset": "o reconcile our investment holdings for my 2024 Financial Disclosure. SP Home Depot, Inc.",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-07-03"
-    },
-    {
-     "date": "2024-08-07",
-     "owner": "",
-     "symbol": "PEP",
-     "asset": "g to reconcile our investment holdings for my 2024 Financial Disclosure. SP Pepsico, Inc.",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-07-03"
-    },
-    {
-     "date": "2024-08-07",
-     "owner": "",
-     "symbol": "PG",
-     "asset": "ile our investment holdings for my 2024 Financial Disclosure. SP Procter & Gamble Company",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-07-03"
-    },
-    {
-     "date": "2024-08-07",
-     "owner": "",
-     "symbol": "V",
-     "asset": "pting to reconcile our investment holdings for my 2024 Financial Disclosure. SP Visa Inc.",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-07-03"
-    }
-   ]
-  },
-  {
-   "id": "M001218",
-   "name": "Richard McCormick",
-   "party": "Republican",
-   "chamber": "House",
-   "state": "GA",
-   "district": 7,
-   "committees": [
-    "House Committee on Science, Space, and Technology",
-    "House Committee on Armed Services",
-    "House Committee on Oversight and Government Reform"
-   ],
-   "n_trades": 8,
-   "buy_mid": 64004,
-   "sell_mid": 0,
-   "recent_mid": 0,
-   "last_traded": "2026-03-19",
-   "top_buys": [
-    {
-     "symbol": "HD",
-     "mid": 32002,
-     "n": 4,
-     "asset": "Mutual Fund Home Depot, Inc."
-    },
-    {
-     "symbol": "PEP",
-     "mid": 16001,
-     "n": 2,
-     "asset": "Mutual Fund Pepsico, Inc."
-    },
-    {
-     "symbol": "PG",
-     "mid": 8000,
-     "n": 1,
-     "asset": "Procter & Gamble Company"
-    },
-    {
-     "symbol": "V",
-     "mid": 8000,
-     "n": 1,
-     "asset": "Visa Inc."
-    }
-   ],
-   "top_sells": [],
-   "trades": [
-    {
-     "date": "2026-03-19",
-     "owner": "",
-     "symbol": "HD",
-     "asset": "Home Depot, Inc.",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2026-04-07"
-    },
-    {
-     "date": "2026-03-19",
-     "owner": "",
-     "symbol": "HD",
-     "asset": "Growth Partners IRA Home Depot, Inc.",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2026-04-07"
-    },
-    {
-     "date": "2025-11-05",
-     "owner": "",
-     "symbol": "HD",
-     "asset": "Home Depot, Inc.",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-12-09"
-    },
-    {
-     "date": "2025-11-05",
-     "owner": "",
-     "symbol": "PEP",
-     "asset": "Pepsico, Inc.",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-12-09"
-    },
-    {
-     "date": "2025-11-05",
-     "owner": "",
-     "symbol": "PG",
-     "asset": "Procter & Gamble Company",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-12-09"
-    },
-    {
-     "date": "2025-11-05",
-     "owner": "",
-     "symbol": "V",
-     "asset": "Visa Inc.",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-12-09"
-    },
-    {
-     "date": "2023-03-15",
-     "owner": "",
-     "symbol": "HD",
-     "asset": "Mutual Fund Home Depot, Inc.",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-09-17"
-    },
-    {
-     "date": "2023-03-15",
-     "owner": "",
-     "symbol": "PEP",
-     "asset": "Mutual Fund Pepsico, Inc.",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-09-17"
-    }
-   ]
-  },
-  {
    "id": "G000359",
    "name": "Lindsey Graham",
    "party": "Republican",
@@ -14639,6 +13818,140 @@
      "lo": 15001,
      "hi": 50000,
      "filed": "2025-07-14"
+    }
+   ]
+  },
+  {
+   "id": "T000486",
+   "name": "Ritchie Torres",
+   "party": "Democrat",
+   "chamber": "House",
+   "state": "NY",
+   "district": 15,
+   "committees": [
+    "House Committee on Financial Services",
+    "House Select Committee on the Strategic Competition Between the United States and the Chinese Communist Party"
+   ],
+   "n_trades": 7,
+   "buy_mid": 0,
+   "sell_mid": 56004,
+   "recent_mid": 0,
+   "last_traded": "2025-07-11",
+   "top_buys": [],
+   "top_sells": [
+    {
+     "symbol": "KO",
+     "mid": 8000,
+     "n": 1,
+     "asset": "made solely by the independent manager, without my input or "
+    },
+    {
+     "symbol": "GS",
+     "mid": 8000,
+     "n": 1,
+     "asset": "lely by the independent manager, without my input or directi"
+    },
+    {
+     "symbol": "HD",
+     "mid": 8000,
+     "n": 1,
+     "asset": "e made solely by the independent manager, without my input o"
+    },
+    {
+     "symbol": "PEP",
+     "mid": 8000,
+     "n": 1,
+     "asset": "Pepsico, Inc."
+    },
+    {
+     "symbol": "PG",
+     "mid": 8000,
+     "n": 1,
+     "asset": "olely by the independent manager, without my input or direct"
+    },
+    {
+     "symbol": "TMUS",
+     "mid": 8000,
+     "n": 1,
+     "asset": "T-Mobile US, Inc."
+    },
+    {
+     "symbol": "WMB",
+     "mid": 8000,
+     "n": 1,
+     "asset": "olely by the independent manager, without my input or direct"
+    }
+   ],
+   "trades": [
+    {
+     "date": "2025-07-11",
+     "owner": "",
+     "symbol": "KO",
+     "asset": "made solely by the independent manager, without my input or direction. Coca-Cola Company",
+     "side": "SELL",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-08-20"
+    },
+    {
+     "date": "2025-07-11",
+     "owner": "",
+     "symbol": "GS",
+     "asset": "lely by the independent manager, without my input or direction. Goldman Sachs Group, Inc.",
+     "side": "SELL",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-08-20"
+    },
+    {
+     "date": "2025-07-11",
+     "owner": "",
+     "symbol": "HD",
+     "asset": "e made solely by the independent manager, without my input or direction. Home Depot, Inc.",
+     "side": "SELL",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-08-20"
+    },
+    {
+     "date": "2025-07-11",
+     "owner": "",
+     "symbol": "PEP",
+     "asset": "Pepsico, Inc.",
+     "side": "SELL",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-08-20"
+    },
+    {
+     "date": "2025-07-11",
+     "owner": "",
+     "symbol": "PG",
+     "asset": "olely by the independent manager, without my input or direction. Procter & Gamble Company",
+     "side": "SELL",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-08-20"
+    },
+    {
+     "date": "2025-07-11",
+     "owner": "",
+     "symbol": "TMUS",
+     "asset": "T-Mobile US, Inc.",
+     "side": "SELL",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-08-20"
+    },
+    {
+     "date": "2025-07-11",
+     "owner": "",
+     "symbol": "WMB",
+     "asset": "olely by the independent manager, without my input or direction. Williams Companies, Inc.",
+     "side": "SELL",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-08-20"
     }
    ]
   },
@@ -15004,6 +14317,113 @@
      "lo": 1001,
      "hi": 15000,
      "filed": "2025-01-10"
+    }
+   ]
+  },
+  {
+   "id": "M001218",
+   "name": "Richard McCormick",
+   "party": "Republican",
+   "chamber": "House",
+   "state": "GA",
+   "district": 7,
+   "committees": [
+    "House Committee on Science, Space, and Technology",
+    "House Committee on Armed Services",
+    "House Committee on Oversight and Government Reform"
+   ],
+   "n_trades": 6,
+   "buy_mid": 48003,
+   "sell_mid": 0,
+   "recent_mid": 0,
+   "last_traded": "2026-03-19",
+   "top_buys": [
+    {
+     "symbol": "HD",
+     "mid": 24002,
+     "n": 3,
+     "asset": "Home Depot, Inc."
+    },
+    {
+     "symbol": "PEP",
+     "mid": 8000,
+     "n": 1,
+     "asset": "Pepsico, Inc."
+    },
+    {
+     "symbol": "PG",
+     "mid": 8000,
+     "n": 1,
+     "asset": "Procter & Gamble Company"
+    },
+    {
+     "symbol": "V",
+     "mid": 8000,
+     "n": 1,
+     "asset": "Visa Inc."
+    }
+   ],
+   "top_sells": [],
+   "trades": [
+    {
+     "date": "2026-03-19",
+     "owner": "",
+     "symbol": "HD",
+     "asset": "Home Depot, Inc.",
+     "side": "BUY",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2026-04-07"
+    },
+    {
+     "date": "2026-03-19",
+     "owner": "",
+     "symbol": "HD",
+     "asset": "Growth Partners IRA Home Depot, Inc.",
+     "side": "BUY",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2026-04-07"
+    },
+    {
+     "date": "2025-11-05",
+     "owner": "",
+     "symbol": "HD",
+     "asset": "Home Depot, Inc.",
+     "side": "BUY",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-12-09"
+    },
+    {
+     "date": "2025-11-05",
+     "owner": "",
+     "symbol": "PEP",
+     "asset": "Pepsico, Inc.",
+     "side": "BUY",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-12-09"
+    },
+    {
+     "date": "2025-11-05",
+     "owner": "",
+     "symbol": "PG",
+     "asset": "Procter & Gamble Company",
+     "side": "BUY",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-12-09"
+    },
+    {
+     "date": "2025-11-05",
+     "owner": "",
+     "symbol": "V",
+     "asset": "Visa Inc.",
+     "side": "BUY",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-12-09"
     }
    ]
   },
@@ -15511,82 +14931,88 @@
    ]
   },
   {
-   "id": "H001082",
-   "name": "Kevin Hern",
+   "id": "F000472",
+   "name": "Scott Franklin",
    "party": "Republican",
    "chamber": "House",
-   "state": "OK",
-   "district": 1,
+   "state": "FL",
+   "district": 18,
    "committees": [
-    "House Committee on Ways and Means"
+    "House Committee on Science, Space, and Technology",
+    "House Committee on Appropriations"
    ],
    "n_trades": 4,
-   "buy_mid": 8000,
-   "sell_mid": 73002,
+   "buy_mid": 0,
+   "sell_mid": 105502,
    "recent_mid": 0,
-   "last_traded": "2025-10-28",
-   "top_buys": [
-    {
-     "symbol": "HD",
-     "mid": 8000,
-     "n": 1,
-     "asset": "Dividend Reinvestment JT Home Depot, Inc."
-    }
-   ],
+   "last_traded": "2025-06-16",
+   "top_buys": [],
    "top_sells": [
     {
      "symbol": "HD",
-     "mid": 40501,
-     "n": 2,
-     "asset": "Hern Family Foundation JT Home Depot, Inc."
-    },
-    {
-     "symbol": "CSX",
      "mid": 32500,
      "n": 1,
-     "asset": "Hern Family Foundation CSX Corporation"
+     "asset": "Fidelity Joint TBE JT Home Depot, Inc."
+    },
+    {
+     "symbol": "PG",
+     "mid": 32500,
+     "n": 1,
+     "asset": "Fidelity Joint TBE JT Procter & Gamble Company"
+    },
+    {
+     "symbol": "V",
+     "mid": 32500,
+     "n": 1,
+     "asset": "Fidelity Joint TBE JT Visa Inc."
+    },
+    {
+     "symbol": "PEP",
+     "mid": 8000,
+     "n": 1,
+     "asset": "Fidelity Joint TBE JT Pepsico, Inc."
     }
    ],
    "trades": [
     {
-     "date": "2025-10-28",
+     "date": "2025-06-16",
      "owner": "",
-     "symbol": "CSX",
-     "asset": "Hern Family Foundation CSX Corporation",
+     "symbol": "HD",
+     "asset": "Fidelity Joint TBE JT Home Depot, Inc.",
      "side": "SELL",
      "lo": 15001,
      "hi": 50000,
-     "filed": "2025-11-16"
+     "filed": "2025-07-14"
     },
     {
-     "date": "2025-10-28",
+     "date": "2025-06-16",
      "owner": "",
-     "symbol": "HD",
-     "asset": "Kevin Hern Traditional IRA Home Depot, Inc.",
+     "symbol": "PEP",
+     "asset": "Fidelity Joint TBE JT Pepsico, Inc.",
      "side": "SELL",
      "lo": 1001,
      "hi": 15000,
-     "filed": "2025-11-16"
+     "filed": "2025-07-14"
     },
     {
-     "date": "2025-09-26",
+     "date": "2025-06-16",
      "owner": "",
-     "symbol": "HD",
-     "asset": "Hern Family Foundation JT Home Depot, Inc.",
+     "symbol": "PG",
+     "asset": "Fidelity Joint TBE JT Procter & Gamble Company",
      "side": "SELL",
      "lo": 15001,
      "hi": 50000,
-     "filed": "2025-10-16"
+     "filed": "2025-07-14"
     },
     {
-     "date": "2024-12-12",
+     "date": "2025-06-16",
      "owner": "",
-     "symbol": "HD",
-     "asset": "Dividend Reinvestment JT Home Depot, Inc.",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-01-15"
+     "symbol": "V",
+     "asset": "Fidelity Joint TBE JT Visa Inc.",
+     "side": "SELL",
+     "lo": 15001,
+     "hi": 50000,
+     "filed": "2025-07-14"
     }
    ]
   },
@@ -15676,6 +15102,69 @@
    ]
   },
   {
+   "id": "H001082",
+   "name": "Kevin Hern",
+   "party": "Republican",
+   "chamber": "House",
+   "state": "OK",
+   "district": 1,
+   "committees": [
+    "House Committee on Ways and Means"
+   ],
+   "n_trades": 3,
+   "buy_mid": 0,
+   "sell_mid": 73002,
+   "recent_mid": 0,
+   "last_traded": "2025-10-28",
+   "top_buys": [],
+   "top_sells": [
+    {
+     "symbol": "HD",
+     "mid": 40501,
+     "n": 2,
+     "asset": "Hern Family Foundation JT Home Depot, Inc."
+    },
+    {
+     "symbol": "CSX",
+     "mid": 32500,
+     "n": 1,
+     "asset": "Hern Family Foundation CSX Corporation"
+    }
+   ],
+   "trades": [
+    {
+     "date": "2025-10-28",
+     "owner": "",
+     "symbol": "CSX",
+     "asset": "Hern Family Foundation CSX Corporation",
+     "side": "SELL",
+     "lo": 15001,
+     "hi": 50000,
+     "filed": "2025-11-16"
+    },
+    {
+     "date": "2025-10-28",
+     "owner": "",
+     "symbol": "HD",
+     "asset": "Kevin Hern Traditional IRA Home Depot, Inc.",
+     "side": "SELL",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-11-16"
+    },
+    {
+     "date": "2025-09-26",
+     "owner": "",
+     "symbol": "HD",
+     "asset": "Hern Family Foundation JT Home Depot, Inc.",
+     "side": "SELL",
+     "lo": 15001,
+     "hi": 50000,
+     "filed": "2025-10-16"
+    }
+   ]
+  },
+  {
    "id": "H001072",
    "name": "J. French Hill",
    "party": "Republican",
@@ -15742,70 +15231,6 @@
      "lo": 1001,
      "hi": 15000,
      "filed": "2025-07-24"
-    }
-   ]
-  },
-  {
-   "id": "W000797",
-   "name": "Debbie Wasserman Schultz",
-   "party": "Democrat",
-   "chamber": "House",
-   "state": "FL",
-   "district": 25,
-   "committees": [
-    "House Committee on Appropriations"
-   ],
-   "n_trades": 3,
-   "buy_mid": 8000,
-   "sell_mid": 4733,
-   "recent_mid": 0,
-   "last_traded": "2025-09-15",
-   "top_buys": [
-    {
-     "symbol": "NGD",
-     "mid": 8000,
-     "n": 1,
-     "asset": "Gold Inc."
-    }
-   ],
-   "top_sells": [
-    {
-     "symbol": "BRY",
-     "mid": 4733,
-     "n": 2,
-     "asset": "Berry Corporation"
-    }
-   ],
-   "trades": [
-    {
-     "date": "2025-09-15",
-     "owner": "",
-     "symbol": "BRY",
-     "asset": "Berry Corporation",
-     "side": "SELL",
-     "lo": 2761,
-     "hi": 2761,
-     "filed": "2025-10-06"
-    },
-    {
-     "date": "2025-09-15",
-     "owner": "",
-     "symbol": "BRY",
-     "asset": "Berry Corporation",
-     "side": "SELL",
-     "lo": 1972,
-     "hi": 1972,
-     "filed": "2025-10-06"
-    },
-    {
-     "date": "2024-02-28",
-     "owner": "",
-     "symbol": "NGD",
-     "asset": "Gold Inc.",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-07-01"
     }
    ]
   },
@@ -16016,6 +15441,53 @@
      "lo": 15001,
      "hi": 50000,
      "filed": "2025-07-01"
+    }
+   ]
+  },
+  {
+   "id": "W000797",
+   "name": "Debbie Wasserman Schultz",
+   "party": "Democrat",
+   "chamber": "House",
+   "state": "FL",
+   "district": 25,
+   "committees": [
+    "House Committee on Appropriations"
+   ],
+   "n_trades": 2,
+   "buy_mid": 0,
+   "sell_mid": 4733,
+   "recent_mid": 0,
+   "last_traded": "2025-09-15",
+   "top_buys": [],
+   "top_sells": [
+    {
+     "symbol": "BRY",
+     "mid": 4733,
+     "n": 2,
+     "asset": "Berry Corporation"
+    }
+   ],
+   "trades": [
+    {
+     "date": "2025-09-15",
+     "owner": "",
+     "symbol": "BRY",
+     "asset": "Berry Corporation",
+     "side": "SELL",
+     "lo": 2761,
+     "hi": 2761,
+     "filed": "2025-10-06"
+    },
+    {
+     "date": "2025-09-15",
+     "owner": "",
+     "symbol": "BRY",
+     "asset": "Berry Corporation",
+     "side": "SELL",
+     "lo": 1972,
+     "hi": 1972,
+     "filed": "2025-10-06"
     }
    ]
   },
@@ -16275,41 +15747,6 @@
    ]
   },
   {
-   "id": "C000174",
-   "name": "Thomas R. Carper (former)",
-   "party": "Democrat",
-   "chamber": "Senate",
-   "state": "DE",
-   "district": null,
-   "committees": [],
-   "n_trades": 1,
-   "buy_mid": 0,
-   "sell_mid": 8000,
-   "recent_mid": 0,
-   "last_traded": "2024-12-13",
-   "top_buys": [],
-   "top_sells": [
-    {
-     "symbol": "AY",
-     "mid": 8000,
-     "n": 1,
-     "asset": "Atlantica Yield Plc"
-    }
-   ],
-   "trades": [
-    {
-     "date": "2024-12-13",
-     "owner": "Spouse",
-     "symbol": "AY",
-     "asset": "Atlantica Yield Plc",
-     "side": "SELL",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-01-02"
-    }
-   ]
-  },
-  {
    "id": "P000048",
    "name": "August Pfluger",
    "party": "Republican",
@@ -16344,45 +15781,6 @@
      "lo": 1001,
      "hi": 15000,
      "filed": "2025-07-23"
-    }
-   ]
-  },
-  {
-   "id": "F000450",
-   "name": "Virginia Foxx",
-   "party": "Republican",
-   "chamber": "House",
-   "state": "NC",
-   "district": 5,
-   "committees": [
-    "House Committee on Oversight and Government Reform",
-    "House Committee on Education and Workforce",
-    "House Committee on Rules (Chair)"
-   ],
-   "n_trades": 1,
-   "buy_mid": 8000,
-   "sell_mid": 0,
-   "recent_mid": 0,
-   "last_traded": "2024-12-06",
-   "top_buys": [
-    {
-     "symbol": "DUK",
-     "mid": 8000,
-     "n": 1,
-     "asset": "Duke Energy Corporation"
-    }
-   ],
-   "top_sells": [],
-   "trades": [
-    {
-     "date": "2024-12-06",
-     "owner": "",
-     "symbol": "DUK",
-     "asset": "Duke Energy Corporation",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-01-06"
     }
    ]
   },
@@ -16611,44 +16009,6 @@
    ]
   },
   {
-   "id": "N000188",
-   "name": "Donald Norcross",
-   "party": "Democrat",
-   "chamber": "House",
-   "state": "NJ",
-   "district": 1,
-   "committees": [
-    "House Committee on Armed Services",
-    "House Committee on Education and Workforce"
-   ],
-   "n_trades": 1,
-   "buy_mid": 0,
-   "sell_mid": 32500,
-   "recent_mid": 0,
-   "last_traded": "2024-06-04",
-   "top_buys": [],
-   "top_sells": [
-    {
-     "symbol": "TD",
-     "mid": 32500,
-     "n": 1,
-     "asset": "Toronto Dominion Bank"
-    }
-   ],
-   "trades": [
-    {
-     "date": "2024-06-04",
-     "owner": "",
-     "symbol": "TD",
-     "asset": "Toronto Dominion Bank",
-     "side": "SELL",
-     "lo": 15001,
-     "hi": 50000,
-     "filed": "2025-09-04"
-    }
-   ]
-  },
-  {
    "id": "G000597",
    "name": "Andrew R. Garbarino",
    "party": "Republican",
@@ -16836,45 +16196,6 @@
      "lo": 1001,
      "hi": 15000,
      "filed": "2025-12-24"
-    }
-   ]
-  },
-  {
-   "id": "J000298",
-   "name": "Pramila Jayapal",
-   "party": "Democrat",
-   "chamber": "House",
-   "state": "WA",
-   "district": 7,
-   "committees": [
-    "House Committee on the Judiciary",
-    "House Committee on Foreign Affairs",
-    "House Committee on the Budget"
-   ],
-   "n_trades": 1,
-   "buy_mid": 0,
-   "sell_mid": 8000,
-   "recent_mid": 0,
-   "last_traded": "2023-10-31",
-   "top_buys": [],
-   "top_sells": [
-    {
-     "symbol": "NWL",
-     "mid": 8000,
-     "n": 1,
-     "asset": "Newell Brands Inc."
-    }
-   ],
-   "trades": [
-    {
-     "date": "2023-10-31",
-     "owner": "",
-     "symbol": "NWL",
-     "asset": "Newell Brands Inc.",
-     "side": "SELL",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2026-03-15"
     }
    ]
   },

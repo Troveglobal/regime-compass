@@ -121,6 +121,90 @@ INDICES = {
 DEFAULT_INDEX = "spx"
 
 
+# Country hub pages (/country/{slug}). Each maps to covered HMM indices plus
+# country-level data sources. bond = FRED series for the 10y government yield
+# (None where no clean free series exists — listed in page methodology).
+# news_query/news_locale feed the shared news engine (src/news.py).
+COUNTRIES = {
+    "usa": {
+        "name": "United States", "flag": "🇺🇸", "iso3": "USA",
+        "indices": ["spx", "nasdaq"], "primary_index": "spx",
+        "currency_label": "Dollar Index (DXY)",
+        "bond": {"series": "DGS10", "label": "US 10y Treasury", "freq": "daily"},
+        "smartmoney": "/smartmoney/us",
+        "news_query": '"US economy" OR "Federal Reserve" OR "S&P 500"',
+        "news_locale": ("en-US", "US", "US:en"),
+    },
+    "eurozone": {
+        "name": "Eurozone", "flag": "🇪🇺", "iso3": "EURO", "group": True,
+        "indices": ["stoxx50"], "primary_index": "stoxx50",
+        "currency_label": "EUR/USD",
+        "bond": {"series": "IRLTLT01DEM156N", "label": "German 10y Bund", "freq": "monthly"},
+        "smartmoney": None,
+        "news_query": 'Eurozone economy OR ECB OR "European stocks"',
+        "news_locale": ("en-US", "US", "US:en"),
+    },
+    "india": {
+        "name": "India", "flag": "🇮🇳", "iso3": "IND",
+        "indices": ["nifty"], "primary_index": "nifty",
+        "currency_label": "USD/INR",
+        "bond": {"series": "INDIRLTLT01STM", "label": "India 10y G-Sec", "freq": "monthly"},
+        "smartmoney": "/smartmoney",
+        "news_query": "India economy OR Nifty OR RBI",
+        "news_locale": ("en-IN", "IN", "IN:en"),
+    },
+    "japan": {
+        "name": "Japan", "flag": "🇯🇵", "iso3": "JPN",
+        "indices": ["nikkei"], "primary_index": "nikkei",
+        "currency_label": "USD/JPY",
+        "bond": {"series": "IRLTLT01JPM156N", "label": "Japan 10y JGB", "freq": "monthly"},
+        "smartmoney": None,
+        "news_query": 'Japan economy OR "Bank of Japan" OR Nikkei',
+        "news_locale": ("en-US", "US", "US:en"),
+    },
+    "south-korea": {
+        "name": "South Korea", "flag": "🇰🇷", "iso3": "KOR",
+        "indices": ["kospi"], "primary_index": "kospi",
+        "currency_label": "USD/KRW",
+        "bond": {"series": "IRLTLT01KRM156N", "label": "Korea 10y KTB", "freq": "monthly"},
+        "smartmoney": None,
+        "news_query": 'South Korea economy OR "Bank of Korea" OR KOSPI',
+        "news_locale": ("en-US", "US", "US:en"),
+    },
+    "china": {
+        "name": "China", "flag": "🇨🇳", "iso3": "CHN",
+        "indices": ["shcomp"], "primary_index": "shcomp",
+        "currency_label": "USD/CNY",
+        "bond": None,  # no clean free 10y CGB series (FRED's OECD China series is gone)
+        "smartmoney": None,
+        "news_query": 'China economy OR PBOC OR "Chinese stocks"',
+        "news_locale": ("en-US", "US", "US:en"),
+    },
+}
+
+
+# Asset hub pages (/asset/{slug}). All four are already classified HMM
+# markets (config.INDICES) — hubs reuse their regimes, prices and news tags.
+ASSETS = {
+    "bitcoin": {"key": "btc", "name": "Bitcoin", "icon": "₿", "asset_class": "crypto",
+                "headline_corr": "spx"},
+    "ethereum": {"key": "eth", "name": "Ethereum", "icon": "Ξ", "asset_class": "crypto",
+                 "headline_corr": "spx"},
+    "gold": {"key": "gold", "name": "Gold", "icon": "🥇", "asset_class": "metal",
+             "headline_corr": "real10y"},
+    "silver": {"key": "silver", "name": "Silver", "icon": "🥈", "asset_class": "metal",
+               "headline_corr": "real10y"},
+}
+
+
+def index_country_slug(index_key: str) -> str | None:
+    """Country page slug an HMM market belongs to, if any (assets → None)."""
+    for slug, cfg in COUNTRIES.items():
+        if index_key in cfg["indices"]:
+            return slug
+    return None
+
+
 def index_dir(key: str) -> Path:
     return DATA_DIR / key
 

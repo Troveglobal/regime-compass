@@ -40,6 +40,7 @@ from . import ma_regime
 from . import subscriptions
 from .config import (
     API_CORS_ORIGINS,
+    COUNTRIES,
     DATA_DIR,
     DB_PATH,
     DEFAULT_INDEX,
@@ -156,6 +157,15 @@ def _run_sectors() -> None:
         log.exception("[sectors] refresh failed: %s", e)
 
 
+def _run_macro() -> None:
+    """Refresh the US Macro Pane feed (FRED surprise meter + global tracker)."""
+    try:
+        from . import macro as macro_mod
+        macro_mod.refresh()
+    except Exception as e:
+        log.exception("[macro] refresh failed: %s", e)
+
+
 def _run_news() -> None:
     """Refresh the aggregated news feed (headlines + links only)."""
     try:
@@ -169,10 +179,13 @@ def _run_analytics() -> None:
     """Refresh the precomputed analytics feeds (Regime Movers, sparkline
     ribbons, Systemic Risk). Each module is wrapped separately: a failure in
     any of them logs an error but never blocks the daily regime update."""
+    from . import assets as assets_mod
+    from . import countries as countries_mod
     from . import movers as movers_mod
     from . import sparklines as sparks_mod
     from . import systemic as systemic_mod
-    for name, mod in (("movers", movers_mod), ("sparklines", sparks_mod), ("systemic", systemic_mod)):
+    for name, mod in (("movers", movers_mod), ("sparklines", sparks_mod), ("systemic", systemic_mod),
+                      ("countries", countries_mod), ("assets", assets_mod)):
         try:
             mod.refresh()
         except Exception as e:
@@ -234,6 +247,9 @@ def _bootstrap_async() -> None:
         if not ANALYTICS_DIR.joinpath("movers.json").exists():
             log.info("[bootstrap] No analytics feeds — generating.")
             _run_analytics()
+        if not ANALYTICS_DIR.joinpath("macro.json").exists():
+            log.info("[bootstrap] No macro feed — generating.")
+            _run_macro()
         _bootstrap_done = True
         log.info("[bootstrap] Ready.")
 
@@ -275,6 +291,9 @@ def _start_scheduler() -> None:
     _scheduler.add_job(_run_weekly, CronTrigger(day_of_week="sun", hour=3, minute=30), id="weekly_refit")
     # News aggregation: hourly at :20 (aggregation-only; headlines + links)
     _scheduler.add_job(_run_news, CronTrigger(minute=20), id="news_hourly")
+    # US Macro Pane: 15:10 UTC mon-fri — after the 8:30 and 10:00 ET US data
+    # releases have landed on FRED. One FRED pass per day (cached per series).
+    _scheduler.add_job(_run_macro, CronTrigger(day_of_week="mon-fri", hour=15, minute=10), id="macro_daily")
     _scheduler.start()
     log.info("[scheduler] started (daily + weekly).")
 
@@ -454,7 +473,7 @@ def vol_endpoint() -> dict:
 
 @app.get("/api/news")
 def news_endpoint(index: str | None = Query(None), limit: int = Query(30, ge=1, le=100)) -> dict:
-    if index and index != "global" and index not in INDICES:
+    if index and index != "global" and index not in INDICES and index not in COUNTRIES:
         raise HTTPException(400, f"Unknown index '{index}'")
     return {"items": news_mod.latest(index, limit)}
 
@@ -1011,6 +1030,26 @@ def systemic_feed() -> Response:
     return _analytics_feed("systemic")
 
 
+@app.get("/api/countries")
+def countries_feed() -> Response:
+    return _analytics_feed("countries")
+
+
+@app.get("/api/assets")
+def assets_feed() -> Response:
+    return _analytics_feed("assets")
+
+
+@app.get("/api/macro")
+def macro_feed() -> Response:
+    path = ANALYTICS_DIR / "macro.json"
+    if not path.exists():
+        _run_macro()
+    if path.exists():
+        return FileResponse(path, media_type="application/json")
+    return JSONResponse({"error": "macro feed unavailable"}, status_code=503)
+
+
 # HMM validation (walk-forward accuracy audit) — precomputed by scripts/hmm_backtest.py,
 # served straight from data/validation/. Regenerate by rerunning the script.
 VALIDATION_DIR = DATA_DIR / "validation"
@@ -1270,6 +1309,31 @@ if FRONTEND_DIR.exists():
     def yields_page():
         return FileResponse(FRONTEND_DIR / "yields.html")
 
+    @app.get("/macro")
+    def macro_page():
+        return FileResponse(FRONTEND_DIR / "macro.html")
+
+    @app.get("/countries")
+    def countries_page():
+        return FileResponse(FRONTEND_DIR / "countries.html")
+
+    @app.get("/country/{slug}")
+    def country_page(slug: str):
+        if slug not in COUNTRIES:
+            return FileResponse(FRONTEND_DIR / "404.html", status_code=404)
+        return FileResponse(FRONTEND_DIR / "country.html")
+
+    @app.get("/assets")
+    def assets_page():
+        return FileResponse(FRONTEND_DIR / "assets.html")
+
+    @app.get("/asset/{slug}")
+    def asset_page(slug: str):
+        from .config import ASSETS
+        if slug not in ASSETS:
+            return FileResponse(FRONTEND_DIR / "404.html", status_code=404)
+        return FileResponse(FRONTEND_DIR / "asset.html")
+
     @app.get("/robots.txt")
     def robots():
         return FileResponse(FRONTEND_DIR / "robots.txt", media_type="text/plain")
@@ -1284,7 +1348,10 @@ if FRONTEND_DIR.exists():
                  ("/ma", "0.9"), ("/ema", "0.9"), ("/smartmoney", "0.9"), ("/valuation", "0.9"),
                  ("/movers", "0.9"), ("/systemic", "0.8"),
                  ("/correlations", "0.8"), ("/volatility", "0.8"), ("/news", "0.8"),
-                 ("/changes", "0.8"), ("/yields", "0.8"), ("/sectors", "0.8")]
+                 ("/changes", "0.8"), ("/yields", "0.8"), ("/sectors", "0.8"), ("/macro", "0.8"),
+                 ("/countries", "0.8"), ("/assets", "0.8")] \
+                + [(f"/country/{s}", "0.7") for s in COUNTRIES] \
+                + [(f"/asset/{s}", "0.7") for s in ("bitcoin", "ethereum", "gold", "silver")]
         weekly = [("/ma/backtest", "0.7"), ("/ema/backtest", "0.7"), ("/calendar", "0.7"),
                   ("/seasonality", "0.7"), ("/validation", "0.7")]
         stable = [("/subscribe", "0.6"), ("/about", "0.5"), ("/methodology", "0.6"), ("/embed", "0.4"),

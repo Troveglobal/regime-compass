@@ -45,7 +45,24 @@
     '<a href="/smartmoney/id" data-nav="/smartmoney/id">🇮🇩 Indonesia <span class="dd-note">IDX negotiated deals</span></a>' +
     '<a href="/smartmoney/us" data-nav="/smartmoney/us">🇺🇸 United States <span class="dd-note">insiders · Congress</span></a>' +
     "</span></span>" +
+    '<span class="nav-dd"><span class="dd-trigger">Countries <span class="chev">&#9662;</span></span><span class="dd-menu">' +
+    '<a href="/countries" data-nav="/countries">All Countries <span class="dd-note">regime &middot; GDP &middot; news</span></a>' +
+    '<a href="/country/usa" data-nav="/country/usa">🇺🇸 United States</a>' +
+    '<a href="/country/eurozone" data-nav="/country/eurozone">🇪🇺 Eurozone</a>' +
+    '<a href="/country/india" data-nav="/country/india">🇮🇳 India</a>' +
+    '<a href="/country/japan" data-nav="/country/japan">🇯🇵 Japan</a>' +
+    '<a href="/country/south-korea" data-nav="/country/south-korea">🇰🇷 South Korea</a>' +
+    '<a href="/country/china" data-nav="/country/china">🇨🇳 China</a>' +
+    "</span></span>" +
+    '<span class="nav-dd"><span class="dd-trigger">Assets <span class="chev">&#9662;</span></span><span class="dd-menu">' +
+    '<a href="/assets" data-nav="/assets">All Assets <span class="dd-note">regime &middot; vol &middot; correlations</span></a>' +
+    '<a href="/asset/bitcoin" data-nav="/asset/bitcoin">&#8383; Bitcoin</a>' +
+    '<a href="/asset/ethereum" data-nav="/asset/ethereum">&Xi; Ethereum</a>' +
+    '<a href="/asset/gold" data-nav="/asset/gold">🥇 Gold</a>' +
+    '<a href="/asset/silver" data-nav="/asset/silver">🥈 Silver</a>' +
+    "</span></span>" +
     '<span class="nav-dd"><span class="dd-trigger">Markets <span class="chev">&#9662;</span></span><span class="dd-menu">' +
+    '<a href="/macro" data-nav="/macro">Macro <span class="dd-note">US surprise meter</span></a>' +
     '<a href="/sectors" data-nav="/sectors">Sector Heatmap <span class="dd-note">India · daily</span></a>' +
     '<a href="/yields" data-nav="/yields">Yield Curve</a>' +
     '<a href="/valuation" data-nav="/valuation">Valuation</a>' +
@@ -70,7 +87,7 @@
     '<div class="f-col"><h5>Quant</h5>' +
     '<a href="/movers">Regime Movers</a><a href="/systemic">Systemic Risk</a><a href="/volatility">Volatility</a><a href="/correlations">Correlations</a><a href="/validation">Validation</a></div>' +
     '<div class="f-col"><h5>Markets</h5>' +
-    '<a href="/sectors">Sector Heatmap</a><a href="/yields">Yield Curve</a><a href="/valuation">Valuation</a><a href="/seasonality">Seasonality</a><a href="/calendar">Calendar</a><a href="/news">News</a></div>' +
+    '<a href="/countries">Countries</a><a href="/assets">Assets</a><a href="/macro">Macro</a><a href="/sectors">Sector Heatmap</a><a href="/yields">Yield Curve</a><a href="/valuation">Valuation</a><a href="/seasonality">Seasonality</a><a href="/calendar">Calendar</a><a href="/news">News</a></div>' +
     '<div class="f-col"><h5>Company</h5>' +
     '<a href="/about">About</a><a href="/methodology">Methodology</a><a href="/validation">Validation</a><a href="/subscribe">Alerts</a><a href="/disclaimer">Disclaimer</a><a href="/terms">Terms</a><a href="/privacy">Privacy</a></div>' +
     "</div>" +

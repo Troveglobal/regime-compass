@@ -119,7 +119,7 @@
   <!--GEO:JSONLD-->
 </head>
 <body>
-<script src="/shell.js?v=4.9"></script>
+<script src="/shell.js?v=5.1"></script>
 
 <div class="wrap">
   <div class="hero">
@@ -145,6 +145,12 @@
 
 <script>
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+/* markets with a country or asset hub page link through to it */
+const HUB_PATH = { spx: "/country/usa", nasdaq: "/country/usa", stoxx50: "/country/eurozone",
+                   nifty: "/country/india", nikkei: "/country/japan", kospi: "/country/south-korea",
+                   shcomp: "/country/china", btc: "/asset/bitcoin", eth: "/asset/ethereum",
+                   gold: "/asset/gold", silver: "/asset/silver" };
 
 function buildMiniGauge(gauge, score) {
   // gauge: 0-100 mapped to needle angle -90..+90 (needle starts at -90, sweeps on mount)
@@ -214,7 +220,9 @@ async function load() {
       <div class="header">
         <div>
           <div class="name">${esc(b.index_name)}</div>
-          <div class="country">${esc(b.country)}</div>
+          <div class="country">${HUB_PATH[b.index_key]
+            ? `<a href="${HUB_PATH[b.index_key]}" style="color:inherit;">${esc(b.country)} →</a>`
+            : esc(b.country)}</div>
         </div>
         <span class="regime-pill ${overallRegime}">${overallLabel}</span>
       </div>

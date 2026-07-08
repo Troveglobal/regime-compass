@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-94DE53GC07"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', { analytics_storage: 'denied' });
+    gtag('js', new Date());
+    gtag('config', 'G-94DE53GC07');
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Country Hub — Regime Compass</title>
+  <meta name="description" content="Regime state, market pulse, IMF macro vitals and news for a covered country — one hub page." />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Regime Compass" />
+  <meta property="og:title" content="Country Hub — Regime Compass" />
+  <meta property="og:description" content="Regime state, market pulse, IMF macro vitals and news — one hub page per covered country." />
+  <meta property="og:image" content="https://www.regimecompass.com/og-image.png" />
+  <meta name="theme-color" content="#07090e" />
+  <link rel="stylesheet" href="/styles.css?v=4.3" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="manifest" href="/manifest.json" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    .hub-hero { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+    .hub-flag { font-size: 52px; line-height: 1; }
+    .hub-hero h1 { margin: 0; }
+    .hub-hero .covered { font-size: 12px; color: var(--muted); margin-top: 4px; }
+    .regime-hero {
+      display: inline-flex; align-items: baseline; gap: 12px; margin-left: auto;
+      padding: 12px 18px; border-radius: var(--r-lg); border: 1px solid var(--border);
+      background: var(--panel); box-shadow: inset 0 1px 0 var(--edge-light);
+    }
+    .regime-hero .state { font-family: var(--font-display); font-size: 30px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+    .regime-hero .state.bull { color: var(--bull); } .regime-hero .state.bear { color: var(--bear); } .regime-hero .state.neutral { color: var(--neutral); }
+    .regime-hero .meta { font-size: 11.5px; color: var(--muted); }
+
+    .pulse-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+    .pulse-card {
+      background: var(--panel-2); border: 1px solid var(--border); border-radius: var(--r-lg);
+      padding: 16px; box-shadow: inset 0 1px 0 var(--edge-light);
+    }
+    .pulse-card .head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+    .pulse-card .name { font-weight: 600; color: var(--text-strong); font-size: 14px; }
+    .pulse-card .name a { color: inherit; text-decoration: none; }
+    .pulse-card .name a:hover { color: var(--accent); }
+    .pulse-card .lvl { font-family: var(--font-mono); font-size: 22px; font-weight: 700; margin: 2px 0 8px; }
+    .pulse-card .deltas { display: flex; gap: 14px; font-size: 12px; font-family: var(--font-mono); margin-bottom: 10px; }
+    .pulse-card .deltas span b { display: block; font-size: 9.5px; color: var(--muted-2); letter-spacing: 1px; text-transform: uppercase; font-family: var(--font-ui); font-weight: 600; }
+    .up { color: var(--bull); } .down { color: var(--bear); }
+    .pill { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; }
+    .pill.bull { background: rgba(52,198,115,0.14); color: var(--bull); border: 1px solid rgba(52,198,115,0.4); }
+    .pill.bear { background: rgba(227,84,84,0.14); color: var(--bear); border: 1px solid rgba(227,84,84,0.4); }
+    .pill.neutral { background: rgba(212,160,23,0.12); color: var(--neutral); border: 1px solid rgba(212,160,23,0.4); }
+    .asof { font-size: 10.5px; color: var(--muted-2); }
+
+    .vitals-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin-bottom: 18px; }
+    .vital { background: var(--panel); border: 1px solid var(--border); border-radius: var(--r-md); padding: 13px 15px; }
+    .vital .k { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 1.1px; font-weight: 600; }
+    .vital .v { font-family: var(--font-mono); font-size: 19px; font-weight: 700; margin-top: 4px; }
+    .vital .fc { font-size: 11.5px; font-family: var(--font-mono); margin-top: 3px; }
+    .vital .yr { font-size: 10px; color: var(--muted-2); margin-top: 3px; display: block; }
+    .imf-chart-box { height: 300px; position: relative; }
+
+    .compare-strip { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
+    .cmp { display: flex; align-items: center; gap: 7px; padding: 7px 12px; border-radius: 20px;
+           border: 1px solid var(--border); background: var(--panel); font-size: 12px; text-decoration: none; color: var(--text); }
+    .cmp:hover { border-color: var(--border-strong); }
+    .cmp.me { border-color: var(--accent-border, rgba(167,139,250,0.5)); background: rgba(167,139,250,0.08); }
+    .cmp .g { font-family: var(--font-mono); color: var(--muted); }
+    .cmp .dot { width: 8px; height: 8px; border-radius: 50%; }
+    .dot.bull { background: var(--bull); } .dot.bear { background: var(--bear); } .dot.neutral { background: var(--neutral); }
+
+    .news-item { display: flex; gap: 12px; align-items: baseline; padding: 10px 2px; border-bottom: 1px solid var(--hairline); }
+    .news-item:last-child { border-bottom: none; }
+    .news-item a { color: var(--text); text-decoration: none; font-size: 13.5px; }
+    .news-item a:hover { color: var(--accent); }
+    .news-item .meta { margin-left: auto; white-space: nowrap; font-size: 11px; color: var(--muted-2); }
+    .sm-card { display: flex; align-items: center; gap: 14px; padding: 16px 18px; border: 1px solid var(--border);
+               border-radius: var(--r-lg); background: var(--panel-2); text-decoration: none; color: var(--text); }
+    .sm-card:hover { border-color: var(--accent-border, rgba(167,139,250,0.5)); }
+    .macro-embed { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
+    .macro-embed .mini { max-width: 190px; }
+    .provenance { font-size: 11px; color: var(--muted-2); line-height: 1.7; }
+    .section-stamp { float: right; font-size: 10.5px; color: var(--muted-2); font-weight: 400; }
+  </style>
+</head>
+<body>
+<script src="/shell.js?v=5.1"></script>
+<script src="/ribbon.js?v=1.0"></script>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="kicker">Country Hub</div>
+    <div class="hub-hero">
+      <span class="hub-flag" id="flag"></span>
+      <div>
+        <h1 id="cname">Loading…</h1>
+        <div class="covered" id="covered"></div>
+      </div>
+      <div class="regime-hero" id="regime-hero" style="display:none">
+        <span class="state" id="rh-state"></span>
+        <span class="meta" id="rh-meta"></span>
+      </div>
+    </div>
+  </div>
+
+  <section class="panel">
+    <div class="panel-title">Market pulse <span class="section-stamp" id="pulse-stamp"></span></div>
+    <div class="pulse-grid" id="pulse-grid"></div>
+  </section>
+
+  <section class="panel reveal" id="macro-embed-panel" style="display:none">
+    <div class="panel-title">US macro surprise <span class="section-stamp" id="macro-stamp"></span></div>
+    <div class="macro-embed">
+      <div class="mini" id="macro-mini"></div>
+      <div style="font-size:13px; max-width:520px;">
+        <div id="macro-line" style="margin-bottom:8px;"></div>
+        <a href="/macro" style="color:var(--accent);">Open the full Macro Pane →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel reveal" id="sm-panel" style="display:none">
+    <div class="panel-title">Smart Money</div>
+    <a class="sm-card" id="sm-link" href="#">
+      <span style="font-size:26px;">🕵️</span>
+      <span><strong>Smart Money coverage exists for this market.</strong><br>
+      <span style="font-size:12px;color:var(--muted);">Institutional deals, flows and insider activity — updated daily.</span></span>
+      <span style="margin-left:auto;color:var(--accent);">Open →</span>
+    </a>
+  </section>
+
+  <section class="panel reveal">
+    <div class="panel-title">Macro vitals — IMF World Economic Outlook <span class="section-stamp" id="imf-stamp"></span></div>
+    <div class="vitals-grid" id="vitals"></div>
+    <div class="imf-chart-box"><canvas id="imf-chart"></canvas></div>
+    <p class="asof" id="imf-source" style="margin:10px 0 0;"></p>
+  </section>
+
+  <section class="panel reveal">
+    <div class="panel-title">How it compares <span class="section-stamp">next-year IMF GDP forecast · current regime</span></div>
+    <div class="compare-strip" id="compare"></div>
+    <p class="asof" id="compare-note" style="margin:10px 0 0;"></p>
+  </section>
+
+  <section class="panel reveal">
+    <div class="panel-title">In the news <span class="section-stamp" id="news-stamp"></span></div>
+    <div id="news"></div>
+    <p class="asof" style="margin:10px 0 0;">Headlines via Google News; RegimeCompass does not produce or endorse linked content.</p>
+  </section>
+
+  <section class="panel reveal">
+    <div class="panel-title">Methodology &amp; provenance</div>
+    <div class="provenance" id="method"></div>
+    <p style="font-size:12px; margin-top:12px;"><strong>Not investment advice.</strong> Educational information only — see the <a href="/disclaimer">disclaimer</a>.</p>
+  </section>
+</div>
+
+<script src="/charts.js?v=4.0"></script>
+<script>
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const fmt = (v, d = 2) => v == null ? "—" : (+v).toFixed(d);
+const signed = (v, d = 2) => v == null ? "—" : (v > 0 ? "+" : "") + (+v).toFixed(d);
+const cls = v => v > 0 ? "up" : v < 0 ? "down" : "";
+const slug = location.pathname.split("/").filter(Boolean).pop();
+
+function relTime(iso) {
+  if (!iso) return "";
+  const m = (Date.now() - new Date(iso).getTime()) / 60000;
+  if (m < 60) return Math.max(1, Math.round(m)) + "m ago";
+  if (m < 1440) return Math.round(m / 60) + "h ago";
+  return Math.round(m / 1440) + "d ago";
+}
+
+async function load() {
+  const [all, sparks] = await Promise.all([
+    (await fetch("/api/countries")).json(),
+    (await fetch("/api/sparklines")).json().catch(() => null),
+  ]);
+  const c = all.countries[slug];
+  if (!c) { document.getElementById("cname").textContent = "Unknown country"; return; }
+  const sparkBy = sparks ? Object.fromEntries(sparks.markets.map(m => [m.index_key, m])) : {};
+
+  document.title = `${c.name} — Regime Compass`;
+  document.getElementById("flag").textContent = c.flag;
+  document.getElementById("cname").textContent = c.name;
+  document.getElementById("covered").textContent =
+    (c.is_group ? "Aggregate hub · " : "") + "Covered: " + c.indices.map(i => i.name).join(" · ");
+
+  // Regime hero (primary index)
+  const prim = c.indices.find(i => i.key === c.primary_index) || c.indices[0];
+  if (prim.regime) {
+    const rh = document.getElementById("regime-hero");
+    rh.style.display = "";
+    const st = document.getElementById("rh-state");
+    st.textContent = prim.regime.state; st.className = "state " + prim.regime.state;
+    document.getElementById("rh-meta").innerHTML =
+      `${esc(prim.name)} · ${prim.regime.days} days in regime · ${fmt(prim.regime.confidence, 0)}% confidence<br>HMM as of ${esc(prim.regime.date)}`;
+  }
+
+  // Market pulse cards
+  const grid = document.getElementById("pulse-grid");
+  for (const idx of c.indices) {
+    const card = document.createElement("div");
+    card.className = "pulse-card";
+    card.innerHTML = `
+      <div class="head"><span class="name"><a href="/hmm?index=${esc(idx.key)}">${esc(idx.name)}</a></span>
+        ${idx.regime ? `<span class="pill ${esc(idx.regime.state)}">${esc(idx.regime.state)}</span>` : ""}</div>
+      <div class="lvl">${idx.level == null ? "—" : (+idx.level).toLocaleString("en-US")}</div>
+      <div class="deltas">
+        <span class="${cls(idx.chg_1d)}"><b>1D</b>${signed(idx.chg_1d)}%</span>
+        <span class="${cls(idx.chg_1m)}"><b>1M</b>${signed(idx.chg_1m)}%</span>
+        <span class="${cls(idx.chg_ytd)}"><b>YTD</b>${signed(idx.chg_ytd)}%</span>
+      </div>
+      <div class="spark-slot"></div>
+      <div class="asof" style="margin-top:8px;">as of ${esc(idx.as_of || "—")}</div>`;
+    grid.appendChild(card);
+    const mkt = sparkBy[idx.key];
+    if (mkt && window.RCRibbon) RCRibbon.build(card.querySelector(".spark-slot"), mkt, sparks.state_labels);
+  }
+  // Currency card
+  const cur = c.currency || {};
+  grid.insertAdjacentHTML("beforeend", `
+    <div class="pulse-card">
+      <div class="head"><span class="name">${esc(cur.label || "Currency")}</span></div>
+      <div class="lvl">${cur.level == null ? "—" : (+cur.level).toLocaleString("en-US")}</div>
+      <div class="deltas">
+        <span class="${cls(cur.chg_1m_pct)}"><b>1M</b>${signed(cur.chg_1m_pct)}%</span>
+        <span><b>1Y pctile</b>${cur.pctile_1y == null ? "—" : fmt(cur.pctile_1y, 0) + "%"}</span>
+      </div>
+      <div class="asof" style="margin-top:8px;">Existing daily pipeline · as of ${esc(cur.as_of || "—")}</div>
+    </div>`);
+  // Bond card
+  if (c.bond) {
+    grid.insertAdjacentHTML("beforeend", `
+      <div class="pulse-card">
+        <div class="head"><span class="name">${esc(c.bond.label)}</span></div>
+        <div class="lvl">${fmt(c.bond.value)}%</div>
+        <div class="deltas">
+          <span class="${cls(c.bond.chg_3m)}"><b>3M chg</b>${signed(c.bond.chg_3m)}pp</span>
+          <span><b>Freq</b>${esc(c.bond.freq)}</span>
+        </div>
+        <div class="asof" style="margin-top:8px;">${esc(c.bond.source)} · as of ${esc(c.bond.as_of)}${c.bond.freq === "monthly" ? " (monthly series, ~2mo lag)" : ""}</div>
+      </div>`);
+  }
+  document.getElementById("pulse-stamp").textContent = "prices as of " + (prim.as_of || "—");
+
+  // US macro embed
+  if (slug === "usa") {
+    try {
+      const m = await (await fetch("/api/macro")).json();
+      const p = document.getElementById("macro-embed-panel");
+      p.style.display = "";
+      const z = m.composite.current;
+      const clamped = Math.max(-2, Math.min(2, z)), angle = clamped * 45;
+      document.getElementById("macro-mini").innerHTML = `
+        <svg viewBox="0 0 200 130" style="width:100%;overflow:visible;">
+          <path d="M 20 110 A 80 80 0 0 1 180 110" fill="none" stroke="var(--border)" stroke-width="10" stroke-linecap="round"/>
+          <path d="M 20 110 A 80 80 0 0 1 53 45.3" fill="none" stroke="rgba(90,143,232,0.7)" stroke-width="10" stroke-linecap="round"/>
+          <path d="M 53 45.3 A 80 80 0 0 1 147 45.3" fill="none" stroke="rgba(212,160,23,0.7)" stroke-width="10" stroke-linecap="round"/>
+          <path d="M 147 45.3 A 80 80 0 0 1 180 110" fill="none" stroke="rgba(227,84,84,0.7)" stroke-width="10" stroke-linecap="round"/>
+          <g style="transform-origin:100px 110px;transform:rotate(${angle}deg);">
+            <line x1="100" y1="110" x2="100" y2="40" stroke="var(--text-strong)" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="100" cy="110" r="6" fill="var(--text-strong)"/>
+          </g>
+          <text x="100" y="128" text-anchor="middle" fill="var(--muted)" font-size="11" font-family="var(--font-mono)">${esc(m.composite.zone)} · ${signed(z)}σ</text>
+        </svg>`;
+      document.getElementById("macro-line").innerHTML =
+        `US data is running <strong>${esc(m.composite.zone.toLowerCase())}</strong> vs its own trend ` +
+        `(growth ${signed(m.composite.growth.current)}, inflation ${signed(m.composite.inflation.current)}). ` +
+        `${esc(m.divergence.text)}`;
+      document.getElementById("macro-stamp").textContent = "as of " + m.as_of;
+    } catch (e) { /* macro pane unavailable — section stays hidden */ }
+  }
+
+  // Smart Money (only where data exists — section omitted entirely elsewhere)
+  if (c.smartmoney) {
+    document.getElementById("sm-panel").style.display = "";
+    document.getElementById("sm-link").href = c.smartmoney;
+  }
+
+  // IMF vitals
+  const V = (c.vitals || {}).indicators || {};
+  const cards = [];
+  const mk = (ind, label) => {
+    const d = V[ind]; if (!d) return;
+    const la = d.latest_actual, ny = d.next_year;
+    const dir = la && ny ? (ny.value > la.value ? "▲" : ny.value < la.value ? "▼" : "→") : "";
+    const dirCls = la && ny ? (ny.value > la.value ? "up" : ny.value < la.value ? "down" : "") : "";
+    const unit = d.unit === "USD" ? "" : d.unit.replace("% of GDP", "% GDP").replace("%", "%");
+    const val = d.unit === "USD" && la ? "$" + Math.round(la.value).toLocaleString("en-US") : la ? fmt(la.value, 1) + unit : "—";
+    cards.push(`<div class="vital">
+      <span class="k">${esc(label || d.label)}</span>
+      <div class="v">${val}</div>
+      ${ny ? `<div class="fc ${dirCls}">${dir} ${d.unit === "USD" ? "$" + Math.round(ny.value).toLocaleString("en-US") : fmt(ny.value, 1) + unit} <span style="color:var(--muted-2)">in ${ny.year}</span></div>` : ""}
+      <span class="yr">${la ? `${la.year} actual` : "—"}${ny ? ` → ${ny.year} IMF forecast` : ""}</span>
+    </div>`);
+  };
+  mk("NGDP_RPCH", "Real GDP growth"); mk("PCPIPCH", "Inflation (avg CPI)"); mk("LUR", "Unemployment");
+  mk("GGXWDG_NGDP", "Gov debt / GDP"); mk("BCA_NGDPD", "Current account"); mk("NGDPDPC", "GDP per capita");
+  document.getElementById("vitals").innerHTML = cards.join("") || "<p style='color:var(--muted)'>IMF vitals unavailable.</p>";
+  document.getElementById("imf-stamp").textContent = all.forecast_rule;
+
+  // Combined GDP + inflation chart with visually distinct forecast segment
+  const gdp = V.NGDP_RPCH, inf = V.PCPIPCH;
+  if (gdp && gdp.series) {
+    const years = gdp.series.map(p => p.year);
+    const fcStart = gdp.series.findIndex(p => p.forecast);
+    const dash = ctx => (fcStart >= 0 && ctx.p1DataIndex >= fcStart) ? [5, 4] : undefined;
+    const infBy = inf && inf.series ? Object.fromEntries(inf.series.map(p => [p.year, p.value])) : {};
+    const shade = {
+      id: "fcShade",
+      afterDraw(chart) {
+        if (fcStart < 0) return;
+        const { ctx, chartArea, scales } = chart;
+        const x0 = scales.x.getPixelForValue(fcStart) - (scales.x.getPixelForValue(1) - scales.x.getPixelForValue(0)) / 2;
+        ctx.save();
+        ctx.fillStyle = "rgba(167,139,250,0.06)";
+        ctx.fillRect(x0, chartArea.top, chartArea.right - x0, chartArea.bottom - chartArea.top);
+        ctx.fillStyle = "rgba(167,139,250,0.7)";
+        ctx.font = "10px Inter, sans-serif"; ctx.textAlign = "right";
+        ctx.fillText("IMF WEO forecast", chartArea.right - 6, chartArea.top + 12);
+        ctx.restore();
+      },
+    };
+    new Chart(document.getElementById("imf-chart"), {
+      type: "line",
+      data: { labels: years, datasets: [
+        { label: "Real GDP growth %", data: gdp.series.map(p => p.value),
+          borderColor: RCCharts.regime.bull, backgroundColor: "transparent",
+          borderWidth: 2, pointRadius: 2, tension: 0.25, segment: { borderDash: dash } },
+        { label: "Inflation %", data: years.map(y => infBy[y] ?? null),
+          borderColor: RCCharts.regime.bear, backgroundColor: "transparent",
+          borderWidth: 2, pointRadius: 2, tension: 0.25, segment: { borderDash: dash } },
+      ]},
+      options: { maintainAspectRatio: false, interaction: { mode: "index", intersect: false },
+                 scales: { y: { title: { display: true, text: "%" } } } },
+      plugins: [shade],
+    });
+  }
+  document.getElementById("imf-source").textContent =
+    `Source: ${all.imf_source}, fetched ${(all.generated_at || "").slice(0, 10)}. Annual data by design — monthly surprise indices exist for the US only (see the Macro Pane).`;
+
+  // Compare strip
+  const cmp = all.compare;
+  document.getElementById("compare").innerHTML = cmp.items.map(i => `
+    <a class="cmp ${i.slug === slug ? "me" : ""}" href="/country/${esc(i.slug)}">
+      <span>${esc(i.flag)}</span> ${esc(i.name)}
+      <span class="g">${i.gdp_next == null ? "—" : fmt(i.gdp_next, 1) + "%"}</span>
+      ${i.regime ? `<span class="dot ${esc(i.regime)}" title="${esc(i.regime)} regime"></span>` : ""}
+    </a>`).join("");
+  document.getElementById("compare-note").textContent =
+    `Median next-year GDP forecast across covered countries: ${fmt(cmp.median_gdp_next, 1)}%. Dots show each country's primary-index regime.`;
+
+  // News
+  try {
+    const n = await (await fetch(`/api/news?index=${encodeURIComponent(c.news_key)}&limit=8`)).json();
+    const items = n.items || [];
+    document.getElementById("news").innerHTML = items.length
+      ? items.map(i => `<div class="news-item">
+          <a href="${esc(i.link)}" target="_blank" rel="noopener nofollow">${esc(i.title)}</a>
+          <span class="meta">${esc(i.source || "")} · ${relTime(i.published_at)}</span></div>`).join("")
+      : "<p style='color:var(--muted);font-size:13px;'>News temporarily unavailable.</p>";
+    document.getElementById("news-stamp").textContent = "refreshed ~daily";
+  } catch (e) {
+    document.getElementById("news").innerHTML = "<p style='color:var(--muted);font-size:13px;'>News temporarily unavailable.</p>";
+  }
+
+  // Methodology / provenance
+  document.getElementById("method").innerHTML = `
+    <strong>Sections refresh independently.</strong> Regime + prices: daily HMM pipeline (Yahoo Finance closes), as of ${esc(prim.as_of || "—")}.
+    Currency: the same pipeline's FX leg. 10y yield: ${c.bond ? esc(c.bond.source) + (c.bond.freq === "monthly" ? " — monthly OECD-style series with ~2 month lag; countries without a clean free series are skipped (" + esc((all.bond_skipped || []).join(", ")) + ")" : "") : "no clean free series for this country — skipped"}.
+    Macro vitals: ${esc(all.imf_source)} — actuals and ~5-year projections in one series; ${esc(all.forecast_rule)}; revisions land ~twice a year with WEO releases.
+    News: shared RegimeCompass news engine (headlines + links only, never article text); the same story is shown on only one country page.
+    Feed generated ${esc((all.generated_at || "").slice(0, 16).replace("T", " "))} UTC.`;
+
+  if (window.RC && RC.reveal) RC.reveal();
+}
+load();
+</script>
+</body>
+</html>

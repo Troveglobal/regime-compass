@@ -301,7 +301,8 @@
   <!--GEO:JSONLD-->
 </head>
 <body>
-<script src="/shell.js?v=4.9"></script>
+<script src="/shell.js?v=5.1"></script>
+<script src="/ribbon.js?v=1.0"></script>
 
 <div class="wrap">
   <div class="hero hero-home">
@@ -618,78 +619,14 @@ async function loadBoard() {
   }
 }
 
-/* ── Regime-ribbon sparklines: 90 sessions of price over HMM state bands ── */
-const SPARK_BAND = ["rgba(227,84,84,0.15)", "rgba(212,160,23,0.13)", "rgba(52,198,115,0.15)"]; // bear, neutral, bull @ ~12–18% opacity
-const SVG_NS = "http://www.w3.org/2000/svg";
-
-function buildSpark(container, mkt, stateLabels) {
-  const pts = mkt.points;               // [[date, close, stateIdx], ...]
-  if (!pts || pts.length < 2) return;
-  const W = 200, H = 34, PAD = 3;       // small vertical padding around the price range
-  const svg = document.createElementNS(SVG_NS, "svg");
-  svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
-  svg.setAttribute("preserveAspectRatio", "none");
-  svg.setAttribute("aria-label", mkt.name + " — 90-session price with regime shading");
-
-  const x = i => (i / (pts.length - 1)) * W;
-
-  /* contiguous same-state runs merge into single background rects */
-  let runStart = 0;
-  for (let i = 1; i <= pts.length; i++) {
-    if (i === pts.length || pts[i][2] !== pts[runStart][2]) {
-      const rect = document.createElementNS(SVG_NS, "rect");
-      rect.setAttribute("x", x(runStart === 0 ? 0 : runStart - 0.5));
-      rect.setAttribute("width", x(i === pts.length ? pts.length - 1 : i - 0.5) - x(runStart === 0 ? 0 : runStart - 0.5));
-      rect.setAttribute("y", 0); rect.setAttribute("height", H);
-      rect.setAttribute("fill", SPARK_BAND[pts[runStart][2]]);
-      svg.appendChild(rect);
-      runStart = i;
-    }
-  }
-
-  /* price line, normalized to its own min/max */
-  const closes = pts.map(p => p[1]);
-  const lo = Math.min(...closes), hi = Math.max(...closes);
-  const span = hi - lo || 1;
-  const y = v => H - PAD - ((v - lo) / span) * (H - 2 * PAD);
-  const line = document.createElementNS(SVG_NS, "polyline");
-  line.setAttribute("points", pts.map((p, i) => `${x(i).toFixed(1)},${y(p[1]).toFixed(1)}`).join(" "));
-  line.setAttribute("fill", "none");
-  line.setAttribute("stroke", "rgba(198,207,218,0.85)");   /* --text-body, subtle */
-  line.setAttribute("stroke-width", "2");
-  line.setAttribute("vector-effect", "non-scaling-stroke");
-  line.setAttribute("stroke-linejoin", "round");
-  svg.appendChild(line);
-
-  const wrap = document.createElement("div");
-  wrap.className = "spark-ribbon";
-  wrap.appendChild(svg);
-  container.appendChild(wrap);
-
-  /* hover tooltip — desktop only; touch keeps the plain visual */
-  if (window.matchMedia("(hover: hover)").matches) {
-    let tt = document.getElementById("spark-tt");
-    if (!tt) { tt = document.createElement("div"); tt.id = "spark-tt"; document.body.appendChild(tt); }
-    svg.addEventListener("mousemove", e => {
-      const r = svg.getBoundingClientRect();
-      const i = Math.max(0, Math.min(pts.length - 1, Math.round(((e.clientX - r.left) / r.width) * (pts.length - 1))));
-      const [d, c, st] = pts[i];
-      tt.innerHTML = `<span class="d">${d}</span><br>${c.toLocaleString("en-US", { maximumFractionDigits: 2 })} · ${stateLabels[st]}`;
-      tt.style.left = Math.min(e.clientX + 12, window.innerWidth - tt.offsetWidth - 10) + "px";
-      tt.style.top = (r.top - tt.offsetHeight - 8) + "px";
-      tt.classList.add("show");
-    });
-    svg.addEventListener("mouseleave", () => tt.classList.remove("show"));
-    window.addEventListener("scroll", () => tt.classList.remove("show"), { passive: true });
-  }
-}
+/* Regime-ribbon sparklines: shared implementation in /ribbon.js (RCRibbon) */
 
 async function loadSparklines() {
   const d = await (await fetch("/api/sparklines")).json();
   const byKey = Object.fromEntries(d.markets.map(m => [m.index_key, m]));
   document.querySelectorAll('#hmm-rows [data-spark-key]').forEach(label => {
     const mkt = byKey[label.dataset.sparkKey];
-    if (mkt) buildSpark(label, mkt, d.state_labels);
+    if (mkt) RCRibbon.build(label, mkt, d.state_labels);
   });
   document.getElementById("spark-legend").style.display = "";
 }

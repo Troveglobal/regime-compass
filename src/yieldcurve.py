@@ -13,23 +13,19 @@ India: INDIRLTLT01STM from FRED (monthly, ~2 month lag)
 """
 from __future__ import annotations
 
-import csv
-import io
 import logging
 import time
-import urllib.request
-from datetime import datetime
 from pathlib import Path
 
 import pandas as pd
 import yfinance as yf
 
+from . import fred
 from .config import DATA_DIR
 
 log = logging.getLogger("regime_compass")
 
 _CACHE_DIR = DATA_DIR / "yields"
-_FRED_CSV = "https://fred.stlouisfed.org/graph/fredgraph.csv"
 
 
 def _cache_path(name: str) -> Path:
@@ -71,41 +67,9 @@ def _fetch_yield_yf(ticker: str, name: str) -> pd.DataFrame:
 
 
 def _fetch_fred(series_id: str, cache_name: str, max_age: int = 24) -> pd.DataFrame:
-    cache = _cache_path(cache_name)
-    if _is_fresh(cache, max_age):
-        return pd.read_parquet(cache)
-
-    url = f"{_FRED_CSV}?id={series_id}"
-    try:
-        req = urllib.request.Request(url, headers={"User-Agent": "RegimeCompass/1.0"})
-        with urllib.request.urlopen(req, timeout=30) as resp:
-            text = resp.read().decode()
-    except Exception as e:
-        log.warning("Failed to fetch FRED %s: %s", series_id, e)
-        if cache.exists():
-            return pd.read_parquet(cache)
-        return pd.DataFrame()
-
-    rows = []
-    reader = csv.DictReader(io.StringIO(text))
-    for row in reader:
-        date_str = row.get("DATE") or row.get("observation_date", "")
-        val_str = list(row.values())[-1] if len(row) > 1 else ""
-        if val_str == "." or not val_str:
-            continue
-        try:
-            rows.append({"date": datetime.strptime(date_str, "%Y-%m-%d"), "value": float(val_str)})
-        except (ValueError, TypeError):
-            continue
-
-    if not rows:
-        if cache.exists():
-            return pd.read_parquet(cache)
-        return pd.DataFrame()
-
-    df = pd.DataFrame(rows).sort_values("date").reset_index(drop=True)
-    df.to_parquet(cache, index=False)
-    return df
+    # Delegates to the shared FRED fetcher (src/fred.py); cache_name is
+    # unused now that caching is per series id in data/fred/.
+    return fred.fetch_series(series_id, max_age_hours=max_age)
 
 
 def us_yield_curve() -> dict:

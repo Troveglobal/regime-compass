@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-94DE53GC07"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', { analytics_storage: 'denied' });
+    gtag('js', new Date());
+    gtag('config', 'G-94DE53GC07');
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>US Macro Surprise Meter — Regime Compass</title>
+  <meta name="description" content="Is US economic data running hotter or colder than its own trend? Daily trend-deviation composite across 12 FRED series, plus market-implied macro gauges." />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Regime Compass" />
+  <meta property="og:title" content="US Macro Surprise Meter — Regime Compass" />
+  <meta property="og:description" content="Is US economic data running hotter or colder than its own trend? Daily composite across 12 FRED series." />
+  <meta property="og:image" content="https://www.regimecompass.com/og-image.png" />
+  <meta property="og:url" content="https://www.regimecompass.com/macro" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="US Macro Surprise Meter — Regime Compass" />
+  <meta name="twitter:description" content="Is US economic data running hotter or colder than its own trend?" />
+  <meta name="twitter:image" content="https://www.regimecompass.com/og-image.png" />
+  <meta name="theme-color" content="#07090e" />
+  <link rel="canonical" href="https://www.regimecompass.com/macro" />
+  <link rel="stylesheet" href="/styles.css?v=4.3" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="manifest" href="/manifest.json" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    .macro-hero { display: grid; grid-template-columns: 300px 1fr; gap: 20px; align-items: stretch; }
+    @media (max-width: 800px) { .macro-hero { grid-template-columns: 1fr; } }
+
+    .gauge-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.015), transparent 40%), var(--panel-2);
+      border: 1px solid var(--border); border-radius: var(--r-lg);
+      padding: 20px; box-shadow: inset 0 1px 0 var(--edge-light);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+    }
+    .macro-gauge svg { width: 100%; max-width: 220px; height: auto; overflow: visible; }
+    .macro-gauge { display: flex; flex-direction: column; align-items: center; width: 100%; }
+    .macro-gauge .needle-g { transform-origin: 100px 110px; transition: transform 1s var(--ease-spring); }
+    .macro-gauge .zone-lbl {
+      font-size: 30px; font-weight: 700; margin-top: -22px; letter-spacing: -0.02em;
+      font-family: var(--font-display);
+    }
+    .macro-gauge .zone-lbl.hot     { color: var(--bear); text-shadow: 0 0 24px rgba(227,84,84,0.3); }
+    .macro-gauge .zone-lbl.warm    { color: #e8935a; }
+    .macro-gauge .zone-lbl.neutral { color: var(--neutral); }
+    .macro-gauge .zone-lbl.cool    { color: #6aa9d8; }
+    .macro-gauge .zone-lbl.cold    { color: #5a8fe8; text-shadow: 0 0 24px rgba(90,143,232,0.3); }
+    .macro-gauge .score-val { font-family: var(--font-mono); font-size: 13px; color: var(--muted); margin-top: 4px; }
+    .macro-gauge .score-scale { font-size: 10px; color: var(--muted-2); letter-spacing: 1.2px; text-transform: uppercase; margin-top: 8px; font-weight: 600; }
+
+    .sub-tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+    .sub-tile {
+      padding: 14px 16px; border-radius: var(--r-md);
+      background: var(--panel); border: 1px solid var(--border);
+      box-shadow: inset 0 1px 0 var(--edge-light);
+    }
+    .sub-tile .lbl { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 1.2px; font-weight: 600; }
+    .sub-tile .val { font-size: 24px; font-weight: 700; font-family: var(--font-mono); display: inline-block; margin-top: 4px; }
+    .sub-tile .arrow { font-size: 16px; margin-left: 6px; }
+    .sub-tile .arrow.up { color: var(--bull); } .sub-tile .arrow.down { color: var(--bear); } .sub-tile .arrow.flat { color: var(--muted); }
+    .sub-tile .sub { font-size: 11px; color: var(--muted); display: block; margin-top: 2px; }
+
+    .divergence { border-radius: var(--r-md); padding: 14px 18px; font-size: 13.5px; border: 1px solid var(--border); background: var(--panel); }
+    .divergence.aligned { color: var(--muted); }
+    .divergence.late_cycle { border-color: rgba(227,84,84,0.5); background: rgba(227,84,84,0.07); color: var(--text); box-shadow: 0 0 18px rgba(227,84,84,0.08); }
+    .divergence.early_cycle { border-color: rgba(52,198,115,0.5); background: rgba(52,198,115,0.07); color: var(--text); box-shadow: 0 0 18px rgba(52,198,115,0.08); }
+    .divergence strong { color: var(--text-strong); }
+
+    .chart-box { height: 340px; position: relative; }
+
+    table.breakdown { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+    table.breakdown th {
+      text-align: left; font-size: 10px; text-transform: uppercase; letter-spacing: 1px;
+      color: var(--muted); font-weight: 600; padding: 8px 10px; border-bottom: 1px solid var(--border);
+      cursor: pointer; user-select: none; white-space: nowrap;
+    }
+    table.breakdown th.sorted { color: var(--accent); }
+    table.breakdown td { padding: 8px 10px; border-bottom: 1px solid var(--hairline); font-family: var(--font-mono); }
+    table.breakdown td.lbl { font-family: var(--font-ui); color: var(--text-strong); }
+    table.breakdown td .grp { display: block; font-size: 10px; color: var(--muted-2); text-transform: capitalize; font-family: var(--font-ui); }
+    td.zcell { font-weight: 700; border-radius: 4px; }
+    td.zcell.hot1 { color: #e8935a; } td.zcell.hot2 { color: var(--bear); }
+    td.zcell.cold1 { color: #6aa9d8; } td.zcell.cold2 { color: #5a8fe8; }
+    td.zcell.flat { color: var(--muted); }
+    .tbl-scroll { overflow-x: auto; }
+
+    .tracker-group { margin-top: 18px; }
+    .tracker-group h4 { font-size: 11px; text-transform: uppercase; letter-spacing: 1.4px; color: var(--muted); margin: 0 0 8px; font-weight: 600; }
+    .tracker-row {
+      display: grid; grid-template-columns: 1.4fr 90px 1fr 1fr 1fr; gap: 10px; align-items: center;
+      padding: 9px 12px; border: 1px solid var(--border); border-radius: var(--r-md);
+      background: var(--panel); margin-bottom: 8px;
+    }
+    @media (max-width: 700px) { .tracker-row { grid-template-columns: 1.2fr 70px 1fr 1fr; } .tracker-row .cell:nth-child(5) { display:none; } }
+    .tracker-row .name { font-size: 13px; color: var(--text-strong); font-weight: 600; }
+    .tracker-row .name .src { display: block; font-size: 10px; color: var(--muted-2); font-weight: 400; }
+    .tracker-row .cell { font-family: var(--font-mono); font-size: 13px; }
+    .tracker-row .cell .k { display: block; font-size: 9.5px; color: var(--muted-2); text-transform: uppercase; letter-spacing: 1px; font-family: var(--font-ui); }
+    .tracker-row .up { color: var(--bull); } .tracker-row .down { color: var(--bear); }
+    .tracker-row canvas { width: 90px; height: 28px; }
+
+    .provenance { font-size: 11px; color: var(--muted-2); line-height: 1.7; margin-top: 14px; }
+    .method-block h3 { font-size: 15px; margin: 18px 0 6px; color: var(--text-strong); }
+    .method-block p, .method-block li { font-size: 13px; color: var(--text-body, var(--text)); line-height: 1.65; }
+  </style>
+  <script type="application/ld+json">
+  {"@context": "https://schema.org", "@type": "WebPage", "name": "US Macro Surprise Meter — Regime Compass", "description": "Daily trend-deviation composite across 12 US macro series from FRED, with growth and inflation sub-indices and market-implied macro gauges.", "url": "https://www.regimecompass.com/macro", "isPartOf": {"@type": "WebSite", "name": "Regime Compass", "url": "https://www.regimecompass.com"}}
+  </script>
+</head>
+<body>
+<script src="/shell.js?v=5.1"></script>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="kicker">US Macro Pane</div>
+    <h1>Is US data running hot or cold?</h1>
+    <div class="tagline">Twelve official US series, each scored against its own recent trend and blended into one daily composite. Above zero = data coming in hotter than trend; below = colder. This is a <strong>trend-deviation</strong> index, not a consensus-surprise index — see the methodology below. Updated daily.</div>
+  </div>
+
+  <section class="panel">
+    <div class="panel-title">Macro Surprise Composite <span id="asof" style="float:right; font-size:11px; color:var(--muted-2); font-weight:400;"></span></div>
+    <div class="macro-hero">
+      <div class="gauge-card" id="gauge-card"></div>
+      <div>
+        <div class="sub-tiles" id="sub-tiles"></div>
+        <div class="divergence" id="divergence"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel reveal">
+    <div class="panel-title">Ten years of macro surprise</div>
+    <p style="font-size:12.5px; color:var(--muted); margin:0 0 12px;">Weekly snapshots of the daily composite. The shaded band marks the ±1 “normal” zone. Click the legend to toggle the Growth and Inflation sub-indices.</p>
+    <div class="chart-box"><canvas id="hist-chart"></canvas></div>
+  </section>
+
+  <section class="panel reveal">
+    <div class="panel-title">What’s driving it — series breakdown</div>
+    <p style="font-size:12.5px; color:var(--muted); margin:0 0 12px;">One row per input series: the latest observation, its “pulse” (the transform scored, e.g. 3-month annualised change), the trend it was compared against, the surprise z-score, and the staleness weight it carries in today’s composite. Click a header to sort.</p>
+    <div class="tbl-scroll">
+      <table class="breakdown" id="bd-table">
+        <thead><tr>
+          <th data-k="label">Series</th>
+          <th data-k="obs_date">Observation</th>
+          <th data-k="pulse">Pulse</th>
+          <th data-k="expected">Trend</th>
+          <th data-k="absz" class="sorted">Surprise z ▾</th>
+          <th data-k="weight">Weight</th>
+        </tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="panel reveal">
+    <div class="panel-title">Global macro tracker — market-implied, daily</div>
+    <p style="font-size:12.5px; color:var(--muted); margin:0 0 4px;">What markets themselves are pricing: curve slopes, real yields, breakevens, credit, the dollar and commodities. Each row shows the current level, 1-month change and where the level sits in its 1-year range.</p>
+    <div id="tracker"></div>
+  </section>
+
+  <section class="panel reveal method-block">
+    <div class="panel-title">Methodology</div>
+    <h3>Trend deviation, not consensus surprise</h3>
+    <p>Indices like Citi’s Economic Surprise Index measure data against <em>economist forecasts</em>. This meter has no forecast feed: each series is measured against its <strong>own trailing 12-observation trend</strong>, scaled by its trailing 5-year dispersion (minimum 3 years, shorter series excluded), clipped to ±3. “Hot” therefore means <em>hotter than its own recent trend</em>, not “beat expectations”. The two usually agree directionally but are not the same number.</p>
+    <h3>Publication-lag honesty</h3>
+    <p>FRED provides observation dates, not release dates. Each series only enters the composite after its typical publication delay (measured from the FRED observation date, which for monthly series is the first day of the reference month): payrolls &amp; unemployment +35d, weekly claims +5d, CPI +43d, retail sales +45d, industrial production +45d, factory orders +65d, Michigan sentiment +28d, Philly Fed +18d, Empire State +14d, housing starts +47d. The ~10-year backfill walks forward using only observations available at each point in time under these constants — an <em>approximation</em> of real-time availability.</p>
+    <h3>Revisions are ignored</h3>
+    <p>FRED serves latest-revised values; first-print values aren’t recoverable from this feed. The backfilled history is therefore modestly cleaner than what a real-time observer would have seen.</p>
+    <h3>Weighting and sub-indices</h3>
+    <p>Each series carries a staleness weight of 0.5<sup>(days since observation / 45)</sup>, so fresh data dominates. Composite = weighted mean of the surprise z-scores. <strong>Growth</strong> = labor + consumer + industry + housing; <strong>Inflation</strong> = the two CPI series; <strong>Macro momentum</strong> = 63-day change in the Growth sub-index. Zones: Hot ≥ +1, Warm ≥ +0.3, Neutral, Cool ≤ −0.3, Cold ≤ −1.</p>
+    <h3>Substitutions &amp; limitations</h3>
+    <p>The high-yield spread (BAMLH0A0HYM2) is capped to roughly three years of history on FRED’s keyless endpoint due to ICE licensing — enough for its 1-year percentile, not for long history. The copper/gold ratio uses front-month futures (HG=F / the site’s existing gold series) and is shown ×1000 for readability. Oil is WTI front-month (CL=F).</p>
+    <div class="provenance" id="provenance"></div>
+    <p style="margin-top:14px;"><strong>Not investment advice.</strong> Educational information only — see the <a href="/disclaimer">disclaimer</a>.</p>
+  </section>
+</div>
+
+<script src="/charts.js?v=4.0"></script>
+<script>
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const fmt = (v, d = 2) => v == null ? "—" : (+v).toFixed(d);
+const signed = (v, d = 2) => v == null ? "—" : (v > 0 ? "+" : "") + (+v).toFixed(d);
+
+function buildGauge(z) {
+  // z clipped to [-2, +2] for display → needle angle -90..+90
+  const clamped = Math.max(-2, Math.min(2, z));
+  const angle = clamped * 45;
+  const zone = z >= 1 ? "Hot" : z >= 0.3 ? "Warm" : z > -0.3 ? "Neutral" : z > -1 ? "Cool" : "Cold";
+  return `
+    <div class="macro-gauge">
+      <svg viewBox="0 0 200 130">
+        <path d="M 20 110 A 80 80 0 0 1 180 110" fill="none" stroke="var(--border)" stroke-width="10" stroke-linecap="round"/>
+        <path d="M 20 110 A 80 80 0 0 1 53 45.3"   fill="none" stroke="rgba(90,143,232,0.7)"  stroke-width="10" stroke-linecap="round"/>
+        <path d="M 53 45.3 A 80 80 0 0 1 147 45.3" fill="none" stroke="rgba(212,160,23,0.7)" stroke-width="10" stroke-linecap="round"/>
+        <path d="M 147 45.3 A 80 80 0 0 1 180 110" fill="none" stroke="rgba(227,84,84,0.7)" stroke-width="10" stroke-linecap="round"/>
+        <g class="needle-g" data-angle="${angle}" style="transform: rotate(-90deg);">
+          <line x1="100" y1="110" x2="100" y2="40" stroke="var(--text-strong)" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="100" cy="110" r="6" fill="var(--text-strong)"/>
+          <circle cx="100" cy="110" r="2.5" fill="var(--bg)"/>
+        </g>
+      </svg>
+      <div class="zone-lbl ${zone.toLowerCase()}">${zone}</div>
+      <div class="score-val">${signed(z)}σ vs trend</div>
+      <div class="score-scale">cold · trend · hot</div>
+    </div>`;
+}
+
+const ARROWS = { up: "▲", down: "▼", flat: "→" };
+
+let bdRows = [], bdSort = { k: "absz", dir: -1 };
+
+function renderBreakdown() {
+  const tb = document.querySelector("#bd-table tbody");
+  const rows = [...bdRows];
+  rows.sort((a, b) => {
+    const va = bdSort.k === "absz" ? Math.abs(a.z) : a[bdSort.k];
+    const vb = bdSort.k === "absz" ? Math.abs(b.z) : b[bdSort.k];
+    if (va == null) return 1; if (vb == null) return -1;
+    return va < vb ? -bdSort.dir : va > vb ? bdSort.dir : 0;
+  });
+  tb.innerHTML = rows.map(r => {
+    const zc = r.z >= 1.5 ? "hot2" : r.z >= 0.5 ? "hot1" : r.z <= -1.5 ? "cold2" : r.z <= -0.5 ? "cold1" : "flat";
+    return `<tr>
+      <td class="lbl">${esc(r.label)}<span class="grp">${esc(r.group)} · hotter = ${esc(r.hotter)}</span></td>
+      <td>${esc(r.obs_date)}</td>
+      <td>${fmt(r.pulse)}</td>
+      <td>${fmt(r.expected)}</td>
+      <td class="zcell ${zc}">${signed(r.z)}</td>
+      <td>${fmt(r.weight, 3)}</td>
+    </tr>`;
+  }).join("");
+}
+
+async function load() {
+  const d = await (await fetch("/api/macro")).json();
+  const c = d.composite;
+
+  document.getElementById("asof").textContent = "As of " + d.as_of;
+  const gc = document.getElementById("gauge-card");
+  gc.innerHTML = buildGauge(c.current);
+  setTimeout(() => {
+    const g = gc.querySelector(".needle-g");
+    if (g) g.style.transform = `rotate(${g.dataset.angle}deg)`;
+  }, 200);
+
+  // Growth / Inflation sub-tiles with 3-month direction arrows
+  const tiles = [
+    { lbl: "Growth surprise", v: c.growth.current, dir: c.growth.dir_3m, sub: "labor · consumer · industry · housing" },
+    { lbl: "Inflation surprise", v: c.inflation.current, dir: c.inflation.dir_3m, sub: "CPI · core CPI (3m annualised)" },
+    { lbl: "Macro momentum", v: c.momentum, dir: null, sub: "63-day change in the Growth sub-index" },
+    { lbl: "Zone", v: null, txt: c.zone, dir: null, sub: "composite vs its ±1 normal band" },
+  ];
+  document.getElementById("sub-tiles").innerHTML = tiles.map(t => `
+    <div class="sub-tile">
+      <span class="lbl">${esc(t.lbl)}</span><br>
+      <span class="val">${t.txt ? esc(t.txt) : signed(t.v)}</span>
+      ${t.dir ? `<span class="arrow ${t.dir}">${ARROWS[t.dir] || ""}</span>` : ""}
+      <span class="sub">${esc(t.sub)}</span>
+    </div>`).join("");
+
+  // Divergence callout
+  const dv = d.divergence;
+  const el = document.getElementById("divergence");
+  el.className = "divergence " + dv.state;
+  const head = dv.state === "aligned" ? "Regime check — aligned."
+    : dv.state === "late_cycle" ? "⚠ Late-cycle divergence."
+    : dv.state === "early_cycle" ? "◆ Early-cycle divergence." : "Regime check.";
+  el.innerHTML = `<strong>${esc(head)}</strong> ${esc(dv.text)}` +
+    (dv.equity_regime ? ` <span style="color:var(--muted)">(S&amp;P 500 HMM regime: ${esc(dv.equity_regime)}, macro momentum ${signed(dv.momentum)}.)</span>` : "");
+
+  // History chart with ±1 shaded band
+  const H = d.history_weekly;
+  const labels = H.map(r => r[0]);
+  const bull = RCCharts.regime.bull, bear = RCCharts.regime.bear;
+  new Chart(document.getElementById("hist-chart"), {
+    type: "line",
+    data: { labels, datasets: [
+      { label: "Composite", data: H.map(r => r[1]), borderColor: RC.cssVar("--accent"), backgroundColor: "transparent", borderWidth: 2, pointRadius: 0, tension: 0.25 },
+      { label: "Growth", data: H.map(r => r[2]), borderColor: bull, backgroundColor: "transparent", borderWidth: 1.4, pointRadius: 0, tension: 0.25, hidden: true },
+      { label: "Inflation", data: H.map(r => r[3]), borderColor: bear, backgroundColor: "transparent", borderWidth: 1.4, pointRadius: 0, tension: 0.25, hidden: true },
+      { label: "_bandTop", data: H.map(() => 1), borderWidth: 0, pointRadius: 0, fill: "+1", backgroundColor: "rgba(167,139,250,0.06)" },
+      { label: "_bandBottom", data: H.map(() => -1), borderWidth: 0, pointRadius: 0 },
+    ]},
+    options: {
+      maintainAspectRatio: false,
+      interaction: { mode: "index", intersect: false },
+      plugins: {
+        legend: { labels: { filter: item => !item.text.startsWith("_") } },
+        tooltip: { filter: item => !item.dataset.label.startsWith("_") },
+      },
+      scales: {
+        x: { ticks: { maxTicksLimit: 10, maxRotation: 0 } },
+        y: { title: { display: true, text: "σ vs own trend" } },
+      },
+    },
+  });
+
+  // Breakdown table
+  bdRows = d.breakdown;
+  renderBreakdown();
+  document.querySelectorAll("#bd-table th").forEach(th => th.addEventListener("click", () => {
+    const k = th.dataset.k;
+    if (bdSort.k === k) bdSort.dir = -bdSort.dir; else bdSort = { k, dir: -1 };
+    document.querySelectorAll("#bd-table th").forEach(t => t.classList.toggle("sorted", t === th));
+    renderBreakdown();
+  }));
+
+  // Global tracker, grouped
+  const tr = document.getElementById("tracker");
+  tr.innerHTML = "";
+  for (const grp of d.tracker.groups) {
+    const gauges = d.tracker.gauges.filter(g => g.group === grp.key);
+    if (!gauges.length) continue;
+    const box = document.createElement("div");
+    box.className = "tracker-group";
+    box.innerHTML = `<h4>${esc(grp.label)}</h4>`;
+    for (const g of gauges) {
+      const row = document.createElement("div");
+      row.className = "tracker-row";
+      const chg = g.chg_1m;
+      row.innerHTML = `
+        <div class="name">${esc(g.label)}${g.slope_label ? ` <span class="regime-pill" style="font-size:9px;padding:2px 7px;border:1px solid var(--border);border-radius:10px;color:var(--muted);">${esc(g.slope_label)}</span>` : ""}<span class="src">${esc(g.source || "")} · as of ${esc(g.as_of)}</span></div>
+        <canvas width="90" height="28"></canvas>
+        <div class="cell"><span class="k">Level</span>${fmt(g.value, 2)}${esc(g.unit || "")}</div>
+        <div class="cell ${chg > 0 ? "up" : chg < 0 ? "down" : ""}"><span class="k">1M chg</span>${signed(chg)}</div>
+        <div class="cell"><span class="k">1Y pctile</span>${g.pctile_1y == null ? "—" : fmt(g.pctile_1y, 0) + "%"}</div>`;
+      box.appendChild(row);
+      const cv = row.querySelector("canvas");
+      if (g.spark && g.spark.length > 3) RCCharts.sparkline(cv, g.spark);
+    }
+    tr.appendChild(box);
+  }
+  const skipped = d.tracker.skipped || [];
+
+  // Provenance footer
+  const ids = d.breakdown.map(b => b.id).join(", ");
+  document.getElementById("provenance").innerHTML =
+    `<strong>Provenance.</strong> Surprise basket: FRED series ${esc(ids)}. ` +
+    `Tracker: ${d.tracker.gauges.map(g => esc(g.source || g.label)).join("; ")}. ` +
+    (skipped.length ? `Unavailable this run: ${esc(skipped.join(", "))}. ` : "") +
+    `Composite as of ${esc(d.as_of)}; feed generated ${esc((d.generated_at || "").slice(0, 16).replace("T", " "))} UTC. ` +
+    `Source: Federal Reserve Bank of St. Louis (FRED), Yahoo Finance.`;
+
+  if (window.RC && RC.reveal) RC.reveal();
+}
+load();
+</script>
+</body>
+</html>

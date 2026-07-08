@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-94DE53GC07"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', { analytics_storage: 'denied' });
+    gtag('js', new Date());
+    gtag('config', 'G-94DE53GC07');
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Assets — Regime Compass</title>
+  <meta name="description" content="One hub per covered asset: current regime, drawdowns, volatility, correlations and news. Bitcoin, Ethereum, Gold, Silver." />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Regime Compass" />
+  <meta property="og:title" content="Assets — Regime Compass" />
+  <meta property="og:description" content="One hub per covered asset: regime, vitals, correlations, news." />
+  <meta property="og:image" content="https://www.regimecompass.com/og-image.png" />
+  <meta property="og:url" content="https://www.regimecompass.com/assets" />
+  <meta name="theme-color" content="#07090e" />
+  <link rel="canonical" href="https://www.regimecompass.com/assets" />
+  <link rel="stylesheet" href="/styles.css?v=4.3" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="manifest" href="/manifest.json" />
+  <style>
+    .agrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+    .acard { display: block; text-decoration: none; color: var(--text);
+      background: linear-gradient(180deg, rgba(255,255,255,0.015), transparent 40%), var(--panel-2);
+      border: 1px solid var(--border); border-radius: var(--r-lg); padding: 18px;
+      box-shadow: inset 0 1px 0 var(--edge-light); transition: var(--transition); }
+    .acard:hover { border-color: var(--border-strong); transform: translateY(-2px); }
+    .acard .top { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+    .acard .ic { font-size: 32px; line-height: 1; color: var(--accent); }
+    .acard .nm { font-weight: 600; font-size: 16px; color: var(--text-strong); }
+    .acard .cl { font-size: 11px; color: var(--muted); margin-top: 2px; text-transform: capitalize; }
+    .pill { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; margin-left: auto; }
+    .pill.bull { background: rgba(52,198,115,0.14); color: var(--bull); border: 1px solid rgba(52,198,115,0.4); }
+    .pill.bear { background: rgba(227,84,84,0.14); color: var(--bear); border: 1px solid rgba(227,84,84,0.4); }
+    .pill.neutral { background: rgba(212,160,23,0.12); color: var(--neutral); border: 1px solid rgba(212,160,23,0.4); }
+    .acard .stats { display: flex; gap: 16px; font-family: var(--font-mono); font-size: 13px; }
+    .acard .stats b { display: block; font-size: 9.5px; color: var(--muted-2); letter-spacing: 1px; text-transform: uppercase; font-family: var(--font-ui); font-weight: 600; margin-bottom: 2px; }
+    .up { color: var(--bull); } .down { color: var(--bear); }
+  </style>
+</head>
+<body>
+<script src="/shell.js?v=5.1"></script>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="kicker">Assets</div>
+    <h1>One hub per covered asset</h1>
+    <div class="tagline">Bitcoin, Ethereum, Gold and Silver — all four are HMM-classified markets in the daily pipeline. Each hub shows the regime, drawdowns, volatility, cross-asset correlations and news.</div>
+  </div>
+
+  <section class="panel">
+    <div class="agrid" id="grid"></div>
+    <p style="font-size:11px;color:var(--muted-2);margin:16px 0 0;">Vol percentile = today's 20-day realized vol within its own 5-year history. <strong>Not investment advice.</strong></p>
+  </section>
+</div>
+
+<script>
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const fmt = (v, d = 0) => v == null ? "—" : (+v).toFixed(d);
+const signed = v => v == null ? "—" : (v > 0 ? "+" : "") + (+v).toFixed(2);
+
+(async () => {
+  const d = await (await fetch("/api/assets")).json();
+  document.getElementById("grid").innerHTML = Object.values(d.assets).map(a => {
+    const r = a.regime;
+    return `<a class="acard" href="/asset/${esc(a.slug)}">
+      <div class="top"><span class="ic">${esc(a.icon)}</span>
+        <div><div class="nm">${esc(a.name)}</div><div class="cl">${esc(a.asset_class)}</div></div>
+        ${r ? `<span class="pill ${esc(r.state)}">${esc(r.state)}</span>` : ""}
+      </div>
+      <div class="stats">
+        <span class="${a.pulse.chg_1m > 0 ? "up" : a.pulse.chg_1m < 0 ? "down" : ""}"><b>1M</b>${signed(a.pulse.chg_1m)}%</span>
+        <span><b>Vol pctile</b>${a.vitals.vol20_pctile_5y == null ? "—" : "p" + fmt(a.vitals.vol20_pctile_5y)}</span>
+        <span><b>From ATH</b>${signed(a.vitals.drawdown.from_ath)}%</span>
+      </div>
+    </a>`;
+  }).join("");
+})();
+</script>
+</body>
+</html>
