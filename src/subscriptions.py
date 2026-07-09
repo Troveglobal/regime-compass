@@ -14,7 +14,7 @@ import sqlite3
 from datetime import datetime, timezone
 from typing import Optional
 
-from .config import DB_PATH
+from .config import USER_DB_PATH as DB_PATH
 
 
 EMAIL_RE = re.compile(r"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$")

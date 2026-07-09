@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin — Regime Compass</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#07090e" />
+  <link rel="stylesheet" href="/styles.css?v=6.3" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <style>
+    .admin-wrap { max-width: 1000px; margin: 0 auto; padding: 40px 24px 60px; }
+    .admin-h { font-family: var(--font-display); font-size: 28px; font-weight: 600; color: var(--text-strong); margin: 0 0 6px; }
+    .admin-sub { color: var(--muted); font-size: 13.5px; margin-bottom: 26px; }
+    .gate { display: flex; gap: 10px; align-items: center; max-width: 460px; margin-bottom: 8px; }
+    .gate input {
+      flex: 1; padding: 11px 14px; background: var(--panel-2); color: var(--text-strong);
+      border: 1px solid var(--border-strong); border-radius: var(--r-md); font: inherit; font-size: 14px; outline: none;
+    }
+    .gate input:focus { border-color: var(--accent); box-shadow: var(--ring-accent); }
+    .gate-msg { font-size: 12.5px; margin: 4px 0 20px; min-height: 18px; }
+    .gate-msg.err { color: var(--bear); }
+    .gate-msg.ok { color: var(--bull); }
+
+    .panel-block { margin-bottom: 34px; }
+    .panel-block h2 {
+      font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px;
+      color: var(--accent-strong); margin: 0 0 4px; display: flex; align-items: baseline; gap: 10px;
+    }
+    .panel-block .count { font-family: var(--font-mono); color: var(--muted); font-size: 12px; letter-spacing: 0; }
+    .panel-block .exp { font-size: 12px; color: var(--muted); margin: 0 0 12px; }
+    .a-actions { margin-bottom: 12px; display: flex; gap: 10px; }
+    .a-btn { padding: 7px 14px; font-size: 12.5px; font-weight: 600; border-radius: var(--r-sm); cursor: pointer;
+      background: var(--panel-2); color: var(--text); border: 1px solid var(--border-strong); font-family: inherit; }
+    .a-btn:hover { border-color: var(--muted); color: var(--text-strong); }
+    table.a-tbl { width: 100%; border-collapse: collapse; font-size: 13px; }
+    table.a-tbl th, table.a-tbl td { padding: 9px 12px; text-align: left; border-bottom: 1px solid var(--hairline); vertical-align: top; }
+    table.a-tbl th { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.2px; color: var(--muted); }
+    table.a-tbl td { color: var(--text-body); }
+    table.a-tbl td.mono { font-family: var(--font-mono); font-size: 12px; color: var(--muted); white-space: nowrap; }
+    .a-empty { color: var(--muted); font-size: 13px; padding: 14px 0; }
+    .a-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--r-md); }
+  </style>
+</head>
+<body>
+<div class="admin-wrap">
+  <h1 class="admin-h">Regime Compass — Admin</h1>
+  <div class="admin-sub">Waitlist, feedback and email-alert subscribers. Private — do not share this URL or the key.</div>
+
+  <div class="gate">
+    <input type="password" id="secret" placeholder="Admin key" autocomplete="off" />
+    <button class="a-btn" id="load">Open</button>
+  </div>
+  <div class="gate-msg" id="msg"></div>
+
+  <div id="content" style="display:none;">
+    <div class="panel-block">
+      <h2>Early-access waitlist <span class="count" id="wl-count"></span></h2>
+      <p class="exp">People who signed up for accounts / custom dashboards. Email them one announcement when it launches.</p>
+      <div class="a-actions"><button class="a-btn" id="copy-wl">Copy emails</button></div>
+      <div class="a-wrap"><table class="a-tbl"><thead><tr><th>Email</th><th>Signed up</th></tr></thead><tbody id="wl-rows"></tbody></table></div>
+    </div>
+
+    <div class="panel-block">
+      <h2>Feedback <span class="count" id="fb-count"></span></h2>
+      <p class="exp">The "what's missing" answers. Email is optional — present only if they wanted a reply.</p>
+      <div class="a-wrap"><table class="a-tbl"><thead><tr><th>Message</th><th>Email</th><th>From page</th><th>When</th></tr></thead><tbody id="fb-rows"></tbody></table></div>
+    </div>
+
+    <div class="panel-block">
+      <h2>Alert subscribers <span class="count" id="sub-count"></span></h2>
+      <p class="exp">Daily regime-change email alerts (double opt-in). Verified = confirmed via link.</p>
+      <div class="a-actions"><button class="a-btn" id="copy-sub">Copy verified emails</button></div>
+      <div class="a-wrap"><table class="a-tbl"><thead><tr><th>Email</th><th>Verified</th><th>Signed up</th></tr></thead><tbody id="sub-rows"></tbody></table></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+const esc = s => (s == null ? "" : String(s)).replace(/[&<>]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]));
+const fmt = iso => { if (!iso) return "—"; try { return new Date(iso).toLocaleString("en-GB", { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" }); } catch (e) { return iso; } };
+let LAST = { wl: [], sub: [] };
+
+async function load() {
+  const key = $("secret").value.trim();
+  if (!key) { msg("Enter the admin key.", "err"); return; }
+  msg("Loading…", "");
+  const hdr = { Authorization: "Bearer " + key };
+  try {
+    const [fbR, subR] = await Promise.all([
+      fetch("/api/admin/feedback", { headers: hdr }),
+      fetch("/api/admin/subscribers", { headers: hdr }),
+    ]);
+    if (fbR.status === 403 || subR.status === 403) {
+      const d = await fbR.json().catch(() => ({}));
+      msg(d.detail && /disabled/.test(d.detail) ? "Admin API is disabled — ADMIN_API_SECRET isn't set on the server yet." : "Wrong key.", "err");
+      return;
+    }
+    if (!fbR.ok || !subR.ok) { msg("Server error (" + fbR.status + "/" + subR.status + ").", "err"); return; }
+    const fb = (await fbR.json()).submissions || [];
+    const subData = await subR.json();
+    render(fb, subData.subscribers || []);
+    sessionStorage.setItem("rc_admin_key", key);
+    msg("", "");
+    $("content").style.display = "";
+  } catch (e) { msg("Network error: " + e.message, "err"); }
+}
+
+function render(fb, subs) {
+  const wl = fb.filter(x => x.kind === "waitlist");
+  const fbk = fb.filter(x => x.kind === "feedback");
+  LAST.wl = wl.map(x => x.email).filter(Boolean);
+  LAST.sub = subs.filter(s => s.verified).map(s => s.email);
+
+  $("wl-count").textContent = wl.length + " signup" + (wl.length === 1 ? "" : "s");
+  $("wl-rows").innerHTML = wl.length
+    ? wl.map(x => `<tr><td>${esc(x.email)}</td><td class="mono">${fmt(x.created_at)}</td></tr>`).join("")
+    : `<tr><td colspan="2" class="a-empty">No signups yet.</td></tr>`;
+
+  $("fb-count").textContent = fbk.length + " message" + (fbk.length === 1 ? "" : "s");
+  $("fb-rows").innerHTML = fbk.length
+    ? fbk.map(x => `<tr><td>${esc(x.message)}</td><td>${esc(x.email) || "—"}</td><td class="mono">${esc(x.page) || "—"}</td><td class="mono">${fmt(x.created_at)}</td></tr>`).join("")
+    : `<tr><td colspan="4" class="a-empty">No feedback yet.</td></tr>`;
+
+  const nv = subs.filter(s => s.verified).length;
+  $("sub-count").textContent = subs.length + " total · " + nv + " verified";
+  $("sub-rows").innerHTML = subs.length
+    ? subs.map(s => `<tr><td>${esc(s.email)}</td><td>${s.verified ? "✓" : "—"}</td><td class="mono">${fmt(s.created_at)}</td></tr>`).join("")
+    : `<tr><td colspan="3" class="a-empty">No subscribers yet.</td></tr>`;
+}
+
+function copy(list, label) {
+  if (!list.length) { msg("Nothing to copy.", "err"); return; }
+  navigator.clipboard.writeText(list.join(", ")).then(() => msg(list.length + " " + label + " copied to clipboard.", "ok"));
+}
+function msg(t, cls) { const m = $("msg"); m.textContent = t; m.className = "gate-msg " + (cls || ""); }
+
+$("load").addEventListener("click", load);
+$("secret").addEventListener("keydown", e => { if (e.key === "Enter") load(); });
+$("copy-wl").addEventListener("click", () => copy(LAST.wl, "waitlist emails"));
+$("copy-sub").addEventListener("click", () => copy(LAST.sub, "verified emails"));
+
+/* remember the key for this browser session */
+const saved = sessionStorage.getItem("rc_admin_key");
+if (saved) { $("secret").value = saved; load(); }
+</script>
+</body>
+</html>

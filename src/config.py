@@ -8,6 +8,22 @@ LOGS_DIR = ROOT / "logs"
 
 DB_PATH = DATA_DIR / "regime.db"
 
+# User-generated data (email subscribers, feedback, waitlist) MUST survive
+# redeploys. regime.db is git-tracked and gets reset to the committed copy on
+# every deploy, and the Railway container filesystem is ephemeral — so user
+# data written there is lost on the next deploy or restart. Route it to the
+# mounted persistent volume when one is present (same volume smart-money uses).
+# Local dev (no volume) keeps everything in regime.db, unchanged.
+_USER_VOL = (
+    os.environ.get("RAILWAY_VOLUME_MOUNT_PATH")
+    or os.environ.get("SMARTMONEY_DATA_DIR")
+    or ""
+).strip() or None
+if _USER_VOL and os.path.isdir(_USER_VOL):
+    USER_DB_PATH = Path(_USER_VOL) / "users.db"
+else:
+    USER_DB_PATH = DB_PATH  # local dev / no volume: same file as before
+
 START_DATE = "2010-01-01"
 
 N_STATES = 3

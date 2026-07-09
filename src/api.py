@@ -1183,6 +1183,11 @@ if FRONTEND_DIR.exists():
     def feedback_page():
         return FileResponse(FRONTEND_DIR / "feedback.html")
 
+    @app.get("/admin")
+    def admin_page():
+        # gated client-side by the admin key (used against /api/admin/*)
+        return FileResponse(FRONTEND_DIR / "admin.html")
+
     @app.get("/research")
     def research_index_page():
         return FileResponse(FRONTEND_DIR / "research.html")
