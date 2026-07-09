@@ -32,15 +32,24 @@ import numpy as np
 import pandas as pd
 from scipy.sparse.csgraph import minimum_spanning_tree
 
-from .analytics import align_calendar, trailing_percentile
+from .analytics import align_business, trailing_percentile
 from .config import DATA_DIR, INDICES, raw_path
 
 OUT_PATH = DATA_DIR / "analytics" / "topology.json"
 
 EXCLUDE = {"btc", "eth"}       # 24/7 markets distort the joint calendar/geometry
-# Universe: every non-crypto board market. Extended from the audited 9 to the
-# full board in Jul 2026 and re-audited (scripts/topo_prototype.py) — the
-# geometry page publishes the refreshed audit.
+# Asset-class groups. Gauges and trees are computed PER GROUP: mixing rates/FX
+# into one cloud muddies the risk read (a treasury rally during an equity
+# selloff is flight-to-quality, not "structure"). Equities is the headline
+# panel; cross-asset (all 18, the re-audited panel) remains available.
+GROUPS = {
+    "equities": ("spx", "nasdaq", "ftse", "stoxx50", "nifty", "nikkei",
+                 "kospi", "shcomp", "hangseng", "taiex", "bovespa", "tadawul"),
+    "commodities": ("gold", "silver", "wti", "copper"),
+    "cross": ("spx", "nasdaq", "ftse", "stoxx50", "nifty", "nikkei",
+              "kospi", "shcomp", "hangseng", "taiex", "bovespa", "tadawul",
+              "gold", "silver", "wti", "copper", "us10y", "dxy"),
+}
 TDA_WINDOW = 60                # days per point cloud (Gidea-Katz use 50-100)
 MST_WINDOW = 90                # rolling correlation window
 PCTILE_WINDOW = 1260           # ~5 trading years
@@ -59,11 +68,10 @@ EPISODES = [
 ]
 
 
-def _load_returns() -> tuple[pd.DataFrame, list[str]]:
+def _load_returns(keys) -> tuple[pd.DataFrame, list[str]]:
     closes, excluded = {}, []
-    for key, cfg in INDICES.items():
-        if key in EXCLUDE:
-            continue
+    for key in keys:
+        cfg = INDICES[key]
         try:
             raw = pd.read_parquet(raw_path(key), columns=["price"])
         except FileNotFoundError:
@@ -74,7 +82,7 @@ def _load_returns() -> tuple[pd.DataFrame, list[str]]:
             excluded.append(key)
             continue
         closes[key] = s
-    prices = align_calendar(closes, max_ffill=1)
+    prices = align_business(closes, ffill_limit=3)
     rets = np.log(prices / prices.shift(1)).dropna(how="any")
     return rets, excluded
 
@@ -101,7 +109,7 @@ def tda_series(rets: pd.DataFrame, window: int = TDA_WINDOW) -> pd.Series:
     X = rets.values
     Xs = X / X.std(axis=0, keepdims=True)
     vals, idx = [], []
-    for t in range(window, len(rets)):
+    for t in range(window, len(rets) + 1):
         dgms = ripser(Xs[t - window:t], maxdim=1)["dgms"]
         vals.append(_landscape_l1(dgms[1]))
         idx.append(rets.index[t - 1])
@@ -125,7 +133,7 @@ def mst_series(rets: pd.DataFrame, window: int = MST_WINDOW) -> pd.DataFrame:
     X = rets.values
     N = rets.shape[1]
     lens, stars, idx = [], [], []
-    for t in range(window, len(rets)):
+    for t in range(window, len(rets) + 1):
         C = np.corrcoef(X[t - window:t].T)
         edges = _mst_edges(C)
         lens.append(float(np.mean([d for _, _, d in edges])))
@@ -143,10 +151,10 @@ def _series_points(s: pd.Series) -> list[list]:
     return [[d.strftime("%Y-%m-%d"), round(float(v), 5)] for d, v in s.items()]
 
 
-def build() -> dict:
-    rets, excluded = _load_returns()
-    if rets.shape[1] < 5:
-        raise RuntimeError(f"only {rets.shape[1]} markets available — need at least 5")
+def _build_group(keys) -> dict:
+    rets, excluded = _load_returns(keys)
+    if rets.shape[1] < 3:
+        raise RuntimeError(f"only {rets.shape[1]} markets available — need at least 3")
 
     tda = tda_series(rets)
     tda_smooth = tda.rolling(SMOOTH_DAYS).mean()
@@ -157,8 +165,8 @@ def build() -> dict:
     # current MST structure for the network visual
     C = np.corrcoef(rets.values[-MST_WINDOW:].T)
     edges = _mst_edges(C)
-    keys = list(rets.columns)
-    degrees = np.zeros(len(keys), dtype=int)
+    cols = list(rets.columns)
+    degrees = np.zeros(len(cols), dtype=int)
     for i, j, _ in edges:
         degrees[i] += 1
         degrees[j] += 1
@@ -166,23 +174,23 @@ def build() -> dict:
     cutoff = tda.index[-1] - pd.DateOffset(years=HISTORY_YEARS)
     tda_hist = tda_smooth.dropna().loc[cutoff:]
     mst_hist = mst_len.rolling(SMOOTH_DAYS).mean().dropna().loc[cutoff:]
+    star_smooth = mst_star.rolling(SMOOTH_DAYS).mean()
 
     cur_tda = float(tda_smooth.dropna().iloc[-1])
     cur_mst = float(mst_len.iloc[-1])
-    tda_pct = trailing_percentile(tda_smooth.dropna(), cur_tda, window=PCTILE_WINDOW)
-    # tightness percentile: how CONTRACTED is the tree vs its own history
-    mst_tight_pct = trailing_percentile(-mst_len.dropna(), -cur_mst, window=PCTILE_WINDOW)
-    star_smooth = mst_star.rolling(SMOOTH_DAYS).mean()
     cur_star = float(star_smooth.dropna().iloc[-1])
+    tda_pct = trailing_percentile(tda_smooth.dropna(), cur_tda, window=PCTILE_WINDOW)
+    mst_tight_pct = trailing_percentile(-mst_len.dropna(), -cur_mst, window=PCTILE_WINDOW)
     star_pct = trailing_percentile(star_smooth.dropna(), cur_star, window=PCTILE_WINDOW)
 
+    def _cls(k):
+        c = INDICES[k]["country"]
+        return {"Commodity": "commodity", "Crypto": "crypto",
+                "Rates": "rates", "FX": "fx"}.get(c, "equity")
+
     return {
-        "generated_at": datetime.now(timezone.utc).isoformat(),
         "as_of": tda.index[-1].strftime("%Y-%m-%d"),
-        "params": {"tda_window": TDA_WINDOW, "mst_window": MST_WINDOW,
-                   "smooth_days": SMOOTH_DAYS, "pctile_window": PCTILE_WINDOW},
-        "markets": [{"key": k, "name": INDICES[k]["name"]} for k in keys],
-        "excluded": sorted(EXCLUDE | set(excluded)),
+        "markets": [{"key": k, "name": INDICES[k]["name"]} for k in cols],
         "tda": {
             "current": round(cur_tda, 5),
             "current_percentile": round(tda_pct, 1) if tda_pct is not None else None,
@@ -193,15 +201,30 @@ def build() -> dict:
             "tightness_percentile": round(mst_tight_pct, 1) if mst_tight_pct is not None else None,
             "star_percentile": round(star_pct, 1) if star_pct is not None else None,
             "history": _series_points(mst_hist),
-            "star_history": _series_points(star_smooth.dropna().loc[cutoff:]),
             "tree": {
-                "nodes": [{"key": k, "name": INDICES[k]["name"], "degree": int(d)}
-                          for k, d in zip(keys, degrees)],
-                "edges": [{"a": keys[i], "b": keys[j], "d": round(d, 4),
+                "nodes": [{"key": k, "name": INDICES[k]["name"], "degree": int(d),
+                           "cls": _cls(k)} for k, d in zip(cols, degrees)],
+                "edges": [{"a": cols[i], "b": cols[j], "d": round(d, 4),
                            "rho": round(float(1.0 - d * d / 2.0), 3)}
                           for i, j, d in edges],
             },
         },
+    }
+
+
+def build() -> dict:
+    groups = {name: _build_group(keys) for name, keys in GROUPS.items()}
+    return {
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "as_of": groups["equities"]["as_of"],
+        "params": {"tda_window": TDA_WINDOW, "mst_window": MST_WINDOW,
+                   "smooth_days": SMOOTH_DAYS, "pctile_window": PCTILE_WINDOW},
+        "excluded": sorted(EXCLUDE),
+        "groups": groups,
+        # legacy top-level fields point at the cross-asset (audited) panel
+        "markets": groups["cross"]["markets"],
+        "tda": groups["cross"]["tda"],
+        "mst": groups["cross"]["mst"],
         "episodes": EPISODES,
     }
 
@@ -210,9 +233,9 @@ def refresh() -> dict:
     out = build()
     OUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     OUT_PATH.write_text(json.dumps(out, separators=(",", ":")))
-    print(f"[topology] wrote {OUT_PATH} — TDA {out['tda']['current']} "
-          f"(p{out['tda']['current_percentile']}), MST tightness "
-          f"p{out['mst']['tightness_percentile']}", flush=True)
+    eq = out["groups"]["equities"]
+    print(f"[topology] wrote {OUT_PATH} — equities TDA p{eq['tda']['current_percentile']}, "
+          f"star p{eq['mst']['star_percentile']}; cross TDA p{out['tda']['current_percentile']}", flush=True)
     return out
 
 

@@ -158,6 +158,15 @@
     <p class="strat-rule">Long when the Hidden Markov Model calls <strong>bull</strong>, cash otherwise — audited the way a skeptic would:
       the model is <strong>refit quarterly using only data available at the time</strong>, signals applied the next day, 10&nbsp;bps charged per switch.
       This is the out-of-sample truth, not the flattering in-sample version.</p>
+    <div style="display:flex;justify-content:flex-end;margin-bottom:12px;">
+      <div class="tabs" id="wf-tabs">
+        <button class="tab active" data-tab="all">All</button>
+        <button class="tab" data-tab="equity">Equities</button>
+        <button class="tab" data-tab="crypto">Crypto</button>
+        <button class="tab" data-tab="commodity">Commodities</button>
+        <button class="tab" data-tab="macro">Rates &amp; FX</button>
+      </div>
+    </div>
     <div class="hmm-agg">
       <div class="tile"><div class="v" id="wf-dd">–</div><div class="k">Markets with smaller max drawdown</div></div>
       <div class="tile"><div class="v" id="wf-vol">–</div><div class="k">Markets with lower volatility</div></div>
@@ -294,38 +303,55 @@ const ACCENT = "#8b6ff0", MUTEDL = "#5c6472", BULL = "#34c673";
 })();
 
 /* ── HMM walk-forward ── */
+const MKT_CLASS = {
+  spx: "equity", nasdaq: "equity", ftse: "equity", stoxx50: "equity", nifty: "equity",
+  nikkei: "equity", kospi: "equity", shcomp: "equity", hangseng: "equity", taiex: "equity",
+  bovespa: "equity", tadawul: "equity",
+  btc: "crypto", eth: "crypto",
+  gold: "commodity", silver: "commodity", wti: "commodity", copper: "commodity",
+  us10y: "macro", dxy: "macro",
+};
+let WF_MKTS = null;
+
+function renderWf(cls) {
+  const mkts = WF_MKTS.filter(m => cls === "all" || MKT_CLASS[m.key] === cls);
+  let ddWin = 0, volWin = 0, shWin = 0; const cagrGaps = [];
+  const rows = mkts.map(m => {
+    const wf = m.walk_forward_net, bh = m.buy_hold;
+    if (wf.max_drawdown_pct > bh.max_drawdown_pct) ddWin++;
+    if (wf.ann_vol_pct < bh.ann_vol_pct) volWin++;
+    if (wf.sharpe > bh.sharpe) shWin++;
+    cagrGaps.push(wf.cagr_pct - bh.cagr_pct);
+    const dCagr = wf.cagr_pct - bh.cagr_pct, dDD = wf.max_drawdown_pct - bh.max_drawdown_pct, dSh = wf.sharpe - bh.sharpe;
+    return `<tr><td>${m.name}</td>` +
+      `<td>${pc(wf.cagr_pct)}</td><td class="${dCagr >= 0 ? "good" : "bad"}">${pc(dCagr)}</td>` +
+      `<td>${wf.max_drawdown_pct.toFixed(1)}%</td><td class="${dDD > 0 ? "good" : "bad"}">${pc(dDD)}</td>` +
+      `<td>${num(wf.sharpe)}</td><td class="${dSh >= 0 ? "good" : "bad"}">${(dSh >= 0 ? "+" : "") + num(dSh)}</td></tr>`;
+  });
+  $("wf-rows").innerHTML = rows.join("");
+  cagrGaps.sort((a, b) => a - b);
+  const medGap = cagrGaps.length ? cagrGaps[Math.floor(cagrGaps.length / 2)] : 0;
+  const n = mkts.length;
+  $("wf-dd").textContent = `${ddWin}/${n}`;
+  $("wf-dd").className = "v " + (ddWin > n / 2 ? "good" : "");
+  $("wf-vol").textContent = `${volWin}/${n}`;
+  $("wf-vol").className = "v " + (volWin > n / 2 ? "good" : "");
+  $("wf-sh").textContent = `${shWin}/${n}`;
+  $("wf-cagr").textContent = Math.abs(medGap).toFixed(1) + " pts";
+  $("wf-verdict").innerHTML =
+    `The honest read: out of sample, the regime strategy usually <strong>earns less than buy-and-hold</strong> ` +
+    `(median ${Math.abs(medGap).toFixed(1)} CAGR points given up in this group) — and in return cuts the max drawdown in ` +
+    `<strong>${ddWin} of ${n} markets</strong> and volatility in <strong>${volWin} of ${n}</strong>. ` +
+    `Regime models are a brake, not an engine. If your priority is never eating a −30% year, that trade is worth it; ` +
+    `if it's maximum compounding, buy-and-hold wins and we say so.`;
+}
+
 (async () => {
   try {
     const d = await (await fetch("/api/validation")).json();
-    const mkts = d.markets;
-    let ddWin = 0, volWin = 0, shWin = 0; const cagrGaps = [];
-    const rows = mkts.map(m => {
-      const wf = m.walk_forward_net, bh = m.buy_hold;
-      if (wf.max_drawdown_pct > bh.max_drawdown_pct) ddWin++;
-      if (wf.ann_vol_pct < bh.ann_vol_pct) volWin++;
-      if (wf.sharpe > bh.sharpe) shWin++;
-      cagrGaps.push(wf.cagr_pct - bh.cagr_pct);
-      const dCagr = wf.cagr_pct - bh.cagr_pct, dDD = wf.max_drawdown_pct - bh.max_drawdown_pct, dSh = wf.sharpe - bh.sharpe;
-      return `<tr><td>${m.name}</td>` +
-        `<td>${pc(wf.cagr_pct)}</td><td class="${dCagr >= 0 ? "good" : "bad"}">${pc(dCagr)}</td>` +
-        `<td>${wf.max_drawdown_pct.toFixed(1)}%</td><td class="${dDD > 0 ? "good" : "bad"}">${pc(dDD)}</td>` +
-        `<td>${num(wf.sharpe)}</td><td class="${dSh >= 0 ? "good" : "bad"}">${(dSh >= 0 ? "+" : "") + num(dSh)}</td></tr>`;
-    });
-    $("wf-rows").innerHTML = rows.join("");
-    cagrGaps.sort((a, b) => a - b);
-    const medGap = cagrGaps[Math.floor(cagrGaps.length / 2)];
-    $("wf-dd").textContent = `${ddWin}/${mkts.length}`;
-    $("wf-dd").className = "v " + (ddWin > mkts.length / 2 ? "good" : "");
-    $("wf-vol").textContent = `${volWin}/${mkts.length}`;
-    $("wf-vol").className = "v " + (volWin > mkts.length / 2 ? "good" : "");
-    $("wf-sh").textContent = `${shWin}/${mkts.length}`;
-    $("wf-cagr").textContent = Math.abs(medGap).toFixed(1) + " pts";
-    $("wf-verdict").innerHTML =
-      `The honest read: out of sample, the regime strategy usually <strong>earns less than buy-and-hold</strong> ` +
-      `(median ${Math.abs(medGap).toFixed(1)} CAGR points given up) — and in return cuts the max drawdown in ` +
-      `<strong>${ddWin} of ${mkts.length} markets</strong> and volatility in <strong>${volWin} of ${mkts.length}</strong>. ` +
-      `Regime models are a brake, not an engine. If your priority is never eating a −30% year, that trade is worth it; ` +
-      `if it's maximum compounding, buy-and-hold wins and we say so.`;
+    WF_MKTS = d.markets;
+    renderWf("all");
+    RC.tabs(document.getElementById("wf-tabs"), (tab) => renderWf(tab));
   } catch (e) { $("wf-verdict").textContent = "Validation data unavailable right now."; }
 })();
 

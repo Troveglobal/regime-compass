@@ -21,6 +21,7 @@ import pandas as pd
 
 from .analytics import (
     absorption_series,
+    align_business,
     align_calendar,
     delta_ar,
     trailing_percentile,
@@ -74,7 +75,7 @@ def build() -> dict:
 
     # Common calendar: inner-join on dates where all series have data,
     # forward-filling single-day holiday gaps only (rule in analytics.align_calendar).
-    prices = align_calendar(closes, max_ffill=1)
+    prices = align_business(closes, ffill_limit=3)
     rets = np.log(prices / prices.shift(1)).dropna(how="any")
 
     turb = turbulence_series(rets, window=TURB_WINDOW)

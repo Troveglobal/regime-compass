@@ -67,6 +67,19 @@ def align_calendar(closes: dict[str, pd.Series], max_ffill: int = 1) -> pd.DataF
     return df.dropna(how="any")
 
 
+def align_business(closes: dict[str, pd.Series], ffill_limit: int = 3) -> pd.DataFrame:
+    """Mixed-calendar alignment for global panels that include Sun-Thu markets
+    (e.g. Tadawul): union of dates -> per-market forward-fill up to
+    `ffill_limit` days -> weekdays only -> rows where every market has a value.
+    Unlike the strict inner join (align_calendar), holiday/weekend offsets
+    don't delete whole days from the panel; stale entries carry a zero return
+    for the filled market instead."""
+    df = pd.DataFrame(closes).sort_index()
+    df = df.ffill(limit=ffill_limit)
+    df = df[df.index.dayofweek < 5]
+    return df.dropna(how="any")
+
+
 def turbulence_series(returns: pd.DataFrame, window: int = 500) -> pd.Series:
     """Financial Turbulence (Kritzman & Li 2010): Mahalanobis distance of the
     day's cross-asset return vector from its recent multivariate history.
