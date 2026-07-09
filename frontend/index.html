@@ -147,6 +147,31 @@
     .cat-card .cat-live { font-size: 12px; color: var(--muted); line-height: 1.5; }
     .cat-card .cat-live strong { color: var(--text-body); font-weight: 600; }
 
+    /* ── Model stack ── */
+    .stack-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    @media (max-width: 860px) { .stack-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 560px) { .stack-grid { grid-template-columns: 1fr; } }
+    .stack-card {
+      display: flex; flex-direction: column; gap: 6px;
+      padding: 18px 20px; text-decoration: none;
+      border: 1px solid var(--border); border-radius: var(--r-lg);
+      background: linear-gradient(180deg, rgba(255,255,255,0.015), transparent 40%), var(--panel);
+      box-shadow: inset 0 1px 0 var(--edge-light);
+      transition: var(--transition); position: relative;
+    }
+    .stack-card:hover { border-color: var(--accent-border); transform: translateY(-2px); box-shadow: var(--shadow-md), inset 0 1px 0 var(--edge-light); text-decoration: none; }
+    .stack-card .sc-name { font-weight: 650; font-size: 14.5px; color: var(--text-strong); }
+    .stack-card .sc-cite { font-size: 10.5px; color: var(--muted); font-family: var(--font-mono); letter-spacing: 0.01em; }
+    .stack-card .sc-live {
+      font-size: 21px; font-weight: 700; color: var(--accent-strong);
+      font-family: var(--font-mono); font-variant-numeric: tabular-nums; letter-spacing: -0.02em;
+      margin-top: 6px; line-height: 1.15; min-height: 24px;
+    }
+    .stack-card .sc-live .sub { font-size: 12px; color: var(--muted); font-weight: 500; }
+    .stack-card .sc-desc { font-size: 12px; color: var(--muted); line-height: 1.5; margin-top: 2px; }
+    .stack-card .sc-arrow { position: absolute; top: 16px; right: 18px; color: var(--muted); opacity: 0; transform: translateX(-4px); transition: var(--transition); }
+    .stack-card:hover .sc-arrow { opacity: 1; transform: translateX(0); color: var(--accent-strong); }
+
     /* ── How investors use it ── */
     .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
     @media (max-width: 760px) { .steps { grid-template-columns: 1fr; } }
@@ -235,7 +260,7 @@
   <!--GEO:JSONLD-->
 </head>
 <body>
-<script src="/shell.js?v=7.0"></script>
+<script src="/shell.js?v=7.1"></script>
 
 <div class="wrap">
   <!-- 1 · The claim -->
@@ -349,7 +374,57 @@
     </div>
   </section>
 
-  <!-- 4 · How investors use it -->
+  <!-- 4 · The model stack -->
+  <section class="model-section reveal">
+    <h2>An institutional model stack <span class="tag">live · academic lineage</span></h2>
+    <div class="subline">Not three trend models — a full quantitative toolkit, each with published research behind it and its own <a href="/validation">audit</a>. All updating daily, all reading live right now.</div>
+    <div class="stack-grid">
+      <a class="stack-card" href="/composite">
+        <span class="sc-arrow">→</span>
+        <span class="sc-name">Regime Models</span>
+        <span class="sc-cite">3-state Gaussian HMM · SMA · EMA</span>
+        <span class="sc-live" id="sc-regime">–</span>
+        <span class="sc-desc">Directional state — bull, neutral or bear — for every market, three ways.</span>
+      </a>
+      <a class="stack-card" href="/systemic">
+        <span class="sc-arrow">→</span>
+        <span class="sc-name">Financial Turbulence</span>
+        <span class="sc-cite">Kritzman &amp; Li (2010)</span>
+        <span class="sc-live" id="sc-turb">–</span>
+        <span class="sc-desc">Mahalanobis distance of the cross-asset return vector from its own history.</span>
+      </a>
+      <a class="stack-card" href="/systemic">
+        <span class="sc-arrow">→</span>
+        <span class="sc-name">Absorption Ratio</span>
+        <span class="sc-cite">Kritzman, Li, Page &amp; Rigobon (2011)</span>
+        <span class="sc-live" id="sc-ar">–</span>
+        <span class="sc-desc">How much of total variance a few hidden factors absorb — unity means fragile.</span>
+      </a>
+      <a class="stack-card" href="/geometry">
+        <span class="sc-arrow">→</span>
+        <span class="sc-name">Market Geometry</span>
+        <span class="sc-cite">Gidea &amp; Katz (2018) · Mantegna (1999)</span>
+        <span class="sc-live" id="sc-geo">–</span>
+        <span class="sc-desc">Persistent homology + correlation trees — the shape of market dynamics.</span>
+      </a>
+      <a class="stack-card" href="/credit">
+        <span class="sc-arrow">→</span>
+        <span class="sc-name">Credit Stress Overlay</span>
+        <span class="sc-cite">HY / Baa spread tripwire</span>
+        <span class="sc-live" id="sc-credit">–</span>
+        <span class="sc-desc">Where bond investors — who have no upside — are pricing trouble first.</span>
+      </a>
+      <a class="stack-card" href="/movers">
+        <span class="sc-arrow">→</span>
+        <span class="sc-name">Regime Movers</span>
+        <span class="sc-cite">regime-conditional z-score</span>
+        <span class="sc-live" id="sc-movers">–</span>
+        <span class="sc-desc">Today's move scored against the return distribution of its own current regime.</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- 5 · How investors use it -->
   <section class="model-section reveal">
     <h2>How investors use it</h2>
     <div class="subline">Ten minutes a day. No noise, no calls — just the state of the board.</div>
@@ -377,10 +452,10 @@
     <h2>Audited, not asserted</h2>
     <div class="subline">We backtested our own models the way a skeptic would — refit quarterly on data available at the time, costs included, <a href="/validation">every result published</a>, including where the models lose. See what the signals become as <a href="/strategies">model portfolios →</a></div>
     <div class="audit-strip">
-      <div class="cell"><div class="v num" data-count="20">0</div><div class="k">Markets tracked</div></div>
-      <div class="cell"><div class="v num" data-count="3">0</div><div class="k">Independent models</div></div>
-      <div class="cell"><div class="v num" data-count="180">0</div><div class="k">Signals per day</div></div>
-      <div class="cell"><div class="v num" id="stat-days" data-count="0">0</div><div class="k">Days of history</div></div>
+      <div class="cell"><div class="v num" data-count="20">0</div><div class="k">Global markets</div></div>
+      <div class="cell"><div class="v num" data-count="7">0</div><div class="k">Quant models</div></div>
+      <div class="cell"><div class="v num" data-count="5">0</div><div class="k">Asset classes</div></div>
+      <div class="cell"><div class="v num" data-count="16">0</div><div class="k">Years walk-forward tested</div></div>
     </div>
   </section>
 
@@ -471,15 +546,6 @@ async function loadBoard() {
 
 /* count-up audit strip */
 (async () => {
-  try {
-    const r = await fetch("/api/model_info");
-    const d = await r.json();
-    const days = d && (d.history_days || d.days || d.n_days);
-    if (days) document.getElementById("stat-days").dataset.count = days;
-  } catch (e) { document.getElementById("stat-days").dataset.count = 365; }
-  if (+document.getElementById("stat-days").dataset.count === 0)
-    document.getElementById("stat-days").dataset.count = 365;
-
   const strip = document.querySelector(".audit-strip");
   const run = () => strip.querySelectorAll("[data-count]").forEach((el, i) =>
     setTimeout(() => RC.countUp(el, +el.dataset.count, { duration: 1100 }), i * 120));
@@ -523,6 +589,36 @@ async function loadBoard() {
       const pos = s.in.net_cr >= 0;
       set("live-sm", "India: smart money net <strong>" + (pos ? "accumulating +" : "distributing −") + inr(s.in.net_cr) + "</strong> this month");
     }
+  } catch (e) {}
+})();
+
+/* Model stack — live readings on each named model; em-dash stays on failure */
+(async () => {
+  const set = (id, html) => { const el = document.getElementById(id); if (el) el.innerHTML = html; };
+  const sub = t => `<span class="sub">${t}</span>`;
+  try {
+    const d = await (await fetch("/api/concordance")).json();
+    set("sc-regime", `${d.counts.bull}<span class="sub">/${d.n_markets} risk-on</span>`);
+  } catch (e) {}
+  try {
+    const s = await (await fetch("/api/systemic")).json();
+    set("sc-turb", `${s.turbulence.current_percentile.toFixed(0)}<span class="sub">th pctile</span>`);
+    set("sc-ar", `${(s.absorption.current * 100).toFixed(0)}%<span class="sub"> in ${s.absorption.n_components} factors</span>`);
+  } catch (e) {}
+  try {
+    const g = await (await fetch("/api/topology")).json();
+    const eq = g.groups.equities.verdict, co = g.groups.commodities.verdict;
+    const cap = w => w.charAt(0).toUpperCase() + w.slice(1);
+    set("sc-geo", `${cap(eq.state)}<span class="sub"> equities · ${co.state} commodities</span>`);
+  } catch (e) {}
+  try {
+    const c = await (await fetch("/api/credit/gauge")).json();
+    set("sc-credit", `${c.spread_bps.toFixed(0)}<span class="sub"> bps · ${c.state}</span>`);
+  } catch (e) {}
+  try {
+    const d = await (await fetch("/api/movers")).json();
+    const t = d.markets[0];
+    if (t && t.z != null) set("sc-movers", `${t.name} ${(t.z > 0 ? "+" : "") + t.z.toFixed(1)}σ<span class="sub"> · ${t.regime}</span>`);
   } catch (e) {}
 })();
 </script>
