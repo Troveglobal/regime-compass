@@ -73,6 +73,7 @@
       ],
     },
     { label: "Strategies", href: "/strategies" },
+    { label: "Research", href: "/research" },
     {
       label: "Explore",
       items: [
@@ -92,6 +93,13 @@
     ["/", "Home", "Overview", "home start landing"],
     ["/today", "Daily Brief", "Today", "today brief snapshot daily"],
     ["/strategies", "Strategies", "Portfolios", "strategies model portfolios backtest track record smart money credit regime"],
+    ["/research", "Research", "Research", "research notes articles blog ideas"],
+    ["/research/why-regimes-matter", "Regime investing for the risk-averse", "Research", "drawdown sequence risk regime article"],
+    ["/research/three-models-one-verdict", "Why three models beat one", "Research", "hmm sma ema ensemble article"],
+    ["/research/smart-money-paper-trail", "Smart money leaves a paper trail", "Research", "insider bulk block deals article"],
+    ["/research/credit-knows-first", "Credit usually knows first", "Research", "credit spreads early warning article"],
+    ["/research/anatomy-of-fragility", "Turbulence, absorption & fragility", "Research", "systemic turbulence absorption article"],
+    ["/research/honest-backtest", "The honest backtest", "Research", "walk forward validation backtest article"],
     ["/news", "News", "News", "headlines news"],
     ["/ma/backtest", "SMA Backtest", "Regime", "sma backtest performance"],
     ["/ema/backtest", "EMA Backtest", "Regime", "ema backtest performance"],
@@ -112,6 +120,7 @@
 
   /* prefix → category for active-state highlighting on spoke pages */
   var PREFIX_CAT = {
+    "/research": "Research",
     "/smartmoney": "Smart Money",
     "/country": "Explore",
     "/countries": "Explore",
@@ -178,7 +187,7 @@
     '<div class="f-col"><h5>Smart Money &amp; Explore</h5>' +
     '<a href="/smartmoney">India</a><a href="/smartmoney/tw">Taiwan</a><a href="/smartmoney/id">Indonesia</a><a href="/smartmoney/us">United States</a><a href="/countries">Countries</a><a href="/assets">Assets</a><a href="/news">News</a></div>' +
     '<div class="f-col"><h5>Company</h5>' +
-    '<a href="/about">About</a><a href="/methodology">Methodology</a><a href="/subscribe">Alerts</a><a href="/feedback">Feedback</a><a href="/disclaimer">Disclaimer</a><a href="/terms">Terms</a><a href="/privacy">Privacy</a></div>' +
+    '<a href="/research">Research</a><a href="/about">About</a><a href="/methodology">Methodology</a><a href="/subscribe">Alerts</a><a href="/feedback">Feedback</a><a href="/disclaimer">Disclaimer</a><a href="/terms">Terms</a><a href="/privacy">Privacy</a></div>' +
     "</div>" +
     '<div class="f-bottom">' +
     '<span class="built-by">Built by <a href="https://www.linkedin.com/in/aditya-s1/" target="_blank" rel="noopener">Aditya Sahasrabuddhe' +
@@ -211,6 +220,11 @@
     if (cat) {
       var dd = nav.querySelector('.nav-dd[data-cat="' + cat + '"]');
       if (dd) dd.classList.add("cat-active");
+      else {
+        /* flat top-level link (e.g. Research on /research/{slug}) */
+        var flat = nav.querySelector('.links > a[data-nav="' + seg + '"]');
+        if (flat) flat.classList.add("active");
+      }
     }
   }
 

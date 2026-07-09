@@ -4,6 +4,7 @@ from __future__ import annotations
 import collections
 import logging
 import os
+import re
 import pickle
 import sqlite3
 import sys
@@ -1175,6 +1176,19 @@ if FRONTEND_DIR.exists():
     def feedback_page():
         return FileResponse(FRONTEND_DIR / "feedback.html")
 
+    @app.get("/research")
+    def research_index_page():
+        return FileResponse(FRONTEND_DIR / "research.html")
+
+    @app.get("/research/{slug}")
+    def research_article_page(slug: str):
+        if not re.fullmatch(r"[a-z0-9-]{1,80}", slug):
+            return FileResponse(FRONTEND_DIR / "404.html", status_code=404)
+        path = FRONTEND_DIR / "research" / f"{slug}.html"
+        if not path.exists():
+            return FileResponse(FRONTEND_DIR / "404.html", status_code=404)
+        return FileResponse(path)
+
     @app.get("/hmm")
     def hmm_page():
         return geo.render_page("hmm.html", "hmm")
@@ -1439,7 +1453,8 @@ if FRONTEND_DIR.exists():
                 + [(f"/country/{s}", "0.7") for s in COUNTRIES] \
                 + [(f"/asset/{s}", "0.7") for s in ("bitcoin", "ethereum", "gold", "silver")]
         weekly = [("/ma/backtest", "0.7"), ("/ema/backtest", "0.7"), ("/calendar", "0.7"),
-                  ("/seasonality", "0.7"), ("/validation", "0.7")]
+                  ("/seasonality", "0.7"), ("/validation", "0.7"), ("/research", "0.8")] \
+                + [(f"/research/{p.stem}", "0.7") for p in sorted((FRONTEND_DIR / "research").glob("*.html"))]
         stable = [("/subscribe", "0.6"), ("/about", "0.5"), ("/methodology", "0.6"), ("/embed", "0.4"),
                   ("/disclaimer", "0.3"), ("/terms", "0.3"), ("/privacy", "0.3")]
         entries = []
