@@ -530,6 +530,26 @@
     btn.className = "idx-btn";
     var menu = document.createElement("div");
     menu.className = "idx-menu";
+    /* pinned class chips — the whole taxonomy visible before scrolling */
+    var nav = document.createElement("div");
+    nav.className = "idx-nav";
+    menu.appendChild(nav);
+    var heads = {};
+    IDX_GROUPS.forEach(function (g) {
+      var members = items.filter(function (i) { return (IDX_CLASS[i.key] || "eq") === g[0]; });
+      if (!members.length) return;
+      var chip = document.createElement("button");
+      chip.type = "button";
+      chip.className = "idx-chip";
+      chip.textContent = g[1];
+      chip.style.color = g[2];
+      chip.addEventListener("click", function (e) {
+        e.stopPropagation();
+        var h = heads[g[0]];
+        if (h) menu.scrollTop = h.offsetTop - nav.offsetHeight - 10;
+      });
+      nav.appendChild(chip);
+    });
     IDX_GROUPS.forEach(function (g) {
       var members = items.filter(function (i) { return (IDX_CLASS[i.key] || "eq") === g[0]; });
       if (!members.length) return;
@@ -537,6 +557,7 @@
       head.className = "idx-head";
       head.textContent = g[1];
       head.style.color = g[2];
+      heads[g[0]] = head;
       menu.appendChild(head);
       members.forEach(function (i) {
         var row = document.createElement("button");
