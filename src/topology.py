@@ -32,7 +32,7 @@ import numpy as np
 import pandas as pd
 from scipy.sparse.csgraph import minimum_spanning_tree
 
-from .analytics import align_business, trailing_percentile
+from .analytics import align_business, trailing_percentile, turbulence_series
 from .config import DATA_DIR, INDICES, raw_path
 
 OUT_PATH = DATA_DIR / "analytics" / "topology.json"
@@ -56,6 +56,21 @@ PCTILE_WINDOW = 1260           # ~5 trading years
 SMOOTH_DAYS = 10
 HISTORY_YEARS = 16             # chart depth — show the full audited record
 MIN_HISTORY_DAYS = int(3 * 252)
+
+# Audited, panel-specific evidence (scripts/topo_prototype.py + per-class
+# audit of 2026-07-10, calendar-corrected data). Each group gets ONE headline
+# signal — the one that survived its own audit. Hit rates are conditional on
+# the group's turbulence reading calm (<p70): the configuration where the
+# geometry gauge adds information the incumbents don't have.
+VERDICT_SIGNAL = {"equities": "tda", "commodities": "star", "cross": "tda"}
+EVIDENCE = {
+    "equities":    {"p5_hot": 44, "p5_calm": 20, "p10_hot": 16, "p10_calm": 6,
+                    "vol_hot": 12.3, "vol_calm": 9.6},
+    "commodities": {"p5_hot": 67, "p5_calm": 39, "p10_hot": 44, "p10_calm": 15,
+                    "vol_hot": None, "vol_calm": None},
+    "cross":       {"p5_hot": 48, "p5_calm": 17, "p10_hot": 11, "p10_calm": 5,
+                    "vol_hot": 11.1, "vol_calm": 8.1},
+}
 
 # Drawdown episodes from the validation study (scripts/topo_prototype.py),
 # shaded on the history chart. Regenerate the study before editing.
@@ -176,6 +191,10 @@ def _build_group(keys) -> dict:
     mst_hist = mst_len.rolling(SMOOTH_DAYS).mean().dropna().loc[cutoff:]
     star_smooth = mst_star.rolling(SMOOTH_DAYS).mean()
 
+    turb = turbulence_series(rets, window=500).rolling(SMOOTH_DAYS).mean()
+    cur_turb = float(turb.dropna().iloc[-1])
+    turb_pct = trailing_percentile(turb.dropna(), cur_turb, window=PCTILE_WINDOW)
+
     cur_tda = float(tda_smooth.dropna().iloc[-1])
     cur_mst = float(mst_len.iloc[-1])
     cur_star = float(star_smooth.dropna().iloc[-1])
@@ -191,6 +210,7 @@ def _build_group(keys) -> dict:
     return {
         "as_of": tda.index[-1].strftime("%Y-%m-%d"),
         "markets": [{"key": k, "name": INDICES[k]["name"]} for k in cols],
+        "turbulence_percentile": round(turb_pct, 1) if turb_pct is not None else None,
         "tda": {
             "current": round(cur_tda, 5),
             "current_percentile": round(tda_pct, 1) if tda_pct is not None else None,
@@ -214,6 +234,23 @@ def _build_group(keys) -> dict:
 
 def build() -> dict:
     groups = {name: _build_group(keys) for name, keys in GROUPS.items()}
+    for name, g in groups.items():
+        sig_name = VERDICT_SIGNAL[name]
+        sig_pct = g["tda"]["current_percentile"] if sig_name == "tda" else g["mst"]["star_percentile"]
+        tp = g["turbulence_percentile"]
+        if sig_pct is None or tp is None:
+            state = "unknown"
+        elif sig_pct > 90 and tp < 70:
+            state = "alert"          # the audited configuration
+        elif sig_pct > 90:
+            state = "hot"            # geometry hot but turbulence already sees it
+        elif sig_pct > 70:
+            state = "watch"
+        else:
+            state = "quiet"
+        g["verdict"] = {"signal": sig_name, "signal_percentile": sig_pct,
+                        "turbulence_percentile": tp, "state": state,
+                        "evidence": EVIDENCE[name]}
     return {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "as_of": groups["equities"]["as_of"],

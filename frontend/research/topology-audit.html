@@ -26,7 +26,7 @@
   <meta name="twitter:image" content="https://www.regimecompass.com/og-image.png" />
   <meta name="theme-color" content="#07090e" />
   <link rel="canonical" href="https://www.regimecompass.com/research/topology-audit" />
-  <link rel="stylesheet" href="/styles.css?v=6.2" />
+  <link rel="stylesheet" href="/styles.css?v=6.0" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="manifest" href="/manifest.json" />
   <script type="application/ld+json">
@@ -98,7 +98,7 @@
   </style>
 </head>
 <body>
-<script src="/shell.js?v=7.0"></script>
+<script src="/shell.js?v=6.4"></script>
 
 <div class="wrap narrow" style="max-width: 860px;">
   <div style="display: flex; align-items: center; gap: 18px; flex-wrap: wrap; margin-bottom: 14px;">
@@ -155,8 +155,9 @@
 <blockquote>The failure is informative: strip the "cross" out of cross-market geometry and the information disappears. The joint gauge's edge lives in how markets move relative to each other — which is exactly what a single series cannot see.</blockquote>
 <p>So the per-market table doesn't ship, the system-level gauge stands, and this note will keep saying whatever the data says.</p>
 
-<h2>Update: re-audited on the 20-market board</h2>
-<p>When the board expanded to twenty markets (July 2026), the study was re-run on the full 18-market non-crypto panel. The TDA finding <strong>strengthened</strong>: overlap with turbulence fell to 0.15, and hot readings preceded roughly 75% worse conditional drawdowns. One reversal, disclosed: <strong>hub concentration</strong> (how star-shaped the tree is) looked inverted on 9 markets and we said so — on 18 nodes it becomes the strongest conditional signal in the study (~2× worse forward drawdowns across ~12 distinct episodes). Small panels do this; the fix is more panel, not more conviction. The live gauges on the <a href="/geometry">Market Geometry</a> page reflect the extended universe.</p>
+<h2>Update: re-audited on the 20-market board — including a retraction</h2>
+<p>When the board expanded to twenty markets (July 2026), the study was re-run — first on the full 18-market panel, then, after a calendar data-quality fix, per asset class. Two findings survived everything: the <strong>TDA gauge works for equities and the cross-asset panel</strong> (hot readings while turbulence was calm preceded a &gt;5% drawdown within 60 days ~44–48% of the time, versus ~17–20% from quiet readings, with forward volatility ~30% higher), and <strong>hub concentration works only inside commodities</strong> (a commodity tree collapsing onto one hub preceded &gt;10% drawdowns 44% of the time vs 15%).</p>
+<p>One retraction, disclosed in full: an interim version of this study reported cross-asset hub concentration at ~2× worse drawdowns. That result was an artifact — mixed Sun–Thu/Mon–Fri trading calendars had been silently deleting days from the panel, and after the fix the effect vanished. Commodity TDA also carries no drawdown information despite producing impressive-looking percentiles. The <a href="/geometry">Market Geometry</a> page now shows each asset class one verdict, from the one signal that passed that class's audit, with the historical odds printed next to it — and lists the failures underneath. A conservative block bootstrap puts the surviving spreads at p≈0.10–0.16: odds-shifters from ~a dozen episodes, not certainties, and the page says that too.</p>
 
 
     <a class="art-cta" href="/geometry">See the live Market Geometry page →</a>

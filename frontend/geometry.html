@@ -28,8 +28,24 @@
   <link rel="manifest" href="/manifest.json" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
   <style>
-    .geo-strip { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-bottom: 22px; }
+    .geo-strip { display: grid; grid-template-columns: 2fr 1fr; gap: 14px; margin-bottom: 22px; }
     @media (max-width: 900px) { .geo-strip { grid-template-columns: 1fr; } }
+    .verdict-card {
+      padding: 22px 26px; border: 1px solid var(--border); border-radius: var(--r-lg);
+      background: linear-gradient(180deg, rgba(255,255,255,0.015), transparent 45%), var(--panel);
+      box-shadow: var(--shadow-sm), inset 0 1px 0 var(--edge-light);
+    }
+    .verdict-card .v-state {
+      display: inline-block; padding: 5px 14px; border-radius: 14px; margin-bottom: 10px;
+      font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.4px;
+    }
+    .v-state.alert { background: rgba(227,84,84,0.16); color: var(--bear); border: 1px solid rgba(227,84,84,0.4); }
+    .v-state.hot   { background: rgba(212,160,23,0.16); color: var(--neutral); border: 1px solid rgba(212,160,23,0.4); }
+    .v-state.watch { background: rgba(212,160,23,0.16); color: var(--neutral); border: 1px solid rgba(212,160,23,0.4); }
+    .v-state.quiet { background: rgba(52,198,115,0.16); color: var(--bull); border: 1px solid rgba(52,198,115,0.4); }
+    .verdict-card .v-read { font-size: 14px; line-height: 1.65; color: var(--text-body); }
+    .verdict-card .v-read strong { color: var(--text-strong); }
+    .verdict-card .v-fine { font-size: 11px; color: var(--muted); margin-top: 10px; line-height: 1.5; }
     .geo-tile {
       padding: 20px 24px; border: 1px solid var(--border); border-radius: var(--r-lg);
       background: linear-gradient(180deg, rgba(255,255,255,0.015), transparent 45%), var(--panel);
@@ -87,7 +103,7 @@
   <div class="hero">
     <div class="kicker">Market Geometry</div>
     <h1>What shape is the market in?</h1>
-    <div class="tagline">Topology-family measures computed daily, <strong>one asset class at a time</strong> — mixing bonds and the dollar into an equity cloud reads flight-to-quality as "structure", so each group gets its own gauges and its own tree. The <strong>TDA gauge</strong> (persistent homology) asks whether the geometry of a group's dynamics is deforming; the <strong>market tree</strong> (minimum spanning tree) shows its correlation skeleton and warns when it collapses toward a single hub. Shipped with <a href="#audit">the audit that earned them a place</a>.</div>
+    <div class="tagline">Topology-family measures computed daily, <strong>one asset class at a time</strong> — mixing bonds and the dollar into an equity cloud reads flight-to-quality as "structure", so each group gets its own gauges and its own tree. The <strong>TDA gauge</strong> (persistent homology) asks whether the geometry of a group's dynamics is deforming; the <strong>market tree</strong> (minimum spanning tree) shows its correlation skeleton and warns when it collapses toward a single hub. Each group shows <strong>one verdict, from the one signal that survived its own audit</strong> — with the historical odds attached, so a reading translates into an expectation. Full evidence in <a href="#audit">the audit</a>.</div>
   </div>
 
   <div class="group-row reveal">
@@ -100,9 +116,8 @@
   </div>
 
   <div class="geo-strip reveal" id="geo-strip">
-    <div class="skeleton" style="height:130px;border-radius:var(--r-lg);"></div>
-    <div class="skeleton" style="height:130px;border-radius:var(--r-lg);"></div>
-    <div class="skeleton" style="height:130px;border-radius:var(--r-lg);"></div>
+    <div class="skeleton" style="height:170px;border-radius:var(--r-lg);"></div>
+    <div class="skeleton" style="height:170px;border-radius:var(--r-lg);"></div>
   </div>
 
   <section class="tree-card reveal" style="margin-bottom:20px;">
@@ -149,24 +164,22 @@
     <p style="margin-top:10px;">Episodic, not universal: the TDA gauge built into 2015–16 and flickered before COVID; <strong>nothing warned before 2018</strong> — which is exactly why this page sits alongside <a href="/systemic">Systemic Risk</a> rather than replacing it.</p>
 
     <h3>Does it add anything the incumbents don't have?</h3>
-    <p>The decisive test: average drawdown of the equal-weight panel over the <em>next 60 days</em>, measured only on days when Turbulence read calm (below its 70th percentile):</p>
+    <p>The decisive test, per panel: when a group's headline signal is hot (&gt;90th percentile) while that group's Turbulence reads calm (&lt;70th) — the configuration the incumbents call safe — what actually happened over the next 60 days?</p>
     <div class="table-wrap">
     <table class="audit-table">
-      <thead><tr><th>State (Turbulence calm)</th><th>Avg forward 60-day drawdown</th></tr></thead>
+      <thead><tr><th>Panel · signal</th><th>P(&gt;5% dd) hot</th><th>quiet</th><th>P(&gt;10% dd) hot</th><th>quiet</th><th>Fwd 60d vol hot</th><th>quiet</th></tr></thead>
       <tbody>
-        <tr><td>Hub concentration hot (&gt; 90th pctile)</td><td class="bad">−6.9%</td></tr>
-        <tr><td>Hub concentration calm (&lt; 50th pctile)</td><td class="good">−3.3%</td></tr>
-        <tr><td>TDA hot (&gt; 90th pctile)</td><td class="bad">−4.7%</td></tr>
-        <tr><td>TDA calm (&lt; 50th pctile)</td><td class="good">−2.7%</td></tr>
-        <tr><td>Tree tightness hot (&gt; 90th pctile)</td><td class="mut">−3.4%</td></tr>
-        <tr><td>Tree tightness calm (&lt; 50th pctile)</td><td class="mut">−2.8%</td></tr>
+        <tr><td>Equities · TDA</td><td class="bad">44%</td><td class="good">20%</td><td class="bad">16%</td><td class="good">6%</td><td class="bad">12.3%</td><td class="good">9.6%</td></tr>
+        <tr><td>Cross-asset · TDA</td><td class="bad">48%</td><td class="good">17%</td><td class="bad">11%</td><td class="good">5%</td><td class="bad">11.1%</td><td class="good">8.1%</td></tr>
+        <tr><td>Commodities · hub concentration</td><td class="bad">67%</td><td class="good">39%</td><td class="bad">44%</td><td class="good">15%</td><td class="mut">—</td><td class="mut">—</td></tr>
       </tbody>
     </table>
     </div>
-    <p style="margin-top:10px;">Two signals survive. The <strong>TDA gauge</strong> strengthened on the wider panel (overlap with turbulence fell to 0.15; hot readings preceded ~75% worse drawdowns). <strong>Hub concentration</strong> is the re-audit's discovery: on the original 9-market panel it looked <em>inverted</em> and we said so — with 18 nodes the star-collapse becomes statistically meaningful (76 hot-while-calm days across ~12 distinct episodes, ~2× worse forward drawdowns). We publish both versions of that finding because the reversal is exactly the kind of thing small panels do. <strong>Tree tightness</strong> remains structure, not signal — its information largely overlaps the absorption ratio (rank correlation 0.62).</p>
+    <p style="margin-top:10px;">Those three pairs are the page's headline verdicts — <strong>each panel shows only the signal that passed its own audit</strong>. The failures are listed too: commodity TDA carries no drawdown information (hot and quiet readings led to identical outcomes); equity hub concentration is mildly <em>inverted</em>; tree tightness everywhere overlaps the absorption ratio and is shown as structure only.</p>
+    <p><strong>A retraction.</strong> An earlier version of this page reported cross-asset hub concentration preceding ~2× worse drawdowns. After a calendar data-quality fix (mixed Sun–Thu/Mon–Fri trading weeks had been deleting whole days from the panel), that result <strong>does not replicate</strong> and is withdrawn. The hub-collapse signal is real only <em>within commodities</em>. We leave this note here because silently deleting findings is how quant marketing works, and this page isn't that.</p>
 
     <h3>Honest limits</h3>
-    <p>A handful of episodes is still a small sample. Parameters follow the literature (60-day windows per Gidea &amp; Katz; 90-day correlations per the MST literature) with no optimisation. These are <em>environment</em> measures: they say a group's geometry is deforming, not that a crash is scheduled. Treat readings as a prompt to check the <a href="/">regime board</a> and <a href="/systemic">stress gauges</a>, never as a standalone signal.</p>
+    <p>A handful of episodes is still a small sample — a conservative block bootstrap puts these spreads at p≈0.10–0.16, so treat them as odds-shifters, not certainties. Parameters follow the literature (60-day windows per Gidea &amp; Katz; 90-day correlations per the MST literature) with no optimisation. These are <em>environment</em> measures: they say a group's geometry is deforming, not that a crash is scheduled. Treat readings as a prompt to check the <a href="/">regime board</a> and <a href="/systemic">stress gauges</a>, never as a standalone signal.</p>
   </div>
 
   <div class="section reveal">
@@ -303,13 +316,47 @@ function renderTree(tree) {
     `<span>hub = most connected node</span>`;
 }
 
-function tile(name, pct, readHot, readCalm) {
-  const cls = pct >= 90 ? "hot" : pct >= 70 ? "warm" : "calm";
-  const read = pct >= 90 ? readHot : pct >= 70 ? "Elevated — worth watching alongside the stress gauges." : readCalm;
-  return `<div class="geo-tile ${cls}">
-    <div class="t-name">${name}</div>
-    <div class="t-val">${pct != null ? pct.toFixed(0) : "–"}<span class="unit">th percentile · 5y · within group</span></div>
-    <div class="t-read">${read}</div>
+function verdictCard(name, g) {
+  const v = g.verdict, ev = v.evidence;
+  const SIG_LABEL = { tda: "TDA shape gauge", star: "hub concentration" };
+  const G = GROUP_LABEL[name].toLowerCase();
+  let read = "";
+  if (v.state === "alert") {
+    read = `<strong>Alert — the audited configuration.</strong> The ${SIG_LABEL[v.signal]} is above its 90th percentile while turbulence is calm. ` +
+      `Historically from readings like this, a <strong>&gt;5% ${G} drawdown followed within 60 days ${ev.p5_hot}% of the time</strong> ` +
+      `(vs ${ev.p5_calm}% from quiet readings), and &gt;10% drawdowns ${ev.p10_hot}% vs ${ev.p10_calm}%.` +
+      (ev.vol_hot ? ` Forward 60-day volatility averaged <strong>${ev.vol_hot}%</strong> vs ${ev.vol_calm}% — expect a rougher ride.` : "");
+  } else if (v.state === "hot") {
+    read = `The ${SIG_LABEL[v.signal]} is hot, but <strong>turbulence is already elevated</strong> — the ` +
+      `<a href="/systemic">stress gauges</a> cover this configuration. Geometry's audited edge is specifically the quiet-turbulence case.`;
+  } else if (v.state === "watch") {
+    read = `<strong>Elevated, below the alert line.</strong> The ${SIG_LABEL[v.signal]} is above its 70th percentile but hasn't reached the ` +
+      `audited configuration (p90 with calm turbulence). Worth watching alongside the <a href="/systemic">stress gauges</a>.`;
+  } else {
+    read = `<strong>Quiet.</strong> From readings like this, a &gt;5% ${G} drawdown followed within 60 days only ` +
+      `<strong>${ev.p5_calm}%</strong> of the time historically — the geometry gives no reason to brace beyond the usual.` +
+      (v.turbulence_percentile >= 70 ? ` (Turbulence itself is elevated though — check the <a href="/systemic">stress gauges</a>.)` : "");
+  }
+  const fine = `Signal: ${SIG_LABEL[v.signal]} p${v.signal_percentile != null ? v.signal_percentile.toFixed(0) : "–"} · ` +
+    `turbulence p${v.turbulence_percentile != null ? v.turbulence_percentile.toFixed(0) : "–"} · ` +
+    `odds from ~12 independent episodes over 16y (block-bootstrap p≈0.1–0.16) — an odds-shifter, not a guarantee.`;
+  return `<div class="verdict-card">
+    <span class="v-state ${v.state}">${v.state}</span>
+    <div class="v-read">${read}</div>
+    <div class="v-fine">${fine}</div>
+  </div>`;
+}
+
+function dialCard(name, g) {
+  const v = g.verdict;
+  const SIG_LABEL = { tda: "TDA shape gauge", star: "Hub concentration" };
+  const row = (label, pct) => `<div style="margin-bottom:12px;">
+    <div class="t-name">${label}</div>
+    <div class="t-val" style="font-size:26px;">${pct != null ? pct.toFixed(0) : "–"}<span class="unit">th pctile · 5y</span></div>
+  </div>`;
+  return `<div class="geo-tile">
+    ${row(SIG_LABEL[v.signal] + " — " + GROUP_LABEL[name], v.signal_percentile)}
+    ${row("Turbulence — " + GROUP_LABEL[name], v.turbulence_percentile)}
   </div>`;
 }
 
@@ -318,20 +365,13 @@ const GROUP_LABEL = { equities: "Equities", commodities: "Commodities", cross: "
 
 function renderGroup(name) {
   const g = FEED.groups[name];
-  const strip = document.getElementById("geo-strip");
-  strip.innerHTML =
-    tile(`TDA gauge — ${GROUP_LABEL[name]}`, g.tda.current_percentile,
-      "<strong>Hot.</strong> This group's dynamics are unusually structured — in the cross-asset audit, readings like this preceded ~75% worse 60-day drawdowns even when turbulence was calm.",
-      "Quiet. The return cloud shows no unusual persistent structure.") +
-    tile(`Hub concentration — ${GROUP_LABEL[name]}`, g.mst.star_percentile,
-      "<strong>Collapsing toward a hub.</strong> The tree is star-shaped — in the audit this configuration preceded roughly 2× worse 60-day drawdowns, even with turbulence calm.",
-      "Distributed. No single market dominates the group's connections.") +
-    tile(`Tree tightness — ${GROUP_LABEL[name]}`, g.mst.tightness_percentile,
-      "<strong>Contracted.</strong> The group is unusually unified — diversification inside it is thin. (Structure view: overlaps the absorption ratio.)",
-      "Loose. The group's markets are moving on their own drivers.");
-  document.getElementById("tda-title").textContent =
-    `TDA landscape norm — ${GROUP_LABEL[name]}, persistent H1 structure of the 60-day return cloud`;
-  tdaChart = lineChart(tdaChart, "tda-chart", g.tda.history, RCCharts.accent, FEED.episodes);
+  document.getElementById("geo-strip").innerHTML = verdictCard(name, g) + dialCard(name, g);
+  const sig = g.verdict.signal;
+  const mainHist = sig === "star" ? g.mst.star_history : g.tda.history;
+  document.getElementById("tda-title").textContent = sig === "star"
+    ? `Hub concentration — ${GROUP_LABEL[name]}, max tree degree / (N−1), 10-day smoothed`
+    : `TDA landscape norm — ${GROUP_LABEL[name]}, persistent H1 structure of the 60-day return cloud`;
+  tdaChart = lineChart(tdaChart, "tda-chart", mainHist, RCCharts.accent, FEED.episodes);
   mstChart = lineChart(mstChart, "mst-chart", g.mst.history, RCCharts.cat ? RCCharts.cat[1] : "#d4a017", FEED.episodes);
   renderTree(g.mst.tree);
 }
