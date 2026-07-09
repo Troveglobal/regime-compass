@@ -21,7 +21,10 @@ from collections import defaultdict
 from datetime import datetime
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-DAILY_DIR = os.path.join(HERE, "data", "raw", "daily")
+try:
+    from .paths import DAILY_DIR
+except ImportError:  # standalone
+    from paths import DAILY_DIR
 
 SOURCES = {
     "block": "https://nsearchives.nseindia.com/content/equities/block.csv",

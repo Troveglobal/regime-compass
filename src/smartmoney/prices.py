@@ -20,7 +20,10 @@ import urllib.request
 from datetime import date, datetime, timedelta
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-CACHE = os.path.join(HERE, "data", "prices")
+try:
+    from .paths import PRICES_DIR as CACHE
+except ImportError:  # standalone
+    from paths import PRICES_DIR as CACHE
 
 _CTX = ssl.create_default_context()
 _CTX.check_hostname = False

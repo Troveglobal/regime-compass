@@ -38,6 +38,7 @@ from . import yieldcurve as yield_mod
 from . import ma_backtest
 from . import ma_regime
 from . import credit
+from .smartmoney import paths as _sm_paths  # seeds the persistent volume (if any) on startup
 from . import subscriptions
 from .config import (
     API_CORS_ORIGINS,

@@ -25,8 +25,10 @@ except ImportError:
     import prices as P
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-RAW_DIR = os.path.join(HERE, "data", "raw")
-DB_PATH = os.path.join(HERE, "store.db")
+try:
+    from .paths import RAW_DIR, DB_PATH
+except ImportError:  # standalone
+    from paths import RAW_DIR, DB_PATH
 OUT_PATH = os.path.join(HERE, "out", "feed.json")
 
 CR = 1e7  # 1 crore = 10,000,000

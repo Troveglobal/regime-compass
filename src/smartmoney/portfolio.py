@@ -25,8 +25,10 @@ import sqlite3
 from datetime import date
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-DB = os.path.join(HERE, "store.db")
-PRICES = os.path.join(HERE, "data", "prices")
+try:
+    from .paths import DB_PATH as DB, PRICES_DIR as PRICES
+except ImportError:  # standalone
+    from paths import DB_PATH as DB, PRICES_DIR as PRICES
 CR = 1e7  # 1 crore in rupees
 
 
