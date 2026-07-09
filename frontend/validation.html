@@ -75,7 +75,7 @@
   </script>
 </head>
 <body>
-<script src="/shell.js?v=6.6"></script>
+<script src="/shell.js?v=6.7"></script>
 
 <div class="wrap">
   <div class="hero">
@@ -255,12 +255,7 @@ async function boot() {
 
   // Market picker
   const sel = document.getElementById("index-select");
-  sel.innerHTML = "";
-  for (const m of MARKETS) {
-    const o = document.createElement("option");
-    o.value = m.key; o.textContent = m.name;
-    sel.appendChild(o);
-  }
+  RC.indexSelect(sel, MARKETS, m => m.name);
   sel.addEventListener("change", () => select(sel.value));
   const q = new URLSearchParams(window.location.search).get("index");
   const start = MARKETS.some(m => m.key === q) ? q : (MARKETS.some(m => m.key === "nifty") ? "nifty" : MARKETS[0].key);

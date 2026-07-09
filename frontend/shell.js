@@ -483,6 +483,38 @@
     return { position: position };
   };
 
+  /* grouped index <select>: Equities → Commodities → Fixed Income & FX → Crypto,
+     colour-coded group headers. items = [{key, name, country?}] */
+  var IDX_CLASS = {
+    spx: "eq", nasdaq: "eq", ftse: "eq", stoxx50: "eq", nifty: "eq", nikkei: "eq",
+    kospi: "eq", shcomp: "eq", hangseng: "eq", taiex: "eq", bovespa: "eq", tadawul: "eq",
+    gold: "co", silver: "co", wti: "co", copper: "co",
+    us10y: "fi", dxy: "fi",
+    btc: "cr", eth: "cr",
+  };
+  var IDX_GROUPS = [
+    ["eq", "\uD83D\uDFE3 Equities"],
+    ["co", "\uD83D\uDFE1 Commodities"],
+    ["fi", "\uD83D\uDD35 Fixed Income & FX"],
+    ["cr", "\uD83D\uDFE0 Crypto"],
+  ];
+  RC.indexSelect = function (sel, items, labelFn) {
+    sel.innerHTML = "";
+    IDX_GROUPS.forEach(function (g) {
+      var members = items.filter(function (i) { return (IDX_CLASS[i.key] || "eq") === g[0]; });
+      if (!members.length) return;
+      var og = document.createElement("optgroup");
+      og.label = g[1];
+      members.forEach(function (i) {
+        var opt = document.createElement("option");
+        opt.value = i.key;
+        opt.textContent = labelFn ? labelFn(i) : (i.name + (i.country ? " \u2014 " + i.country : ""));
+        og.appendChild(opt);
+      });
+      sel.appendChild(og);
+    });
+  };
+
   /* formatting helpers */
   RC.fmt = {
     pct: function (v, d) { return (v * 100).toFixed(d != null ? d : 1) + "%"; },

@@ -117,7 +117,7 @@
   <!--GEO:JSONLD-->
 </head>
 <body>
-<script src="/shell.js?v=6.6"></script>
+<script src="/shell.js?v=6.7"></script>
 
 <div class="wrap">
   <div class="hero">
@@ -295,12 +295,7 @@ let chart;
 async function loadIndexList() {
   const r = await fetch("/api/indices"); const list = await r.json();
   const sel = document.getElementById("index-select");
-  sel.innerHTML = "";
-  for (const i of list) {
-    const opt = document.createElement("option");
-    opt.value = i.key; opt.textContent = `${i.name} — ${i.country}`;
-    sel.appendChild(opt);
-  }
+  RC.indexSelect(sel, list);
   sel.value = currentIndex;
   sel.addEventListener("change", () => { currentIndex = sel.value; refresh(); });
 }

@@ -197,7 +197,7 @@
   <!--GEO:JSONLD-->
 </head>
 <body>
-<script src="/shell.js?v=6.6"></script>
+<script src="/shell.js?v=6.7"></script>
 
 <div class="wrap">
   <div class="hero">
@@ -279,6 +279,7 @@ async function loadSummary() {
   grid.innerHTML = "";
   select.innerHTML = "";
   let firstAvailable = null;
+  const chartItems = [];
 
   for (const m of data) {
     /* No historical metric AND no PE snapshot → nothing to show; skip entirely. */
@@ -328,12 +329,10 @@ async function loadSummary() {
       '</div>';
     grid.appendChild(card);
 
-    // Populate chart selector
-    const opt = document.createElement("option");
-    opt.value = m.index_key;
-    opt.textContent = m.index_name + " — " + m.metric;
-    select.appendChild(opt);
+    // Collect for the grouped chart selector (populated after the loop)
+    chartItems.push({ key: m.index_key, name: m.index_name, metric: m.metric });
   }
+  RC.indexSelect(select, chartItems, i => i.name + " — " + i.metric);
 
   if (firstAvailable) {
     select.value = firstAvailable;
