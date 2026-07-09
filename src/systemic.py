@@ -40,9 +40,17 @@ HISTORY_YEARS = 10         # chart depth
 MIN_HISTORY_DAYS = int(3 * 252)  # markets with < 3y of data are excluded
 
 
+# Pinned universe: the 11 markets the published gauges and their audits were
+# built on. New board markets don't silently change audited history — extending
+# this universe is a deliberate, re-audited change.
+UNIVERSE = ("spx", "nasdaq", "btc", "eth", "gold", "silver",
+            "stoxx50", "nifty", "nikkei", "kospi", "shcomp")
+
+
 def _load_closes() -> tuple[dict[str, pd.Series], list[dict]]:
     closes, excluded = {}, []
-    for key, cfg in INDICES.items():
+    for key in UNIVERSE:
+        cfg = INDICES[key]
         try:
             raw = pd.read_parquet(raw_path(key), columns=["price"])
         except FileNotFoundError:

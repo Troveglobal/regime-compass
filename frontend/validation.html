@@ -13,16 +13,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Model Validation — Regime Compass</title>
-  <meta name="description" content="Honest walk-forward audit of the Regime Compass HMM across 11 markets. What the model is genuinely good at (volatility regimes, drawdown control) — and what it isn't (return timing)." />
+  <meta name="description" content="Honest walk-forward audit of the Regime Compass HMM across 17 markets. What the model is genuinely good at (volatility regimes, drawdown control) — and what it isn't (return timing)." />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Regime Compass" />
   <meta property="og:title" content="Model Validation — Regime Compass" />
-  <meta property="og:description" content="We tested our own HMM out of sample across 11 markets and published the results — including where it loses to buy &amp; hold." />
+  <meta property="og:description" content="We tested our own HMM out of sample across 17 markets and published the results — including where it loses to buy &amp; hold." />
   <meta property="og:image" content="https://www.regimecompass.com/og-image.png" />
   <meta property="og:url" content="https://www.regimecompass.com/validation" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Model Validation — Regime Compass" />
-  <meta name="twitter:description" content="Honest walk-forward audit of the Regime Compass HMM across 11 markets." />
+  <meta name="twitter:description" content="Honest walk-forward audit of the Regime Compass HMM across 17 markets." />
   <meta name="twitter:image" content="https://www.regimecompass.com/og-image.png" />
   <meta name="theme-color" content="#07090e" />
   <link rel="canonical" href="https://www.regimecompass.com/validation" />
@@ -71,17 +71,17 @@
     @media (max-width: 800px) { .method-cols { grid-template-columns: 1fr; } }
   </style>
   <script type="application/ld+json">
-  {"@context": "https://schema.org", "@type": "WebPage", "name": "Model Validation — Regime Compass", "description": "Walk-forward out-of-sample audit of the Regime Compass hidden Markov model across 11 global markets: volatility-regime accuracy, drawdown reduction, and an honest comparison against buy-and-hold.", "url": "https://www.regimecompass.com/validation", "isPartOf": {"@type": "WebSite", "name": "Regime Compass", "url": "https://www.regimecompass.com"}}
+  {"@context": "https://schema.org", "@type": "WebPage", "name": "Model Validation — Regime Compass", "description": "Walk-forward out-of-sample audit of the Regime Compass hidden Markov model across 17 global markets: volatility-regime accuracy, drawdown reduction, and an honest comparison against buy-and-hold.", "url": "https://www.regimecompass.com/validation", "isPartOf": {"@type": "WebSite", "name": "Regime Compass", "url": "https://www.regimecompass.com"}}
   </script>
 </head>
 <body>
-<script src="/shell.js?v=6.4"></script>
+<script src="/shell.js?v=6.5"></script>
 
 <div class="wrap">
   <div class="hero">
     <div class="kicker">Model Validation</div>
     <h1>How accurate is the HMM, really?</h1>
-    <div class="tagline">We audited our own model the way a skeptic would: refit quarterly using only data available at the time, signals applied the next day, costs included. Across all 11 markets. These are the results — including where the model loses.</div>
+    <div class="tagline">We audited our own model the way a skeptic would: refit quarterly using only data available at the time, signals applied the next day, costs included. Across all 17 markets. These are the results — including where the model loses.</div>
   </div>
 
   <div class="callout">
@@ -118,7 +118,7 @@
 
   <!-- All-market table -->
   <section class="panel reveal">
-    <div class="panel-title">All 11 markets — walk-forward strategy vs buy &amp; hold</div>
+    <div class="panel-title">All 17 markets — walk-forward strategy vs buy &amp; hold</div>
     <p style="color: var(--muted); font-size: 13px; margin: 0 0 12px;">Strategy = long the index unless the regime is bear, then cash at the local risk-free rate, net of costs. Green = strategy beat buy &amp; hold on that metric. Sorted by Sharpe improvement.</p>
     <div style="overflow-x: auto;">
       <table class="t" id="sum-table">

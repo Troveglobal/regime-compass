@@ -116,6 +116,58 @@ INDICES = {
         "cash_rate": 0.025,
         "cash_label": "Chinese MMF",
     },
+    "hangseng": {
+        "name": "Hang Seng",
+        "country": "Hong Kong",
+        "currency": "HKD",
+        "tickers": {"price": "^HSI", "fx": "HKD=X", "vix": None},
+        "cash_rate": 0.030,
+        "cash_label": "HK deposit rate",
+    },
+    "taiex": {
+        "name": "TAIEX",
+        "country": "Taiwan",
+        "currency": "TWD",
+        "tickers": {"price": "^TWII", "fx": "TWD=X", "vix": None},
+        "cash_rate": 0.015,
+        "cash_label": "Taiwan deposit rate",
+    },
+    "wti": {
+        "name": "Crude Oil (WTI)",
+        "country": "Commodity",
+        "currency": "USD",
+        "tickers": {"price": "CL=F", "fx": "DX-Y.NYB", "vix": "^OVX"},
+        "cash_rate": 0.020,
+        "cash_label": "US T-bill",
+    },
+    "copper": {
+        "name": "Copper",
+        "country": "Commodity",
+        "currency": "USD",
+        "tickers": {"price": "HG=F", "fx": "DX-Y.NYB", "vix": None},
+        "cash_rate": 0.020,
+        "cash_label": "US T-bill",
+    },
+    "us10y": {
+        "name": "US 10Y Treasuries",
+        "country": "Rates",
+        "currency": "USD",
+        "tickers": {"price": "ZN=F", "fx": "DX-Y.NYB", "vix": "^MOVE"},
+        "cash_rate": 0.020,
+        "cash_label": "US T-bill",
+        # bond bull = risk-off elsewhere: keep out of the breadth verdict
+        "breadth": False,
+    },
+    "dxy": {
+        "name": "US Dollar Index",
+        "country": "FX",
+        "currency": "USD",
+        "tickers": {"price": "DX-Y.NYB", "fx": None, "vix": None},
+        "cash_rate": 0.020,
+        "cash_label": "US T-bill",
+        # dollar bull = risk-off elsewhere: keep out of the breadth verdict
+        "breadth": False,
+    },
 }
 
 DEFAULT_INDEX = "spx"
@@ -180,6 +232,24 @@ COUNTRIES = {
         "news_query": 'China economy OR PBOC OR "Chinese stocks"',
         "news_locale": ("en-US", "US", "US:en"),
     },
+    "hong-kong": {
+        "name": "Hong Kong", "flag": "🇭🇰", "iso3": "HKG",
+        "indices": ["hangseng"], "primary_index": "hangseng",
+        "currency_label": "USD/HKD",
+        "bond": None,  # no clean free 10y HKGB series
+        "smartmoney": None,
+        "news_query": '"Hong Kong" economy OR "Hang Seng" OR HKMA',
+        "news_locale": ("en-US", "US", "US:en"),
+    },
+    "taiwan": {
+        "name": "Taiwan", "flag": "🇹🇼", "iso3": "TWN",
+        "indices": ["taiex"], "primary_index": "taiex",
+        "currency_label": "USD/TWD",
+        "bond": None,  # no clean free 10y TGB series
+        "smartmoney": "/smartmoney/tw",
+        "news_query": 'Taiwan economy OR TSMC OR TAIEX',
+        "news_locale": ("en-US", "US", "US:en"),
+    },
 }
 
 
@@ -194,6 +264,14 @@ ASSETS = {
              "headline_corr": "real10y"},
     "silver": {"key": "silver", "name": "Silver", "icon": "🥈", "asset_class": "metal",
                "headline_corr": "real10y"},
+    "oil": {"key": "wti", "name": "Crude Oil (WTI)", "icon": "🛢️", "asset_class": "energy",
+            "headline_corr": "spx"},
+    "copper": {"key": "copper", "name": "Copper", "icon": "🔶", "asset_class": "metal",
+               "headline_corr": "spx"},
+    "treasuries": {"key": "us10y", "name": "US 10Y Treasuries", "icon": "🏛️", "asset_class": "rates",
+                   "headline_corr": "spx"},
+    "dollar": {"key": "dxy", "name": "US Dollar Index", "icon": "💵", "asset_class": "fx",
+               "headline_corr": "spx"},
 }
 
 

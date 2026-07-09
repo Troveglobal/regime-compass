@@ -47,6 +47,9 @@ def _state_counts_frame() -> pd.DataFrame:
     if df.empty:
         return pd.DataFrame()
     pivot = df.pivot_table(index="date", columns="index_key", values="hard_state", aggfunc="last")
+    # breadth counts exclude inverse-risk markets (rates/FX), same as the dial
+    keep = [k for k in pivot.columns if INDICES.get(k, {}).get("breadth", True)]
+    pivot = pivot[keep]
     # Carry each market's last known regime across its non-trading days
     pivot = pivot.ffill()
     counts = pd.DataFrame({
@@ -67,6 +70,10 @@ def _build_concordance() -> dict:
     conn = sqlite3.connect(DB_PATH)
     markets = []
     for key, cfg in INDICES.items():
+        # rates/FX regimes are inverse risk signals (bond/dollar bull = risk-off
+        # elsewhere) — they get full regime coverage but stay out of the breadth dial
+        if not cfg.get("breadth", True):
+            continue
         row = conn.execute(
             "SELECT date, hard_state, bear, neutral, bull FROM probabilities "
             "WHERE index_key = ? ORDER BY date DESC LIMIT 1", (key,),

@@ -18,7 +18,13 @@ def build_one(key: str) -> pd.DataFrame:
     df["log_return"] = np.log(raw["price"] / raw["price"].shift(1))
     df["realized_vol"] = df["log_return"].rolling(VOL_WINDOW).std()
     if "fx" in raw.columns:
-        df["fx_change"] = np.log(raw["fx"] / raw["fx"].shift(1))
+        # Yahoo FX series occasionally carry decimal-glitch ticks (e.g. TWD=X
+        # printing 1.8 between 30.0 closes). Drop values >20% off the local
+        # median and carry the last good value forward.
+        fx = raw["fx"]
+        med = fx.rolling(7, center=True, min_periods=3).median()
+        fx = fx.where(((fx / med) - 1.0).abs() < 0.20).ffill()
+        df["fx_change"] = np.log(fx / fx.shift(1))
     if "vix" in raw.columns:
         df["vix"] = raw["vix"]
     df = df.dropna()

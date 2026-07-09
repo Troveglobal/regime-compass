@@ -84,6 +84,9 @@
         ["/country/india", "🇮🇳 India", "", "india country nifty"],
         ["/asset/bitcoin", "₿ Bitcoin", "", "btc crypto bitcoin"],
         ["/asset/gold", "🥇 Gold", "", "gold commodity"],
+        ["/asset/oil", "🛢️ Crude Oil", "", "wti oil energy crude"],
+        ["/asset/treasuries", "🏛️ US 10Y Treasuries", "", "bonds rates treasury 10y"],
+        ["/asset/dollar", "💵 US Dollar Index", "", "dxy dollar fx currency"],
       ],
     },
     { label: "News", href: "/news" },
@@ -110,6 +113,9 @@
     ["/country/china", "🇨🇳 China", "Explore", "china shanghai"],
     ["/asset/ethereum", "Ξ Ethereum", "Explore", "eth crypto ethereum"],
     ["/asset/silver", "🥈 Silver", "Explore", "silver commodity"],
+    ["/asset/copper", "🔶 Copper", "Explore", "copper dr commodity growth"],
+    ["/country/hong-kong", "🇭🇰 Hong Kong", "Explore", "hong kong hang seng hsi"],
+    ["/country/taiwan", "🇹🇼 Taiwan", "Explore", "taiwan taiex twii semiconductors"],
     ["/subscribe", "Alerts", "Account", "subscribe email alerts notify"],
     ["/feedback", "Feedback & Early Access", "Account", "feedback waitlist early access suggest missing"],
     ["/about", "About", "Company", "about iquant aditya"],
@@ -178,7 +184,7 @@
     '<div class="inner">' +
     '<div class="f-brand">' +
     '<span class="brand-line">' + LOGO + " Regime Compass</span>" +
-    "<p>Daily regime classification across eleven global markets. Three independent models, one honest snapshot. An iQuant Labs project.</p>" +
+    "<p>Daily regime classification across 17 global markets — equities, rates, currencies, commodities and crypto. Three independent models, one honest snapshot. An iQuant Labs project.</p>" +
     '<p class="f-soon">Accounts &amp; custom dashboards are in the works — <a href="/feedback">sign up for early access</a>.</p>' +
     "</div>" +
     '<div class="f-col"><h5>Regime</h5>' +

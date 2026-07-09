@@ -91,7 +91,7 @@ ARTICLES = [
 <p>It matters even more if you ever withdraw money. Anyone drawing on a portfolio — retirees, family offices funding obligations, anyone between jobs — faces <strong>sequence risk</strong>: a deep drawdown early in the withdrawal phase does permanent damage that later gains can't repair. For these investors, drawdown control isn't a preference. It's the whole game.</p>
 
 <h2>What the evidence actually says</h2>
-<p>We tested our own regime models the way a skeptic would — walk-forward, refit only on data available at the time, costs charged on every switch. The honest result across eleven global markets: the regime strategy usually <strong>earns less</strong> than buy-and-hold, and in exchange it cut the maximum drawdown in <strong>nine of eleven markets</strong> and volatility in all eleven.</p>
+<p>We tested our own regime models the way a skeptic would — walk-forward, refit only on data available at the time, costs charged on every switch. The honest result across seventeen global markets: the regime strategy usually <strong>earns less</strong> than buy-and-hold, and in exchange it cut the maximum drawdown in <strong>thirteen of seventeen markets</strong> and volatility in all seventeen.</p>
 <p>We publish that trade-off rather than hiding half of it, because it's exactly the trade a risk-averse investor wants to see priced: how many points of annual return does a smaller worst-case cost? For maximum-compounding investors with iron stomachs and no withdrawals, buy-and-hold wins and we say so. For everyone else, the brake has a price and a benefit, and both are measurable.</p>
 
 <h2>What regime investing won't do</h2>
@@ -250,13 +250,13 @@ ARTICLES = [
 <li><strong>The model is refit quarterly using only data available on that date.</strong> No future information reaches any decision.</li>
 <li><strong>Signals apply the next trading day.</strong> No same-close execution fantasy.</li>
 <li><strong>Every regime switch pays a cost.</strong> Ten basis points per turn, every time.</li>
-<li><strong>Every market is reported.</strong> All eleven — not a curated highlight reel.</li>
+<li><strong>Every market is reported.</strong> All seventeen — not a curated highlight reel.</li>
 </ul>
 
 <h2>What honesty produces</h2>
-<p>Numbers that look worse and mean more. Out of sample, our regime strategy earns less than buy-and-hold in most markets. It cuts the maximum drawdown in nine of eleven and volatility in all eleven. On Sharpe ratio, it beats buy-and-hold in exactly one market — a statistic we display in large type on our own strategies page.</p>
+<p>Numbers that look worse and mean more. Out of sample, our regime strategy earns less than buy-and-hold in most markets. It cuts the maximum drawdown in thirteen of seventeen and volatility in all seventeen. On Sharpe ratio, it beats buy-and-hold in just three markets of seventeen — a statistic we display in large type on our own strategies page.</p>
 <blockquote>If a result would look better with a detail hidden, the detail is the result.</blockquote>
-<p>Why publish that? Because the alternative is a website whose model has never been wrong, and every professional reader knows exactly what that means. Publishing the losses does something subtle: it makes the wins legible. When the same audit that shows one Sharpe win in eleven also shows drawdowns shrinking almost everywhere, a reader can finally see what the tool is <em>for</em> — it's a brake, not an engine — and decide with open eyes whether that trade suits them.</p>
+<p>Why publish that? Because the alternative is a website whose model has never been wrong, and every professional reader knows exactly what that means. Publishing the losses does something subtle: it makes the wins legible. When the same audit that shows three Sharpe wins in seventeen also shows drawdowns shrinking almost everywhere, a reader can finally see what the tool is <em>for</em> — it's a brake, not an engine — and decide with open eyes whether that trade suits them.</p>
 
 <h2>Questions to ask of any backtest</h2>
 <ul>

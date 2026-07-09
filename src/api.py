@@ -44,6 +44,7 @@ from . import subscriptions
 from . import feedback as feedback_mod
 from .config import (
     API_CORS_ORIGINS,
+    ASSETS,
     COUNTRIES,
     DATA_DIR,
     DB_PATH,
@@ -737,7 +738,7 @@ def share_page(index_key: str):
     date, bear, neutral, bull, hard_state, price = row
     confidence = max(bear, neutral, bull) * 100
     title = f"{cfg['name']} — {hard_state.upper()} regime"
-    desc = f"{cfg['name']} is in a {hard_state} regime ({confidence:.0f}% HMM confidence) as of {date}. View all 11 markets on Regime Compass."
+    desc = f"{cfg['name']} is in a {hard_state} regime ({confidence:.0f}% HMM confidence) as of {date}. View all 17 markets on Regime Compass."
     base = os.getenv("PUBLIC_URL", "https://www.regimecompass.com")
     card_url = f"{base}/api/card/{index_key}"
     page_url = f"{base}/share/{index_key}"
@@ -1461,7 +1462,7 @@ if FRONTEND_DIR.exists():
                  ("/changes", "0.8"), ("/yields", "0.8"), ("/sectors", "0.8"), ("/macro", "0.8"),
                  ("/countries", "0.8"), ("/assets", "0.8")] \
                 + [(f"/country/{s}", "0.7") for s in COUNTRIES] \
-                + [(f"/asset/{s}", "0.7") for s in ("bitcoin", "ethereum", "gold", "silver")]
+                + [(f"/asset/{s}", "0.7") for s in ASSETS]
         weekly = [("/ma/backtest", "0.7"), ("/ema/backtest", "0.7"), ("/calendar", "0.7"),
                   ("/seasonality", "0.7"), ("/validation", "0.7"), ("/research", "0.8")] \
                 + [(f"/research/{p.stem}", "0.7") for p in sorted((FRONTEND_DIR / "research").glob("*.html"))]

@@ -37,6 +37,10 @@ from .config import DATA_DIR, INDICES, raw_path
 
 OUT_PATH = DATA_DIR / "analytics" / "topology.json"
 
+# Pinned universe: the 9 markets the published audit was run on. New board
+# markets don't silently change audited history.
+UNIVERSE = ("spx", "nasdaq", "gold", "silver", "stoxx50",
+            "nifty", "nikkei", "kospi", "shcomp")
 EXCLUDE = {"btc", "eth"}       # 24/7 markets distort the joint calendar/geometry
 TDA_WINDOW = 60                # days per point cloud (Gidea-Katz use 50-100)
 MST_WINDOW = 90                # rolling correlation window
@@ -58,9 +62,8 @@ EPISODES = [
 
 def _load_returns() -> tuple[pd.DataFrame, list[str]]:
     closes, excluded = {}, []
-    for key, cfg in INDICES.items():
-        if key in EXCLUDE:
-            continue
+    for key in UNIVERSE:
+        cfg = INDICES[key]
         try:
             raw = pd.read_parquet(raw_path(key), columns=["price"])
         except FileNotFoundError:

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-07T15:00:12.191370+00:00",
+  "generated_at": "2026-07-09T15:56:31.933080+00:00",
   "params": {
     "train_min_obs": 750,
     "retrain_every": 63,
@@ -10,38 +10,38 @@
       "key": "spx",
       "name": "S&P 500",
       "eval_start": "2013-01-10",
-      "eval_end": "2026-07-06",
-      "disagreement_pct": 12.448377581120944,
+      "eval_end": "2026-07-08",
+      "disagreement_pct": 9.72877358490566,
       "in_sample_net": {
-        "total_return_pct": 206.59285763322163,
-        "cagr_pct": 8.687571646030623,
-        "ann_vol_pct": 10.885240691069855,
-        "sharpe": 0.820016097736739,
-        "max_drawdown_pct": -17.79041374017261
+        "total_return_pct": 159.25188673252512,
+        "cagr_pct": 7.336018288679069,
+        "ann_vol_pct": 10.4495473880681,
+        "sharpe": 0.729969723467798,
+        "max_drawdown_pct": -14.746964432431096
       },
       "walk_forward_net": {
-        "total_return_pct": 147.52768611689314,
-        "cagr_pct": 6.97176532536623,
-        "ann_vol_pct": 10.942019878216565,
-        "sharpe": 0.6708660494260509,
+        "total_return_pct": 145.7306853025289,
+        "cagr_pct": 6.9096088047726045,
+        "ann_vol_pct": 10.939884801171008,
+        "sharpe": 0.6656611390776003,
         "max_drawdown_pct": -21.2935189470314
       },
       "buy_hold": {
-        "total_return_pct": 412.0119420143606,
-        "cagr_pct": 12.912182858759103,
-        "ann_vol_pct": 16.945860772244426,
-        "sharpe": 0.801782910471072,
+        "total_return_pct": 408.29483912701113,
+        "cagr_pct": 12.842977606996552,
+        "ann_vol_pct": 16.941655191302242,
+        "sharpe": 0.7983189315287351,
         "max_drawdown_pct": -33.924960002653314
       },
       "wf_stats": {
         "t_stat_bull_minus_bear_nextday": -1.4811011588892034,
         "vol_ratio_bear_over_bull": 3.043096334969834,
-        "avg_regime_length_days": 11.81184668989547,
-        "flips_per_year": 21.26017699115044,
+        "avg_regime_length_days": 11.777777777777779,
+        "flips_per_year": 21.32193396226415,
         "state_share_pct": {
-          "bear": 19.705014749262535,
-          "neutral": 38.58407079646018,
-          "bull": 41.71091445427729
+          "bear": 19.693396226415093,
+          "neutral": 38.590801886792455,
+          "bull": 41.715801886792455
         }
       }
     },
@@ -49,38 +49,38 @@
       "key": "nasdaq",
       "name": "Nasdaq 100",
       "eval_start": "2013-01-10",
-      "eval_end": "2026-07-06",
-      "disagreement_pct": 10.41297935103245,
+      "eval_end": "2026-07-08",
+      "disagreement_pct": 10.377358490566039,
       "in_sample_net": {
-        "total_return_pct": 349.5348411164895,
-        "cagr_pct": 11.82484886179751,
-        "ann_vol_pct": 12.9754238154227,
-        "sharpe": 0.9265888431965612,
+        "total_return_pct": 349.6054972314522,
+        "cagr_pct": 11.8187838400843,
+        "ann_vol_pct": 12.971604787797045,
+        "sharpe": 0.926405027222076,
         "max_drawdown_pct": -19.331823253588375
       },
       "walk_forward_net": {
-        "total_return_pct": 364.8816641928723,
-        "cagr_pct": 12.10433138037288,
-        "ann_vol_pct": 13.383696888372052,
-        "sharpe": 0.9210361251966425,
+        "total_return_pct": 364.9547324610129,
+        "cagr_pct": 12.098086165861632,
+        "ann_vol_pct": 13.379757672908715,
+        "sharpe": 0.9208512050809358,
         "max_drawdown_pct": -28.843686987414905
       },
       "buy_hold": {
-        "total_return_pct": 982.2128971284183,
-        "cagr_pct": 19.373973301055347,
-        "ann_vol_pct": 21.062811147318126,
-        "sharpe": 0.9465451043160589,
+        "total_return_pct": 965.9855139085519,
+        "cagr_pct": 19.227567062338547,
+        "ann_vol_pct": 21.062678657825014,
+        "sharpe": 0.9407193086724149,
         "max_drawdown_pct": -35.563139690415085
       },
       "wf_stats": {
-        "t_stat_bull_minus_bear_nextday": -0.9842154590964542,
-        "vol_ratio_bear_over_bull": 2.621234263979215,
-        "avg_regime_length_days": 20.79754601226994,
-        "flips_per_year": 12.042477876106194,
+        "t_stat_bull_minus_bear_nextday": -0.9579075539069405,
+        "vol_ratio_bear_over_bull": 2.6192841815702548,
+        "avg_regime_length_days": 20.682926829268293,
+        "flips_per_year": 12.109669811320755,
         "state_share_pct": {
-          "bear": 23.59882005899705,
-          "neutral": 37.75811209439528,
-          "bull": 38.64306784660767
+          "bear": 23.61438679245283,
+          "neutral": 37.76533018867924,
+          "bull": 38.62028301886792
         }
       }
     },
@@ -88,38 +88,38 @@
       "key": "btc",
       "name": "Bitcoin",
       "eval_start": "2016-10-16",
-      "eval_end": "2026-07-07",
-      "disagreement_pct": 20.242117117117118,
+      "eval_end": "2026-07-09",
+      "disagreement_pct": 20.258863252673045,
       "in_sample_net": {
-        "total_return_pct": 6701.133613704678,
-        "cagr_pct": 34.912076801660106,
-        "ann_vol_pct": 43.996242190336474,
-        "sharpe": 0.9034465978480813,
-        "max_drawdown_pct": -73.37008061952362
+        "total_return_pct": 7119.90688862974,
+        "cagr_pct": 35.462214553346485,
+        "ann_vol_pct": 43.94704526124387,
+        "sharpe": 0.9132211884525184,
+        "max_drawdown_pct": -73.263751480188
       },
       "walk_forward_net": {
-        "total_return_pct": 1683.9316218353918,
-        "cagr_pct": 22.68888281786552,
-        "ann_vol_pct": 43.827586224981644,
-        "sharpe": 0.6892317604779706,
+        "total_return_pct": 1669.8120029031775,
+        "cagr_pct": 22.605641123024235,
+        "ann_vol_pct": 43.81783989086841,
+        "sharpe": 0.687735149017104,
         "max_drawdown_pct": -77.01273000103262
       },
       "buy_hold": {
-        "total_return_pct": 9753.470873957234,
-        "cagr_pct": 38.50865258618115,
-        "ann_vol_pct": 56.08859102478596,
-        "sharpe": 0.8632272318508714,
+        "total_return_pct": 9675.481755878363,
+        "cagr_pct": 38.4052283265899,
+        "ann_vol_pct": 56.0749250044721,
+        "sharpe": 0.8619655398731423,
         "max_drawdown_pct": -83.39900882218976
       },
       "wf_stats": {
-        "t_stat_bull_minus_bear_nextday": -0.8995237302650514,
-        "vol_ratio_bear_over_bull": 1.6618000282202396,
-        "avg_regime_length_days": 4.111111111111111,
-        "flips_per_year": 61.226351351351354,
+        "t_stat_bull_minus_bear_nextday": -0.903319211136736,
+        "vol_ratio_bear_over_bull": 1.6626755759088123,
+        "avg_regime_length_days": 4.113425925925926,
+        "flips_per_year": 61.191896454698934,
         "state_share_pct": {
-          "bear": 21.14301801801802,
-          "neutral": 35.78265765765766,
-          "bull": 43.07432432432432
+          "bear": 21.13111986494091,
+          "neutral": 35.762521102982554,
+          "bull": 43.10635903207653
         }
       }
     },
@@ -127,38 +127,38 @@
       "key": "eth",
       "name": "Ethereum",
       "eval_start": "2019-12-09",
-      "eval_end": "2026-07-07",
-      "disagreement_pct": 24.594257178526842,
+      "eval_end": "2026-07-09",
+      "disagreement_pct": 24.573804573804576,
       "in_sample_net": {
-        "total_return_pct": 962.0714883279599,
-        "cagr_pct": 28.131653340603123,
-        "ann_vol_pct": 55.35999278764121,
-        "sharpe": 0.7228784556647764,
+        "total_return_pct": 944.4529524822252,
+        "cagr_pct": 27.880793889590507,
+        "ann_vol_pct": 55.340387313285945,
+        "sharpe": 0.7193935769718197,
         "max_drawdown_pct": -75.79953230144388
       },
       "walk_forward_net": {
-        "total_return_pct": 1623.0280780368907,
-        "cagr_pct": 34.80394805336391,
-        "ann_vol_pct": 56.832107998125814,
-        "sharpe": 0.8081318034677635,
+        "total_return_pct": 1594.4450379216796,
+        "cagr_pct": 34.5343435988988,
+        "ann_vol_pct": 56.81188718362269,
+        "sharpe": 0.8046888261106979,
         "max_drawdown_pct": -73.68901520789895
       },
       "buy_hold": {
-        "total_return_pct": 1096.8816826288855,
-        "cagr_pct": 29.74813595472896,
-        "ann_vol_pct": 66.77405828099707,
-        "sharpe": 0.7287729677082484,
+        "total_return_pct": 1077.026801803774,
+        "cagr_pct": 29.492761093891783,
+        "ann_vol_pct": 66.74922258330741,
+        "sharpe": 0.7258348187483419,
         "max_drawdown_pct": -79.35123166505245
       },
       "wf_stats": {
-        "t_stat_bull_minus_bear_nextday": 0.24424518455017477,
-        "vol_ratio_bear_over_bull": 1.8249023647440341,
-        "avg_regime_length_days": 4.245583038869258,
-        "flips_per_year": 59.25093632958801,
+        "t_stat_bull_minus_bear_nextday": 0.24039352238980793,
+        "vol_ratio_bear_over_bull": 1.8261188614277077,
+        "avg_regime_length_days": 4.249116607773852,
+        "flips_per_year": 59.201663201663195,
         "state_share_pct": {
-          "bear": 11.735330836454432,
-          "neutral": 34.831460674157306,
-          "bull": 53.433208489388264
+          "bear": 11.725571725571726,
+          "neutral": 34.802494802494806,
+          "bull": 53.471933471933475
         }
       }
     },
@@ -166,38 +166,38 @@
       "key": "gold",
       "name": "Gold",
       "eval_start": "2013-01-10",
-      "eval_end": "2026-07-07",
-      "disagreement_pct": 10.530973451327434,
+      "eval_end": "2026-07-09",
+      "disagreement_pct": 10.495283018867925,
       "in_sample_net": {
-        "total_return_pct": 104.36984740945765,
-        "cagr_pct": 5.458609695412231,
-        "ann_vol_pct": 13.815996157754846,
-        "sharpe": 0.4539041594217925,
+        "total_return_pct": 104.8866969390303,
+        "cagr_pct": 5.475100112086406,
+        "ann_vol_pct": 13.811841982542926,
+        "sharpe": 0.45513143387022004,
         "max_drawdown_pct": -32.80029481171713
       },
       "walk_forward_net": {
-        "total_return_pct": 105.31353515784087,
-        "cagr_pct": 5.4947420392231106,
-        "ann_vol_pct": 13.660557728210772,
-        "sharpe": 0.46000367272885134,
+        "total_return_pct": 105.3458055302718,
+        "cagr_pct": 5.492645959482156,
+        "ann_vol_pct": 13.656529057216668,
+        "sharpe": 0.4599535117468003,
         "max_drawdown_pct": -33.727623077242725
       },
       "buy_hold": {
-        "total_return_pct": 147.15315562628888,
-        "cagr_pct": 6.9597214611028635,
-        "ann_vol_pct": 16.871741110370547,
-        "sharpe": 0.4836121780660138,
+        "total_return_pct": 145.04262672190578,
+        "cagr_pct": 6.887333738677492,
+        "ann_vol_pct": 16.876031259284627,
+        "sharpe": 0.4795197062614082,
         "max_drawdown_pct": -37.9253297189139
       },
       "wf_stats": {
-        "t_stat_bull_minus_bear_nextday": -0.11956375664604466,
-        "vol_ratio_bear_over_bull": 1.9230373905162101,
-        "avg_regime_length_days": 10.560747663551401,
-        "flips_per_year": 23.787610619469028,
+        "t_stat_bull_minus_bear_nextday": -0.09544326960868543,
+        "vol_ratio_bear_over_bull": 1.9220972656530677,
+        "avg_regime_length_days": 10.566978193146417,
+        "flips_per_year": 23.77358490566038,
         "state_share_pct": {
-          "bear": 14.15929203539823,
-          "neutral": 35.78171091445428,
-          "bull": 50.05899705014749
+          "bear": 14.209905660377359,
+          "neutral": 35.76061320754717,
+          "bull": 50.02948113207547
         }
       }
     },
@@ -205,38 +205,38 @@
       "key": "silver",
       "name": "Silver",
       "eval_start": "2013-01-10",
-      "eval_end": "2026-07-07",
-      "disagreement_pct": 10.32448377581121,
+      "eval_end": "2026-07-09",
+      "disagreement_pct": 10.318396226415095,
       "in_sample_net": {
-        "total_return_pct": 77.20243441675582,
-        "cagr_pct": 4.345989762987523,
-        "ann_vol_pct": 25.0834346295512,
-        "sharpe": 0.2953001059273601,
+        "total_return_pct": 77.23028639714234,
+        "cagr_pct": 4.344590324399333,
+        "ann_vol_pct": 25.07603566859633,
+        "sharpe": 0.29525959737047064,
         "max_drawdown_pct": -57.71063470536407
       },
       "walk_forward_net": {
-        "total_return_pct": 53.54289097756708,
-        "cagr_pct": 3.239931944610275,
-        "ann_vol_pct": 24.388892049829426,
-        "sharpe": 0.25296591420120307,
+        "total_return_pct": 53.56702424414477,
+        "cagr_pct": 3.239196212629447,
+        "ann_vol_pct": 24.38169746702899,
+        "sharpe": 0.25293922197079766,
         "max_drawdown_pct": -60.343359563535735
       },
       "buy_hold": {
-        "total_return_pct": 98.54250765039923,
-        "cagr_pct": 5.2320075383659015,
-        "ann_vol_pct": 32.82470841354787,
-        "sharpe": 0.32292590410463523,
+        "total_return_pct": 91.78947417842298,
+        "cagr_pct": 4.958578951161741,
+        "ann_vol_pct": 32.844139074901854,
+        "sharpe": 0.31500954327843567,
         "max_drawdown_pct": -63.790923777266926
       },
       "wf_stats": {
-        "t_stat_bull_minus_bear_nextday": -0.9040032875735391,
-        "vol_ratio_bear_over_bull": 2.1633206205673416,
-        "avg_regime_length_days": 11.81184668989547,
-        "flips_per_year": 21.26017699115044,
+        "t_stat_bull_minus_bear_nextday": -0.8632082017347062,
+        "vol_ratio_bear_over_bull": 2.163781793065564,
+        "avg_regime_length_days": 11.818815331010454,
+        "flips_per_year": 21.24764150943396,
         "state_share_pct": {
-          "bear": 16.460176991150444,
-          "neutral": 37.93510324483776,
-          "bull": 45.6047197640118
+          "bear": 16.50943396226415,
+          "neutral": 37.9127358490566,
+          "bull": 45.57783018867924
         }
       }
     },
@@ -244,38 +244,38 @@
       "key": "stoxx50",
       "name": "Euro Stoxx 50",
       "eval_start": "2013-01-11",
-      "eval_end": "2026-07-07",
-      "disagreement_pct": 9.144717372003552,
+      "eval_end": "2026-07-09",
+      "disagreement_pct": 9.050576752440106,
       "in_sample_net": {
-        "total_return_pct": 47.2601926864844,
-        "cagr_pct": 2.9293494513986884,
-        "ann_vol_pct": 14.647434419358085,
-        "sharpe": 0.27049626762066187,
-        "max_drawdown_pct": -28.09571377780271
+        "total_return_pct": 45.424298980465736,
+        "cagr_pct": 2.8313641736911643,
+        "ann_vol_pct": 14.653343010977283,
+        "sharpe": 0.26394670538767234,
+        "max_drawdown_pct": -28.095713777802793
       },
       "walk_forward_net": {
-        "total_return_pct": 65.65586186947772,
-        "cagr_pct": 3.8371849457180307,
-        "ann_vol_pct": 14.755771917592586,
-        "sharpe": 0.3290996337092423,
+        "total_return_pct": 62.292069077868774,
+        "cagr_pct": 3.6761759552468964,
+        "ann_vol_pct": 14.763930678631546,
+        "sharpe": 0.31848784732715474,
         "max_drawdown_pct": -26.7556632812389
       },
       "buy_hold": {
-        "total_return_pct": 134.31170201259962,
-        "cagr_pct": 6.558172143915142,
-        "ann_vol_pct": 18.694317450236454,
-        "sharpe": 0.43372012204262805,
+        "total_return_pct": 129.5537900055943,
+        "cagr_pct": 6.391315592071933,
+        "ann_vol_pct": 18.69877986832011,
+        "sharpe": 0.42527859137125945,
         "max_drawdown_pct": -38.274023187668696
       },
       "wf_stats": {
-        "t_stat_bull_minus_bear_nextday": -0.8699064275988144,
-        "vol_ratio_bear_over_bull": 2.4056551670459982,
-        "avg_regime_length_days": 8.16183574879227,
-        "flips_per_year": 30.800828647528856,
+        "t_stat_bull_minus_bear_nextday": -0.8836681467354582,
+        "vol_ratio_bear_over_bull": 2.4021524767061475,
+        "avg_regime_length_days": 8.14698795180723,
+        "flips_per_year": 30.857142857142858,
         "state_share_pct": {
-          "bear": 12.252145605208643,
-          "neutral": 34.27049422906185,
-          "bull": 53.47736016572951
+          "bear": 12.244897959183673,
+          "neutral": 34.30937592428276,
+          "bull": 53.445726116533564
         }
       }
     },
@@ -283,38 +283,38 @@
       "key": "nifty",
       "name": "Nifty 50",
       "eval_start": "2013-02-07",
-      "eval_end": "2026-07-07",
-      "disagreement_pct": 17.52201639842089,
+      "eval_end": "2026-07-09",
+      "disagreement_pct": 17.207890743550834,
       "in_sample_net": {
-        "total_return_pct": 108.93838868193741,
-        "cagr_pct": 5.802795723899412,
-        "ann_vol_pct": 12.850770715086938,
-        "sharpe": 0.503366394044648,
+        "total_return_pct": 105.20557012699436,
+        "cagr_pct": 5.653362308625276,
+        "ann_vol_pct": 12.86082839976069,
+        "sharpe": 0.4920825534894187,
         "max_drawdown_pct": -25.750135552926
       },
       "walk_forward_net": {
-        "total_return_pct": 126.25685663910198,
-        "cagr_pct": 6.449710296545352,
-        "ann_vol_pct": 13.021354498103221,
-        "sharpe": 0.5453031751024582,
+        "total_return_pct": 122.2146325271356,
+        "cagr_pct": 6.298969769351981,
+        "ann_vol_pct": 13.031204658747619,
+        "sharpe": 0.5341137374596184,
         "max_drawdown_pct": -23.999860262056504
       },
       "buy_hold": {
-        "total_return_pct": 310.835522684095,
-        "cagr_pct": 11.423244341356042,
-        "ann_vol_pct": 16.231697079169958,
-        "sharpe": 0.7481893531796977,
+        "total_return_pct": 303.4956821130095,
+        "cagr_pct": 11.262376121617311,
+        "ann_vol_pct": 16.238018839752492,
+        "sharpe": 0.739060603042451,
         "max_drawdown_pct": -38.439852452742095
       },
       "wf_stats": {
-        "t_stat_bull_minus_bear_nextday": -1.758196624247593,
-        "vol_ratio_bear_over_bull": 2.4709129406469685,
-        "avg_regime_length_days": 12.86328125,
-        "flips_per_year": 19.51412086243547,
+        "t_stat_bull_minus_bear_nextday": -1.7672194422849903,
+        "vol_ratio_bear_over_bull": 2.467084995278507,
+        "avg_regime_length_days": 12.87109375,
+        "flips_per_year": 19.502276176024278,
         "state_share_pct": {
-          "bear": 10.476768903735195,
-          "neutral": 30.00303674460978,
-          "bull": 59.52019435165503
+          "bear": 10.47040971168437,
+          "neutral": 29.984825493171474,
+          "bull": 59.544764795144154
         }
       }
     },
@@ -322,38 +322,38 @@
       "key": "nikkei",
       "name": "Nikkei 225",
       "eval_start": "2013-02-08",
-      "eval_end": "2026-07-07",
-      "disagreement_pct": 8.361306072627404,
+      "eval_end": "2026-07-09",
+      "disagreement_pct": 8.417200365965233,
       "in_sample_net": {
-        "total_return_pct": 73.5358013426038,
-        "cagr_pct": 4.331282267838232,
-        "ann_vol_pct": 16.83384247348064,
-        "sharpe": 0.3363362151579631,
-        "max_drawdown_pct": -32.69908381370375
+        "total_return_pct": 77.16914241366084,
+        "cagr_pct": 4.494905614756539,
+        "ann_vol_pct": 16.838482612617774,
+        "sharpe": 0.34559704281723475,
+        "max_drawdown_pct": -32.699083813703766
       },
       "walk_forward_net": {
-        "total_return_pct": 129.20800543832348,
-        "cagr_pct": 6.588409858912447,
-        "ann_vol_pct": 17.109213233604635,
-        "sharpe": 0.45869278579465944,
+        "total_return_pct": 129.21707851029015,
+        "cagr_pct": 6.584584902449331,
+        "ann_vol_pct": 17.10399525936741,
+        "sharpe": 0.4585705655916706,
         "max_drawdown_pct": -34.01609140072735
       },
       "buy_hold": {
-        "total_return_pct": 511.9965998986395,
-        "cagr_pct": 14.95269422006471,
-        "ann_vol_pct": 21.869867952325208,
-        "sharpe": 0.7468473136057803,
+        "total_return_pct": 507.3960260001963,
+        "cagr_pct": 14.87626376693747,
+        "ann_vol_pct": 21.874542827069714,
+        "sharpe": 0.7436927001185768,
         "max_drawdown_pct": -31.79889650850203
       },
       "wf_stats": {
-        "t_stat_bull_minus_bear_nextday": -1.837640304970988,
-        "vol_ratio_bear_over_bull": 2.1805549867369494,
-        "avg_regime_length_days": 12.047794117647058,
-        "flips_per_year": 20.839792493133963,
+        "t_stat_bull_minus_bear_nextday": -1.8197521098350646,
+        "vol_ratio_bear_over_bull": 2.179103004074316,
+        "avg_regime_length_days": 12.055147058823529,
+        "flips_per_year": 20.82708142726441,
         "state_share_pct": {
-          "bear": 14.769606347268843,
-          "neutral": 43.66798901434238,
-          "bull": 41.56240463838877
+          "bear": 14.821591948764867,
+          "neutral": 43.64135407136322,
+          "bull": 41.537053979871914
         }
       }
     },
@@ -361,38 +361,38 @@
       "key": "kospi",
       "name": "KOSPI Composite",
       "eval_start": "2013-01-22",
-      "eval_end": "2026-07-07",
-      "disagreement_pct": 79.63019096695967,
+      "eval_end": "2026-07-09",
+      "disagreement_pct": 22.144804604665254,
       "in_sample_net": {
-        "total_return_pct": 143.37644368856854,
-        "cagr_pct": 7.032463693693658,
-        "ann_vol_pct": 14.114616564127779,
-        "sharpe": 0.5522210927773913,
-        "max_drawdown_pct": -30.750864256014797
+        "total_return_pct": 152.4466971440579,
+        "cagr_pct": 7.327531341408333,
+        "ann_vol_pct": 14.127847039844973,
+        "sharpe": 0.5713263856675078,
+        "max_drawdown_pct": -30.750864256014776
       },
       "walk_forward_net": {
-        "total_return_pct": 28.002015680353367,
-        "cagr_pct": 1.9042813264473546,
-        "ann_vol_pct": 12.668763787625137,
-        "sharpe": 0.21239154129631796,
+        "total_return_pct": 28.02710309234333,
+        "cagr_pct": 1.904641317498057,
+        "ann_vol_pct": 12.664923027055822,
+        "sharpe": 0.21244535843265142,
         "max_drawdown_pct": -38.59223983986767
       },
       "buy_hold": {
-        "total_return_pct": 283.4827591857219,
-        "cagr_pct": 10.8163873823385,
-        "ann_vol_pct": 19.769153447873617,
-        "sharpe": 0.6187771735344132,
+        "total_return_pct": 265.231006196573,
+        "cagr_pct": 10.397619971394079,
+        "ann_vol_pct": 19.819999277879905,
+        "sharpe": 0.5986064646434968,
         "max_drawdown_pct": -43.89786553251375
       },
       "wf_stats": {
-        "t_stat_bull_minus_bear_nextday": -2.152196631588494,
-        "vol_ratio_bear_over_bull": 2.8299680563742675,
-        "avg_regime_length_days": 12.355805243445692,
-        "flips_per_year": 20.318884510457714,
+        "t_stat_bull_minus_bear_nextday": -2.058557264748043,
+        "vol_ratio_bear_over_bull": 2.8402615540985603,
+        "avg_regime_length_days": 12.363295880149813,
+        "flips_per_year": 20.3065737655256,
         "state_share_pct": {
-          "bear": 20.824492270384965,
-          "neutral": 40.254622612913,
-          "bull": 38.92088511670203
+          "bear": 20.872462890033322,
+          "neutral": 40.23023326264768,
+          "bull": 38.897303847318994
         }
       }
     },
@@ -400,38 +400,272 @@
       "key": "shcomp",
       "name": "Shanghai Composite",
       "eval_start": "2013-02-26",
-      "eval_end": "2026-07-07",
-      "disagreement_pct": 24.545174221399936,
+      "eval_end": "2026-07-09",
+      "disagreement_pct": 27.3959938366718,
       "in_sample_net": {
-        "total_return_pct": 2.595481356263263,
-        "cagr_pct": 0.19937101302913707,
-        "ann_vol_pct": 14.634974215067107,
-        "sharpe": 0.08716556159303201,
-        "max_drawdown_pct": -52.60066696902766
+        "total_return_pct": 30.25554871797942,
+        "cagr_pct": 2.074576446385934,
+        "ann_vol_pct": 14.28788168039559,
+        "sharpe": 0.2154854350047522,
+        "max_drawdown_pct": -39.6707694880654
       },
       "walk_forward_net": {
-        "total_return_pct": -17.32369301226514,
-        "cagr_pct": -1.4678300340968287,
-        "ann_vol_pct": 16.531647483800302,
-        "sharpe": -0.006250536908195271,
+        "total_return_pct": -16.363284311637592,
+        "cagr_pct": -1.3784892168032137,
+        "ann_vol_pct": 16.533539336660873,
+        "sharpe": -0.0007503138203532286,
         "max_drawdown_pct": -60.53375693774813
       },
       "buy_hold": {
-        "total_return_pct": 73.99223401225858,
-        "cagr_pct": 4.3989996762816785,
-        "ann_vol_pct": 19.7856112475978,
-        "sharpe": 0.3172084795319677,
+        "total_return_pct": 76.01341349493416,
+        "cagr_pct": 4.489934098487014,
+        "ann_vol_pct": 19.7852365188499,
+        "sharpe": 0.3216113630831799,
         "max_drawdown_pct": -52.29972823120617
       },
       "wf_stats": {
         "t_stat_bull_minus_bear_nextday": -1.558427437976445,
         "vol_ratio_bear_over_bull": 1.9385165706981866,
-        "avg_regime_length_days": 9.680597014925374,
-        "flips_per_year": 25.953746530989825,
+        "avg_regime_length_days": 9.686567164179104,
+        "flips_per_year": 25.937750385208012,
         "state_share_pct": {
-          "bear": 13.660191181005244,
-          "neutral": 29.386370644465003,
-          "bull": 56.95343817452976
+          "bear": 13.651771956856704,
+          "neutral": 29.429892141756547,
+          "bull": 56.918335901386754
+        }
+      }
+    },
+    {
+      "key": "hangseng",
+      "name": "Hang Seng",
+      "eval_start": "2013-01-29",
+      "eval_end": "2026-07-09",
+      "disagreement_pct": 20.375416288222826,
+      "in_sample_net": {
+        "total_return_pct": -56.01773580798768,
+        "cagr_pct": -6.076151677200892,
+        "ann_vol_pct": 17.461862178767095,
+        "sharpe": -0.2711920195464763,
+        "max_drawdown_pct": -69.09356678253812
+      },
+      "walk_forward_net": {
+        "total_return_pct": -50.1784641397752,
+        "cagr_pct": -5.178315625017859,
+        "ann_vol_pct": 16.089221247587894,
+        "sharpe": -0.24953622223331454,
+        "max_drawdown_pct": -64.61903779009934
+      },
+      "buy_hold": {
+        "total_return_pct": 1.5853184181871427,
+        "cagr_pct": 0.12011042765520674,
+        "ann_vol_pct": 21.015062379775486,
+        "sharpe": 0.11100379641437837,
+        "max_drawdown_pct": -55.700772493049946
+      },
+      "wf_stats": {
+        "t_stat_bull_minus_bear_nextday": -0.6984263130206486,
+        "vol_ratio_bear_over_bull": 1.7490223323513374,
+        "avg_regime_length_days": 8.784574468085106,
+        "flips_per_year": 28.61035422343324,
+        "state_share_pct": {
+          "bear": 25.037844383893432,
+          "neutral": 45.14078110808356,
+          "bull": 29.82137450802301
+        }
+      }
+    },
+    {
+      "key": "taiex",
+      "name": "TAIEX",
+      "eval_start": "2013-01-25",
+      "eval_end": "2026-07-09",
+      "disagreement_pct": 27.82023845918679,
+      "in_sample_net": {
+        "total_return_pct": 215.290781747158,
+        "cagr_pct": 9.252855147044524,
+        "ann_vol_pct": 13.111717910443414,
+        "sharpe": 0.7407208531588385,
+        "max_drawdown_pct": -27.455802416775015
+      },
+      "walk_forward_net": {
+        "total_return_pct": 163.0285062351299,
+        "cagr_pct": 7.737573422190103,
+        "ann_vol_pct": 12.715509624930444,
+        "sharpe": 0.6499165375538999,
+        "max_drawdown_pct": -28.5143978121991
+      },
+      "buy_hold": {
+        "total_return_pct": 491.1259173991373,
+        "cagr_pct": 14.67504454675952,
+        "ann_vol_pct": 16.984724409983144,
+        "sharpe": 0.8916191181749892,
+        "max_drawdown_pct": -31.63186281026472
+      },
+      "wf_stats": {
+        "t_stat_bull_minus_bear_nextday": -1.0641298294789345,
+        "vol_ratio_bear_over_bull": 1.8506432315657484,
+        "avg_regime_length_days": 7.334080717488789,
+        "flips_per_year": 34.283093855090186,
+        "state_share_pct": {
+          "bear": 21.15560990522776,
+          "neutral": 40.72149189850199,
+          "bull": 38.122898196270256
+        }
+      }
+    },
+    {
+      "key": "wti",
+      "name": "Crude Oil (WTI)",
+      "eval_start": "2013-01-10",
+      "eval_end": "2026-07-09",
+      "disagreement_pct": 44.175044352454165,
+      "in_sample_net": {
+        "total_return_pct": -61.14199740047921,
+        "cagr_pct": -6.802927341416066,
+        "ann_vol_pct": 31.35873942910135,
+        "sharpe": -0.06731869709727907,
+        "max_drawdown_pct": -78.6058501424132
+      },
+      "walk_forward_net": {
+        "total_return_pct": -59.34848560359784,
+        "cagr_pct": -6.488965450696815,
+        "ann_vol_pct": 25.683112187907003,
+        "sharpe": -0.13217047507782764,
+        "max_drawdown_pct": -73.55875664726732
+      },
+      "buy_hold": {
+        "total_return_pct": -23.108079701232164,
+        "cagr_pct": -1.9394749691701962,
+        "ann_vol_pct": 41.51312821845446,
+        "sharpe": 0.15997014205933033,
+        "max_drawdown_pct": -83.47055038492792
+      },
+      "wf_stats": {
+        "t_stat_bull_minus_bear_nextday": -0.9005451647894778,
+        "vol_ratio_bear_over_bull": 2.6887803439275713,
+        "avg_regime_length_days": 19.77777777777778,
+        "flips_per_year": 12.667060910703725,
+        "state_share_pct": {
+          "bear": 27.823772915434652,
+          "neutral": 42.93317563571851,
+          "bull": 29.243051448846835
+        }
+      }
+    },
+    {
+      "key": "copper",
+      "name": "Copper",
+      "eval_start": "2013-01-10",
+      "eval_end": "2026-07-09",
+      "disagreement_pct": 13.026819923371647,
+      "in_sample_net": {
+        "total_return_pct": 29.778509951177522,
+        "cagr_pct": 1.9553717376511015,
+        "ann_vol_pct": 21.366850690288018,
+        "sharpe": 0.19874915833140996,
+        "max_drawdown_pct": -47.524579773379095
+      },
+      "walk_forward_net": {
+        "total_return_pct": 58.93177225909272,
+        "cagr_pct": 3.501927672660643,
+        "ann_vol_pct": 20.635730880424518,
+        "sharpe": 0.27126513939699815,
+        "max_drawdown_pct": -45.626544904162884
+      },
+      "buy_hold": {
+        "total_return_pct": 69.73879984429463,
+        "cagr_pct": 4.009019805643899,
+        "ann_vol_pct": 23.377480970681415,
+        "sharpe": 0.28622888574404454,
+        "max_drawdown_pct": -48.62932210630551
+      },
+      "wf_stats": {
+        "t_stat_bull_minus_bear_nextday": -0.012391141480004218,
+        "vol_ratio_bear_over_bull": 1.4906215950421484,
+        "avg_regime_length_days": 11.501694915254237,
+        "flips_per_year": 21.83554376657825,
+        "state_share_pct": {
+          "bear": 16.06248157972296,
+          "neutral": 38.46153846153847,
+          "bull": 45.47597995873858
+        }
+      }
+    },
+    {
+      "key": "us10y",
+      "name": "US 10Y Treasuries",
+      "eval_start": "2013-01-10",
+      "eval_end": "2026-07-09",
+      "disagreement_pct": 21.34433962264151,
+      "in_sample_net": {
+        "total_return_pct": -7.497472456329735,
+        "cagr_pct": -0.577489241544149,
+        "ann_vol_pct": 3.6770520135143023,
+        "sharpe": -0.13911421815747382,
+        "max_drawdown_pct": -13.807461584977032
+      },
+      "walk_forward_net": {
+        "total_return_pct": -5.33972397892617,
+        "cagr_pct": -0.4069752019591588,
+        "ann_vol_pct": 3.518343057221287,
+        "sharpe": -0.0983088401828646,
+        "max_drawdown_pct": -12.273040867792348
+      },
+      "buy_hold": {
+        "total_return_pct": -17.105575326216115,
+        "cagr_pct": -1.3844817711204493,
+        "ann_vol_pct": 5.347253078271762,
+        "sharpe": -0.23398890131980912,
+        "max_drawdown_pct": -24.87473555283391
+      },
+      "wf_stats": {
+        "t_stat_bull_minus_bear_nextday": 0.34604193501182157,
+        "vol_ratio_bear_over_bull": 1.8560826683610783,
+        "avg_regime_length_days": 28.74576271186441,
+        "flips_per_year": 8.692216981132075,
+        "state_share_pct": {
+          "bear": 32.69457547169811,
+          "neutral": 33.696933962264154,
+          "bull": 33.60849056603774
+        }
+      }
+    },
+    {
+      "key": "dxy",
+      "name": "US Dollar Index",
+      "eval_start": "2013-01-10",
+      "eval_end": "2026-07-09",
+      "disagreement_pct": 8.338243959929287,
+      "in_sample_net": {
+        "total_return_pct": 26.671974269986688,
+        "cagr_pct": 1.7714918610256314,
+        "ann_vol_pct": 5.335388666585699,
+        "sharpe": 0.355797149517022,
+        "max_drawdown_pct": -20.793045015188746
+      },
+      "walk_forward_net": {
+        "total_return_pct": 25.53824148847368,
+        "cagr_pct": 1.7035591749613221,
+        "ann_vol_pct": 5.42425602313463,
+        "sharpe": 0.3385404780965216,
+        "max_drawdown_pct": -19.20374009680539
+      },
+      "buy_hold": {
+        "total_return_pct": 26.567601900593907,
+        "cagr_pct": 1.7652614956978674,
+        "ann_vol_pct": 6.783413789442422,
+        "sharpe": 0.2918881935034059,
+        "max_drawdown_pct": -15.677854082866341
+      },
+      "wf_stats": {
+        "t_stat_bull_minus_bear_nextday": 0.7387686000688393,
+        "vol_ratio_bear_over_bull": 1.5603290230035174,
+        "avg_regime_length_days": 9.123655913978494,
+        "flips_per_year": 27.546258102533884,
+        "state_share_pct": {
+          "bear": 21.979964643488508,
+          "neutral": 41.42604596346494,
+          "bull": 36.593989393046556
         }
       }
     }
