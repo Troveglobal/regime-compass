@@ -1,8 +1,8 @@
 {
  "meta": {
-  "generated": "2026-07-07T02:26:52",
-  "cash_latest": "2026-07-06",
-  "oi_latest": "2026-07-06",
+  "generated": "2026-07-09T17:00:04",
+  "cash_latest": "2026-07-08",
+  "oi_latest": "2026-07-08",
   "source": "NSE daily FII/DII provisional flows (cash, \u20b9 cr) + participant-wise F&O open interest (contracts). Provisional figures, T+0 evening."
  },
  "cash": {
@@ -11,12 +11,22 @@
     "date": "2026-07-06",
     "fii": 243.03,
     "dii": 3791.42
+   },
+   {
+    "date": "2026-07-07",
+    "fii": 393.19,
+    "dii": -383.43
+   },
+   {
+    "date": "2026-07-08",
+    "fii": 1962.8,
+    "dii": 790.16
    }
   ],
   "latest": {
-   "date": "2026-07-06",
-   "fii": 243.03,
-   "dii": 3791.42
+   "date": "2026-07-08",
+   "fii": 1962.8,
+   "dii": 790.16
   }
  },
  "derivs": {
@@ -330,41 +340,51 @@
     "date": "2026-07-06",
     "net": -241279.0,
     "long_pct": 10.7
+   },
+   {
+    "date": "2026-07-07",
+    "net": -238838.0,
+    "long_pct": 10.8
+   },
+   {
+    "date": "2026-07-08",
+    "net": -268586.0,
+    "long_pct": 9.2
    }
   ],
   "latest": {
-   "date": "2026-07-06",
+   "date": "2026-07-08",
    "fii": {
-    "fut_idx_long": 32686.0,
-    "fut_idx_short": 273965.0,
-    "fut_idx_net": -241279.0,
-    "long_pct": 10.7,
-    "opt_idx_call_long": 481814.0,
-    "opt_idx_put_long": 973972.0,
-    "opt_idx_call_short": 670467.0,
-    "opt_idx_put_short": 516945.0,
-    "fut_stk_net": 3856372.0
+    "fut_idx_long": 30225.0,
+    "fut_idx_short": 298811.0,
+    "fut_idx_net": -268586.0,
+    "long_pct": 9.2,
+    "opt_idx_call_long": 486150.0,
+    "opt_idx_put_long": 912286.0,
+    "opt_idx_call_short": 769301.0,
+    "opt_idx_put_short": 365622.0,
+    "fut_stk_net": 3804278.0
    },
-   "client_fut_idx_net": 164632.0,
-   "pro_fut_idx_net": 10551.0,
-   "dii_fut_idx_net": 66096.0
+   "client_fut_idx_net": 187155.0,
+   "pro_fut_idx_net": 10201.0,
+   "dii_fut_idx_net": 71230.0
   },
   "prev": {
-   "date": "2026-07-03",
+   "date": "2026-07-07",
    "fii": {
-    "fut_idx_long": 29772.0,
-    "fut_idx_short": 280539.0,
-    "fut_idx_net": -250767.0,
-    "long_pct": 9.6,
-    "opt_idx_call_long": 479396.0,
-    "opt_idx_put_long": 921556.0,
-    "opt_idx_call_short": 712869.0,
-    "opt_idx_put_short": 444381.0,
-    "fut_stk_net": 3835098.0
+    "fut_idx_long": 32710.0,
+    "fut_idx_short": 271548.0,
+    "fut_idx_net": -238838.0,
+    "long_pct": 10.8,
+    "opt_idx_call_long": 355937.0,
+    "opt_idx_put_long": 718833.0,
+    "opt_idx_call_short": 544458.0,
+    "opt_idx_put_short": 275050.0,
+    "fut_stk_net": 3845780.0
    },
-   "client_fut_idx_net": 172697.0,
-   "pro_fut_idx_net": 13496.0,
-   "dii_fut_idx_net": 64574.0
+   "client_fut_idx_net": 164159.0,
+   "pro_fut_idx_net": 5435.0,
+   "dii_fut_idx_net": 69244.0
   }
  }
 }

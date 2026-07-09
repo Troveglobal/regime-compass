@@ -1,149 +1,149 @@
 {
-  "as_of": "2026-07-06",
+  "as_of": "2026-07-08",
   "benchmark": {
     "name": "Nifty 50",
     "label": "Nifty 50",
-    "close": 24430.3,
-    "d1": 0.66,
-    "w1": 2.02,
-    "m1": 4.55
+    "close": 23882.0,
+    "d1": -2.12,
+    "w1": -0.52,
+    "m1": 3.28
   },
   "sectors": [
     {
       "name": "Nifty Bank",
       "label": "Bank",
-      "close": 58291.5,
-      "d1": 0.61,
-      "w1": 0.98,
-      "m1": 6.96
+      "close": 56742.6,
+      "d1": -2.51,
+      "w1": -2.22,
+      "m1": 4.95
     },
     {
       "name": "Nifty Financial Services",
       "label": "Financials",
-      "close": 26993.8,
-      "d1": 0.44,
-      "w1": 1.49,
-      "m1": 7.73
+      "close": 26323.8,
+      "d1": -2.45,
+      "w1": -1.77,
+      "m1": 6.12
     },
     {
       "name": "Nifty Private Bank",
       "label": "Pvt Bank",
-      "close": 28347.2,
-      "d1": 0.47,
-      "w1": 1.06,
-      "m1": 7.79
+      "close": 27591.7,
+      "d1": -2.52,
+      "w1": -2.08,
+      "m1": 5.62
     },
     {
       "name": "Nifty PSU Bank",
       "label": "PSU Bank",
-      "close": 8334.0,
-      "d1": -0.88,
-      "w1": -2.57,
-      "m1": 0.91
+      "close": 8072.3,
+      "d1": -2.72,
+      "w1": -5.88,
+      "m1": -1.55
     },
     {
       "name": "Nifty IT",
       "label": "IT",
-      "close": 27276.5,
-      "d1": -0.59,
-      "w1": 0.88,
-      "m1": -5.98
+      "close": 27555.2,
+      "d1": -1.37,
+      "w1": 6.93,
+      "m1": -3.83
     },
     {
       "name": "Nifty Auto",
       "label": "Auto",
-      "close": 27354.0,
-      "d1": 1.36,
-      "w1": 3.54,
-      "m1": 4.54
+      "close": 26733.4,
+      "d1": -2.23,
+      "w1": -0.19,
+      "m1": 4.09
     },
     {
       "name": "Nifty Pharma",
       "label": "Pharma",
-      "close": 25866.2,
-      "d1": 0.47,
-      "w1": 2.53,
-      "m1": 6.67
+      "close": 25429.8,
+      "d1": -0.97,
+      "w1": 0.98,
+      "m1": 5.31
     },
     {
       "name": "Nifty Healthcare Index",
       "label": "Healthcare",
-      "close": 16481.3,
-      "d1": 0.24,
-      "w1": 2.28,
-      "m1": 6.96
+      "close": 16145.8,
+      "d1": -1.21,
+      "w1": 0.53,
+      "m1": 4.69
     },
     {
       "name": "Nifty FMCG",
       "label": "FMCG",
-      "close": 50196.3,
-      "d1": 0.2,
-      "w1": 2.18,
-      "m1": 3.92
+      "close": 48977.4,
+      "d1": -2.49,
+      "w1": -1.67,
+      "m1": 1.83
     },
     {
       "name": "Nifty Consumer Durables",
       "label": "Consumer Durables",
-      "close": 37376.4,
-      "d1": 1.48,
-      "w1": 3.75,
-      "m1": 5.39
+      "close": 37209.6,
+      "d1": -1.33,
+      "w1": 2.09,
+      "m1": 6.51
     },
     {
       "name": "Nifty Metal",
       "label": "Metal",
-      "close": 12722.5,
-      "d1": 0.98,
-      "w1": 1.41,
-      "m1": -3.78
+      "close": 12468.7,
+      "d1": -0.91,
+      "w1": 0.6,
+      "m1": -3.45
     },
     {
       "name": "Nifty Energy",
       "label": "Energy",
-      "close": 39481.4,
-      "d1": 0.77,
-      "w1": -0.6,
-      "m1": -2.14
+      "close": 38695.7,
+      "d1": -1.26,
+      "w1": -2.69,
+      "m1": -2.49
     },
     {
       "name": "Nifty Oil & Gas",
       "label": "Oil & Gas",
-      "close": 11261.1,
-      "d1": 1.12,
-      "w1": 2.26,
-      "m1": 1.39
+      "close": 10998.5,
+      "d1": -2.23,
+      "w1": -0.77,
+      "m1": 0.61
     },
     {
       "name": "Nifty Realty",
       "label": "Realty",
-      "close": 907.0,
-      "d1": 1.81,
-      "w1": 10.76,
-      "m1": 17.95
+      "close": 876.0,
+      "d1": -1.87,
+      "w1": 1.94,
+      "m1": 16.92
     },
     {
       "name": "Nifty Media",
       "label": "Media",
-      "close": 1498.0,
-      "d1": -0.95,
-      "w1": 0.54,
-      "m1": -0.3
+      "close": 1452.5,
+      "d1": -2.31,
+      "w1": -3.75,
+      "m1": -1.65
     },
     {
       "name": "Nifty Infrastructure",
       "label": "Infra",
-      "close": 9520.1,
-      "d1": 0.49,
-      "w1": 1.44,
-      "m1": 3.68
+      "close": 9250.0,
+      "d1": -2.16,
+      "w1": -2.03,
+      "m1": 1.79
     },
     {
       "name": "Nifty Commodities",
       "label": "Commodities",
-      "close": 9948.6,
-      "d1": 0.6,
-      "w1": 1.31,
-      "m1": -1.53
+      "close": 9760.8,
+      "d1": -1.48,
+      "w1": -0.25,
+      "m1": -1.82
     }
   ]
 }

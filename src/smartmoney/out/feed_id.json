@@ -5,17 +5,17 @@
   "flavor": "blocks",
   "currency": "IDR",
   "unit": "IDR bn",
-  "generated": "2026-07-07T01:28:58",
-  "latest_date": "2026-07-06",
+  "generated": "2026-07-09T11:30:04",
+  "latest_date": "2026-07-08",
   "earliest_date": "2026-04-06",
   "min_value": 10.0,
   "significant": 100.0,
   "source": "IDX daily trading summary \u2014 negotiated (non-regular) market deals"
  },
  "stats": {
-  "raw_deals": 29199,
-  "distinct_symbols": 251,
-  "days": 59
+  "raw_deals": 30045,
+  "distinct_symbols": 255,
+  "days": 61
  },
  "timeline": [
   {
@@ -312,6 +312,16 @@
    "date": "2026-07-06",
    "value": 754.8,
    "deals": 310
+  },
+  {
+   "date": "2026-07-07",
+   "value": 702.9,
+   "deals": 412
+  },
+  {
+   "date": "2026-07-08",
+   "value": 798.4,
+   "deals": 434
   }
  ],
  "history": [
@@ -329,351 +339,373 @@
   },
   {
    "month": "2026-07",
-   "value": 3555.6
+   "value": 5056.9
   }
  ],
  "today": {
   "stocks": [
    {
+    "symbol": "TLKM",
+    "security": "Telkom Indonesia (Persero) Tbk.",
+    "sector": "",
+    "value": 86.8,
+    "deals": 10,
+    "days_active": 1,
+    "avg_px": 2477.73,
+    "prem_pct": -1.3,
+    "significant": false
+   },
+   {
     "symbol": "SMMA",
     "security": "Sinarmas Multiartha Tbk.",
     "sector": "",
-    "value": 143.3,
-    "deals": 142,
+    "value": 85.5,
+    "deals": 99,
     "days_active": 1,
-    "avg_px": 11661.54,
+    "avg_px": 11539.3,
     "prem_pct": null,
-    "significant": true
-   },
-   {
-    "symbol": "BBCA",
-    "security": "Bank Central Asia Tbk.",
-    "sector": "",
-    "value": 66.7,
-    "deals": 26,
-    "days_active": 1,
-    "avg_px": 6119.95,
-    "prem_pct": -0.1,
-    "significant": false
-   },
-   {
-    "symbol": "BBHI",
-    "security": "Allo Bank Indonesia Tbk.",
-    "sector": "",
-    "value": 63.0,
-    "deals": 20,
-    "days_active": 1,
-    "avg_px": 1102.59,
-    "prem_pct": 18.6,
-    "significant": false
-   },
-   {
-    "symbol": "BRMS",
-    "security": "Bumi Resources Minerals Tbk.",
-    "sector": "",
-    "value": 60.2,
-    "deals": 3,
-    "days_active": 1,
-    "avg_px": 530.01,
-    "prem_pct": 1.0,
-    "significant": false
-   },
-   {
-    "symbol": "RLCO",
-    "security": "Abadi Lestari Indonesia Tbk.",
-    "sector": "",
-    "value": 58.0,
-    "deals": 1,
-    "days_active": 1,
-    "avg_px": 1000.0,
-    "prem_pct": null,
-    "significant": false
-   },
-   {
-    "symbol": "NSSS",
-    "security": "Nusantara Sawit Sejahtera Tbk.",
-    "sector": "",
-    "value": 47.0,
-    "deals": 10,
-    "days_active": 1,
-    "avg_px": 557.26,
-    "prem_pct": -10.1,
-    "significant": false
-   },
-   {
-    "symbol": "UNTR",
-    "security": "United Tractors Tbk.",
-    "sector": "",
-    "value": 40.3,
-    "deals": 8,
-    "days_active": 1,
-    "avg_px": 23801.95,
-    "prem_pct": 0.0,
-    "significant": false
-   },
-   {
-    "symbol": "APIC",
-    "security": "Pacific Strategic Financial Tbk.",
-    "sector": "",
-    "value": 29.2,
-    "deals": 17,
-    "days_active": 1,
-    "avg_px": 740.76,
-    "prem_pct": 9.7,
-    "significant": false
-   },
-   {
-    "symbol": "MKPI",
-    "security": "Metropolitan Kentjana Tbk.",
-    "sector": "",
-    "value": 26.7,
-    "deals": 12,
-    "days_active": 1,
-    "avg_px": 20892.43,
-    "prem_pct": -0.0,
-    "significant": false
-   },
-   {
-    "symbol": "TRIM",
-    "security": "Trimegah Sekuritas Indonesia Tbk.",
-    "sector": "",
-    "value": 25.7,
-    "deals": 2,
-    "days_active": 1,
-    "avg_px": 560.34,
-    "prem_pct": 0.1,
-    "significant": false
-   },
-   {
-    "symbol": "RMKE",
-    "security": "RMK Energy Tbk.",
-    "sector": "",
-    "value": 25.0,
-    "deals": 1,
-    "days_active": 1,
-    "avg_px": 3150.0,
-    "prem_pct": null,
-    "significant": false
-   },
-   {
-    "symbol": "TPIA",
-    "security": "Chandra Asri Pacific Tbk.",
-    "sector": "",
-    "value": 22.2,
-    "deals": 14,
-    "days_active": 1,
-    "avg_px": 2333.01,
-    "prem_pct": 23.8,
     "significant": false
    },
    {
     "symbol": "CARE",
     "security": "Metro Healthcare Indonesia Tbk.",
     "sector": "",
-    "value": 21.6,
+    "value": 85.0,
     "deals": 7,
     "days_active": 1,
-    "avg_px": 522.6,
-    "prem_pct": 21.5,
+    "avg_px": 502.0,
+    "prem_pct": 17.8,
     "significant": false
    },
    {
-    "symbol": "SSIA",
-    "security": "Surya Semesta Internusa Tbk.",
+    "symbol": "SKBM",
+    "security": "Sekar Bumi Tbk.",
     "sector": "",
-    "value": 21.0,
-    "deals": 3,
-    "days_active": 1,
-    "avg_px": 1368.21,
-    "prem_pct": -9.1,
-    "significant": false
-   },
-   {
-    "symbol": "BBRI",
-    "security": "Bank Rakyat Indonesia (Persero) Tbk.",
-    "sector": "",
-    "value": 15.3,
-    "deals": 14,
-    "days_active": 1,
-    "avg_px": 3043.27,
-    "prem_pct": 9.1,
-    "significant": false
-   },
-   {
-    "symbol": "STAR",
-    "security": "Calculus Global Ventures Tbk.",
-    "sector": "",
-    "value": 12.8,
+    "value": 83.2,
     "deals": 1,
     "days_active": 1,
-    "avg_px": 284.0,
-    "prem_pct": 5.2,
+    "avg_px": 150.0,
+    "prem_pct": null,
     "significant": false
    },
    {
-    "symbol": "IMPC",
-    "security": "Impack Pratama Industri Tbk.",
+    "symbol": "KING",
+    "security": "Hoffmen Cleanindo Tbk.",
     "sector": "",
-    "value": 12.1,
+    "value": 50.0,
     "deals": 2,
     "days_active": 1,
-    "avg_px": 1997.24,
-    "prem_pct": 29.3,
+    "avg_px": 200.0,
+    "prem_pct": -36.3,
+    "significant": false
+   },
+   {
+    "symbol": "NSSS",
+    "security": "Nusantara Sawit Sejahtera Tbk.",
+    "sector": "",
+    "value": 45.5,
+    "deals": 9,
+    "days_active": 1,
+    "avg_px": 596.14,
+    "prem_pct": -3.8,
+    "significant": false
+   },
+   {
+    "symbol": "CASA",
+    "security": "Capital Financial Indonesia Tbk.",
+    "sector": "",
+    "value": 45.3,
+    "deals": 4,
+    "days_active": 1,
+    "avg_px": 1803.34,
+    "prem_pct": -0.1,
+    "significant": false
+   },
+   {
+    "symbol": "SMGR",
+    "security": "Semen Indonesia (Persero) Tbk.",
+    "sector": "",
+    "value": 33.8,
+    "deals": 3,
+    "days_active": 1,
+    "avg_px": 1472.0,
+    "prem_pct": 3.7,
+    "significant": false
+   },
+   {
+    "symbol": "ASII",
+    "security": "Astra International Tbk.",
+    "sector": "",
+    "value": 33.7,
+    "deals": 4,
+    "days_active": 1,
+    "avg_px": 4940.8,
+    "prem_pct": 1.0,
+    "significant": false
+   },
+   {
+    "symbol": "ISAT",
+    "security": "Indosat Tbk.",
+    "sector": "",
+    "value": 31.4,
+    "deals": 2,
+    "days_active": 1,
+    "avg_px": 1864.8,
+    "prem_pct": 0.8,
+    "significant": false
+   },
+   {
+    "symbol": "BNBR",
+    "security": "Bakrie & Brothers Tbk",
+    "sector": "",
+    "value": 28.0,
+    "deals": 4,
+    "days_active": 1,
+    "avg_px": 90.39,
+    "prem_pct": -3.8,
+    "significant": false
+   },
+   {
+    "symbol": "GOTO",
+    "security": "GoTo Gojek Tokopedia Tbk.",
+    "sector": "",
+    "value": 24.6,
+    "deals": 65,
+    "days_active": 1,
+    "avg_px": 37.98,
+    "prem_pct": -24.0,
+    "significant": false
+   },
+   {
+    "symbol": "BOGA",
+    "security": "Apollo Global Interactive Tbk.",
+    "sector": "",
+    "value": 23.4,
+    "deals": 1,
+    "days_active": 1,
+    "avg_px": 1560.0,
+    "prem_pct": 1.0,
     "significant": false
    },
    {
     "symbol": "BMRI",
     "security": "Bank Mandiri (Persero) Tbk.",
     "sector": "",
-    "value": 11.1,
+    "value": 21.8,
+    "deals": 19,
+    "days_active": 1,
+    "avg_px": 4093.91,
+    "prem_pct": 3.1,
+    "significant": false
+   },
+   {
+    "symbol": "APIC",
+    "security": "Pacific Strategic Financial Tbk.",
+    "sector": "",
+    "value": 17.6,
+    "deals": 3,
+    "days_active": 1,
+    "avg_px": 688.26,
+    "prem_pct": 5.1,
+    "significant": false
+   },
+   {
+    "symbol": "MKPI",
+    "security": "Metropolitan Kentjana Tbk.",
+    "sector": "",
+    "value": 17.0,
     "deals": 7,
     "days_active": 1,
-    "avg_px": 4416.72,
-    "prem_pct": 9.6,
+    "avg_px": 21382.61,
+    "prem_pct": 2.8,
+    "significant": false
+   },
+   {
+    "symbol": "CMRY",
+    "security": "Cisarua Mountain Dairy Tbk.",
+    "sector": "",
+    "value": 15.7,
+    "deals": 3,
+    "days_active": 1,
+    "avg_px": 4669.07,
+    "prem_pct": -1.7,
+    "significant": false
+   },
+   {
+    "symbol": "JECX",
+    "security": "Nitrasanata Dharma Tbk.",
+    "sector": "",
+    "value": 14.1,
+    "deals": 166,
+    "days_active": 1,
+    "avg_px": 2052.74,
+    "prem_pct": 5.3,
+    "significant": false
+   },
+   {
+    "symbol": "UNTR",
+    "security": "United Tractors Tbk.",
+    "sector": "",
+    "value": 13.0,
+    "deals": 2,
+    "days_active": 1,
+    "avg_px": 24403.98,
+    "prem_pct": 0.4,
+    "significant": false
+   },
+   {
+    "symbol": "BUMI",
+    "security": "Bumi Resources Tbk.",
+    "sector": "",
+    "value": 11.6,
+    "deals": 11,
+    "days_active": 1,
+    "avg_px": 159.53,
+    "prem_pct": 17.3,
+    "significant": false
+   },
+   {
+    "symbol": "HYGN",
+    "security": "Ecocare Indo Pasifik Tbk.",
+    "sector": "",
+    "value": 11.0,
+    "deals": 2,
+    "days_active": 1,
+    "avg_px": 140.0,
+    "prem_pct": -3.4,
     "significant": false
    }
   ],
   "kpi": {
-   "total_value": 701.2,
-   "n_deals": 290,
-   "n_stocks": 18,
-   "top_stock": "SMMA",
+   "total_value": 778.0,
+   "n_deals": 424,
+   "n_stocks": 21,
+   "top_stock": "TLKM",
    "sessions": 1
   },
-  "date": "2026-07-06"
+  "date": "2026-07-08"
  },
  "week": {
   "stocks": [
    {
-    "symbol": "PANI",
-    "security": "Pantai Indah Kapuk Dua Tbk.",
+    "symbol": "SMMA",
+    "security": "Sinarmas Multiartha Tbk.",
     "sector": "",
-    "value": 1031.3,
-    "deals": 7,
-    "days_active": 1,
-    "avg_px": 6250.0,
-    "prem_pct": 8.2,
+    "value": 561.8,
+    "deals": 594,
+    "days_active": 5,
+    "avg_px": 11687.34,
+    "prem_pct": null,
     "significant": true
    },
    {
     "symbol": "MGLV",
     "security": "Panca Anugrah Wisesa Tbk.",
     "sector": "",
-    "value": 500.0,
-    "deals": 6,
-    "days_active": 1,
+    "value": 521.0,
+    "deals": 7,
+    "days_active": 2,
     "avg_px": 7000.0,
     "prem_pct": -18.6,
-    "significant": true
-   },
-   {
-    "symbol": "SMMA",
-    "security": "Sinarmas Multiartha Tbk.",
-    "sector": "",
-    "value": 464.3,
-    "deals": 511,
-    "days_active": 5,
-    "avg_px": 11759.69,
-    "prem_pct": null,
-    "significant": true
-   },
-   {
-    "symbol": "ISAT",
-    "security": "Indosat Tbk.",
-    "sector": "",
-    "value": 282.4,
-    "deals": 17,
-    "days_active": 4,
-    "avg_px": 1828.9,
-    "prem_pct": -0.4,
-    "significant": true
-   },
-   {
-    "symbol": "BBCA",
-    "security": "Bank Central Asia Tbk.",
-    "sector": "",
-    "value": 276.5,
-    "deals": 94,
-    "days_active": 5,
-    "avg_px": 5828.12,
-    "prem_pct": 0.4,
-    "significant": true
-   },
-   {
-    "symbol": "APIC",
-    "security": "Pacific Strategic Financial Tbk.",
-    "sector": "",
-    "value": 245.2,
-    "deals": 50,
-    "days_active": 5,
-    "avg_px": 664.07,
-    "prem_pct": 3.1,
-    "significant": true
-   },
-   {
-    "symbol": "MTLA",
-    "security": "Metropolitan Land Tbk.",
-    "sector": "",
-    "value": 209.6,
-    "deals": 5,
-    "days_active": 2,
-    "avg_px": 610.64,
-    "prem_pct": 19.7,
     "significant": true
    },
    {
     "symbol": "ENRG",
     "security": "Energi Mega Persada Tbk.",
     "sector": "",
-    "value": 196.8,
+    "value": 196.9,
     "deals": 5,
     "days_active": 2,
-    "avg_px": 1031.87,
-    "prem_pct": -1.7,
+    "avg_px": 1037.22,
+    "prem_pct": -1.6,
     "significant": true
    },
    {
-    "symbol": "BMRI",
-    "security": "Bank Mandiri (Persero) Tbk.",
+    "symbol": "MTLA",
+    "security": "Metropolitan Land Tbk.",
     "sector": "",
-    "value": 161.2,
-    "deals": 33,
-    "days_active": 3,
-    "avg_px": 3968.08,
-    "prem_pct": 1.9,
-    "significant": true
-   },
-   {
-    "symbol": "BBRI",
-    "security": "Bank Rakyat Indonesia (Persero) Tbk.",
-    "sector": "",
-    "value": 157.2,
-    "deals": 55,
-    "days_active": 4,
-    "avg_px": 2787.28,
-    "prem_pct": 2.4,
-    "significant": true
-   },
-   {
-    "symbol": "CASA",
-    "security": "Capital Financial Indonesia Tbk.",
-    "sector": "",
-    "value": 141.2,
-    "deals": 13,
-    "days_active": 3,
-    "avg_px": 1803.29,
-    "prem_pct": 0.2,
+    "value": 193.8,
+    "deals": 4,
+    "days_active": 2,
+    "avg_px": 597.4,
+    "prem_pct": 18.3,
     "significant": true
    },
    {
     "symbol": "NSSS",
     "security": "Nusantara Sawit Sejahtera Tbk.",
     "sector": "",
-    "value": 110.1,
-    "deals": 24,
+    "value": 185.3,
+    "deals": 41,
+    "days_active": 5,
+    "avg_px": 601.04,
+    "prem_pct": -2.2,
+    "significant": true
+   },
+   {
+    "symbol": "BMRI",
+    "security": "Bank Mandiri (Persero) Tbk.",
+    "sector": "",
+    "value": 184.9,
+    "deals": 48,
     "days_active": 4,
-    "avg_px": 584.4,
-    "prem_pct": -3.6,
+    "avg_px": 3994.11,
+    "prem_pct": 1.1,
+    "significant": true
+   },
+   {
+    "symbol": "CARE",
+    "security": "Metro Healthcare Indonesia Tbk.",
+    "sector": "",
+    "value": 183.8,
+    "deals": 23,
+    "days_active": 4,
+    "avg_px": 481.42,
+    "prem_pct": 14.3,
+    "significant": true
+   },
+   {
+    "symbol": "APIC",
+    "security": "Pacific Strategic Financial Tbk.",
+    "sector": "",
+    "value": 182.6,
+    "deals": 38,
+    "days_active": 5,
+    "avg_px": 677.32,
+    "prem_pct": 2.0,
+    "significant": true
+   },
+   {
+    "symbol": "BBCA",
+    "security": "Bank Central Asia Tbk.",
+    "sector": "",
+    "value": 159.9,
+    "deals": 61,
+    "days_active": 3,
+    "avg_px": 5963.78,
+    "prem_pct": -0.6,
+    "significant": true
+   },
+   {
+    "symbol": "CASA",
+    "security": "Capital Financial Indonesia Tbk.",
+    "sector": "",
+    "value": 120.2,
+    "deals": 12,
+    "days_active": 4,
+    "avg_px": 1801.75,
+    "prem_pct": -0.0,
+    "significant": true
+   },
+   {
+    "symbol": "ISAT",
+    "security": "Indosat Tbk.",
+    "sector": "",
+    "value": 114.5,
+    "deals": 13,
+    "days_active": 3,
+    "avg_px": 1940.99,
+    "prem_pct": -0.0,
     "significant": true
    },
    {
@@ -688,17 +720,6 @@
     "significant": true
    },
    {
-    "symbol": "RMKE",
-    "security": "RMK Energy Tbk.",
-    "sector": "",
-    "value": 109.2,
-    "deals": 4,
-    "days_active": 2,
-    "avg_px": 2136.24,
-    "prem_pct": 5.1,
-    "significant": true
-   },
-   {
     "symbol": "DNET",
     "security": "Indoritel Makmur Internasional Tbk.",
     "sector": "",
@@ -710,13 +731,46 @@
     "significant": false
    },
    {
-    "symbol": "BUMI",
-    "security": "Bumi Resources Tbk.",
+    "symbol": "ASII",
+    "security": "Astra International Tbk.",
     "sector": "",
-    "value": 81.4,
-    "deals": 16,
+    "value": 93.1,
+    "deals": 12,
     "days_active": 3,
-    "avg_px": 175.79,
+    "avg_px": 4825.38,
+    "prem_pct": -0.6,
+    "significant": false
+   },
+   {
+    "symbol": "MKPI",
+    "security": "Metropolitan Kentjana Tbk.",
+    "sector": "",
+    "value": 90.5,
+    "deals": 33,
+    "days_active": 4,
+    "avg_px": 22172.77,
+    "prem_pct": 6.5,
+    "significant": false
+   },
+   {
+    "symbol": "TLKM",
+    "security": "Telkom Indonesia (Persero) Tbk.",
+    "sector": "",
+    "value": 86.8,
+    "deals": 10,
+    "days_active": 1,
+    "avg_px": 2477.73,
+    "prem_pct": -1.3,
+    "significant": false
+   },
+   {
+    "symbol": "SKBM",
+    "security": "Sekar Bumi Tbk.",
+    "sector": "",
+    "value": 83.2,
+    "deals": 1,
+    "days_active": 1,
+    "avg_px": 150.0,
     "prem_pct": null,
     "significant": false
    },
@@ -724,44 +778,55 @@
     "symbol": "BBHI",
     "security": "Allo Bank Indonesia Tbk.",
     "sector": "",
-    "value": 69.8,
-    "deals": 58,
-    "days_active": 2,
-    "avg_px": 1095.12,
-    "prem_pct": 17.8,
-    "significant": false
-   },
-   {
-    "symbol": "LPPF",
-    "security": "MDS Retailing Tbk.",
-    "sector": "",
-    "value": 67.6,
-    "deals": 1,
-    "days_active": 1,
-    "avg_px": 1520.0,
-    "prem_pct": 2.7,
+    "value": 75.8,
+    "deals": 64,
+    "days_active": 3,
+    "avg_px": 1088.6,
+    "prem_pct": 17.3,
     "significant": false
    },
    {
     "symbol": "BOGA",
     "security": "Apollo Global Interactive Tbk.",
     "sector": "",
-    "value": 65.6,
-    "deals": 11,
+    "value": 69.3,
+    "deals": 10,
     "days_active": 3,
-    "avg_px": 1534.52,
-    "prem_pct": 1.6,
+    "avg_px": 1537.58,
+    "prem_pct": 1.5,
     "significant": false
    },
    {
-    "symbol": "MKPI",
-    "security": "Metropolitan Kentjana Tbk.",
+    "symbol": "BBRI",
+    "security": "Bank Rakyat Indonesia (Persero) Tbk.",
     "sector": "",
-    "value": 60.3,
-    "deals": 20,
+    "value": 66.6,
+    "deals": 37,
+    "days_active": 4,
+    "avg_px": 2797.7,
+    "prem_pct": 3.1,
+    "significant": false
+   },
+   {
+    "symbol": "UNTR",
+    "security": "United Tractors Tbk.",
+    "sector": "",
+    "value": 66.4,
+    "deals": 11,
     "days_active": 3,
-    "avg_px": 21063.79,
-    "prem_pct": 2.2,
+    "avg_px": 23938.76,
+    "prem_pct": 0.0,
+    "significant": false
+   },
+   {
+    "symbol": "GOTO",
+    "security": "GoTo Gojek Tokopedia Tbk.",
+    "sector": "",
+    "value": 63.3,
+    "deals": 195,
+    "days_active": 3,
+    "avg_px": 37.98,
+    "prem_pct": -24.0,
     "significant": false
    },
    {
@@ -776,17 +841,6 @@
     "significant": false
    },
    {
-    "symbol": "CARE",
-    "security": "Metro Healthcare Indonesia Tbk.",
-    "sector": "",
-    "value": 58.5,
-    "deals": 16,
-    "days_active": 3,
-    "avg_px": 375.27,
-    "prem_pct": -6.4,
-    "significant": false
-   },
-   {
     "symbol": "RLCO",
     "security": "Abadi Lestari Indonesia Tbk.",
     "sector": "",
@@ -795,6 +849,28 @@
     "days_active": 1,
     "avg_px": 1000.0,
     "prem_pct": null,
+    "significant": false
+   },
+   {
+    "symbol": "SMGR",
+    "security": "Semen Indonesia (Persero) Tbk.",
+    "sector": "",
+    "value": 57.1,
+    "deals": 10,
+    "days_active": 2,
+    "avg_px": 1470.04,
+    "prem_pct": 0.7,
+    "significant": false
+   },
+   {
+    "symbol": "KING",
+    "security": "Hoffmen Cleanindo Tbk.",
+    "sector": "",
+    "value": 50.0,
+    "deals": 2,
+    "days_active": 1,
+    "avg_px": 200.0,
+    "prem_pct": -36.3,
     "significant": false
    },
    {
@@ -809,102 +885,25 @@
     "significant": false
    },
    {
-    "symbol": "ASII",
-    "security": "Astra International Tbk.",
+    "symbol": "JECX",
+    "security": "Nitrasanata Dharma Tbk.",
     "sector": "",
-    "value": 47.9,
-    "deals": 3,
-    "days_active": 1,
-    "avg_px": 4765.01,
-    "prem_pct": -0.9,
-    "significant": false
-   },
-   {
-    "symbol": "SAME",
-    "security": "Sarana Meditama Metropolitan Tbk.",
-    "sector": "",
-    "value": 45.8,
-    "deals": 2,
-    "days_active": 1,
-    "avg_px": 410.0,
-    "prem_pct": 15.8,
-    "significant": false
-   },
-   {
-    "symbol": "TPIA",
-    "security": "Chandra Asri Pacific Tbk.",
-    "sector": "",
-    "value": 45.3,
-    "deals": 27,
-    "days_active": 3,
-    "avg_px": 2322.39,
-    "prem_pct": 29.9,
-    "significant": false
-   },
-   {
-    "symbol": "BINA",
-    "security": "Bank Ina Perdana Tbk.",
-    "sector": "",
-    "value": 45.0,
-    "deals": 2,
+    "value": 48.4,
+    "deals": 289,
     "days_active": 2,
-    "avg_px": 4200.45,
-    "prem_pct": -1.5,
+    "avg_px": 1461.18,
+    "prem_pct": -10.0,
     "significant": false
    },
    {
-    "symbol": "PGAS",
-    "security": "Perusahaan Gas Negara (Persero) Tbk.",
+    "symbol": "BNBR",
+    "security": "Bakrie & Brothers Tbk",
     "sector": "",
-    "value": 44.2,
-    "deals": 10,
-    "days_active": 4,
-    "avg_px": 1380.73,
-    "prem_pct": 0.7,
-    "significant": false
-   },
-   {
-    "symbol": "GOTO",
-    "security": "GoTo Gojek Tokopedia Tbk.",
-    "sector": "",
-    "value": 41.4,
-    "deals": 161,
+    "value": 43.8,
+    "deals": 9,
     "days_active": 3,
-    "avg_px": 43.86,
-    "prem_pct": -11.3,
-    "significant": false
-   },
-   {
-    "symbol": "MSIN",
-    "security": "MNC Digital Entertainment Tbk.",
-    "sector": "",
-    "value": 41.1,
-    "deals": 5,
-    "days_active": 1,
-    "avg_px": 508.19,
-    "prem_pct": 11.4,
-    "significant": false
-   },
-   {
-    "symbol": "UNTR",
-    "security": "United Tractors Tbk.",
-    "sector": "",
-    "value": 40.3,
-    "deals": 8,
-    "days_active": 1,
-    "avg_px": 23801.95,
-    "prem_pct": 0.0,
-    "significant": false
-   },
-   {
-    "symbol": "TLKM",
-    "security": "Telkom Indonesia (Persero) Tbk.",
-    "sector": "",
-    "value": 39.7,
-    "deals": 18,
-    "days_active": 2,
-    "avg_px": 2416.04,
-    "prem_pct": 1.7,
+    "avg_px": 95.15,
+    "prem_pct": -2.4,
     "significant": false
    },
    {
@@ -933,33 +932,33 @@
     "symbol": "FUTR",
     "security": "Futura Energi Global Tbk.",
     "sector": "",
-    "value": 36.9,
-    "deals": 3,
+    "value": 34.6,
+    "deals": 4,
     "days_active": 2,
-    "avg_px": 169.95,
-    "prem_pct": -9.1,
+    "avg_px": 191.91,
+    "prem_pct": -10.9,
     "significant": false
    },
    {
-    "symbol": "YULE",
-    "security": "Yulie Sekuritas Indonesia Tbk.",
+    "symbol": "TPIA",
+    "security": "Chandra Asri Pacific Tbk.",
     "sector": "",
-    "value": 36.4,
-    "deals": 11,
-    "days_active": 1,
-    "avg_px": 3000.0,
-    "prem_pct": -11.0,
+    "value": 34.0,
+    "deals": 21,
+    "days_active": 2,
+    "avg_px": 2246.66,
+    "prem_pct": 22.0,
     "significant": false
    },
    {
-    "symbol": "BHAT",
-    "security": "Bhakti Multi Artha Tbk.",
+    "symbol": "OBMD",
+    "security": "OBM Drilchem Tbk.",
     "sector": "",
-    "value": 35.6,
-    "deals": 7,
+    "value": 32.8,
+    "deals": 2,
     "days_active": 2,
-    "avg_px": 1770.0,
-    "prem_pct": 0.0,
+    "avg_px": 309.0,
+    "prem_pct": null,
     "significant": false
    },
    {
@@ -971,17 +970,6 @@
     "days_active": 1,
     "avg_px": 500.0,
     "prem_pct": -16.0,
-    "significant": false
-   },
-   {
-    "symbol": "BNBR",
-    "security": "Bakrie & Brothers Tbk",
-    "sector": "",
-    "value": 29.3,
-    "deals": 8,
-    "days_active": 4,
-    "avg_px": 96.12,
-    "prem_pct": 2.3,
     "significant": false
    },
    {
@@ -1007,6 +995,39 @@
     "significant": false
    },
    {
+    "symbol": "RMKE",
+    "security": "RMK Energy Tbk.",
+    "sector": "",
+    "value": 25.0,
+    "deals": 1,
+    "days_active": 1,
+    "avg_px": 3150.0,
+    "prem_pct": null,
+    "significant": false
+   },
+   {
+    "symbol": "STAR",
+    "security": "Calculus Global Ventures Tbk.",
+    "sector": "",
+    "value": 24.6,
+    "deals": 2,
+    "days_active": 2,
+    "avg_px": 273.0,
+    "prem_pct": 1.3,
+    "significant": false
+   },
+   {
+    "symbol": "CMRY",
+    "security": "Cisarua Mountain Dairy Tbk.",
+    "sector": "",
+    "value": 24.3,
+    "deals": 7,
+    "days_active": 2,
+    "avg_px": 4553.11,
+    "prem_pct": -1.1,
+    "significant": false
+   },
+   {
     "symbol": "MBMA",
     "security": "Merdeka Battery Materials Tbk.",
     "sector": "",
@@ -1018,102 +1039,47 @@
     "significant": false
    },
    {
-    "symbol": "KOTA",
-    "security": "DMS Propertindo Tbk.",
+    "symbol": "BUMI",
+    "security": "Bumi Resources Tbk.",
     "sector": "",
-    "value": 23.4,
-    "deals": 5,
-    "days_active": 1,
-    "avg_px": 92.0,
-    "prem_pct": 13.6,
+    "value": 21.1,
+    "deals": 14,
+    "days_active": 2,
+    "avg_px": 215.78,
+    "prem_pct": null,
     "significant": false
    },
    {
-    "symbol": "NATO",
-    "security": "Olympus Strategic Indonesia Tbk.",
+    "symbol": "PGAS",
+    "security": "Perusahaan Gas Negara (Persero) Tbk.",
     "sector": "",
-    "value": 22.9,
-    "deals": 3,
-    "days_active": 1,
-    "avg_px": 545.27,
-    "prem_pct": 1.0,
-    "significant": false
-   },
-   {
-    "symbol": "MTEL",
-    "security": "Dayamitra Telekomunikasi Tbk.",
-    "sector": "",
-    "value": 21.8,
-    "deals": 2,
-    "days_active": 1,
-    "avg_px": 485.0,
-    "prem_pct": -10.2,
+    "value": 20.8,
+    "deals": 6,
+    "days_active": 2,
+    "avg_px": 1376.61,
+    "prem_pct": -0.2,
     "significant": false
    },
    {
     "symbol": "PTRO",
     "security": "Petrosea Tbk.",
     "sector": "",
-    "value": 20.6,
-    "deals": 31,
+    "value": 19.6,
+    "deals": 35,
     "days_active": 3,
-    "avg_px": 4677.21,
-    "prem_pct": 23.3,
+    "avg_px": 4721.1,
+    "prem_pct": 21.0,
     "significant": false
    },
    {
-    "symbol": "VKTR",
-    "security": "VKTR Teknologi Mobilitas Tbk.",
+    "symbol": "BULL",
+    "security": "Buana Lintas Lautan Tbk.",
     "sector": "",
-    "value": 20.3,
-    "deals": 5,
+    "value": 17.1,
+    "deals": 6,
     "days_active": 2,
-    "avg_px": 457.26,
-    "prem_pct": -1.3,
-    "significant": false
-   },
-   {
-    "symbol": "MIKA",
-    "security": "Mitra Keluarga Karyasehat Tbk.",
-    "sector": "",
-    "value": 18.8,
-    "deals": 8,
-    "days_active": 2,
-    "avg_px": 1688.98,
-    "prem_pct": -0.3,
-    "significant": false
-   },
-   {
-    "symbol": "JSMR",
-    "security": "Jasa Marga (Persero) Tbk.",
-    "sector": "",
-    "value": 18.5,
-    "deals": 3,
-    "days_active": 1,
-    "avg_px": 2838.36,
-    "prem_pct": 4.7,
-    "significant": false
-   },
-   {
-    "symbol": "ICBP",
-    "security": "Indofood CBP Sukses Makmur Tbk.",
-    "sector": "",
-    "value": 16.5,
-    "deals": 10,
-    "days_active": 2,
-    "avg_px": 6742.89,
-    "prem_pct": -1.5,
-    "significant": false
-   },
-   {
-    "symbol": "OBMD",
-    "security": "OBM Drilchem Tbk.",
-    "sector": "",
-    "value": 16.4,
-    "deals": 1,
-    "days_active": 1,
-    "avg_px": 309.0,
-    "prem_pct": null,
+    "avg_px": 312.21,
+    "prem_pct": -3.8,
     "significant": false
    },
    {
@@ -1128,47 +1094,25 @@
     "significant": false
    },
    {
-    "symbol": "GGRM",
-    "security": "Gudang Garam Tbk.",
+    "symbol": "BIPI",
+    "security": "Astrindo Nusantara Infrastruktur Tbk.",
     "sector": "",
-    "value": 14.9,
-    "deals": 1,
-    "days_active": 1,
-    "avg_px": 16400.0,
-    "prem_pct": 0.9,
-    "significant": false
-   },
-   {
-    "symbol": "MORA",
-    "security": "Ekamas Mora Republik Tbk.",
-    "sector": "",
-    "value": 14.5,
-    "deals": 2,
+    "value": 14.4,
+    "deals": 15,
     "days_active": 2,
-    "avg_px": 14500.0,
-    "prem_pct": null,
+    "avg_px": 120.42,
+    "prem_pct": 0.8,
     "significant": false
    },
    {
-    "symbol": "CASS",
-    "security": "Cahaya Aero Services Tbk.",
+    "symbol": "ICBP",
+    "security": "Indofood CBP Sukses Makmur Tbk.",
     "sector": "",
-    "value": 12.9,
-    "deals": 2,
-    "days_active": 1,
-    "avg_px": 1840.0,
-    "prem_pct": 0.3,
-    "significant": false
-   },
-   {
-    "symbol": "STAR",
-    "security": "Calculus Global Ventures Tbk.",
-    "sector": "",
-    "value": 12.8,
-    "deals": 1,
-    "days_active": 1,
-    "avg_px": 284.0,
-    "prem_pct": 5.2,
+    "value": 14.3,
+    "deals": 7,
+    "days_active": 2,
+    "avg_px": 6783.97,
+    "prem_pct": 0.5,
     "significant": false
    },
    {
@@ -1183,6 +1127,17 @@
     "significant": false
    },
    {
+    "symbol": "HYGN",
+    "security": "Ecocare Indo Pasifik Tbk.",
+    "sector": "",
+    "value": 11.0,
+    "deals": 2,
+    "days_active": 1,
+    "avg_px": 140.0,
+    "prem_pct": -3.4,
+    "significant": false
+   },
+   {
     "symbol": "EXCL",
     "security": "XLSMART Telecom Sejahtera Tbk.",
     "sector": "",
@@ -1192,17 +1147,28 @@
     "avg_px": 2399.25,
     "prem_pct": -0.4,
     "significant": false
+   },
+   {
+    "symbol": "TINS",
+    "security": "TIMAH (Persero) Tbk.",
+    "sector": "",
+    "value": 10.0,
+    "deals": 1,
+    "days_active": 1,
+    "avg_px": 3460.0,
+    "prem_pct": 0.3,
+    "significant": false
    }
   ],
   "kpi": {
-   "total_value": 5653.1,
-   "n_deals": 1386,
-   "n_stocks": 59,
-   "top_stock": "PANI",
+   "total_value": 4404.3,
+   "n_deals": 1753,
+   "n_stocks": 52,
+   "top_stock": "SMMA",
    "sessions": 5
   },
-  "from": "2026-06-30",
-  "to": "2026-07-06"
+  "from": "2026-07-02",
+  "to": "2026-07-08"
  },
  "month": {
   "stocks": [
@@ -1232,21 +1198,21 @@
     "symbol": "BBCA",
     "security": "Bank Central Asia Tbk.",
     "sector": "",
-    "value": 3547.6,
-    "deals": 415,
-    "days_active": 20,
-    "avg_px": 5664.14,
-    "prem_pct": -1.1,
+    "value": 3267.7,
+    "deals": 392,
+    "days_active": 19,
+    "avg_px": 5737.11,
+    "prem_pct": -1.3,
     "significant": true
    },
    {
     "symbol": "SMMA",
     "security": "Sinarmas Multiartha Tbk.",
     "sector": "",
-    "value": 2430.9,
-    "deals": 2371,
-    "days_active": 20,
-    "avg_px": 12803.13,
+    "value": 2593.0,
+    "deals": 2519,
+    "days_active": 21,
+    "avg_px": 12684.08,
     "prem_pct": null,
     "significant": true
    },
@@ -1254,22 +1220,22 @@
     "symbol": "TLKM",
     "security": "Telkom Indonesia (Persero) Tbk.",
     "sector": "",
-    "value": 2002.8,
-    "deals": 224,
+    "value": 2025.5,
+    "deals": 219,
     "days_active": 14,
-    "avg_px": 2635.29,
-    "prem_pct": -1.9,
+    "avg_px": 2636.31,
+    "prem_pct": -2.0,
     "significant": true
    },
    {
     "symbol": "BMRI",
     "security": "Bank Mandiri (Persero) Tbk.",
     "sector": "",
-    "value": 1500.0,
-    "deals": 3412,
-    "days_active": 13,
-    "avg_px": 4146.46,
-    "prem_pct": 1.9,
+    "value": 1468.3,
+    "deals": 3379,
+    "days_active": 14,
+    "avg_px": 4157.64,
+    "prem_pct": 1.6,
     "significant": true
    },
    {
@@ -1287,99 +1253,88 @@
     "symbol": "CASA",
     "security": "Capital Financial Indonesia Tbk.",
     "sector": "",
-    "value": 947.5,
-    "deals": 67,
-    "days_active": 15,
-    "avg_px": 1826.11,
-    "prem_pct": 1.7,
-    "significant": true
-   },
-   {
-    "symbol": "ENRG",
-    "security": "Energi Mega Persada Tbk.",
-    "sector": "",
-    "value": 835.9,
-    "deals": 64,
-    "days_active": 14,
-    "avg_px": 986.36,
-    "prem_pct": -5.5,
+    "value": 1004.7,
+    "deals": 73,
+    "days_active": 17,
+    "avg_px": 1824.82,
+    "prem_pct": 1.6,
     "significant": true
    },
    {
     "symbol": "BBRI",
     "security": "Bank Rakyat Indonesia (Persero) Tbk.",
     "sector": "",
-    "value": 820.2,
-    "deals": 209,
+    "value": 808.9,
+    "deals": 203,
     "days_active": 16,
-    "avg_px": 2877.12,
+    "avg_px": 2884.49,
     "prem_pct": 0.8,
+    "significant": true
+   },
+   {
+    "symbol": "ENRG",
+    "security": "Energi Mega Persada Tbk.",
+    "sector": "",
+    "value": 745.3,
+    "deals": 61,
+    "days_active": 14,
+    "avg_px": 969.14,
+    "prem_pct": -6.5,
     "significant": true
    },
    {
     "symbol": "ASII",
     "security": "Astra International Tbk.",
     "sector": "",
-    "value": 705.4,
+    "value": 736.5,
     "deals": 77,
-    "days_active": 10,
-    "avg_px": 4725.81,
-    "prem_pct": 0.1,
-    "significant": true
-   },
-   {
-    "symbol": "BRMS",
-    "security": "Bumi Resources Minerals Tbk.",
-    "sector": "",
-    "value": 643.7,
-    "deals": 63,
-    "days_active": 12,
-    "avg_px": 539.31,
-    "prem_pct": 5.6,
+    "days_active": 11,
+    "avg_px": 4739.23,
+    "prem_pct": -0.0,
     "significant": true
    },
    {
     "symbol": "APIC",
     "security": "Pacific Strategic Financial Tbk.",
     "sector": "",
-    "value": 595.0,
-    "deals": 161,
-    "days_active": 17,
-    "avg_px": 651.01,
-    "prem_pct": 6.4,
-    "significant": true
-   },
-   {
-    "symbol": "MGLV",
-    "security": "Panca Anugrah Wisesa Tbk.",
-    "sector": "",
-    "value": 567.3,
-    "deals": 8,
-    "days_active": 3,
-    "avg_px": 6266.17,
-    "prem_pct": -22.6,
+    "value": 627.5,
+    "deals": 171,
+    "days_active": 19,
+    "avg_px": 655.52,
+    "prem_pct": 6.7,
     "significant": true
    },
    {
     "symbol": "GOTO",
     "security": "GoTo Gojek Tokopedia Tbk.",
     "sector": "",
-    "value": 556.5,
-    "deals": 1071,
-    "days_active": 18,
-    "avg_px": 43.55,
-    "prem_pct": -12.3,
+    "value": 589.3,
+    "deals": 1168,
+    "days_active": 19,
+    "avg_px": 42.89,
+    "prem_pct": -13.5,
+    "significant": true
+   },
+   {
+    "symbol": "MGLV",
+    "security": "Panca Anugrah Wisesa Tbk.",
+    "sector": "",
+    "value": 588.3,
+    "deals": 9,
+    "days_active": 4,
+    "avg_px": 6289.7,
+    "prem_pct": -22.5,
     "significant": true
    },
    {
     "symbol": "ISAT",
     "security": "Indosat Tbk.",
     "sector": "",
-    "value": 551.9,
-    "deals": 57,
+    "value": 568.6,
+    "deals": 51,
     "days_active": 12,
-    "avg_px": 1803.53,
-    "prem_pct": -0.1,
+    "avg_px": 1809.08,
+    "prem_pct": -0.0,
     "significant": true
    },
    {
@@ -1397,11 +1352,33 @@
     "symbol": "ANTM",
     "security": "Aneka Tambang Tbk.",
     "sector": "",
-    "value": 469.5,
-    "deals": 37,
-    "days_active": 8,
-    "avg_px": 2860.98,
-    "prem_pct": 0.3,
+    "value": 456.2,
+    "deals": 34,
+    "days_active": 7,
+    "avg_px": 2863.72,
+    "prem_pct": 0.1,
+    "significant": true
+   },
+   {
+    "symbol": "BRMS",
+    "security": "Bumi Resources Minerals Tbk.",
+    "sector": "",
+    "value": 433.3,
+    "deals": 56,
+    "days_active": 11,
+    "avg_px": 554.38,
+    "prem_pct": 5.5,
+    "significant": true
+   },
+   {
+    "symbol": "CARE",
+    "security": "Metro Healthcare Indonesia Tbk.",
+    "sector": "",
+    "value": 404.3,
+    "deals": 51,
+    "days_active": 12,
+    "avg_px": 451.75,
+    "prem_pct": 11.7,
     "significant": true
    },
    {
@@ -1416,36 +1393,47 @@
     "significant": true
    },
    {
-    "symbol": "DILD",
-    "security": "Intiland Development Tbk.",
+    "symbol": "MTLA",
+    "security": "Metropolitan Land Tbk.",
     "sector": "",
-    "value": 343.8,
-    "deals": 12,
-    "days_active": 6,
-    "avg_px": 114.37,
-    "prem_pct": 0.2,
+    "value": 348.9,
+    "deals": 15,
+    "days_active": 4,
+    "avg_px": 598.4,
+    "prem_pct": 14.9,
+    "significant": true
+   },
+   {
+    "symbol": "NSSS",
+    "security": "Nusantara Sawit Sejahtera Tbk.",
+    "sector": "",
+    "value": 328.9,
+    "deals": 60,
+    "days_active": 12,
+    "avg_px": 545.22,
+    "prem_pct": -4.9,
+    "significant": true
+   },
+   {
+    "symbol": "BOGA",
+    "security": "Apollo Global Interactive Tbk.",
+    "sector": "",
+    "value": 309.2,
+    "deals": 40,
+    "days_active": 14,
+    "avg_px": 1395.12,
+    "prem_pct": 0.5,
     "significant": true
    },
    {
     "symbol": "BUMI",
     "security": "Bumi Resources Tbk.",
     "sector": "",
-    "value": 331.1,
-    "deals": 93,
+    "value": 306.2,
+    "deals": 95,
     "days_active": 14,
-    "avg_px": 176.46,
-    "prem_pct": 22.7,
-    "significant": true
-   },
-   {
-    "symbol": "TPIA",
-    "security": "Chandra Asri Pacific Tbk.",
-    "sector": "",
-    "value": 295.7,
-    "deals": 127,
-    "days_active": 13,
-    "avg_px": 1777.28,
-    "prem_pct": -0.2,
+    "avg_px": 179.85,
+    "prem_pct": 23.6,
     "significant": true
    },
    {
@@ -1471,25 +1459,14 @@
     "significant": true
    },
    {
-    "symbol": "CARE",
-    "security": "Metro Healthcare Indonesia Tbk.",
+    "symbol": "DILD",
+    "security": "Intiland Development Tbk.",
     "sector": "",
-    "value": 268.5,
-    "deals": 43,
-    "days_active": 11,
-    "avg_px": 426.33,
-    "prem_pct": 8.2,
-    "significant": true
-   },
-   {
-    "symbol": "MTLA",
-    "security": "Metropolitan Land Tbk.",
-    "sector": "",
-    "value": 260.8,
-    "deals": 13,
-    "days_active": 3,
-    "avg_px": 606.36,
-    "prem_pct": 14.8,
+    "value": 268.8,
+    "deals": 10,
+    "days_active": 5,
+    "avg_px": 114.2,
+    "prem_pct": -1.5,
     "significant": true
    },
    {
@@ -1504,25 +1481,14 @@
     "significant": true
    },
    {
-    "symbol": "BOGA",
-    "security": "Apollo Global Interactive Tbk.",
+    "symbol": "TPIA",
+    "security": "Chandra Asri Pacific Tbk.",
     "sector": "",
-    "value": 249.6,
-    "deals": 35,
+    "value": 244.9,
+    "deals": 114,
     "days_active": 12,
-    "avg_px": 1365.75,
-    "prem_pct": 0.3,
-    "significant": true
-   },
-   {
-    "symbol": "NSSS",
-    "security": "Nusantara Sawit Sejahtera Tbk.",
-    "sector": "",
-    "value": 236.8,
-    "deals": 41,
-    "days_active": 10,
-    "avg_px": 521.78,
-    "prem_pct": -6.6,
+    "avg_px": 1894.56,
+    "prem_pct": 2.9,
     "significant": true
    },
    {
@@ -1548,17 +1514,6 @@
     "significant": true
    },
    {
-    "symbol": "BNBR",
-    "security": "Bakrie & Brothers Tbk",
-    "sector": "",
-    "value": 203.8,
-    "deals": 30,
-    "days_active": 13,
-    "avg_px": 99.15,
-    "prem_pct": 6.9,
-    "significant": true
-   },
-   {
     "symbol": "BBNI",
     "security": "Bank Negara Indonesia (Persero) Tbk.",
     "sector": "",
@@ -1581,6 +1536,28 @@
     "significant": true
    },
    {
+    "symbol": "MKPI",
+    "security": "Metropolitan Kentjana Tbk.",
+    "sector": "",
+    "value": 178.4,
+    "deals": 53,
+    "days_active": 11,
+    "avg_px": 21596.15,
+    "prem_pct": 2.7,
+    "significant": true
+   },
+   {
+    "symbol": "BULL",
+    "security": "Buana Lintas Lautan Tbk.",
+    "sector": "",
+    "value": 163.1,
+    "deals": 34,
+    "days_active": 8,
+    "avg_px": 342.0,
+    "prem_pct": -5.3,
+    "significant": true
+   },
+   {
     "symbol": "INPP",
     "security": "Indonesian Paradise Property Tbk.",
     "sector": "",
@@ -1592,14 +1569,25 @@
     "significant": true
    },
    {
-    "symbol": "BULL",
-    "security": "Buana Lintas Lautan Tbk.",
+    "symbol": "UNTR",
+    "security": "United Tractors Tbk.",
     "sector": "",
-    "value": 153.8,
-    "deals": 30,
-    "days_active": 7,
-    "avg_px": 343.86,
-    "prem_pct": -5.3,
+    "value": 156.8,
+    "deals": 26,
+    "days_active": 6,
+    "avg_px": 23112.4,
+    "prem_pct": -0.3,
+    "significant": true
+   },
+   {
+    "symbol": "BNBR",
+    "security": "Bakrie & Brothers Tbk",
+    "sector": "",
+    "value": 154.1,
+    "deals": 29,
+    "days_active": 13,
+    "avg_px": 97.61,
+    "prem_pct": 0.2,
     "significant": true
    },
    {
@@ -1611,28 +1599,6 @@
     "days_active": 9,
     "avg_px": 3064.38,
     "prem_pct": -11.1,
-    "significant": true
-   },
-   {
-    "symbol": "MKPI",
-    "security": "Metropolitan Kentjana Tbk.",
-    "sector": "",
-    "value": 132.6,
-    "deals": 40,
-    "days_active": 10,
-    "avg_px": 21388.17,
-    "prem_pct": 1.2,
-    "significant": true
-   },
-   {
-    "symbol": "UNTR",
-    "security": "United Tractors Tbk.",
-    "sector": "",
-    "value": 130.7,
-    "deals": 23,
-    "days_active": 4,
-    "avg_px": 22914.88,
-    "prem_pct": -0.3,
     "significant": true
    },
    {
@@ -1669,6 +1635,17 @@
     "significant": true
    },
    {
+    "symbol": "SMGR",
+    "security": "Semen Indonesia (Persero) Tbk.",
+    "sector": "",
+    "value": 122.2,
+    "deals": 16,
+    "days_active": 4,
+    "avg_px": 1469.66,
+    "prem_pct": -0.1,
+    "significant": true
+   },
+   {
     "symbol": "BKSL",
     "security": "Sentul City Tbk.",
     "sector": "",
@@ -1680,6 +1657,39 @@
     "significant": true
    },
    {
+    "symbol": "CMRY",
+    "security": "Cisarua Mountain Dairy Tbk.",
+    "sector": "",
+    "value": 119.5,
+    "deals": 16,
+    "days_active": 5,
+    "avg_px": 4336.36,
+    "prem_pct": -0.6,
+    "significant": true
+   },
+   {
+    "symbol": "BIPI",
+    "security": "Astrindo Nusantara Infrastruktur Tbk.",
+    "sector": "",
+    "value": 115.8,
+    "deals": 56,
+    "days_active": 11,
+    "avg_px": 156.52,
+    "prem_pct": 9.6,
+    "significant": true
+   },
+   {
+    "symbol": "OBMD",
+    "security": "OBM Drilchem Tbk.",
+    "sector": "",
+    "value": 113.7,
+    "deals": 7,
+    "days_active": 7,
+    "avg_px": 309.0,
+    "prem_pct": null,
+    "significant": true
+   },
+   {
     "symbol": "FAPA",
     "security": "FAP Agri Tbk.",
     "sector": "",
@@ -1688,28 +1698,6 @@
     "days_active": 2,
     "avg_px": 7288.34,
     "prem_pct": -0.0,
-    "significant": true
-   },
-   {
-    "symbol": "BRPT",
-    "security": "Barito Pacific Tbk.",
-    "sector": "",
-    "value": 111.6,
-    "deals": 45,
-    "days_active": 5,
-    "avg_px": 1516.01,
-    "prem_pct": 6.3,
-    "significant": true
-   },
-   {
-    "symbol": "BIPI",
-    "security": "Astrindo Nusantara Infrastruktur Tbk.",
-    "sector": "",
-    "value": 110.4,
-    "deals": 55,
-    "days_active": 10,
-    "avg_px": 158.89,
-    "prem_pct": 10.0,
     "significant": true
    },
    {
@@ -1757,17 +1745,6 @@
     "significant": true
    },
    {
-    "symbol": "CMRY",
-    "security": "Cisarua Mountain Dairy Tbk.",
-    "sector": "",
-    "value": 103.7,
-    "deals": 13,
-    "days_active": 4,
-    "avg_px": 4289.97,
-    "prem_pct": -0.4,
-    "significant": true
-   },
-   {
     "symbol": "SSIA",
     "security": "Surya Semesta Internusa Tbk.",
     "sector": "",
@@ -1779,36 +1756,25 @@
     "significant": true
    },
    {
+    "symbol": "BBHI",
+    "security": "Allo Bank Indonesia Tbk.",
+    "sector": "",
+    "value": 94.7,
+    "deals": 195,
+    "days_active": 5,
+    "avg_px": 1097.63,
+    "prem_pct": 17.1,
+    "significant": false
+   },
+   {
     "symbol": "BANK",
     "security": "Bank Aladin Syariah Tbk.",
     "sector": "",
-    "value": 99.3,
-    "deals": 11,
-    "days_active": 3,
-    "avg_px": 284.01,
-    "prem_pct": 5.9,
-    "significant": false
-   },
-   {
-    "symbol": "OBMD",
-    "security": "OBM Drilchem Tbk.",
-    "sector": "",
-    "value": 97.3,
-    "deals": 6,
-    "days_active": 6,
-    "avg_px": 309.0,
-    "prem_pct": null,
-    "significant": false
-   },
-   {
-    "symbol": "INDF",
-    "security": "Indofood Sukses Makmur Tbk.",
-    "sector": "",
-    "value": 93.7,
-    "deals": 19,
-    "days_active": 4,
-    "avg_px": 6157.95,
-    "prem_pct": 0.0,
+    "value": 90.4,
+    "deals": 7,
+    "days_active": 2,
+    "avg_px": 289.79,
+    "prem_pct": 6.6,
     "significant": false
    },
    {
@@ -1823,14 +1789,14 @@
     "significant": false
    },
    {
-    "symbol": "BBHI",
-    "security": "Allo Bank Indonesia Tbk.",
+    "symbol": "PTRO",
+    "security": "Petrosea Tbk.",
     "sector": "",
-    "value": 88.7,
-    "deals": 189,
-    "days_active": 4,
-    "avg_px": 1103.46,
-    "prem_pct": 17.5,
+    "value": 86.6,
+    "deals": 115,
+    "days_active": 10,
+    "avg_px": 4875.59,
+    "prem_pct": 20.7,
     "significant": false
    },
    {
@@ -1845,14 +1811,25 @@
     "significant": false
    },
    {
-    "symbol": "PTRO",
-    "security": "Petrosea Tbk.",
+    "symbol": "SKBM",
+    "security": "Sekar Bumi Tbk.",
     "sector": "",
-    "value": 79.7,
-    "deals": 103,
-    "days_active": 9,
-    "avg_px": 4878.35,
-    "prem_pct": 20.7,
+    "value": 83.2,
+    "deals": 1,
+    "days_active": 1,
+    "avg_px": 150.0,
+    "prem_pct": null,
+    "significant": false
+   },
+   {
+    "symbol": "AVIA",
+    "security": "Avia Avian Tbk.",
+    "sector": "",
+    "value": 82.5,
+    "deals": 5,
+    "days_active": 3,
+    "avg_px": 313.5,
+    "prem_pct": -1.8,
     "significant": false
    },
    {
@@ -1863,17 +1840,6 @@
     "deals": 1,
     "days_active": 1,
     "avg_px": 1490.0,
-    "prem_pct": -2.0,
-    "significant": false
-   },
-   {
-    "symbol": "AVIA",
-    "security": "Avia Avian Tbk.",
-    "sector": "",
-    "value": 77.0,
-    "deals": 3,
-    "days_active": 2,
-    "avg_px": 313.21,
     "prem_pct": -2.0,
     "significant": false
    },
@@ -1889,14 +1855,14 @@
     "significant": false
    },
    {
-    "symbol": "BCAP",
-    "security": "MNC Kapital Indonesia Tbk.",
+    "symbol": "FUTR",
+    "security": "Futura Energi Global Tbk.",
     "sector": "",
-    "value": 70.5,
+    "value": 73.0,
     "deals": 6,
     "days_active": 4,
-    "avg_px": 54.24,
-    "prem_pct": 8.7,
+    "avg_px": 179.12,
+    "prem_pct": -3.7,
     "significant": false
    },
    {
@@ -1933,14 +1899,25 @@
     "significant": false
    },
    {
-    "symbol": "SMGR",
-    "security": "Semen Indonesia (Persero) Tbk.",
+    "symbol": "ICBP",
+    "security": "Indofood CBP Sukses Makmur Tbk.",
     "sector": "",
-    "value": 65.1,
-    "deals": 6,
-    "days_active": 2,
-    "avg_px": 1469.33,
-    "prem_pct": -0.9,
+    "value": 67.3,
+    "deals": 33,
+    "days_active": 6,
+    "avg_px": 6695.33,
+    "prem_pct": -0.3,
+    "significant": false
+   },
+   {
+    "symbol": "AMMN",
+    "security": "Amman Mineral Internasional Tbk.",
+    "sector": "",
+    "value": 66.1,
+    "deals": 16,
+    "days_active": 3,
+    "avg_px": 3801.11,
+    "prem_pct": 0.5,
     "significant": false
    },
    {
@@ -1977,17 +1954,6 @@
     "significant": false
    },
    {
-    "symbol": "AMMN",
-    "security": "Amman Mineral Internasional Tbk.",
-    "sector": "",
-    "value": 60.6,
-    "deals": 13,
-    "days_active": 2,
-    "avg_px": 3822.77,
-    "prem_pct": 0.5,
-    "significant": false
-   },
-   {
     "symbol": "RISE",
     "security": "Jaya Sukses Makmur Sentosa Tbk.",
     "sector": "",
@@ -2007,28 +1973,6 @@
     "days_active": 2,
     "avg_px": 93.49,
     "prem_pct": null,
-    "significant": false
-   },
-   {
-    "symbol": "ICBP",
-    "security": "Indofood CBP Sukses Makmur Tbk.",
-    "sector": "",
-    "value": 58.5,
-    "deals": 31,
-    "days_active": 5,
-    "avg_px": 6697.53,
-    "prem_pct": -0.4,
-    "significant": false
-   },
-   {
-    "symbol": "FUTR",
-    "security": "Futura Energi Global Tbk.",
-    "sector": "",
-    "value": 56.1,
-    "deals": 4,
-    "days_active": 3,
-    "avg_px": 169.62,
-    "prem_pct": -5.1,
     "significant": false
    },
    {
@@ -2098,6 +2042,28 @@
     "significant": false
    },
    {
+    "symbol": "KING",
+    "security": "Hoffmen Cleanindo Tbk.",
+    "sector": "",
+    "value": 50.0,
+    "deals": 2,
+    "days_active": 1,
+    "avg_px": 200.0,
+    "prem_pct": -36.3,
+    "significant": false
+   },
+   {
+    "symbol": "JECX",
+    "security": "Nitrasanata Dharma Tbk.",
+    "sector": "",
+    "value": 48.4,
+    "deals": 289,
+    "days_active": 2,
+    "avg_px": 1461.18,
+    "prem_pct": -10.0,
+    "significant": false
+   },
+   {
     "symbol": "CSAP",
     "security": "Catur Sentosa Adiprana Tbk.",
     "sector": "",
@@ -2131,17 +2097,6 @@
     "significant": false
    },
    {
-    "symbol": "MDKA",
-    "security": "Merdeka Copper Gold Tbk.",
-    "sector": "",
-    "value": 45.4,
-    "deals": 63,
-    "days_active": 4,
-    "avg_px": 2605.91,
-    "prem_pct": -0.2,
-    "significant": false
-   },
-   {
     "symbol": "BINA",
     "security": "Bank Ina Perdana Tbk.",
     "sector": "",
@@ -2153,14 +2108,25 @@
     "significant": false
    },
    {
-    "symbol": "CTRA",
-    "security": "Ciputra Development Tbk.",
+    "symbol": "BRPT",
+    "security": "Barito Pacific Tbk.",
     "sector": "",
-    "value": 44.6,
-    "deals": 7,
-    "days_active": 2,
-    "avg_px": 535.53,
-    "prem_pct": 0.5,
+    "value": 42.7,
+    "deals": 35,
+    "days_active": 4,
+    "avg_px": 1674.33,
+    "prem_pct": 10.9,
+    "significant": false
+   },
+   {
+    "symbol": "BCAP",
+    "security": "MNC Kapital Indonesia Tbk.",
+    "sector": "",
+    "value": 41.4,
+    "deals": 4,
+    "days_active": 3,
+    "avg_px": 53.06,
+    "prem_pct": 6.3,
     "significant": false
    },
    {
@@ -2194,6 +2160,17 @@
     "days_active": 1,
     "avg_px": 1624.64,
     "prem_pct": -0.9,
+    "significant": false
+   },
+   {
+    "symbol": "MDKA",
+    "security": "Merdeka Copper Gold Tbk.",
+    "sector": "",
+    "value": 35.9,
+    "deals": 7,
+    "days_active": 3,
+    "avg_px": 2651.79,
+    "prem_pct": -0.6,
     "significant": false
    },
    {
@@ -2285,25 +2262,25 @@
     "significant": false
    },
    {
-    "symbol": "UNVR",
-    "security": "Unilever Indonesia Tbk.",
+    "symbol": "TINS",
+    "security": "TIMAH (Persero) Tbk.",
     "sector": "",
-    "value": 31.2,
-    "deals": 33,
-    "days_active": 4,
-    "avg_px": 1686.99,
-    "prem_pct": -0.0,
+    "value": 30.3,
+    "deals": 7,
+    "days_active": 3,
+    "avg_px": 3501.11,
+    "prem_pct": 2.0,
     "significant": false
    },
    {
-    "symbol": "PWON",
-    "security": "Pakuwon Jati Tbk.",
+    "symbol": "INDF",
+    "security": "Indofood Sukses Makmur Tbk.",
     "sector": "",
-    "value": 29.5,
-    "deals": 4,
-    "days_active": 1,
-    "avg_px": 250.0,
-    "prem_pct": 2.5,
+    "value": 30.2,
+    "deals": 10,
+    "days_active": 3,
+    "avg_px": 6688.11,
+    "prem_pct": -0.2,
     "significant": false
    },
    {
@@ -2348,17 +2325,6 @@
     "days_active": 3,
     "avg_px": 102.93,
     "prem_pct": -10.8,
-    "significant": false
-   },
-   {
-    "symbol": "EMTK",
-    "security": "Elang Mahkota Teknologi Tbk.",
-    "sector": "",
-    "value": 26.0,
-    "deals": 4,
-    "days_active": 2,
-    "avg_px": 520.96,
-    "prem_pct": 4.9,
     "significant": false
    },
    {
@@ -2417,6 +2383,17 @@
     "significant": false
    },
    {
+    "symbol": "STAR",
+    "security": "Calculus Global Ventures Tbk.",
+    "sector": "",
+    "value": 24.6,
+    "deals": 2,
+    "days_active": 2,
+    "avg_px": 273.0,
+    "prem_pct": 1.3,
+    "significant": false
+   },
+   {
     "symbol": "SIDO",
     "security": "Industri Jamu dan Farmasi Sido Muncul Tbk.",
     "sector": "",
@@ -2439,6 +2416,17 @@
     "significant": false
    },
    {
+    "symbol": "UNVR",
+    "security": "Unilever Indonesia Tbk.",
+    "sector": "",
+    "value": 23.4,
+    "deals": 17,
+    "days_active": 3,
+    "avg_px": 1728.11,
+    "prem_pct": 0.0,
+    "significant": false
+   },
+   {
     "symbol": "NATO",
     "security": "Olympus Strategic Indonesia Tbk.",
     "sector": "",
@@ -2447,28 +2435,6 @@
     "days_active": 1,
     "avg_px": 545.27,
     "prem_pct": 1.0,
-    "significant": false
-   },
-   {
-    "symbol": "MAPA",
-    "security": "Map Aktif Adiperkasa Tbk.",
-    "sector": "",
-    "value": 22.4,
-    "deals": 6,
-    "days_active": 3,
-    "avg_px": 580.2,
-    "prem_pct": 0.4,
-    "significant": false
-   },
-   {
-    "symbol": "TINS",
-    "security": "Timah Tbk.",
-    "sector": "",
-    "value": 20.3,
-    "deals": 6,
-    "days_active": 2,
-    "avg_px": 3521.74,
-    "prem_pct": 2.8,
     "significant": false
    },
    {
@@ -2516,6 +2482,17 @@
     "significant": false
    },
    {
+    "symbol": "MAPA",
+    "security": "Map Aktif Adiperkasa Tbk.",
+    "sector": "",
+    "value": 17.0,
+    "deals": 2,
+    "days_active": 2,
+    "avg_px": 596.75,
+    "prem_pct": 0.3,
+    "significant": false
+   },
+   {
     "symbol": "ASLI",
     "security": "Asri Karya Lestari Tbk.",
     "sector": "",
@@ -2524,6 +2501,17 @@
     "days_active": 2,
     "avg_px": 185.67,
     "prem_pct": -12.3,
+    "significant": false
+   },
+   {
+    "symbol": "BDMN",
+    "security": "Bank Danamon Indonesia Tbk.",
+    "sector": "",
+    "value": 16.2,
+    "deals": 4,
+    "days_active": 2,
+    "avg_px": 4002.1,
+    "prem_pct": 0.0,
     "significant": false
    },
    {
@@ -2549,6 +2537,17 @@
     "significant": false
    },
    {
+    "symbol": "SRTG",
+    "security": "Saratoga Investama Sedaya Tbk.",
+    "sector": "",
+    "value": 14.8,
+    "deals": 2,
+    "days_active": 2,
+    "avg_px": 1489.24,
+    "prem_pct": -0.0,
+    "significant": false
+   },
+   {
     "symbol": "EPAC",
     "security": "Megalestari Epack Sentosaraya Tbk.",
     "sector": "",
@@ -2557,17 +2556,6 @@
     "days_active": 2,
     "avg_px": 23.01,
     "prem_pct": -11.5,
-    "significant": false
-   },
-   {
-    "symbol": "DPUM",
-    "security": "Dua Putra Utama Makmur Tbk.",
-    "sector": "",
-    "value": 13.9,
-    "deals": 2,
-    "days_active": 2,
-    "avg_px": 172.5,
-    "prem_pct": 25.2,
     "significant": false
    },
    {
@@ -2612,17 +2600,6 @@
     "days_active": 1,
     "avg_px": 1840.0,
     "prem_pct": 0.3,
-    "significant": false
-   },
-   {
-    "symbol": "STAR",
-    "security": "Calculus Global Ventures Tbk.",
-    "sector": "",
-    "value": 12.8,
-    "deals": 1,
-    "days_active": 1,
-    "avg_px": 284.0,
-    "prem_pct": 5.2,
     "significant": false
    },
    {
@@ -2681,6 +2658,17 @@
     "significant": false
    },
    {
+    "symbol": "HYGN",
+    "security": "Ecocare Indo Pasifik Tbk.",
+    "sector": "",
+    "value": 11.0,
+    "deals": 2,
+    "days_active": 1,
+    "avg_px": 140.0,
+    "prem_pct": -3.4,
+    "significant": false
+   },
+   {
     "symbol": "INCO",
     "security": "Vale Indonesia Tbk.",
     "sector": "",
@@ -2693,13 +2681,13 @@
    }
   ],
   "kpi": {
-   "total_value": 51342.2,
-   "n_deals": 10514,
-   "n_stocks": 135,
+   "total_value": 51420.1,
+   "n_deals": 10956,
+   "n_stocks": 137,
    "top_stock": "ARCI",
-   "sessions": 20
+   "sessions": 21
   },
-  "from": "2026-06-07",
-  "to": "2026-07-06"
+  "from": "2026-06-09",
+  "to": "2026-07-08"
  }
 }

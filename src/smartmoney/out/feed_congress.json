@@ -1,10 +1,10 @@
 {
  "meta": {
-  "generated": "2026-07-08T03:30:04",
+  "generated": "2026-07-09T03:30:05",
   "coverage_from": "2025-01-02",
   "latest_trade": "2026-06-30",
   "n_politicians": 75,
-  "n_trades": 1671,
+  "n_trades": 1672,
   "unmatched": [],
   "recent_days": 90,
   "source": "Senate eFD + House Clerk periodic transaction reports (STOCK Act); amounts are disclosed ranges; filings may lag trades by up to 45 days"
@@ -51,9 +51,9 @@
     ]
    },
    {
-    "symbol": "PG",
-    "asset": "David Taylor Trust > Schwab Joint Brokerage #1 (Home Grown) ",
-    "mid": 24002,
+    "symbol": "HD",
+    "asset": "David Taylor Trust > Sardinia Ready Mix 401(k) - Dave Home D",
+    "mid": 32002,
     "n_politicians": 2,
     "politicians": [
      "David J. Taylor",
@@ -61,12 +61,13 @@
     ]
    },
    {
-    "symbol": "HD",
-    "asset": "David Taylor Trust > Sardinia Ready Mix 401(k) - Dave Home D",
+    "symbol": "PG",
+    "asset": "David Taylor Trust > Schwab Joint Brokerage #1 (Home Grown) ",
     "mid": 24002,
-    "n_politicians": 1,
+    "n_politicians": 2,
     "politicians": [
-     "David J. Taylor"
+     "David J. Taylor",
+     "Lloyd Doggett"
     ]
    },
    {
@@ -209,26 +210,6 @@
     ]
    },
    {
-    "symbol": "T",
-    "asset": "AT&T Inc.",
-    "mid": 40501,
-    "n_politicians": 2,
-    "politicians": [
-     "Josh Gottheimer",
-     "Tim Moore"
-    ]
-   },
-   {
-    "symbol": "HD",
-    "asset": "David Taylor Trust > Sardinia Ready Mix 401(k) - Dave Home D",
-    "mid": 40501,
-    "n_politicians": 2,
-    "politicians": [
-     "David J. Taylor",
-     "Josh Gottheimer"
-    ]
-   },
-   {
     "symbol": "ORCL",
     "asset": "Oracle Corporation Common Stock",
     "mid": 32500,
@@ -256,21 +237,21 @@
     ]
    },
    {
-    "symbol": "GS",
-    "asset": "Morgan Stanley - Select UMA Account # 1 JT Goldman Sachs Gro",
-    "mid": 32500,
-    "n_politicians": 1,
-    "politicians": [
-     "Josh Gottheimer"
-    ]
-   },
-   {
     "symbol": "PG",
     "asset": "R.W. Allen & Associates, Inc. > RWA&A - Securities SP Procte",
     "mid": 32500,
     "n_politicians": 1,
     "politicians": [
      "Rick W. Allen"
+    ]
+   },
+   {
+    "symbol": "T",
+    "asset": "AT&T Inc.",
+    "mid": 32500,
+    "n_politicians": 1,
+    "politicians": [
+     "Tim Moore"
     ]
    },
    {
@@ -290,9 +271,40 @@
     "politicians": [
      "John Boozman"
     ]
+   },
+   {
+    "symbol": "LITP",
+    "asset": "Sprott Lithium Miners ETF",
+    "mid": 16001,
+    "n_politicians": 1,
+    "politicians": [
+     "John Boozman"
+    ]
+   },
+   {
+    "symbol": "IVV",
+    "asset": "iShares Core S&amp;P 500 ETF",
+    "mid": 16001,
+    "n_politicians": 1,
+    "politicians": [
+     "John Boozman"
+    ]
    }
   ],
   "recent": [
+   {
+    "name": "Lloyd Doggett",
+    "party": "Democrat",
+    "chamber": "House",
+    "state": "TX",
+    "symbol": "HD",
+    "asset": "Home Depot, Inc.",
+    "side": "BUY",
+    "lo": 1001,
+    "hi": 15000,
+    "date": "2026-06-18",
+    "filed": "2026-07-06"
+   },
    {
     "name": "Gilbert Ray Cisneros, Jr.",
     "party": "Democrat",
@@ -669,19 +681,6 @@
     "hi": 15000,
     "date": "2026-05-27",
     "filed": "2026-06-16"
-   },
-   {
-    "name": "John Boozman",
-    "party": "Republican",
-    "chamber": "Senate",
-    "state": "AR",
-    "symbol": "FTGC",
-    "asset": "First Trust Global Tactical Commodity Strategy Fund",
-    "side": "SELL",
-    "lo": 1001,
-    "hi": 15000,
-    "date": "2026-05-27",
-    "filed": "2026-06-16"
    }
   ]
  },
@@ -870,7 +869,7 @@
    "n_trades": 328,
    "buy_mid": 1680086,
    "sell_mid": 1561578,
-   "recent_mid": 593024,
+   "recent_mid": 585024,
    "last_traded": "2026-05-27",
    "top_buys": [
     {
@@ -2966,725 +2965,6 @@
    ]
   },
   {
-   "id": "G000583",
-   "name": "Josh Gottheimer",
-   "party": "Democrat",
-   "chamber": "House",
-   "state": "NJ",
-   "district": 5,
-   "committees": [
-    "House Permanent Select Committee on Intelligence",
-    "House Committee on Financial Services"
-   ],
-   "n_trades": 61,
-   "buy_mid": 184012,
-   "sell_mid": 353019,
-   "recent_mid": 113004,
-   "last_traded": "2026-05-14",
-   "top_buys": [
-    {
-     "symbol": "V",
-     "mid": 80005,
-     "n": 10,
-     "asset": "Morgan Stanley - Select UMA Account # 1 JT Visa Inc."
-    },
-    {
-     "symbol": "FI",
-     "mid": 32002,
-     "n": 4,
-     "asset": "Morgan Stanley - Select UMA Account # 1 JT Fiserv, Inc. Comm"
-    },
-    {
-     "symbol": "FN",
-     "mid": 16001,
-     "n": 2,
-     "asset": "Fabrinet Ordinary Shares"
-    },
-    {
-     "symbol": "KO",
-     "mid": 16001,
-     "n": 2,
-     "asset": "Morgan Stanley - Select UMA Account # 1 JT Coca-Cola Company"
-    },
-    {
-     "symbol": "GS",
-     "mid": 8000,
-     "n": 1,
-     "asset": "Morgan Stanley - Select UMA Account # 1 JT Goldman Sachs Gro"
-    },
-    {
-     "symbol": "CBZ",
-     "mid": 8000,
-     "n": 1,
-     "asset": "Morgan Stanley - Active Asset Account # 3 JT CBIZ, Inc. Comm"
-    },
-    {
-     "symbol": "MTHRY",
-     "mid": 8000,
-     "n": 1,
-     "asset": "Morgan Stanley - Select UMA Account # 1 JT M3 INC UNSP/ADR"
-    },
-    {
-     "symbol": "HD",
-     "mid": 8000,
-     "n": 1,
-     "asset": "Morgan Stanley - Select UMA Account # 1 JT Home Depot, Inc."
-    }
-   ],
-   "top_sells": [
-    {
-     "symbol": "V",
-     "mid": 64004,
-     "n": 8,
-     "asset": "Morgan Stanley - Select UMA Account # 1 JT Visa Inc."
-    },
-    {
-     "symbol": "HD",
-     "mid": 56502,
-     "n": 4,
-     "asset": "Morgan Stanley - Select UMA Account # 1 JT Home Depot, Inc."
-    },
-    {
-     "symbol": "GS",
-     "mid": 40501,
-     "n": 2,
-     "asset": "Goldman Sachs Group, Inc."
-    },
-    {
-     "symbol": "NSRGY",
-     "mid": 32002,
-     "n": 4,
-     "asset": "; Expires 6/18/2026 JT NESTLE S.A S/ADR"
-    },
-    {
-     "symbol": "CBZ",
-     "mid": 16001,
-     "n": 2,
-     "asset": "Morgan Stanley - Select UMA Account # 1 JT CBIZ, Inc. Common"
-    },
-    {
-     "symbol": "DEO",
-     "mid": 16001,
-     "n": 2,
-     "asset": "Morgan Stanley - Select UMA Account # 1 JT Diageo plc Common"
-    },
-    {
-     "symbol": "NTDOY",
-     "mid": 16001,
-     "n": 2,
-     "asset": "Nintendo Co Ltd ADR"
-    },
-    {
-     "symbol": "TT",
-     "mid": 16001,
-     "n": 2,
-     "asset": "Morgan Stanley - Select UMA Account # 1 JT Trane Technologie"
-    }
-   ],
-   "trades": [
-    {
-     "date": "2026-05-14",
-     "owner": "",
-     "symbol": "NSRGY",
-     "asset": "NESTLE S.A S/ADR",
-     "side": "SELL",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2026-06-03"
-    },
-    {
-     "date": "2026-05-05",
-     "owner": "",
-     "symbol": "NSRGY",
-     "asset": "Morgan Stanley - Select UMA Account # 1 JT NESTLE S.A S/ADR",
-     "side": "SELL",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2026-06-03"
-    },
-    {
-     "date": "2026-05-01",
-     "owner": "",
-     "symbol": "FN",
-     "asset": "Fabrinet Ordinary Shares",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2026-06-03"
-    },
-    {
-     "date": "2026-04-16",
-     "owner": "",
-     "symbol": "GS",
-     "asset": "Morgan Stanley - Select UMA Account # 1 JT Goldman Sachs Group, Inc.",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2026-05-19"
-    },
-    {
-     "date": "2026-04-09",
-     "owner": "",
-     "symbol": "T",
-     "asset": "Morgan Stanley - Active Asset Account # 3 JT AT&T Inc.",
-     "side": "SELL",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2026-05-19"
-    },
-    {
-     "date": "2026-04-09",
-     "owner": "",
-     "symbol": "GS",
-     "asset": "Morgan Stanley - Select UMA Account # 1 JT Goldman Sachs Group, Inc.",
-     "side": "SELL",
-     "lo": 15001,
-     "hi": 50000,
-     "filed": "2026-05-19"
-    },
-    {
-     "date": "2026-04-09",
-     "owner": "",
-     "symbol": "HD",
-     "asset": "Morgan Stanley - Select UMA Account # 1 JT Home Depot, Inc.",
-     "side": "SELL",
-     "lo": 15001,
-     "hi": 50000,
-     "filed": "2026-05-19"
-    },
-    {
-     "date": "2026-04-09",
-     "owner": "",
-     "symbol": "VLY",
-     "asset": "Morgan Stanley - Active Asset Account # 3 JT Valley National Bancorp",
-     "side": "SELL",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2026-05-19"
-    },
-    {
-     "date": "2026-04-06",
-     "owner": "",
-     "symbol": "CBZ",
-     "asset": "Morgan Stanley - Active Asset Account # 3 JT CBIZ, Inc. Common Stock",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2026-05-19"
-    },
-    {
-     "date": "2026-03-24",
-     "owner": "",
-     "symbol": "FN",
-     "asset": "Fabrinet Ordinary Shares",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2026-04-08"
-    },
-    {
-     "date": "2026-03-05",
-     "owner": "",
-     "symbol": "CBZ",
-     "asset": "Morgan Stanley - Select UMA Account # 1 JT CBIZ, Inc. Common Stock",
-     "side": "SELL",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2026-04-08"
-    },
-    {
-     "date": "2026-02-18",
-     "owner": "",
-     "symbol": "V",
-     "asset": "Visa Inc.",
-     "side": "SELL",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2026-03-16"
-    },
-    {
-     "date": "2026-01-26",
-     "owner": "",
-     "symbol": "NSRGY",
-     "asset": "Morgan Stanley - Select UMA Account # 1 JT NESTLE S.A S/ADR",
-     "side": "SELL",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2026-02-26"
-    },
-    {
-     "date": "2025-12-05",
-     "owner": "",
-     "symbol": "MTHRY",
-     "asset": "Morgan Stanley - Select UMA Account # 1 JT M3 INC UNSP/ADR",
-     "side": "SELL",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2026-01-14"
-    },
-    {
-     "date": "2025-11-19",
-     "owner": "",
-     "symbol": "HD",
-     "asset": "Morgan Stanley - Select UMA Account # 1 JT Home Depot, Inc.",
-     "side": "SELL",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-12-29"
-    },
-    {
-     "date": "2025-09-30",
-     "owner": "",
-     "symbol": "MTHRY",
-     "asset": "Morgan Stanley - Select UMA Account # 1 JT M3 INC UNSP/ADR",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-10-15"
-    },
-    {
-     "date": "2025-09-22",
-     "owner": "",
-     "symbol": "DEO",
-     "asset": "Morgan Stanley - Select UMA Account # 1 JT Diageo plc Common Stock",
-     "side": "SELL",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-10-15"
-    },
-    {
-     "date": "2025-08-12",
-     "owner": "",
-     "symbol": "V",
-     "asset": "Morgan Stanley - Select UMA Account # 1 JT Visa Inc.",
-     "side": "SELL",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-09-05"
-    },
-    {
-     "date": "2025-08-01",
-     "owner": "",
-     "symbol": "V",
-     "asset": "Morgan Stanley - Select UMA Account # 1 JT Visa Inc.",
-     "side": "SELL",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-09-05"
-    },
-    {
-     "date": "2025-07-14",
-     "owner": "",
-     "symbol": "V",
-     "asset": "Morgan Stanley - Select UMA Account # 1 JT Visa Inc.",
-     "side": "SELL",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-08-11"
-    },
-    {
-     "date": "2025-06-26",
-     "owner": "",
-     "symbol": "V",
-     "asset": "Visa Inc.",
-     "side": "SELL",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-07-16"
-    },
-    {
-     "date": "2025-06-25",
-     "owner": "",
-     "symbol": "V",
-     "asset": "Morgan Stanley - Select UMA Account # 1 JT Visa Inc.",
-     "side": "SELL",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-07-16"
-    },
-    {
-     "date": "2025-06-24",
-     "owner": "",
-     "symbol": "V",
-     "asset": "Morgan Stanley - Select UMA Account # 1 JT Visa Inc.",
-     "side": "SELL",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-07-16"
-    },
-    {
-     "date": "2025-06-20",
-     "owner": "",
-     "symbol": "V",
-     "asset": "Morgan Stanley - Select UMA Account # 1 JT Visa Inc.",
-     "side": "SELL",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-07-16"
-    },
-    {
-     "date": "2025-06-03",
-     "owner": "",
-     "symbol": "PFE",
-     "asset": "Morgan Stanley - Select UMA Account # 1 JT Pfizer, Inc. Common Stock",
-     "side": "SELL",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-07-16"
-    },
-    {
-     "date": "2025-05-23",
-     "owner": "",
-     "symbol": "ZTO",
-     "asset": "Morgan Stanley - Select UMA Account # 1 JT ZTO Express",
-     "side": "SELL",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-06-11"
-    },
-    {
-     "date": "2025-05-14",
-     "owner": "",
-     "symbol": "FI",
-     "asset": "Morgan Stanley - Select UMA Account # 1 JT Fiserv, Inc. Common Stock",
-     "side": "SELL",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-06-11"
-    },
-    {
-     "date": "2025-04-21",
-     "owner": "",
-     "symbol": "HD",
-     "asset": "Morgan Stanley - Select UMA Account # 1 JT Home Depot, Inc.",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-05-14"
-    },
-    {
-     "date": "2025-04-09",
-     "owner": "",
-     "symbol": "CBZ",
-     "asset": "Morgan Stanley - Select UMA Account # 1 JT CBIZ, Inc. Common Stock",
-     "side": "SELL",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-05-14"
-    },
-    {
-     "date": "2025-04-09",
-     "owner": "",
-     "symbol": "KO",
-     "asset": "Morgan Stanley - Select UMA Account # 1 JT Coca-Cola Company",
-     "side": "SELL",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-05-14"
-    },
-    {
-     "date": "2025-04-09",
-     "owner": "",
-     "symbol": "NSRGY",
-     "asset": "; Expires 6/18/2026 JT NESTLE S.A S/ADR",
-     "side": "SELL",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-05-14"
-    },
-    {
-     "date": "2025-04-09",
-     "owner": "",
-     "symbol": "NTDOY",
-     "asset": "Nintendo Co Ltd ADR",
-     "side": "SELL",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-05-14"
-    },
-    {
-     "date": "2025-04-09",
-     "owner": "",
-     "symbol": "PGR",
-     "asset": "Morgan Stanley - Select UMA Account # 1 JT Progressive Corporation",
-     "side": "SELL",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-05-14"
-    },
-    {
-     "date": "2025-04-09",
-     "owner": "",
-     "symbol": "SAP",
-     "asset": "Morgan Stanley - Select UMA Account # 1 JT SAP SE ADS",
-     "side": "SELL",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-05-14"
-    },
-    {
-     "date": "2025-04-09",
-     "owner": "",
-     "symbol": "SLGN",
-     "asset": "Morgan Stanley - Select UMA Account # 1 JT Silgan Holdings Inc.",
-     "side": "SELL",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-05-14"
-    },
-    {
-     "date": "2025-04-07",
-     "owner": "",
-     "symbol": "CHX",
-     "asset": "Morgan Stanley - Select UMA Account # 1 JT ChampionX Corporation",
-     "side": "SELL",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-05-14"
-    },
-    {
-     "date": "2025-04-04",
-     "owner": "",
-     "symbol": "FI",
-     "asset": "Morgan Stanley - Select UMA Account # 1 JT Fiserv, Inc. Common Stock",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-05-14"
-    },
-    {
-     "date": "2025-03-24",
-     "owner": "",
-     "symbol": "V",
-     "asset": "Morgan Stanley - Select UMA Account # 1 JT Visa Inc.",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-04-10"
-    },
-    {
-     "date": "2025-03-19",
-     "owner": "",
-     "symbol": "DEO",
-     "asset": "Morgan Stanley - Select UMA Account # 1 JT Diageo plc Common Stock",
-     "side": "SELL",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-04-10"
-    },
-    {
-     "date": "2025-03-19",
-     "owner": "",
-     "symbol": "HD",
-     "asset": "Morgan Stanley - Select UMA Account # 1 JT Home Depot, Inc.",
-     "side": "SELL",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-04-10"
-    },
-    {
-     "date": "2025-03-10",
-     "owner": "",
-     "symbol": "FI",
-     "asset": "Morgan Stanley - Select UMA Account # 1 JT Fiserv, Inc. Common Stock",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-04-10"
-    },
-    {
-     "date": "2025-03-05",
-     "owner": "",
-     "symbol": "V",
-     "asset": "Morgan Stanley - Select UMA Account # 1 JT Visa Inc.",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-04-10"
-    },
-    {
-     "date": "2025-03-03",
-     "owner": "",
-     "symbol": "V",
-     "asset": "Morgan Stanley - Select UMA Account # 1 JT Visa Inc.",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-04-10"
-    },
-    {
-     "date": "2025-02-28",
-     "owner": "",
-     "symbol": "GS",
-     "asset": "Goldman Sachs Group, Inc.",
-     "side": "SELL",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-03-06"
-    },
-    {
-     "date": "2025-02-28",
-     "owner": "",
-     "symbol": "V",
-     "asset": "Morgan Stanley - Select UMA Account # 1 JT Visa Inc.",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-03-06"
-    },
-    {
-     "date": "2025-02-26",
-     "owner": "",
-     "symbol": "FI",
-     "asset": "Morgan Stanley - Select UMA Account # 1 JT Fiserv, Inc. Common Stock",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-03-06"
-    },
-    {
-     "date": "2025-02-24",
-     "owner": "",
-     "symbol": "HD",
-     "asset": "Morgan Stanley - Select UMA Account # 1 JT Home Depot, Inc.",
-     "side": "SELL",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-03-06"
-    },
-    {
-     "date": "2025-02-21",
-     "owner": "",
-     "symbol": "FI",
-     "asset": "Morgan Stanley - Select UMA Account # 1 JT Fiserv, Inc. Common Stock",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-03-06"
-    },
-    {
-     "date": "2025-02-21",
-     "owner": "",
-     "symbol": "NTDOY",
-     "asset": "Nintendo Co Ltd ADR",
-     "side": "SELL",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-03-06"
-    },
-    {
-     "date": "2025-02-13",
-     "owner": "",
-     "symbol": "V",
-     "asset": "Morgan Stanley - Select UMA Account # 1 JT Visa Inc.",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-03-06"
-    },
-    {
-     "date": "2025-01-31",
-     "owner": "",
-     "symbol": "V",
-     "asset": "Morgan Stanley - Select UMA Account # 1 JT Visa Inc.",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-02-10"
-    },
-    {
-     "date": "2025-01-30",
-     "owner": "",
-     "symbol": "TT",
-     "asset": "Morgan Stanley - Select UMA Account # 1 JT Trane Technologies plc",
-     "side": "SELL",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-02-10"
-    },
-    {
-     "date": "2025-01-30",
-     "owner": "",
-     "symbol": "V",
-     "asset": "Morgan Stanley - Select UMA Account # 1 JT Visa Inc.",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-02-10"
-    },
-    {
-     "date": "2025-01-28",
-     "owner": "",
-     "symbol": "V",
-     "asset": "Morgan Stanley - Select UMA Account # 1 JT Visa Inc.",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-02-10"
-    },
-    {
-     "date": "2025-01-24",
-     "owner": "",
-     "symbol": "V",
-     "asset": "Morgan Stanley - Select UMA Account # 1 JT Visa Inc.",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-02-10"
-    },
-    {
-     "date": "2025-01-23",
-     "owner": "",
-     "symbol": "TT",
-     "asset": "Morgan Stanley - Select UMA Account # 1 JT Trane Technologies plc",
-     "side": "SELL",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-02-10"
-    },
-    {
-     "date": "2025-01-23",
-     "owner": "",
-     "symbol": "V",
-     "asset": "Morgan Stanley - Select UMA Account # 1 JT Visa Inc.",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-02-10"
-    },
-    {
-     "date": "2025-01-21",
-     "owner": "",
-     "symbol": "KO",
-     "asset": "Morgan Stanley - Select UMA Account # 1 JT Coca-Cola Company",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-02-10"
-    },
-    {
-     "date": "2025-01-16",
-     "owner": "",
-     "symbol": "KO",
-     "asset": "Morgan Stanley - Select UMA Account # 1 JT Coca-Cola Company",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-02-10"
-    },
-    {
-     "date": "2025-01-16",
-     "owner": "",
-     "symbol": "NSRGY",
-     "asset": "Morgan Stanley - Select UMA Account # 1 JT NESTLE S.A S/ADR",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-02-10"
-    }
-   ]
-  },
-  {
    "id": "T000490",
    "name": "David J. Taylor",
    "party": "Republican",
@@ -4825,6 +4105,725 @@
    ]
   },
   {
+   "id": "G000583",
+   "name": "Josh Gottheimer",
+   "party": "Democrat",
+   "chamber": "House",
+   "state": "NJ",
+   "district": 5,
+   "committees": [
+    "House Permanent Select Committee on Intelligence",
+    "House Committee on Financial Services"
+   ],
+   "n_trades": 61,
+   "buy_mid": 184012,
+   "sell_mid": 353019,
+   "recent_mid": 32002,
+   "last_traded": "2026-05-14",
+   "top_buys": [
+    {
+     "symbol": "V",
+     "mid": 80005,
+     "n": 10,
+     "asset": "Morgan Stanley - Select UMA Account # 1 JT Visa Inc."
+    },
+    {
+     "symbol": "FI",
+     "mid": 32002,
+     "n": 4,
+     "asset": "Morgan Stanley - Select UMA Account # 1 JT Fiserv, Inc. Comm"
+    },
+    {
+     "symbol": "FN",
+     "mid": 16001,
+     "n": 2,
+     "asset": "Fabrinet Ordinary Shares"
+    },
+    {
+     "symbol": "KO",
+     "mid": 16001,
+     "n": 2,
+     "asset": "Morgan Stanley - Select UMA Account # 1 JT Coca-Cola Company"
+    },
+    {
+     "symbol": "GS",
+     "mid": 8000,
+     "n": 1,
+     "asset": "Morgan Stanley - Select UMA Account # 1 JT Goldman Sachs Gro"
+    },
+    {
+     "symbol": "CBZ",
+     "mid": 8000,
+     "n": 1,
+     "asset": "Morgan Stanley - Active Asset Account # 3 JT CBIZ, Inc. Comm"
+    },
+    {
+     "symbol": "MTHRY",
+     "mid": 8000,
+     "n": 1,
+     "asset": "Morgan Stanley - Select UMA Account # 1 JT M3 INC UNSP/ADR"
+    },
+    {
+     "symbol": "HD",
+     "mid": 8000,
+     "n": 1,
+     "asset": "Morgan Stanley - Select UMA Account # 1 JT Home Depot, Inc."
+    }
+   ],
+   "top_sells": [
+    {
+     "symbol": "V",
+     "mid": 64004,
+     "n": 8,
+     "asset": "Morgan Stanley - Select UMA Account # 1 JT Visa Inc."
+    },
+    {
+     "symbol": "HD",
+     "mid": 56502,
+     "n": 4,
+     "asset": "Morgan Stanley - Select UMA Account # 1 JT Home Depot, Inc."
+    },
+    {
+     "symbol": "GS",
+     "mid": 40501,
+     "n": 2,
+     "asset": "Goldman Sachs Group, Inc."
+    },
+    {
+     "symbol": "NSRGY",
+     "mid": 32002,
+     "n": 4,
+     "asset": "; Expires 6/18/2026 JT NESTLE S.A S/ADR"
+    },
+    {
+     "symbol": "CBZ",
+     "mid": 16001,
+     "n": 2,
+     "asset": "Morgan Stanley - Select UMA Account # 1 JT CBIZ, Inc. Common"
+    },
+    {
+     "symbol": "DEO",
+     "mid": 16001,
+     "n": 2,
+     "asset": "Morgan Stanley - Select UMA Account # 1 JT Diageo plc Common"
+    },
+    {
+     "symbol": "NTDOY",
+     "mid": 16001,
+     "n": 2,
+     "asset": "Nintendo Co Ltd ADR"
+    },
+    {
+     "symbol": "TT",
+     "mid": 16001,
+     "n": 2,
+     "asset": "Morgan Stanley - Select UMA Account # 1 JT Trane Technologie"
+    }
+   ],
+   "trades": [
+    {
+     "date": "2026-05-14",
+     "owner": "",
+     "symbol": "NSRGY",
+     "asset": "NESTLE S.A S/ADR",
+     "side": "SELL",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2026-06-03"
+    },
+    {
+     "date": "2026-05-05",
+     "owner": "",
+     "symbol": "NSRGY",
+     "asset": "Morgan Stanley - Select UMA Account # 1 JT NESTLE S.A S/ADR",
+     "side": "SELL",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2026-06-03"
+    },
+    {
+     "date": "2026-05-01",
+     "owner": "",
+     "symbol": "FN",
+     "asset": "Fabrinet Ordinary Shares",
+     "side": "BUY",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2026-06-03"
+    },
+    {
+     "date": "2026-04-16",
+     "owner": "",
+     "symbol": "GS",
+     "asset": "Morgan Stanley - Select UMA Account # 1 JT Goldman Sachs Group, Inc.",
+     "side": "BUY",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2026-05-19"
+    },
+    {
+     "date": "2026-04-09",
+     "owner": "",
+     "symbol": "T",
+     "asset": "Morgan Stanley - Active Asset Account # 3 JT AT&T Inc.",
+     "side": "SELL",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2026-05-19"
+    },
+    {
+     "date": "2026-04-09",
+     "owner": "",
+     "symbol": "GS",
+     "asset": "Morgan Stanley - Select UMA Account # 1 JT Goldman Sachs Group, Inc.",
+     "side": "SELL",
+     "lo": 15001,
+     "hi": 50000,
+     "filed": "2026-05-19"
+    },
+    {
+     "date": "2026-04-09",
+     "owner": "",
+     "symbol": "HD",
+     "asset": "Morgan Stanley - Select UMA Account # 1 JT Home Depot, Inc.",
+     "side": "SELL",
+     "lo": 15001,
+     "hi": 50000,
+     "filed": "2026-05-19"
+    },
+    {
+     "date": "2026-04-09",
+     "owner": "",
+     "symbol": "VLY",
+     "asset": "Morgan Stanley - Active Asset Account # 3 JT Valley National Bancorp",
+     "side": "SELL",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2026-05-19"
+    },
+    {
+     "date": "2026-04-06",
+     "owner": "",
+     "symbol": "CBZ",
+     "asset": "Morgan Stanley - Active Asset Account # 3 JT CBIZ, Inc. Common Stock",
+     "side": "BUY",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2026-05-19"
+    },
+    {
+     "date": "2026-03-24",
+     "owner": "",
+     "symbol": "FN",
+     "asset": "Fabrinet Ordinary Shares",
+     "side": "BUY",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2026-04-08"
+    },
+    {
+     "date": "2026-03-05",
+     "owner": "",
+     "symbol": "CBZ",
+     "asset": "Morgan Stanley - Select UMA Account # 1 JT CBIZ, Inc. Common Stock",
+     "side": "SELL",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2026-04-08"
+    },
+    {
+     "date": "2026-02-18",
+     "owner": "",
+     "symbol": "V",
+     "asset": "Visa Inc.",
+     "side": "SELL",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2026-03-16"
+    },
+    {
+     "date": "2026-01-26",
+     "owner": "",
+     "symbol": "NSRGY",
+     "asset": "Morgan Stanley - Select UMA Account # 1 JT NESTLE S.A S/ADR",
+     "side": "SELL",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2026-02-26"
+    },
+    {
+     "date": "2025-12-05",
+     "owner": "",
+     "symbol": "MTHRY",
+     "asset": "Morgan Stanley - Select UMA Account # 1 JT M3 INC UNSP/ADR",
+     "side": "SELL",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2026-01-14"
+    },
+    {
+     "date": "2025-11-19",
+     "owner": "",
+     "symbol": "HD",
+     "asset": "Morgan Stanley - Select UMA Account # 1 JT Home Depot, Inc.",
+     "side": "SELL",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-12-29"
+    },
+    {
+     "date": "2025-09-30",
+     "owner": "",
+     "symbol": "MTHRY",
+     "asset": "Morgan Stanley - Select UMA Account # 1 JT M3 INC UNSP/ADR",
+     "side": "BUY",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-10-15"
+    },
+    {
+     "date": "2025-09-22",
+     "owner": "",
+     "symbol": "DEO",
+     "asset": "Morgan Stanley - Select UMA Account # 1 JT Diageo plc Common Stock",
+     "side": "SELL",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-10-15"
+    },
+    {
+     "date": "2025-08-12",
+     "owner": "",
+     "symbol": "V",
+     "asset": "Morgan Stanley - Select UMA Account # 1 JT Visa Inc.",
+     "side": "SELL",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-09-05"
+    },
+    {
+     "date": "2025-08-01",
+     "owner": "",
+     "symbol": "V",
+     "asset": "Morgan Stanley - Select UMA Account # 1 JT Visa Inc.",
+     "side": "SELL",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-09-05"
+    },
+    {
+     "date": "2025-07-14",
+     "owner": "",
+     "symbol": "V",
+     "asset": "Morgan Stanley - Select UMA Account # 1 JT Visa Inc.",
+     "side": "SELL",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-08-11"
+    },
+    {
+     "date": "2025-06-26",
+     "owner": "",
+     "symbol": "V",
+     "asset": "Visa Inc.",
+     "side": "SELL",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-07-16"
+    },
+    {
+     "date": "2025-06-25",
+     "owner": "",
+     "symbol": "V",
+     "asset": "Morgan Stanley - Select UMA Account # 1 JT Visa Inc.",
+     "side": "SELL",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-07-16"
+    },
+    {
+     "date": "2025-06-24",
+     "owner": "",
+     "symbol": "V",
+     "asset": "Morgan Stanley - Select UMA Account # 1 JT Visa Inc.",
+     "side": "SELL",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-07-16"
+    },
+    {
+     "date": "2025-06-20",
+     "owner": "",
+     "symbol": "V",
+     "asset": "Morgan Stanley - Select UMA Account # 1 JT Visa Inc.",
+     "side": "SELL",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-07-16"
+    },
+    {
+     "date": "2025-06-03",
+     "owner": "",
+     "symbol": "PFE",
+     "asset": "Morgan Stanley - Select UMA Account # 1 JT Pfizer, Inc. Common Stock",
+     "side": "SELL",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-07-16"
+    },
+    {
+     "date": "2025-05-23",
+     "owner": "",
+     "symbol": "ZTO",
+     "asset": "Morgan Stanley - Select UMA Account # 1 JT ZTO Express",
+     "side": "SELL",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-06-11"
+    },
+    {
+     "date": "2025-05-14",
+     "owner": "",
+     "symbol": "FI",
+     "asset": "Morgan Stanley - Select UMA Account # 1 JT Fiserv, Inc. Common Stock",
+     "side": "SELL",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-06-11"
+    },
+    {
+     "date": "2025-04-21",
+     "owner": "",
+     "symbol": "HD",
+     "asset": "Morgan Stanley - Select UMA Account # 1 JT Home Depot, Inc.",
+     "side": "BUY",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-05-14"
+    },
+    {
+     "date": "2025-04-09",
+     "owner": "",
+     "symbol": "CBZ",
+     "asset": "Morgan Stanley - Select UMA Account # 1 JT CBIZ, Inc. Common Stock",
+     "side": "SELL",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-05-14"
+    },
+    {
+     "date": "2025-04-09",
+     "owner": "",
+     "symbol": "KO",
+     "asset": "Morgan Stanley - Select UMA Account # 1 JT Coca-Cola Company",
+     "side": "SELL",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-05-14"
+    },
+    {
+     "date": "2025-04-09",
+     "owner": "",
+     "symbol": "NSRGY",
+     "asset": "; Expires 6/18/2026 JT NESTLE S.A S/ADR",
+     "side": "SELL",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-05-14"
+    },
+    {
+     "date": "2025-04-09",
+     "owner": "",
+     "symbol": "NTDOY",
+     "asset": "Nintendo Co Ltd ADR",
+     "side": "SELL",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-05-14"
+    },
+    {
+     "date": "2025-04-09",
+     "owner": "",
+     "symbol": "PGR",
+     "asset": "Morgan Stanley - Select UMA Account # 1 JT Progressive Corporation",
+     "side": "SELL",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-05-14"
+    },
+    {
+     "date": "2025-04-09",
+     "owner": "",
+     "symbol": "SAP",
+     "asset": "Morgan Stanley - Select UMA Account # 1 JT SAP SE ADS",
+     "side": "SELL",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-05-14"
+    },
+    {
+     "date": "2025-04-09",
+     "owner": "",
+     "symbol": "SLGN",
+     "asset": "Morgan Stanley - Select UMA Account # 1 JT Silgan Holdings Inc.",
+     "side": "SELL",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-05-14"
+    },
+    {
+     "date": "2025-04-07",
+     "owner": "",
+     "symbol": "CHX",
+     "asset": "Morgan Stanley - Select UMA Account # 1 JT ChampionX Corporation",
+     "side": "SELL",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-05-14"
+    },
+    {
+     "date": "2025-04-04",
+     "owner": "",
+     "symbol": "FI",
+     "asset": "Morgan Stanley - Select UMA Account # 1 JT Fiserv, Inc. Common Stock",
+     "side": "BUY",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-05-14"
+    },
+    {
+     "date": "2025-03-24",
+     "owner": "",
+     "symbol": "V",
+     "asset": "Morgan Stanley - Select UMA Account # 1 JT Visa Inc.",
+     "side": "BUY",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-04-10"
+    },
+    {
+     "date": "2025-03-19",
+     "owner": "",
+     "symbol": "DEO",
+     "asset": "Morgan Stanley - Select UMA Account # 1 JT Diageo plc Common Stock",
+     "side": "SELL",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-04-10"
+    },
+    {
+     "date": "2025-03-19",
+     "owner": "",
+     "symbol": "HD",
+     "asset": "Morgan Stanley - Select UMA Account # 1 JT Home Depot, Inc.",
+     "side": "SELL",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-04-10"
+    },
+    {
+     "date": "2025-03-10",
+     "owner": "",
+     "symbol": "FI",
+     "asset": "Morgan Stanley - Select UMA Account # 1 JT Fiserv, Inc. Common Stock",
+     "side": "BUY",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-04-10"
+    },
+    {
+     "date": "2025-03-05",
+     "owner": "",
+     "symbol": "V",
+     "asset": "Morgan Stanley - Select UMA Account # 1 JT Visa Inc.",
+     "side": "BUY",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-04-10"
+    },
+    {
+     "date": "2025-03-03",
+     "owner": "",
+     "symbol": "V",
+     "asset": "Morgan Stanley - Select UMA Account # 1 JT Visa Inc.",
+     "side": "BUY",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-04-10"
+    },
+    {
+     "date": "2025-02-28",
+     "owner": "",
+     "symbol": "GS",
+     "asset": "Goldman Sachs Group, Inc.",
+     "side": "SELL",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-03-06"
+    },
+    {
+     "date": "2025-02-28",
+     "owner": "",
+     "symbol": "V",
+     "asset": "Morgan Stanley - Select UMA Account # 1 JT Visa Inc.",
+     "side": "BUY",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-03-06"
+    },
+    {
+     "date": "2025-02-26",
+     "owner": "",
+     "symbol": "FI",
+     "asset": "Morgan Stanley - Select UMA Account # 1 JT Fiserv, Inc. Common Stock",
+     "side": "BUY",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-03-06"
+    },
+    {
+     "date": "2025-02-24",
+     "owner": "",
+     "symbol": "HD",
+     "asset": "Morgan Stanley - Select UMA Account # 1 JT Home Depot, Inc.",
+     "side": "SELL",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-03-06"
+    },
+    {
+     "date": "2025-02-21",
+     "owner": "",
+     "symbol": "FI",
+     "asset": "Morgan Stanley - Select UMA Account # 1 JT Fiserv, Inc. Common Stock",
+     "side": "BUY",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-03-06"
+    },
+    {
+     "date": "2025-02-21",
+     "owner": "",
+     "symbol": "NTDOY",
+     "asset": "Nintendo Co Ltd ADR",
+     "side": "SELL",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-03-06"
+    },
+    {
+     "date": "2025-02-13",
+     "owner": "",
+     "symbol": "V",
+     "asset": "Morgan Stanley - Select UMA Account # 1 JT Visa Inc.",
+     "side": "BUY",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-03-06"
+    },
+    {
+     "date": "2025-01-31",
+     "owner": "",
+     "symbol": "V",
+     "asset": "Morgan Stanley - Select UMA Account # 1 JT Visa Inc.",
+     "side": "BUY",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-02-10"
+    },
+    {
+     "date": "2025-01-30",
+     "owner": "",
+     "symbol": "TT",
+     "asset": "Morgan Stanley - Select UMA Account # 1 JT Trane Technologies plc",
+     "side": "SELL",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-02-10"
+    },
+    {
+     "date": "2025-01-30",
+     "owner": "",
+     "symbol": "V",
+     "asset": "Morgan Stanley - Select UMA Account # 1 JT Visa Inc.",
+     "side": "BUY",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-02-10"
+    },
+    {
+     "date": "2025-01-28",
+     "owner": "",
+     "symbol": "V",
+     "asset": "Morgan Stanley - Select UMA Account # 1 JT Visa Inc.",
+     "side": "BUY",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-02-10"
+    },
+    {
+     "date": "2025-01-24",
+     "owner": "",
+     "symbol": "V",
+     "asset": "Morgan Stanley - Select UMA Account # 1 JT Visa Inc.",
+     "side": "BUY",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-02-10"
+    },
+    {
+     "date": "2025-01-23",
+     "owner": "",
+     "symbol": "TT",
+     "asset": "Morgan Stanley - Select UMA Account # 1 JT Trane Technologies plc",
+     "side": "SELL",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-02-10"
+    },
+    {
+     "date": "2025-01-23",
+     "owner": "",
+     "symbol": "V",
+     "asset": "Morgan Stanley - Select UMA Account # 1 JT Visa Inc.",
+     "side": "BUY",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-02-10"
+    },
+    {
+     "date": "2025-01-21",
+     "owner": "",
+     "symbol": "KO",
+     "asset": "Morgan Stanley - Select UMA Account # 1 JT Coca-Cola Company",
+     "side": "BUY",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-02-10"
+    },
+    {
+     "date": "2025-01-16",
+     "owner": "",
+     "symbol": "KO",
+     "asset": "Morgan Stanley - Select UMA Account # 1 JT Coca-Cola Company",
+     "side": "BUY",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-02-10"
+    },
+    {
+     "date": "2025-01-16",
+     "owner": "",
+     "symbol": "NSRGY",
+     "asset": "Morgan Stanley - Select UMA Account # 1 JT NESTLE S.A S/ADR",
+     "side": "BUY",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-02-10"
+    }
+   ]
+  },
+  {
    "id": "C001047",
    "name": "Shelley Moore Capito",
    "party": "Republican",
@@ -5546,6 +5545,177 @@
    ]
   },
   {
+   "id": "D000399",
+   "name": "Lloyd Doggett",
+   "party": "Democrat",
+   "chamber": "House",
+   "state": "TX",
+   "district": 37,
+   "committees": [
+    "Joint Committee on Taxation",
+    "House Committee on Ways and Means",
+    "House Committee on the Budget"
+   ],
+   "n_trades": 13,
+   "buy_mid": 104006,
+   "sell_mid": 0,
+   "recent_mid": 16001,
+   "last_traded": "2026-06-18",
+   "top_buys": [
+    {
+     "symbol": "HD",
+     "mid": 40002,
+     "n": 5,
+     "asset": "Home Depot, Inc."
+    },
+    {
+     "symbol": "PG",
+     "mid": 32002,
+     "n": 4,
+     "asset": "Procter & Gamble Company"
+    },
+    {
+     "symbol": "KO",
+     "mid": 32002,
+     "n": 4,
+     "asset": "Coca-Cola Company"
+    }
+   ],
+   "top_sells": [],
+   "trades": [
+    {
+     "date": "2026-06-18",
+     "owner": "",
+     "symbol": "HD",
+     "asset": "Home Depot, Inc.",
+     "side": "BUY",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2026-07-06"
+    },
+    {
+     "date": "2026-05-15",
+     "owner": "",
+     "symbol": "PG",
+     "asset": "Procter & Gamble Company",
+     "side": "BUY",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2026-06-04"
+    },
+    {
+     "date": "2026-04-01",
+     "owner": "",
+     "symbol": "KO",
+     "asset": "Coca-Cola Company",
+     "side": "BUY",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2026-05-06"
+    },
+    {
+     "date": "2026-03-26",
+     "owner": "",
+     "symbol": "HD",
+     "asset": "Home Depot, Inc.",
+     "side": "BUY",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2026-04-06"
+    },
+    {
+     "date": "2026-02-17",
+     "owner": "",
+     "symbol": "PG",
+     "asset": "Procter & Gamble Company",
+     "side": "BUY",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2026-03-05"
+    },
+    {
+     "date": "2025-12-18",
+     "owner": "",
+     "symbol": "HD",
+     "asset": "Automatic reinvestment of dividends earned. Home Depot, Inc.",
+     "side": "BUY",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2026-01-02"
+    },
+    {
+     "date": "2025-12-15",
+     "owner": "",
+     "symbol": "KO",
+     "asset": "Coca-Cola Company",
+     "side": "BUY",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2026-01-02"
+    },
+    {
+     "date": "2025-07-01",
+     "owner": "",
+     "symbol": "KO",
+     "asset": "Coca-Cola Company",
+     "side": "BUY",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-08-04"
+    },
+    {
+     "date": "2025-06-18",
+     "owner": "",
+     "symbol": "HD",
+     "asset": "Home Depot, Inc.",
+     "side": "BUY",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-07-07"
+    },
+    {
+     "date": "2025-05-15",
+     "owner": "",
+     "symbol": "PG",
+     "asset": "Procter & Gamble Company",
+     "side": "BUY",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-06-04"
+    },
+    {
+     "date": "2025-04-01",
+     "owner": "",
+     "symbol": "KO",
+     "asset": "Coca-Cola Company",
+     "side": "BUY",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-05-05"
+    },
+    {
+     "date": "2025-03-27",
+     "owner": "",
+     "symbol": "HD",
+     "asset": "Home Depot, Inc.",
+     "side": "BUY",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-04-07"
+    },
+    {
+     "date": "2025-02-18",
+     "owner": "",
+     "symbol": "PG",
+     "asset": "Procter & Gamble Company",
+     "side": "BUY",
+     "lo": 1001,
+     "hi": 15000,
+     "filed": "2025-03-10"
+    }
+   ]
+  },
+  {
    "id": "B001299",
    "name": "Jim Banks",
    "party": "Republican",
@@ -5847,167 +6017,6 @@
      "lo": 1001,
      "hi": 15000,
      "filed": "2025-04-02"
-    }
-   ]
-  },
-  {
-   "id": "D000399",
-   "name": "Lloyd Doggett",
-   "party": "Democrat",
-   "chamber": "House",
-   "state": "TX",
-   "district": 37,
-   "committees": [
-    "Joint Committee on Taxation",
-    "House Committee on Ways and Means",
-    "House Committee on the Budget"
-   ],
-   "n_trades": 12,
-   "buy_mid": 96006,
-   "sell_mid": 0,
-   "recent_mid": 8000,
-   "last_traded": "2026-05-15",
-   "top_buys": [
-    {
-     "symbol": "PG",
-     "mid": 32002,
-     "n": 4,
-     "asset": "Procter & Gamble Company"
-    },
-    {
-     "symbol": "KO",
-     "mid": 32002,
-     "n": 4,
-     "asset": "Coca-Cola Company"
-    },
-    {
-     "symbol": "HD",
-     "mid": 32002,
-     "n": 4,
-     "asset": "Home Depot, Inc."
-    }
-   ],
-   "top_sells": [],
-   "trades": [
-    {
-     "date": "2026-05-15",
-     "owner": "",
-     "symbol": "PG",
-     "asset": "Procter & Gamble Company",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2026-06-04"
-    },
-    {
-     "date": "2026-04-01",
-     "owner": "",
-     "symbol": "KO",
-     "asset": "Coca-Cola Company",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2026-05-06"
-    },
-    {
-     "date": "2026-03-26",
-     "owner": "",
-     "symbol": "HD",
-     "asset": "Home Depot, Inc.",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2026-04-06"
-    },
-    {
-     "date": "2026-02-17",
-     "owner": "",
-     "symbol": "PG",
-     "asset": "Procter & Gamble Company",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2026-03-05"
-    },
-    {
-     "date": "2025-12-18",
-     "owner": "",
-     "symbol": "HD",
-     "asset": "Automatic reinvestment of dividends earned. Home Depot, Inc.",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2026-01-02"
-    },
-    {
-     "date": "2025-12-15",
-     "owner": "",
-     "symbol": "KO",
-     "asset": "Coca-Cola Company",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2026-01-02"
-    },
-    {
-     "date": "2025-07-01",
-     "owner": "",
-     "symbol": "KO",
-     "asset": "Coca-Cola Company",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-08-04"
-    },
-    {
-     "date": "2025-06-18",
-     "owner": "",
-     "symbol": "HD",
-     "asset": "Home Depot, Inc.",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-07-07"
-    },
-    {
-     "date": "2025-05-15",
-     "owner": "",
-     "symbol": "PG",
-     "asset": "Procter & Gamble Company",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-06-04"
-    },
-    {
-     "date": "2025-04-01",
-     "owner": "",
-     "symbol": "KO",
-     "asset": "Coca-Cola Company",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-05-05"
-    },
-    {
-     "date": "2025-03-27",
-     "owner": "",
-     "symbol": "HD",
-     "asset": "Home Depot, Inc.",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-04-07"
-    },
-    {
-     "date": "2025-02-18",
-     "owner": "",
-     "symbol": "PG",
-     "asset": "Procter & Gamble Company",
-     "side": "BUY",
-     "lo": 1001,
-     "hi": 15000,
-     "filed": "2025-03-10"
     }
    ]
   },

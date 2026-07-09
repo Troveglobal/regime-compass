@@ -1,7 +1,7 @@
 {
   "meta": {
-    "generated": "2026-07-07T15:00:12",
-    "latest_date": "2026-07-06",
+    "generated": "2026-07-09T17:00:00",
+    "latest_date": "2026-07-08",
     "earliest_date": "2025-07-03",
     "deal_types": [
       "block",
@@ -11,12 +11,12 @@
     "significant_cr": 25.0
   },
   "stats": {
-    "raw_deals": 2802,
-    "smart_deals": 1415,
-    "net_positions": 1996,
-    "round_trips_removed": 543,
-    "distinct_entities": 818,
-    "distinct_symbols": 361
+    "raw_deals": 3051,
+    "smart_deals": 1433,
+    "net_positions": 2140,
+    "round_trips_removed": 639,
+    "distinct_entities": 845,
+    "distinct_symbols": 383
   },
   "timeline": [
     {
@@ -180,6 +180,18 @@
       "fii_cr": -7.5,
       "dii_cr": 0.0,
       "net_cr": -7.5
+    },
+    {
+      "date": "2026-07-07",
+      "fii_cr": 73.6,
+      "dii_cr": 0.0,
+      "net_cr": 73.6
+    },
+    {
+      "date": "2026-07-08",
+      "fii_cr": 13.3,
+      "dii_cr": 0.0,
+      "net_cr": 13.3
     }
   ],
   "history": [
@@ -257,293 +269,69 @@
     },
     {
       "month": "2026-07",
-      "fii_cr": -7.5,
+      "fii_cr": 79.5,
       "dii_cr": 0.0,
-      "net_cr": -7.5
+      "net_cr": 79.5
     }
   ],
   "today": {
     "buy": {
       "stocks": [
         {
-          "symbol": "LODHA",
-          "security": "Lodha Developers Limited",
-          "sector": "Realty",
-          "net_cr": 1514.5,
-          "fii_cr": 1514.5,
+          "symbol": "KNACK",
+          "security": "Knack Packaging Limited",
+          "sector": "Other / Diversified",
+          "net_cr": 13.3,
+          "fii_cr": 13.3,
           "dii_cr": 0.0,
-          "n_buyers": 5,
+          "n_buyers": 1,
           "buyers": [
             {
-              "entity": "Fmrc Fidelity Advisor International Capital Appreciation Fund",
+              "entity": "BofA Securities",
               "etype": "FII/FPI",
               "bucket": "FII",
-              "net_cr": 1244.0
-            },
-            {
-              "entity": "Fidelity Investment Trust Fidelity International Capital Appreciation K6 Fd",
-              "etype": "FII/FPI",
-              "bucket": "FII",
-              "net_cr": 160.4
-            },
-            {
-              "entity": "Fidelity Institutional Am International Core Cit",
-              "etype": "FII/FPI",
-              "bucket": "FII",
-              "net_cr": 83.9
-            },
-            {
-              "entity": "Sunamerica Series Trust Sa Fidelity Institutional Am Intl Growth Portfolio",
-              "etype": "FII/FPI",
-              "bucket": "FII",
-              "net_cr": 16.7
-            },
-            {
-              "entity": "Fidelity Rutland Square Trust Ii:",
-              "etype": "FII/FPI",
-              "bucket": "FII",
-              "net_cr": 9.5
+              "net_cr": 13.3
             }
           ],
-          "significant": true,
-          "entry": 937.9,
-          "px_now": 1095.9,
-          "ret_pct": 16.9
-        },
-        {
-          "symbol": "EMCURE",
-          "security": "Emcure Pharmaceuticals L",
-          "sector": "Healthcare",
-          "net_cr": 302.4,
-          "fii_cr": 50.0,
-          "dii_cr": 252.4,
-          "n_buyers": 7,
-          "buyers": [
-            {
-              "entity": "Hdfc Standard Life Insurance Company Ltd",
-              "etype": "Insurance",
-              "bucket": "DII",
-              "net_cr": 101.2
-            },
-            {
-              "entity": "Axis MF",
-              "etype": "DII (MF)",
-              "bucket": "DII",
-              "net_cr": 50.0
-            },
-            {
-              "entity": "Aditya Birla Sun Life MF",
-              "etype": "DII (MF)",
-              "bucket": "DII",
-              "net_cr": 47.5
-            },
-            {
-              "entity": "Hdfc Standard Life Insurnace",
-              "etype": "Insurance",
-              "bucket": "DII",
-              "net_cr": 28.7
-            },
-            {
-              "entity": "Goldman Sachs (ODI)",
-              "etype": "ODI/Swap desk",
-              "bucket": "FII",
-              "net_cr": 25.0
-            },
-            {
-              "entity": "Hsbc Mutual Fund",
-              "etype": "DII (MF)",
-              "bucket": "DII",
-              "net_cr": 25.0
-            },
-            {
-              "entity": "Morgan Stanley",
-              "etype": "FII/FPI",
-              "bucket": "FII",
-              "net_cr": 25.0
-            }
-          ],
-          "significant": true,
-          "entry": 1817.0,
-          "px_now": 1835.0,
-          "ret_pct": 1.0
-        },
-        {
-          "symbol": "BANSALWIRE",
-          "security": "Bansal Wire Industries L",
-          "sector": "Capital Goods",
-          "net_cr": 114.7,
-          "fii_cr": 0.0,
-          "dii_cr": 114.7,
-          "n_buyers": 3,
-          "buyers": [
-            {
-              "entity": "Invesco Mutual Fund",
-              "etype": "DII (MF)",
-              "bucket": "DII",
-              "net_cr": 64.7
-            },
-            {
-              "entity": "HDFC MF",
-              "etype": "DII (MF)",
-              "bucket": "DII",
-              "net_cr": 25.0
-            },
-            {
-              "entity": "Malabar India Fund Limited",
-              "etype": "AIF/PMS",
-              "bucket": "DII",
-              "net_cr": 25.0
-            }
-          ],
-          "significant": true,
-          "entry": 309.0,
-          "px_now": 362.6,
-          "ret_pct": 17.4
+          "significant": false,
+          "entry": 185.9,
+          "px_now": 183.0,
+          "ret_pct": -1.6
         }
       ],
       "flavour": [
         {
-          "sector": "Realty",
-          "net_cr": 1514.5,
-          "fii_cr": 1514.5,
+          "sector": "Other / Diversified",
+          "net_cr": 13.3,
+          "fii_cr": 13.3,
           "dii_cr": 0.0,
-          "names": 1
-        },
-        {
-          "sector": "Healthcare",
-          "net_cr": 302.4,
-          "fii_cr": 50.0,
-          "dii_cr": 252.4,
-          "names": 1
-        },
-        {
-          "sector": "Capital Goods",
-          "net_cr": 114.7,
-          "fii_cr": 0.0,
-          "dii_cr": 114.7,
           "names": 1
         }
       ],
       "top_entities": [
         {
-          "entity": "Fmrc Fidelity Advisor International Capital Appreciation Fund",
+          "entity": "BofA Securities",
           "etype": "FII/FPI",
           "bucket": "FII",
-          "net_cr": 1244.0,
-          "n_names": 1
-        },
-        {
-          "entity": "Fidelity Investment Trust Fidelity International Capital Appreciation K6 Fd",
-          "etype": "FII/FPI",
-          "bucket": "FII",
-          "net_cr": 160.4,
-          "n_names": 1
-        },
-        {
-          "entity": "Hdfc Standard Life Insurance Company Ltd",
-          "etype": "Insurance",
-          "bucket": "DII",
-          "net_cr": 101.2,
-          "n_names": 1
-        },
-        {
-          "entity": "Fidelity Institutional Am International Core Cit",
-          "etype": "FII/FPI",
-          "bucket": "FII",
-          "net_cr": 83.9,
-          "n_names": 1
-        },
-        {
-          "entity": "Invesco Mutual Fund",
-          "etype": "DII (MF)",
-          "bucket": "DII",
-          "net_cr": 64.7,
-          "n_names": 1
-        },
-        {
-          "entity": "Axis MF",
-          "etype": "DII (MF)",
-          "bucket": "DII",
-          "net_cr": 50.0,
-          "n_names": 1
-        },
-        {
-          "entity": "Aditya Birla Sun Life MF",
-          "etype": "DII (MF)",
-          "bucket": "DII",
-          "net_cr": 47.5,
-          "n_names": 1
-        },
-        {
-          "entity": "Hdfc Standard Life Insurnace",
-          "etype": "Insurance",
-          "bucket": "DII",
-          "net_cr": 28.7,
-          "n_names": 1
-        },
-        {
-          "entity": "HDFC MF",
-          "etype": "DII (MF)",
-          "bucket": "DII",
-          "net_cr": 25.0,
-          "n_names": 1
-        },
-        {
-          "entity": "Malabar India Fund Limited",
-          "etype": "AIF/PMS",
-          "bucket": "DII",
-          "net_cr": 25.0,
-          "n_names": 1
-        },
-        {
-          "entity": "Goldman Sachs (ODI)",
-          "etype": "ODI/Swap desk",
-          "bucket": "FII",
-          "net_cr": 25.0,
-          "n_names": 1
-        },
-        {
-          "entity": "Hsbc Mutual Fund",
-          "etype": "DII (MF)",
-          "bucket": "DII",
-          "net_cr": 25.0,
+          "net_cr": 13.3,
           "n_names": 1
         }
       ],
       "kpi": {
-        "net_cr": 1931.6,
-        "fii_cr": 1564.5,
-        "dii_cr": 367.1,
-        "n_stocks": 3,
-        "n_entities": 12,
-        "top_sector": "Realty",
-        "top_stock": "LODHA"
+        "net_cr": 13.3,
+        "fii_cr": 13.3,
+        "dii_cr": 0.0,
+        "n_stocks": 1,
+        "n_entities": 1,
+        "top_sector": "Other / Diversified",
+        "top_stock": "KNACK"
       },
       "performance": {
-        "basket_ret": 14.4,
-        "nifty_ret": 1.6,
-        "n_priced": 3,
-        "since": "2026-06-25",
-        "sectors": [
-          {
-            "sector": "Realty",
-            "index": "Nifty Realty",
-            "index_ret": 9.8,
-            "flow_cr": 1514.5
-          },
-          {
-            "sector": "Healthcare",
-            "index": "Nifty Healthcare Index",
-            "index_ret": 3.2,
-            "flow_cr": 302.4
-          },
-          {
-            "sector": "Capital Goods",
-            "index": "Nifty Capital Goods",
-            "index_ret": -1.0,
-            "flow_cr": 114.7
-          }
-        ]
+        "basket_ret": -1.6,
+        "nifty_ret": 0.0,
+        "n_priced": 1,
+        "since": "2026-07-08",
+        "sectors": []
       }
     },
     "sell": {
@@ -561,53 +349,112 @@
       }
     },
     "rotation": [],
-    "date": "2026-06-25"
+    "date": "2026-07-08"
   },
   "week": {
     "buy": {
-      "stocks": [],
-      "flavour": [],
-      "top_entities": [],
-      "kpi": {
-        "net_cr": 0,
-        "fii_cr": 0,
-        "dii_cr": 0,
-        "n_stocks": 0,
-        "n_entities": 0,
-        "top_sector": null,
-        "top_stock": null
-      },
-      "performance": {
-        "basket_ret": null,
-        "nifty_ret": 2.4,
-        "n_priced": 0,
-        "since": "2026-06-30",
-        "sectors": []
-      }
-    },
-    "sell": {
       "stocks": [
         {
-          "symbol": "IVALUE",
-          "security": "Ivalue Infosolutions Ltd",
-          "sector": "Other / Diversified",
-          "net_cr": 148.3,
-          "fii_cr": 148.3,
+          "symbol": "IOLCP",
+          "security": "IOL Chem and Pharma Ltd",
+          "sector": "Healthcare",
+          "net_cr": 73.6,
+          "fii_cr": 73.6,
           "dii_cr": 0.0,
           "n_buyers": 1,
           "buyers": [
             {
-              "entity": "Sundara Mauritius Limited",
+              "entity": "Polunin Emerging Markets Small Cap Fund Llc",
               "etype": "FII/FPI",
               "bucket": "FII",
-              "net_cr": 148.3
+              "net_cr": 73.6
             }
           ],
           "significant": true,
-          "entry": 260.2,
-          "px_now": 280.9,
-          "ret_pct": 7.9
+          "entry": 166.7,
+          "px_now": 167.1,
+          "ret_pct": 0.3
         },
+        {
+          "symbol": "KNACK",
+          "security": "Knack Packaging Limited",
+          "sector": "Other / Diversified",
+          "net_cr": 13.3,
+          "fii_cr": 13.3,
+          "dii_cr": 0.0,
+          "n_buyers": 1,
+          "buyers": [
+            {
+              "entity": "BofA Securities",
+              "etype": "FII/FPI",
+              "bucket": "FII",
+              "net_cr": 13.3
+            }
+          ],
+          "significant": false,
+          "entry": 185.9,
+          "px_now": 183.0,
+          "ret_pct": -1.6
+        }
+      ],
+      "flavour": [
+        {
+          "sector": "Healthcare",
+          "net_cr": 73.6,
+          "fii_cr": 73.6,
+          "dii_cr": 0.0,
+          "names": 1
+        },
+        {
+          "sector": "Other / Diversified",
+          "net_cr": 13.3,
+          "fii_cr": 13.3,
+          "dii_cr": 0.0,
+          "names": 1
+        }
+      ],
+      "top_entities": [
+        {
+          "entity": "Polunin Emerging Markets Small Cap Fund Llc",
+          "etype": "FII/FPI",
+          "bucket": "FII",
+          "net_cr": 73.6,
+          "n_names": 1
+        },
+        {
+          "entity": "BofA Securities",
+          "etype": "FII/FPI",
+          "bucket": "FII",
+          "net_cr": 13.3,
+          "n_names": 1
+        }
+      ],
+      "kpi": {
+        "net_cr": 86.9,
+        "fii_cr": 86.9,
+        "dii_cr": 0.0,
+        "n_stocks": 2,
+        "n_entities": 2,
+        "top_sector": "Healthcare",
+        "top_stock": "IOLCP"
+      },
+      "performance": {
+        "basket_ret": 0.0,
+        "nifty_ret": -1.2,
+        "n_priced": 2,
+        "since": "2026-07-02",
+        "sectors": [
+          {
+            "sector": "Healthcare",
+            "index": "Nifty Healthcare Index",
+            "index_ret": -0.0,
+            "flow_cr": 73.6
+          }
+        ]
+      }
+    },
+    "sell": {
+      "stocks": [
         {
           "symbol": "AASTHA",
           "security": "Aastha Spintex Limited",
@@ -632,41 +479,33 @@
           ],
           "significant": false,
           "entry": 131.4,
-          "px_now": 136.5,
-          "ret_pct": 3.9
+          "px_now": 123.2,
+          "ret_pct": -6.2
         }
       ],
       "flavour": [
         {
           "sector": "Other / Diversified",
-          "net_cr": 155.8,
-          "fii_cr": 155.8,
+          "net_cr": 7.5,
+          "fii_cr": 7.5,
           "dii_cr": 0.0,
-          "names": 2
+          "names": 1
         }
       ],
-      "top_entities": [
-        {
-          "entity": "Sundara Mauritius Limited",
-          "etype": "FII/FPI",
-          "bucket": "FII",
-          "net_cr": 148.3,
-          "n_names": 1
-        }
-      ],
+      "top_entities": [],
       "kpi": {
-        "net_cr": 155.8,
-        "fii_cr": 155.8,
+        "net_cr": 7.5,
+        "fii_cr": 7.5,
         "dii_cr": 0.0,
-        "n_stocks": 2,
-        "n_entities": 1,
+        "n_stocks": 1,
+        "n_entities": 0,
         "top_sector": "Other / Diversified",
-        "top_stock": "IVALUE"
+        "top_stock": "AASTHA"
       }
     },
     "rotation": [],
-    "from": "2026-06-30",
-    "to": "2026-07-06"
+    "from": "2026-07-02",
+    "to": "2026-07-08"
   },
   "month": {
     "buy": {
@@ -713,8 +552,8 @@
           ],
           "significant": true,
           "entry": 937.9,
-          "px_now": 1095.9,
-          "ret_pct": 16.9
+          "px_now": 1115.1,
+          "ret_pct": 18.9
         },
         {
           "symbol": "LENSKART",
@@ -806,8 +645,8 @@
           ],
           "significant": true,
           "entry": 490.0,
-          "px_now": 536.1,
-          "ret_pct": 9.4
+          "px_now": 536.5,
+          "ret_pct": 9.5
         },
         {
           "symbol": "ANTHEM",
@@ -911,8 +750,8 @@
           ],
           "significant": true,
           "entry": 744.8,
-          "px_now": 774.0,
-          "ret_pct": 3.9
+          "px_now": 748.5,
+          "ret_pct": 0.5
         },
         {
           "symbol": "AJANTPHARM",
@@ -938,8 +777,8 @@
           ],
           "significant": true,
           "entry": 2968.0,
-          "px_now": 3373.5,
-          "ret_pct": 13.7
+          "px_now": 3278.8,
+          "ret_pct": 10.5
         },
         {
           "symbol": "EMCURE",
@@ -1001,8 +840,8 @@
           ],
           "significant": true,
           "entry": 1737.0,
-          "px_now": 1835.0,
-          "ret_pct": 5.6
+          "px_now": 1809.3,
+          "ret_pct": 4.2
         },
         {
           "symbol": "CORONA",
@@ -1064,8 +903,8 @@
           ],
           "significant": true,
           "entry": 1730.0,
-          "px_now": 2004.1,
-          "ret_pct": 15.8
+          "px_now": 1979.4,
+          "ret_pct": 14.4
         },
         {
           "symbol": "CRAFTSMAN",
@@ -1133,8 +972,8 @@
           ],
           "significant": true,
           "entry": 9250.0,
-          "px_now": 9097.0,
-          "ret_pct": -1.7
+          "px_now": 9181.5,
+          "ret_pct": -0.7
         },
         {
           "symbol": "M&M",
@@ -1154,29 +993,8 @@
           ],
           "significant": true,
           "entry": 3045.0,
-          "px_now": 3201.2,
-          "ret_pct": 5.1
-        },
-        {
-          "symbol": "MOTILALOFS",
-          "security": "Motilal Oswal Financial S",
-          "sector": "Financials \u2014 Capital Markets",
-          "net_cr": 153.3,
-          "fii_cr": 0.0,
-          "dii_cr": 153.3,
-          "n_buyers": 1,
-          "buyers": [
-            {
-              "entity": "HDFC Life Insurance",
-              "etype": "Insurance",
-              "bucket": "DII",
-              "net_cr": 153.3
-            }
-          ],
-          "significant": true,
-          "entry": 842.5,
-          "px_now": 953.0,
-          "ret_pct": 13.1
+          "px_now": 3102.5,
+          "ret_pct": 1.9
         },
         {
           "symbol": "EBGNG",
@@ -1226,8 +1044,8 @@
           ],
           "significant": true,
           "entry": 390.0,
-          "px_now": 641.5,
-          "ret_pct": 64.5
+          "px_now": 640.3,
+          "ret_pct": 64.2
         },
         {
           "symbol": "BANSALWIRE",
@@ -1259,17 +1077,59 @@
           ],
           "significant": true,
           "entry": 309.0,
-          "px_now": 362.6,
-          "ret_pct": 17.4
+          "px_now": 330.2,
+          "ret_pct": 6.9
+        },
+        {
+          "symbol": "IOLCP",
+          "security": "IOL Chem and Pharma Ltd",
+          "sector": "Healthcare",
+          "net_cr": 73.6,
+          "fii_cr": 73.6,
+          "dii_cr": 0.0,
+          "n_buyers": 1,
+          "buyers": [
+            {
+              "entity": "Polunin Emerging Markets Small Cap Fund Llc",
+              "etype": "FII/FPI",
+              "bucket": "FII",
+              "net_cr": 73.6
+            }
+          ],
+          "significant": true,
+          "entry": 166.7,
+          "px_now": 167.1,
+          "ret_pct": 0.3
+        },
+        {
+          "symbol": "KNACK",
+          "security": "Knack Packaging Limited",
+          "sector": "Other / Diversified",
+          "net_cr": 13.3,
+          "fii_cr": 13.3,
+          "dii_cr": 0.0,
+          "n_buyers": 1,
+          "buyers": [
+            {
+              "entity": "BofA Securities",
+              "etype": "FII/FPI",
+              "bucket": "FII",
+              "net_cr": 13.3
+            }
+          ],
+          "significant": false,
+          "entry": 185.9,
+          "px_now": 183.0,
+          "ret_pct": -1.6
         }
       ],
       "flavour": [
         {
           "sector": "Healthcare",
-          "net_cr": 3661.1,
-          "fii_cr": 107.3,
+          "net_cr": 3734.7,
+          "fii_cr": 180.9,
           "dii_cr": 3553.8,
-          "names": 4
+          "names": 5
         },
         {
           "sector": "Realty",
@@ -1293,18 +1153,11 @@
           "names": 2
         },
         {
-          "sector": "Financials \u2014 Capital Markets",
-          "net_cr": 153.3,
-          "fii_cr": 0.0,
-          "dii_cr": 153.3,
-          "names": 1
-        },
-        {
           "sector": "Other / Diversified",
-          "net_cr": 130.7,
-          "fii_cr": 30.7,
+          "net_cr": 144.0,
+          "fii_cr": 44.0,
           "dii_cr": 100.0,
-          "names": 1
+          "names": 2
         },
         {
           "sector": "Capital Goods",
@@ -1372,13 +1225,6 @@
           "n_names": 3
         },
         {
-          "entity": "HDFC Life Insurance",
-          "etype": "Insurance",
-          "bucket": "DII",
-          "net_cr": 203.3,
-          "n_names": 2
-        },
-        {
           "entity": "Canara Robeco Mutual Fund",
           "etype": "DII (MF)",
           "bucket": "DII",
@@ -1398,52 +1244,53 @@
           "bucket": "DII",
           "net_cr": 140.0,
           "n_names": 2
+        },
+        {
+          "entity": "Franklin Templeton Mutual Fund",
+          "etype": "DII (MF)",
+          "bucket": "DII",
+          "net_cr": 137.0,
+          "n_names": 2
         }
       ],
       "kpi": {
-        "net_cr": 7852.1,
-        "fii_cr": 1893.1,
-        "dii_cr": 5959.0,
-        "n_stocks": 11,
+        "net_cr": 7785.7,
+        "fii_cr": 1980.0,
+        "dii_cr": 5805.7,
+        "n_stocks": 12,
         "n_entities": 12,
         "top_sector": "Healthcare",
         "top_stock": "LODHA"
       },
       "performance": {
-        "basket_ret": 11.0,
-        "nifty_ret": 4.6,
-        "n_priced": 11,
-        "since": "2026-06-05",
+        "basket_ret": 9.8,
+        "nifty_ret": 2.8,
+        "n_priced": 12,
+        "since": "2026-06-09",
         "sectors": [
           {
             "sector": "Healthcare",
             "index": "Nifty Healthcare Index",
-            "index_ret": 7.0,
-            "flow_cr": 3661.1
+            "index_ret": 4.1,
+            "flow_cr": 3734.7
           },
           {
             "sector": "Realty",
             "index": "Nifty Realty",
-            "index_ret": 18.0,
+            "index_ret": 15.0,
             "flow_cr": 1514.5
           },
           {
             "sector": "New-Age / Consumer Tech",
             "index": "Nifty India New Age Consumption",
-            "index_ret": 7.9,
+            "index_ret": 6.6,
             "flow_cr": 1482.0
           },
           {
             "sector": "Auto & Components",
             "index": "Nifty Auto",
-            "index_ret": 4.5,
+            "index_ret": 2.7,
             "flow_cr": 795.8
-          },
-          {
-            "sector": "Financials \u2014 Capital Markets",
-            "index": "Nifty Capital Markets",
-            "index_ret": 4.2,
-            "flow_cr": 153.3
           }
         ]
       }
@@ -1468,8 +1315,8 @@
           ],
           "significant": true,
           "entry": 260.2,
-          "px_now": 280.9,
-          "ret_pct": 7.9
+          "px_now": 285.2,
+          "ret_pct": 9.6
         },
         {
           "symbol": "INFY",
@@ -1489,8 +1336,8 @@
           ],
           "significant": true,
           "entry": 1031.4,
-          "px_now": 1042.2,
-          "ret_pct": 1.0
+          "px_now": 1069.3,
+          "ret_pct": 3.7
         },
         {
           "symbol": "AASTHA",
@@ -1516,8 +1363,8 @@
           ],
           "significant": false,
           "entry": 131.4,
-          "px_now": 136.5,
-          "ret_pct": 3.9
+          "px_now": 123.2,
+          "ret_pct": -6.2
         }
       ],
       "flavour": [
@@ -1563,7 +1410,7 @@
       }
     },
     "rotation": [],
-    "from": "2026-06-07",
-    "to": "2026-07-06"
+    "from": "2026-06-09",
+    "to": "2026-07-08"
   }
 }
