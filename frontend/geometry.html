@@ -84,6 +84,19 @@
 
     .group-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 16px; }
 
+    details.howto { background: var(--panel-2); border: 1px solid var(--border); border-radius: var(--r-md); padding: 14px 20px; margin-bottom: 18px; }
+    details.howto summary { cursor: pointer; font-size: 14px; font-weight: 600; color: var(--text); list-style: none; display: flex; align-items: center; gap: 8px; }
+    details.howto summary::-webkit-details-marker { display: none; }
+    details.howto summary::before { content: "▶"; font-size: 10px; color: var(--muted); transition: transform 0.2s var(--ease-out); }
+    details.howto[open] summary::before { transform: rotate(90deg); }
+    details.howto .body { margin-top: 14px; font-size: 13.5px; line-height: 1.7; color: var(--text-body); animation: rise 0.3s var(--ease-out); }
+    details.howto .body p { margin: 0 0 12px; }
+    details.howto .body strong { color: var(--text-strong); }
+    .read-key { width: 100%; border-collapse: collapse; font-size: 12.5px; margin: 10px 0 4px; }
+    .read-key th, .read-key td { padding: 8px 10px; text-align: left; border-bottom: 1px solid var(--hairline); vertical-align: top; }
+    .read-key th { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.2px; color: var(--muted); }
+    .read-key .v-state { margin: 0; font-size: 10px; padding: 3px 10px; }
+
     .audit-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
     .audit-table th, .audit-table td { padding: 8px 10px; text-align: right; border-bottom: 1px solid var(--hairline); font-variant-numeric: tabular-nums; }
     .audit-table th { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.2px; color: var(--muted); }
@@ -114,6 +127,51 @@
     </div>
     <span class="updated-ts" id="updated" style="font-size:12px;color:var(--muted);font-family:var(--font-mono);"></span>
   </div>
+
+  <details class="howto reveal">
+    <summary>How to read this page — start here</summary>
+    <div class="body">
+      <p><strong>What the TDA gauge measures, in plain words.</strong> Take the last 60 trading days. Each day is a dot,
+      positioned by how every market in the group moved that day — 12 markets means each dot lives in 12 dimensions.
+      In a normal market those 60 dots form a shapeless fuzz: days don't relate to each other in any persistent way.
+      When markets start moving in <em>coordinated, repeating patterns</em> — the kind of synchronised behaviour that builds
+      before selloffs — the dot-cloud develops actual shape: loops and strands that persist. The TDA gauge is simply
+      <strong>"how much shape does the cloud have right now"</strong>, scored against the group's own last five years.</p>
+
+      <p><strong>Direction: high = warning, low = normal. There is no good high reading.</strong></p>
+      <table class="read-key">
+        <thead><tr><th>Verdict</th><th>What it means</th><th>What happened historically (next 60 days)</th></tr></thead>
+        <tbody>
+          <tr><td><span class="v-state quiet">quiet</span></td>
+              <td>The cloud is shapeless — no unusual coordination.</td>
+              <td>Baseline odds: a &gt;5% drawdown followed only ~17–20% of the time. Nothing to act on here.</td></tr>
+          <tr><td><span class="v-state watch">watch</span></td>
+              <td>Structure building (above the 70th percentile), but below the audited alert line.</td>
+              <td>In-between zone — check the <a href="/systemic">stress gauges</a> more often.</td></tr>
+          <tr><td><span class="v-state alert">alert</span></td>
+              <td>Heavy structure (&gt;90th percentile) <em>while turbulence still reads calm</em> — coordination building under a quiet surface. This is the audited configuration.</td>
+              <td>A &gt;5% drawdown followed <strong>44–48%</strong> of the time (2–3× baseline) and volatility ran ~30% higher — expect a turbulent market even though today looks calm.</td></tr>
+          <tr><td><span class="v-state hot">hot</span></td>
+              <td>Geometry hot, but turbulence is <em>also</em> elevated — the storm is already visible.</td>
+              <td>The <a href="/systemic">stress gauges</a> cover this case; geometry adds little once stress is overt.</td></tr>
+        </tbody>
+      </table>
+
+      <p><strong>The commodities panel uses a different signal</strong> — hub concentration. The market tree below shows which
+      markets are correlated to which; normally commodities trade on their own drivers (gold on rates, oil on supply).
+      When the tree collapses so that everything connects through one hub, the group has become a single bet — and
+      historically a <strong>&gt;10% commodity drawdown followed 44% of the time vs 15%</strong> from distributed readings.
+      Same direction: <strong>high concentration = warning</strong>.</p>
+
+      <p><strong>Tree length</strong> (bottom chart) is context, not a signal: shorter = markets more correlated = less
+      diversification inside the group. Its information overlaps the <a href="/systemic">absorption ratio</a>, so we don't
+      issue verdicts from it.</p>
+
+      <p>All the odds above come from <a href="#audit">the audit on this page</a> — ~12 independent episodes over 16 years,
+      so treat them as odds-shifters, not certainties. One sentence to take away:
+      <strong>high geometry reading + calm surface = the historical setup for rough markets; everything else here is context.</strong></p>
+    </div>
+  </details>
 
   <div class="geo-strip reveal" id="geo-strip">
     <div class="skeleton" style="height:170px;border-radius:var(--r-lg);"></div>
