@@ -19,7 +19,7 @@ OUT_DIR = os.path.join(FRONTEND, "research")
 
 SITE = "https://www.regimecompass.com"
 SHELL_V = "6.4"
-STYLES_V = "6.0"
+STYLES_V = "6.3"
 
 # ─────────────────────────────────────────────────────────────────
 # Articles. body is HTML (h2/p/ul/blockquote). Idea-level, never
