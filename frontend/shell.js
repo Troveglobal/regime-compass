@@ -483,8 +483,10 @@
     return { position: position };
   };
 
-  /* grouped index <select>: Equities → Commodities → Fixed Income & FX → Crypto,
-     colour-coded group headers. items = [{key, name, country?}] */
+  /* grouped index dropdown: Equities \u2192 Commodities \u2192 Fixed Income & FX \u2192 Crypto.
+     The native <select> stays in the DOM (hidden) as the state holder \u2014 pages keep
+     reading .value and listening for "change" \u2014 while a styled glass menu renders
+     the UI, since OS-native dropdown lists can't be themed. */
   var IDX_CLASS = {
     spx: "eq", nasdaq: "eq", ftse: "eq", stoxx50: "eq", nifty: "eq", nikkei: "eq",
     kospi: "eq", shcomp: "eq", hangseng: "eq", taiex: "eq", bovespa: "eq", tadawul: "eq",
@@ -493,12 +495,20 @@
     btc: "cr", eth: "cr",
   };
   var IDX_GROUPS = [
-    ["eq", "\uD83D\uDFE3 Equities"],
-    ["co", "\uD83D\uDFE1 Commodities"],
-    ["fi", "\uD83D\uDD35 Fixed Income & FX"],
-    ["cr", "\uD83D\uDFE0 Crypto"],
+    ["eq", "Equities", "#a58ff5"],
+    ["co", "Commodities", "#d4a017"],
+    ["fi", "Fixed Income & FX", "#6ec1ff"],
+    ["cr", "Crypto", "#f0883e"],
   ];
   RC.indexSelect = function (sel, items, labelFn) {
+    var label = labelFn || function (i) {
+      /* the group header already says Commodities/Crypto/Rates — only real
+         countries earn a suffix */
+      var redundant = { Commodity: 1, Crypto: 1, Rates: 1, FX: 1 };
+      return i.name + (i.country && !redundant[i.country] ? " \u2014 " + i.country : "");
+    };
+    var byVal = {};
+    /* native options (accessibility + state) */
     sel.innerHTML = "";
     IDX_GROUPS.forEach(function (g) {
       var members = items.filter(function (i) { return (IDX_CLASS[i.key] || "eq") === g[0]; });
@@ -506,13 +516,78 @@
       var og = document.createElement("optgroup");
       og.label = g[1];
       members.forEach(function (i) {
+        byVal[i.key] = label(i);
         var opt = document.createElement("option");
         opt.value = i.key;
-        opt.textContent = labelFn ? labelFn(i) : (i.name + (i.country ? " \u2014 " + i.country : ""));
+        opt.textContent = label(i);
         og.appendChild(opt);
       });
       sel.appendChild(og);
     });
+
+    /* custom glass UI */
+    if (sel._idxdd) sel._idxdd.remove();
+    sel.classList.add("idx-native");
+    var wrap = document.createElement("span");
+    wrap.className = "idx-dd";
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "idx-btn";
+    var menu = document.createElement("div");
+    menu.className = "idx-menu";
+    IDX_GROUPS.forEach(function (g) {
+      var members = items.filter(function (i) { return (IDX_CLASS[i.key] || "eq") === g[0]; });
+      if (!members.length) return;
+      var head = document.createElement("span");
+      head.className = "idx-head";
+      head.textContent = g[1];
+      head.style.color = g[2];
+      menu.appendChild(head);
+      members.forEach(function (i) {
+        var row = document.createElement("button");
+        row.type = "button";
+        row.className = "idx-opt";
+        row.dataset.value = i.key;
+        row.textContent = label(i);
+        row.addEventListener("click", function (e) {
+          e.stopPropagation();
+          sel.value = i.key;
+          sel.dispatchEvent(new Event("change", { bubbles: true }));
+          close();
+        });
+        menu.appendChild(row);
+      });
+    });
+    wrap.appendChild(btn);
+    wrap.appendChild(menu);
+    sel.parentNode.insertBefore(wrap, sel.nextSibling);
+    sel._idxdd = wrap;
+
+    function paint() {
+      btn.textContent = byVal[sel.value] || "Select market";
+      menu.querySelectorAll(".idx-opt").forEach(function (r) {
+        r.classList.toggle("active", r.dataset.value === sel.value);
+      });
+    }
+    function close() { wrap.classList.remove("open"); }
+    btn.addEventListener("click", function (e) {
+      e.stopPropagation();
+      wrap.classList.toggle("open");
+      var act = menu.querySelector(".idx-opt.active");
+      if (act && wrap.classList.contains("open")) act.scrollIntoView({ block: "nearest" });
+    });
+    document.addEventListener("click", close);
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") close(); });
+
+    /* keep the button label honest when pages set select.value programmatically */
+    var proto = Object.getOwnPropertyDescriptor(HTMLSelectElement.prototype, "value");
+    Object.defineProperty(sel, "value", {
+      get: function () { return proto.get.call(sel); },
+      set: function (v) { proto.set.call(sel, v); paint(); },
+      configurable: true,
+    });
+    sel.addEventListener("change", paint);
+    paint();
   };
 
   /* formatting helpers */
