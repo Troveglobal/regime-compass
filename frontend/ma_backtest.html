@@ -88,13 +88,16 @@
 
     .pill-buy  { background: var(--bull); color: #052e17; padding: 1px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
     .pill-sell { background: var(--bear); color: white; padding: 1px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
+    .period-banner { display: inline-block; background: var(--bg-elev); border: 1px solid var(--border-strong); border-radius: var(--r-md);
+      padding: 8px 14px; margin-bottom: 18px; font-size: 13px; color: var(--text); font-family: var(--font-mono); }
+    .period-banner strong { color: var(--text-strong); }
   </style>
   <script type="application/ld+json">
   {"@context": "https://schema.org", "@type": "WebPage", "name": "MA Backtest — Regime Compass", "description": "Walk-forward backtest of the price-vs-DMA regime strategy with 2-day confirmation. Long when bull, cash earning country risk-free rate when bear.", "url": "https://www.regimecompass.com/ma/backtest", "isPartOf": {"@type": "WebSite", "name": "Regime Compass", "url": "https://www.regimecompass.com"}}
   </script>
 </head>
 <body>
-<script src="/shell.js?v=5.1"></script>
+<script src="/shell.js?v=5.2"></script>
 
 <div class="wrap">
   <div style="display: flex; align-items: center; gap: 18px; flex-wrap: wrap; margin-bottom: 14px;">
@@ -126,6 +129,8 @@
   <div class="callout">
     <strong>How this strategy works.</strong> Each day, we check if the regime (price above/below the chosen DMA) has been consistent for at least 2 trading days. If two consecutive bull days → go long the index. If two consecutive bear days → move to cash earning the country's risk-free rate. Otherwise, hold the previous position. This 2-day confirmation reduces whipsaws from one-day regime flips. No transaction costs, no slippage. Cash yield is approximate but realistic.
   </div>
+
+  <div class="period-banner" id="bt-period">Backtest period: —</div>
 
   <!-- Side-by-side comparison -->
   <div class="compare-grid reveal">
@@ -280,6 +285,9 @@ async function refresh() {
   document.getElementById("cash-pill").textContent =
     `cash: ${(d.cash_rate_annual*100).toFixed(1)}% (${d.cash_label})`;
   document.getElementById("s-period").textContent = `· ${d.period}-day DMA · ${d.confirm_days}-day confirm`;
+  const yrs = (d.n_trading_days / 252).toFixed(1);
+  document.getElementById("bt-period").innerHTML =
+    `All returns below are over <strong>${d.date_range.start} → ${d.date_range.end}</strong> · ${d.n_trading_days.toLocaleString()} trading days (~${yrs} yrs)`;
 
   const sm = d.strategy_metrics;
   const bh = d.buy_hold_metrics;

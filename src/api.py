@@ -37,6 +37,7 @@ from . import valuation as val_mod
 from . import yieldcurve as yield_mod
 from . import ma_backtest
 from . import ma_regime
+from . import credit
 from . import subscriptions
 from .config import (
     API_CORS_ORIGINS,
@@ -51,6 +52,7 @@ from .config import (
 )
 
 FRONTEND_DIR = Path(__file__).resolve().parent.parent / "frontend"
+_SIMPLE_CACHE: dict = {}  # in-process cache for expensive derived feeds (e.g. portfolio backtest)
 SMARTMONEY_FEED = Path(__file__).resolve().parent / "smartmoney" / "out" / "feed.json"
 SMARTMONEY_OUT = Path(__file__).resolve().parent / "smartmoney" / "out"
 SMARTMONEY_MARKETS = ("tw", "id", "us")  # global deal-level trackers (India is /api/smartmoney)
@@ -1003,6 +1005,33 @@ def ema_backtest_endpoint(
     return ma_backtest.backtest(key, period, confirm_days, kind="ema")
 
 
+# Credit stress (US High-Yield OAS) — gauge, history, conditioned equity overlay
+@app.get("/api/credit/gauge")
+def credit_gauge_endpoint(
+    kind: str = Query("sma", regex="^(sma|ema)$"),
+    period: int = Query(200),
+) -> dict:
+    if period not in (50, 100, 200):
+        period = 200
+    return credit.gauge(kind=kind, period=period)
+
+
+@app.get("/api/credit/history")
+def credit_history_endpoint(days: int = Query(500, ge=30, le=800)) -> dict:
+    return credit.history(days)
+
+
+@app.get("/api/credit/backtest")
+def credit_backtest_endpoint(
+    kind: str = Query("sma", regex="^(sma|ema)$"),
+    period: int = Query(200),
+    series: str = Query("baa", regex="^(baa|hy)$"),
+) -> dict:
+    if period not in (50, 100, 200):
+        period = 200
+    return credit.overlay_backtest(kind=kind, period=period, series=series)
+
+
 # Analytics feeds (Regime Movers, sparkline ribbons, Systemic Risk) —
 # precomputed by the daily pipeline (src/movers.py, src/sparklines.py,
 # src/systemic.py), served straight from data/analytics/.
@@ -1129,6 +1158,10 @@ if FRONTEND_DIR.exists():
     def ema_backtest_page():
         return FileResponse(FRONTEND_DIR / "ema_backtest.html")
 
+    @app.get("/credit")
+    def credit_page():
+        return FileResponse(FRONTEND_DIR / "credit.html")
+
     @app.get("/composite")
     def composite_page():
         return geo.render_page("composite.html", "composite")
@@ -1248,6 +1281,22 @@ if FRONTEND_DIR.exists():
         if feed.exists():
             return FileResponse(feed, media_type="application/json")
         return JSONResponse({"error": "feed unavailable"}, status_code=503)
+
+    @app.get("/api/smartmoney/portfolio")
+    def smartmoney_portfolio(mode: str = Query("refined", regex="^(refined|raw)$")):
+        # Backtested Smart Money portfolio. mode=refined applies momentum + regime overlays.
+        # Cached in-process; the underlying data refreshes daily via the scheduler.
+        try:
+            from .smartmoney import portfolio as sm_portfolio
+            key = "sm_portfolio_v2_" + mode
+            cached = _SIMPLE_CACHE.get(key)
+            if cached is None:
+                cached = sm_portfolio.backtest(mode=mode)
+                _SIMPLE_CACHE[key] = cached
+            return cached
+        except Exception as e:
+            log.exception("[smartmoney] portfolio failed: %s", e)
+            return JSONResponse({"error": "portfolio unavailable"}, status_code=503)
 
     @app.get("/smartmoney/{mkt}")
     def smartmoney_market_page(mkt: str):

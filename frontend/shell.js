@@ -36,6 +36,7 @@
     '<span class="nav-dd"><span class="dd-trigger">Quant <span class="chev">&#9662;</span></span><span class="dd-menu">' +
     '<a href="/movers" data-nav="/movers">Regime Movers <span class="dd-note">today&#39;s abnormal moves</span></a>' +
     '<a href="/systemic" data-nav="/systemic">Systemic Risk <span class="dd-note">turbulence &middot; absorption</span></a>' +
+    '<a href="/credit" data-nav="/credit">Credit Stress <span class="dd-note">HY spread &middot; equity overlay</span></a>' +
     '<a href="/volatility" data-nav="/volatility">Volatility <span class="dd-note">stress percentile</span></a>' +
     '<a href="/correlations" data-nav="/correlations">Correlations <span class="dd-note">cross-asset matrix</span></a>' +
     "</span></span>" +

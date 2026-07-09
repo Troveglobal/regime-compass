@@ -304,7 +304,7 @@
   <!--GEO:JSONLD-->
 </head>
 <body>
-<script src="/shell.js?v=5.1"></script>
+<script src="/shell.js?v=5.2"></script>
 
 <div class="wrap">
   <div class="hero">
@@ -360,6 +360,7 @@
         <button class="tab" data-tab="flows">Flows &amp; F&amp;O</button>
         <button class="tab" data-tab="sectors">FPI Sectors</button>
         <button class="tab" data-tab="stakes">FII Stakes</button>
+        <button class="tab" data-tab="portfolio">Portfolio</button>
       </div>
       <div class="tabs" id="tab-window">
         <button class="tab" data-tab="today">Latest</button>
@@ -1056,6 +1057,166 @@ function renderStakes() {
   if (window.RC) RC.reveal(root);
 }
 
+/* ============ portfolio ============ */
+var portMode = "refined";
+var portCache = {};
+
+function renderPortfolio() {
+  var d = portCache[portMode];
+  if (!d) {
+    root.innerHTML = '<div class="skeleton" style="height:340px;margin-top:22px"></div>';
+    fetch("/api/smartmoney/portfolio?mode=" + portMode).then(function (r) { return r.json(); })
+      .then(function (x) { portCache[portMode] = x; renderPortfolio(); })
+      .catch(function () { root.innerHTML = '<div class="surface-card empty">Couldn\'t load the portfolio backtest.</div>'; });
+    return;
+  }
+  if (d.error) { root.innerHTML = '<div class="surface-card empty">' + esc(d.error) + "</div>"; return; }
+
+  var U = d.universe, bench = d.benchmark_nifty_pct, ff = d.follow_the_flow;
+  var col = function (v) { return v >= 0 ? "var(--bull)" : "var(--bear)"; };
+  var pc = function (v) { return v == null ? "—" : (v >= 0 ? "+" : "") + v.toFixed(1) + "%"; };
+  var equitySVG = function (ec) {
+    if (!ec || !ec.portfolio || ec.portfolio.length < 2) return "";
+    var P = ec.portfolio, N = ec.nifty, n = P.length;
+    var vals = P.concat(N.filter(function (x) { return x != null; }));
+    var lo = Math.min.apply(null, vals), hi = Math.max.apply(null, vals);
+    var pad = (hi - lo) * 0.1 || 1; lo -= pad; hi += pad;
+    var W = 520, H = 200, L = 4, R = 46, T = 10, B = 14, iw = W - L - R, ih = H - T - B;
+    var x = function (i) { return L + iw * i / (n - 1); };
+    var y = function (v) { return T + ih * (1 - (v - lo) / (hi - lo)); };
+    var pathOf = function (arr) {
+      var d = "", started = false;
+      for (var i = 0; i < arr.length; i++) {
+        if (arr[i] == null) continue;
+        d += (started ? "L" : "M") + x(i).toFixed(1) + " " + y(arr[i]).toFixed(1) + " "; started = true;
+      }
+      return d;
+    };
+    var pfPath = pathOf(P), y100 = y(100);
+    var area = pfPath + "L" + x(n - 1).toFixed(1) + " " + (T + ih).toFixed(1) + " L" + x(0).toFixed(1) + " " + (T + ih).toFixed(1) + " Z";
+    return '<svg viewBox="0 0 ' + W + " " + H + '" style="width:100%;height:auto;display:block;overflow:visible">' +
+      '<line x1="' + L + '" y1="' + y100.toFixed(1) + '" x2="' + (W - R) + '" y2="' + y100.toFixed(1) + '" stroke="var(--border)" stroke-dasharray="2 3" vector-effect="non-scaling-stroke"/>' +
+      '<path d="' + area + '" fill="var(--bull)" opacity="0.08"/>' +
+      '<path d="' + pathOf(N) + '" fill="none" stroke="var(--muted)" stroke-width="1.6" stroke-dasharray="4 4" vector-effect="non-scaling-stroke"/>' +
+      '<path d="' + pfPath + '" fill="none" stroke="var(--bull)" stroke-width="2" vector-effect="non-scaling-stroke"/>' +
+      '<text x="' + (W - R + 5) + '" y="' + y(P[n - 1]).toFixed(1) + '" fill="var(--bull)" font-size="12" font-weight="700" dominant-baseline="middle">' + Math.round(P[n - 1]) + "</text>" +
+      '<text x="' + (W - R + 5) + '" y="' + y(N[n - 1]).toFixed(1) + '" fill="var(--muted)" font-size="12" dominant-baseline="middle">' + Math.round(N[n - 1]) + "</text>" +
+      "</svg>";
+  };
+
+  document.getElementById("period").textContent =
+    "Backtest " + fmtDate(U.date_range[0]) + " – " + fmtDate(U.date_range[1]) + " · " + U.price_days + " trading days";
+  document.getElementById("upd").textContent = "● " + U.signals + " FII buy signals · daily";
+
+  // ---- portfolio-level stats from the equity curve (a portfolio has ONE return) ----
+  var ec = d.equity_curve;
+  var pTot = null, nTot = null, pAlpha = null, mdd = 0, cagr = null, months = 0, endRs = null;
+  if (ec && ec.portfolio && ec.portfolio.length > 1) {
+    endRs = ec.portfolio[ec.portfolio.length - 1];
+    pTot = endRs - 100;
+    var nEnd = ec.nifty[ec.nifty.length - 1];
+    nTot = nEnd != null ? nEnd - 100 : null;
+    pAlpha = nTot != null ? pTot - nTot : null;
+    var peak = ec.portfolio[0];
+    ec.portfolio.forEach(function (vv) { peak = Math.max(peak, vv); mdd = Math.min(mdd, (vv / peak - 1) * 100); });
+    cagr = (Math.pow(endRs / 100, 252 / ec.dates.length) - 1) * 100;
+    months = Math.round(ec.dates.length / 21);
+  }
+
+  var v = document.getElementById("verdict");
+  v.innerHTML = '<span class="live-dot"></span> <span>&#8377;100 in the <strong>Smart Money Flow</strong> portfolio grew to <span class="num mono" style="color:' +
+    col(pTot) + '">&#8377;' + (endRs != null ? endRs.toFixed(0) : "—") + '</span> <span class="num mono" style="color:' + col(pTot) + '">(' + pc(pTot) + ')</span> while the Nifty ' +
+    (nTot >= 0 ? "rose to" : "fell to") + ' <span class="num mono" style="color:' + col(nTot) + '">&#8377;' + (nTot != null ? (100 + nTot).toFixed(0) : "—") +
+    '</span> — <strong>' + (pAlpha >= 0 ? "+" : "") + (pAlpha != null ? pAlpha.toFixed(1) : "—") + ' points of alpha</strong> over ' + months + ' months, ' + ff.n + ' picks.</span>';
+  v.style.display = "";
+  var gb = document.querySelector(".geo-brief"); if (gb) gb.style.display = "none";
+
+  /* strategy scoreboard */
+  var card = function (title, sub, s) {
+    return '<div class="surface-card" style="padding:20px;flex:1;min-width:240px">' +
+      '<div style="font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:1.2px;font-weight:600">' + title + "</div>" +
+      '<div style="font-size:12.5px;color:var(--muted);margin:2px 0 12px">' + sub + "</div>" +
+      '<div style="display:flex;align-items:baseline;gap:10px"><span class="num mono" style="font-size:30px;font-weight:700;color:' + col(s.avg_ret_pct) + '">' + pc(s.avg_ret_pct) + "</span>" +
+      '<span style="font-size:12px;color:var(--muted)">avg / pick</span></div>' +
+      '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 14px;margin-top:14px;font-size:13px">' +
+      kv("vs Nifty", '<span class="num mono" style="color:' + col(s.avg_bench_pct) + '">' + pc(s.avg_bench_pct) + "</span>") +
+      kv("Alpha", '<span class="num mono" style="font-weight:700;color:' + col(s.avg_alpha_pct) + '">' + pc(s.avg_alpha_pct) + "</span>") +
+      kv("Win rate", s.win_rate_pct.toFixed(0) + "%") +
+      kv("Median", '<span class="num mono" style="color:' + col(s.median_ret_pct) + '">' + pc(s.median_ret_pct) + "</span>") +
+      kv("Avg hold", s.avg_hold_days.toFixed(0) + "d") +
+      kv("Picks", s.n + " (" + s.n_open + " held)") +
+      "</div></div>";
+  };
+  function kv(k, val) { return '<div><div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px">' + k + '</div><div style="font-weight:600">' + val + "</div></div>"; }
+
+  var refined = d.params.mode === "refined";
+  var html = '<div style="margin:22px 0 10px">' +
+    '<div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:2px;font-weight:600">The Portfolio</div>' +
+    '<h2 style="font-family:var(--font-display);font-size:30px;margin:4px 0 0;color:var(--text-strong)">Smart Money Flow</h2>' +
+    '<div style="font-size:14px;color:var(--muted);margin-top:5px;max-width:72ch">Buy what foreign institutions are accumulating — and hold until they leave.</div></div>';
+  html += '<div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:14px 0 8px">' +
+    '<span style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1.2px;font-weight:600">Strategy</span>' +
+    '<div id="port-mode" style="display:inline-flex;background:var(--bg-elev);border:1px solid var(--border);border-radius:var(--r-md);padding:3px">' +
+    '<button data-m="refined" style="background:' + (refined ? "var(--panel-2)" : "transparent") + ';color:' + (refined ? "var(--text-strong)" : "var(--muted)") + ';border:none;border-radius:6px;padding:6px 15px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit">Refined</button>' +
+    '<button data-m="raw" style="background:' + (!refined ? "var(--panel-2)" : "transparent") + ';color:' + (!refined ? "var(--text-strong)" : "var(--muted)") + ';border:none;border-radius:6px;padding:6px 15px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit">Raw</button>' +
+    "</div>" +
+    '<span style="font-size:12.5px;color:var(--muted)">' + (refined ? "momentum + market-regime overlays · hold to exit · no stop" : "every FII buy · no filters") + "</span></div>";
+  html += '<div style="display:inline-block;background:var(--panel);border:1px solid var(--border-strong);border-radius:var(--r-md);padding:11px 16px;margin:4px 0 4px;font-size:14px">' +
+    'Every return here is measured over <strong style="color:var(--text-strong)">' + fmtDate(U.date_range[0]) + " &rarr; " + fmtDate(U.date_range[1]) +
+    '</strong> &nbsp;·&nbsp; ' + U.price_days + ' trading days &nbsp;·&nbsp; ' + U.signals + ' picks held &nbsp;·&nbsp; benchmark: Nifty <span class="num mono" style="color:var(--bear)">' + pc(bench) + "</span></div>";
+  html += '<p class="quiet-note" style="margin:12px 0 0">Every time FIIs buy a name with conviction (net &ge; &#8377;25 cr in a day), the portfolio buys at the <strong>next day\'s close</strong> (no look-ahead) and holds until they exit — <strong>no take-profit, no stop</strong> (both were tested and both hurt). ' +
+    (refined ? '<strong>Refined</strong> only takes the buy when the stock is already above its 50-day average <em>and</em> the Nifty is above its 100-day average — don\'t catch a falling knife in a falling market. ' : "") +
+    'Prices <strong>split/bonus-adjusted</strong>. Gross of costs, single-market.</p>';
+  var chartCol = ec ? ('<div style="flex:1.25;min-width:300px;display:flex;flex-direction:column;justify-content:center">' +
+      '<div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px">' +
+        '<span style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px">Growth of ₹100 invested</span>' +
+        '<span style="font-size:11px"><span style="color:var(--bull)">━ Smart Money Flow</span> &nbsp; <span style="color:var(--muted)">╌ Nifty</span></span></div>' +
+      equitySVG(ec) + "</div>") : "";
+  html += '<div class="surface-card" style="padding:20px;margin:16px 0 6px">' +
+    '<div style="display:flex;gap:28px;flex-wrap:wrap;align-items:center">' +
+      '<div style="flex:1;min-width:250px">' +
+        '<div style="font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:1.2px;font-weight:600">Portfolio return' + (months ? " · " + months + " months invested" : "") + "</div>" +
+        '<div style="font-size:12.5px;color:var(--muted);margin:2px 0 12px">Equal-weight across every pick held — the whole book, not one trade</div>' +
+        '<div style="display:flex;align-items:baseline;gap:10px"><span class="num mono" style="font-size:34px;font-weight:700;color:' + col(pTot) + '">' + pc(pTot) + '</span><span style="font-size:12px;color:var(--muted)">&#8377;100 &rarr; &#8377;' + (endRs != null ? endRs.toFixed(0) : "—") + "</span></div>" +
+        '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 14px;margin-top:14px;font-size:13px">' +
+          kv("Nifty · same window", '<span class="num mono" style="color:' + col(nTot) + '">' + pc(nTot) + "</span>") +
+          kv("Alpha", '<span class="num mono" style="font-weight:700;color:' + col(pAlpha) + '">' + (pAlpha != null ? (pAlpha >= 0 ? "+" : "") + pAlpha.toFixed(1) + " pts" : "—") + "</span>") +
+          kv("Max drawdown", '<span class="num mono" style="color:var(--bear)">' + mdd.toFixed(1) + "%</span>") +
+          kv("Annualised", '<span class="num mono" style="color:' + col(cagr) + '">' + pc(cagr) + "</span>") +
+          kv("Positions", ff.n + " (" + ff.n_open + " held now)") +
+          kv("Picks in profit", ff.win_rate_pct.toFixed(0) + "%") +
+        "</div></div>" + chartCol +
+    "</div></div>";
+
+  /* live holdings */
+  var H = d.live_holdings || [];
+  html += '<div class="blk" style="margin-top:22px">' + blockHead("Live portfolio · " + H.length + " open positions",
+    "Names still held under the follow-the-flow rule (FIIs bought, haven't been seen selling yet), marked to the latest close.") + "</div>";
+  html += '<div class="surface-card" style="padding:0;overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:13.5px">' +
+    '<thead><tr style="text-align:left;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:1px">' +
+    '<th style="padding:11px 14px">Stock</th><th style="padding:11px 14px">Bought</th><th style="padding:11px 14px;text-align:right">Entry</th>' +
+    '<th style="padding:11px 14px;text-align:right">Unrealised</th><th style="padding:11px 14px;text-align:right">Held</th></tr></thead><tbody>';
+  H.forEach(function (h) {
+    html += '<tr style="border-top:1px solid var(--border)">' +
+      '<td style="padding:10px 14px;font-weight:600">' + esc(h.symbol) + "</td>" +
+      '<td style="padding:10px 14px;color:var(--muted)">' + fmtDate(h.entry_date) + "</td>" +
+      '<td style="padding:10px 14px;text-align:right" class="num mono">' + h.entry_px.toLocaleString("en-IN") + "</td>" +
+      '<td style="padding:10px 14px;text-align:right;font-weight:600" class="num mono"><span style="color:' + col(h.ret_pct) + '">' + pc(h.ret_pct) + "</span></td>" +
+      '<td style="padding:10px 14px;text-align:right;color:var(--muted)">' + h.held_days + "d</td></tr>";
+  });
+  html += "</tbody></table></div>";
+
+  html += '<div class="surface-card" style="margin-top:18px;padding:18px 20px;font-size:13.5px;line-height:1.65;color:var(--text)">' +
+    '<strong>How to read this — honestly.</strong> The <strong>portfolio</strong> returned <span class="num mono" style="color:' + col(pTot) + '">' + pc(pTot) + '</span> vs the Nifty\'s <span class="num mono" style="color:' + col(nTot) + '">' + pc(nTot) + '</span> — about ' + Math.round(Math.abs(pAlpha)) + ' points of alpha. (The <em>average individual pick</em> rose more, ~' + Math.round(ff.avg_ret_pct) + '%, but once capital is spread equally across the names held at the same time, the whole book earns less — the <strong>portfolio number is the honest one</strong>, and it\'s what the chart shows.) The edge is in the <strong>entry filters</strong>, not clever exits — take-profits and stops both hurt, so there are none. Most signals are <strong>block deals</strong> with an equally large seller, so it\'s a positive tilt, not a free lunch. Next step: multi-day <em>net accumulation</em>. <strong>Not investment advice.</strong></div>';
+
+  root.innerHTML = html;
+  var mt = document.getElementById("port-mode");
+  if (mt) mt.querySelectorAll("button").forEach(function (b) {
+    b.addEventListener("click", function () { if (b.dataset.m !== portMode) { portMode = b.dataset.m; renderPortfolio(); } });
+  });
+  if (window.RC) RC.reveal(root);
+}
+
 /* ============ render ============ */
 
 function render() {
@@ -1066,6 +1227,7 @@ function render() {
     modeTabs.style.display = "none";
     if (state.view === "flows") renderFlows();
     else if (state.view === "sectors") renderSectors();
+    else if (state.view === "portfolio") renderPortfolio();
     else renderStakes();
     return;
   }
