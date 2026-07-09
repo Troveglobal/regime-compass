@@ -32,7 +32,7 @@ OUT_PATH = DATA_DIR / "analytics" / "systemic.json"
 
 TURB_WINDOW = 500          # trailing estimation window for μ, Σ (ends t-1)
 AR_WINDOW = 250            # trailing covariance window for the eigendecomposition
-AR_TOP_N = 2               # ≈ 1/5 of 11 assets (Kritzman, Li, Page & Rigobon)
+AR_TOP_N = None            # resolved at build time: max(2, round(N/5)) per Kritzman
 AR_SHORT, AR_LONG = 15, 252
 SMOOTH_DAYS = 10
 PCTILE_WINDOW = 1260       # ~5 trading years
@@ -40,17 +40,12 @@ HISTORY_YEARS = 10         # chart depth
 MIN_HISTORY_DAYS = int(3 * 252)  # markets with < 3y of data are excluded
 
 
-# Pinned universe: the 11 markets the published gauges and their audits were
-# built on. New board markets don't silently change audited history — extending
-# this universe is a deliberate, re-audited change.
-UNIVERSE = ("spx", "nasdaq", "btc", "eth", "gold", "silver",
-            "stoxx50", "nifty", "nikkei", "kospi", "shcomp")
-
-
 def _load_closes() -> tuple[dict[str, pd.Series], list[dict]]:
+    """Full market board (config.INDICES). Extended from the original 11 to
+    the whole cross-asset universe in Jul 2026 — a deliberate methodology
+    change, noted on the page; AR components scale with Kritzman's 1/5 rule."""
     closes, excluded = {}, []
-    for key in UNIVERSE:
-        cfg = INDICES[key]
+    for key, cfg in INDICES.items():
         try:
             raw = pd.read_parquet(raw_path(key), columns=["price"])
         except FileNotFoundError:
@@ -84,7 +79,8 @@ def build() -> dict:
 
     turb = turbulence_series(rets, window=TURB_WINDOW)
     turb_smooth = turb.rolling(SMOOTH_DAYS).mean()
-    ar = absorption_series(rets, window=AR_WINDOW, n_components=AR_TOP_N)
+    n_comp = max(2, round(rets.shape[1] / 5))  # Kritzman's ~1/5-of-assets rule
+    ar = absorption_series(rets, window=AR_WINDOW, n_components=n_comp)
     dar = delta_ar(ar, short=AR_SHORT, long=AR_LONG)
     if turb.empty or ar.empty:
         raise RuntimeError("turbulence/absorption series came back empty")
@@ -135,7 +131,7 @@ def build() -> dict:
         },
         "absorption": {
             "window": AR_WINDOW,
-            "n_components": AR_TOP_N,
+            "n_components": n_comp,
             "n_assets": int(len(prices.columns)),
             "current": round(cur_ar, 4),
             "current_percentile": round(trailing_percentile(ar, cur_ar, PCTILE_WINDOW), 1),

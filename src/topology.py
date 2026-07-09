@@ -37,11 +37,10 @@ from .config import DATA_DIR, INDICES, raw_path
 
 OUT_PATH = DATA_DIR / "analytics" / "topology.json"
 
-# Pinned universe: the 9 markets the published audit was run on. New board
-# markets don't silently change audited history.
-UNIVERSE = ("spx", "nasdaq", "gold", "silver", "stoxx50",
-            "nifty", "nikkei", "kospi", "shcomp")
 EXCLUDE = {"btc", "eth"}       # 24/7 markets distort the joint calendar/geometry
+# Universe: every non-crypto board market. Extended from the audited 9 to the
+# full board in Jul 2026 and re-audited (scripts/topo_prototype.py) — the
+# geometry page publishes the refreshed audit.
 TDA_WINDOW = 60                # days per point cloud (Gidea-Katz use 50-100)
 MST_WINDOW = 90                # rolling correlation window
 PCTILE_WINDOW = 1260           # ~5 trading years
@@ -52,18 +51,19 @@ MIN_HISTORY_DAYS = int(3 * 252)
 # Drawdown episodes from the validation study (scripts/topo_prototype.py),
 # shaded on the history chart. Regenerate the study before editing.
 EPISODES = [
-    {"from": "2015-05-25", "to": "2016-01-21", "label": "2015–16 global"},
-    {"from": "2018-01-26", "to": "2018-12-24", "label": "2018 Q4"},
-    {"from": "2020-02-19", "to": "2020-03-23", "label": "COVID"},
-    {"from": "2021-11-15", "to": "2022-09-30", "label": "2022"},
-    {"from": "2025-02-18", "to": "2025-04-07", "label": "2025 Feb"},
+    {"from": "2011-04-29", "to": "2011-10-03", "label": "2011 eurozone"},
+    {"from": "2015-05-25", "to": "2016-01-20", "label": "2015–16 global"},
+    {"from": "2018-01-26", "to": "2018-12-23", "label": "2018"},
+    {"from": "2020-01-17", "to": "2020-03-23", "label": "COVID"},
+    {"from": "2022-03-30", "to": "2022-09-30", "label": "2022"},
 ]
 
 
 def _load_returns() -> tuple[pd.DataFrame, list[str]]:
     closes, excluded = {}, []
-    for key in UNIVERSE:
-        cfg = INDICES[key]
+    for key, cfg in INDICES.items():
+        if key in EXCLUDE:
+            continue
         try:
             raw = pd.read_parquet(raw_path(key), columns=["price"])
         except FileNotFoundError:
@@ -117,17 +117,26 @@ def _mst_edges(corr: np.ndarray) -> list[tuple[int, int, float]]:
     return [(int(i), int(j), float(v)) for i, j, v in zip(tree.row, tree.col, tree.data)]
 
 
-def mst_series(rets: pd.DataFrame, window: int = MST_WINDOW) -> pd.Series:
-    """Rolling normalized tree length (mean MST edge distance). Contracts
-    toward 0 as markets unify."""
+def mst_series(rets: pd.DataFrame, window: int = MST_WINDOW) -> pd.DataFrame:
+    """Rolling MST metrics. Tree length (mean edge distance) contracts toward
+    0 as markets unify; star-ness (max node degree / (N-1)) rises as the tree
+    collapses toward a single hub — the configuration that preceded the worst
+    forward drawdowns in the 18-market re-audit."""
     X = rets.values
-    vals, idx = [], []
+    N = rets.shape[1]
+    lens, stars, idx = [], [], []
     for t in range(window, len(rets)):
         C = np.corrcoef(X[t - window:t].T)
         edges = _mst_edges(C)
-        vals.append(float(np.mean([d for _, _, d in edges])))
+        lens.append(float(np.mean([d for _, _, d in edges])))
+        deg = np.zeros(N, dtype=int)
+        for i, j, _ in edges:
+            deg[i] += 1
+            deg[j] += 1
+        stars.append(float(deg.max() / (N - 1)))
         idx.append(rets.index[t - 1])
-    return pd.Series(vals, index=pd.DatetimeIndex(idx), name="mst_len")
+    return pd.DataFrame({"mst_len": lens, "mst_star": stars},
+                        index=pd.DatetimeIndex(idx))
 
 
 def _series_points(s: pd.Series) -> list[list]:
@@ -141,7 +150,9 @@ def build() -> dict:
 
     tda = tda_series(rets)
     tda_smooth = tda.rolling(SMOOTH_DAYS).mean()
-    mst_len = mst_series(rets)
+    mst = mst_series(rets)
+    mst_len = mst["mst_len"]
+    mst_star = mst["mst_star"]
 
     # current MST structure for the network visual
     C = np.corrcoef(rets.values[-MST_WINDOW:].T)
@@ -161,6 +172,9 @@ def build() -> dict:
     tda_pct = trailing_percentile(tda_smooth.dropna(), cur_tda, window=PCTILE_WINDOW)
     # tightness percentile: how CONTRACTED is the tree vs its own history
     mst_tight_pct = trailing_percentile(-mst_len.dropna(), -cur_mst, window=PCTILE_WINDOW)
+    star_smooth = mst_star.rolling(SMOOTH_DAYS).mean()
+    cur_star = float(star_smooth.dropna().iloc[-1])
+    star_pct = trailing_percentile(star_smooth.dropna(), cur_star, window=PCTILE_WINDOW)
 
     return {
         "generated_at": datetime.now(timezone.utc).isoformat(),
@@ -177,7 +191,9 @@ def build() -> dict:
         "mst": {
             "current_len": round(cur_mst, 5),
             "tightness_percentile": round(mst_tight_pct, 1) if mst_tight_pct is not None else None,
+            "star_percentile": round(star_pct, 1) if star_pct is not None else None,
             "history": _series_points(mst_hist),
+            "star_history": _series_points(star_smooth.dropna().loc[cutoff:]),
             "tree": {
                 "nodes": [{"key": k, "name": INDICES[k]["name"], "degree": int(d)}
                           for k, d in zip(keys, degrees)],

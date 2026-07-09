@@ -68,6 +68,9 @@ ARTICLES = [
 <blockquote>The failure is informative: strip the "cross" out of cross-market geometry and the information disappears. The joint gauge's edge lives in how markets move relative to each other — which is exactly what a single series cannot see.</blockquote>
 <p>So the per-market table doesn't ship, the system-level gauge stands, and this note will keep saying whatever the data says.</p>
 
+<h2>Update: re-audited on the 20-market board</h2>
+<p>When the board expanded to twenty markets (July 2026), the study was re-run on the full 18-market non-crypto panel. The TDA finding <strong>strengthened</strong>: overlap with turbulence fell to 0.15, and hot readings preceded roughly 75% worse conditional drawdowns. One reversal, disclosed: <strong>hub concentration</strong> (how star-shaped the tree is) looked inverted on 9 markets and we said so — on 18 nodes it becomes the strongest conditional signal in the study (~2× worse forward drawdowns across ~12 distinct episodes). Small panels do this; the fix is more panel, not more conviction. The live gauges on the <a href="/geometry">Market Geometry</a> page reflect the extended universe.</p>
+
 """,
     },
     {
@@ -91,7 +94,7 @@ ARTICLES = [
 <p>It matters even more if you ever withdraw money. Anyone drawing on a portfolio — retirees, family offices funding obligations, anyone between jobs — faces <strong>sequence risk</strong>: a deep drawdown early in the withdrawal phase does permanent damage that later gains can't repair. For these investors, drawdown control isn't a preference. It's the whole game.</p>
 
 <h2>What the evidence actually says</h2>
-<p>We tested our own regime models the way a skeptic would — walk-forward, refit only on data available at the time, costs charged on every switch. The honest result across seventeen global markets: the regime strategy usually <strong>earns less</strong> than buy-and-hold, and in exchange it cut the maximum drawdown in <strong>thirteen of seventeen markets</strong> and volatility in all seventeen.</p>
+<p>We tested our own regime models the way a skeptic would — walk-forward, refit only on data available at the time, costs charged on every switch. The honest result across twenty global markets: the regime strategy usually <strong>earns less</strong> than buy-and-hold, and in exchange it cut the maximum drawdown in <strong>fifteen of twenty markets</strong> and volatility in all twenty.</p>
 <p>We publish that trade-off rather than hiding half of it, because it's exactly the trade a risk-averse investor wants to see priced: how many points of annual return does a smaller worst-case cost? For maximum-compounding investors with iron stomachs and no withdrawals, buy-and-hold wins and we say so. For everyone else, the brake has a price and a benefit, and both are measurable.</p>
 
 <h2>What regime investing won't do</h2>
@@ -254,9 +257,9 @@ ARTICLES = [
 </ul>
 
 <h2>What honesty produces</h2>
-<p>Numbers that look worse and mean more. Out of sample, our regime strategy earns less than buy-and-hold in most markets. It cuts the maximum drawdown in thirteen of seventeen and volatility in all seventeen. On Sharpe ratio, it beats buy-and-hold in just three markets of seventeen — a statistic we display in large type on our own strategies page.</p>
+<p>Numbers that look worse and mean more. Out of sample, our regime strategy earns less than buy-and-hold in most markets. It cuts the maximum drawdown in fifteen of twenty and volatility in all twenty. On Sharpe ratio, it beats buy-and-hold in just four markets of twenty — a statistic we display in large type on our own strategies page.</p>
 <blockquote>If a result would look better with a detail hidden, the detail is the result.</blockquote>
-<p>Why publish that? Because the alternative is a website whose model has never been wrong, and every professional reader knows exactly what that means. Publishing the losses does something subtle: it makes the wins legible. When the same audit that shows three Sharpe wins in seventeen also shows drawdowns shrinking almost everywhere, a reader can finally see what the tool is <em>for</em> — it's a brake, not an engine — and decide with open eyes whether that trade suits them.</p>
+<p>Why publish that? Because the alternative is a website whose model has never been wrong, and every professional reader knows exactly what that means. Publishing the losses does something subtle: it makes the wins legible. When the same audit that shows four Sharpe wins in twenty also shows drawdowns shrinking almost everywhere, a reader can finally see what the tool is <em>for</em> — it's a brake, not an engine — and decide with open eyes whether that trade suits them.</p>
 
 <h2>Questions to ask of any backtest</h2>
 <ul>

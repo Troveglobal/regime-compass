@@ -115,6 +115,9 @@
     ["/asset/silver", "🥈 Silver", "Explore", "silver commodity"],
     ["/asset/copper", "🔶 Copper", "Explore", "copper dr commodity growth"],
     ["/country/hong-kong", "🇭🇰 Hong Kong", "Explore", "hong kong hang seng hsi"],
+    ["/country/united-kingdom", "🇬🇧 United Kingdom", "Explore", "uk ftse gilts"],
+    ["/country/brazil", "🇧🇷 Brazil", "Explore", "brazil bovespa latam"],
+    ["/country/saudi-arabia", "🇸🇦 Saudi Arabia", "Explore", "saudi tadawul gcc aramco"],
     ["/country/taiwan", "🇹🇼 Taiwan", "Explore", "taiwan taiex twii semiconductors"],
     ["/subscribe", "Alerts", "Account", "subscribe email alerts notify"],
     ["/feedback", "Feedback & Early Access", "Account", "feedback waitlist early access suggest missing"],
@@ -184,7 +187,7 @@
     '<div class="inner">' +
     '<div class="f-brand">' +
     '<span class="brand-line">' + LOGO + " Regime Compass</span>" +
-    "<p>Daily regime classification across 17 global markets — equities, rates, currencies, commodities and crypto. Three independent models, one honest snapshot. An iQuant Labs project.</p>" +
+    "<p>Daily regime classification across 20 global markets — equities, rates, currencies, commodities and crypto. Three independent models, one honest snapshot. An iQuant Labs project.</p>" +
     '<p class="f-soon">Accounts &amp; custom dashboards are in the works — <a href="/feedback">sign up for early access</a>.</p>' +
     "</div>" +
     '<div class="f-col"><h5>Regime</h5>' +

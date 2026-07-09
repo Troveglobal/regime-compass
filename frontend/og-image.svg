@@ -44,7 +44,7 @@
   <text x="80" y="395" font-family="Fraunces, Georgia, serif" font-size="68" font-weight="600" fill="#ffffff" letter-spacing="-2">you're in.</text>
 
   <!-- Tagline -->
-  <text x="80" y="450" font-family="Inter, system-ui, sans-serif" font-size="22" fill="#8b95a3">17 global markets &#183; one daily verdict &#183; audited, not asserted</text>
+  <text x="80" y="450" font-family="Inter, system-ui, sans-serif" font-size="22" fill="#8b95a3">20 global markets &#183; one daily verdict &#183; audited, not asserted</text>
 
   <!-- Tricolor accent at bottom -->
   <rect x="80" y="510" width="220" height="6" rx="3" fill="#e35454"/>

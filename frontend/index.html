@@ -13,16 +13,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Regime Compass — Know the market you're in</title>
-  <meta name="description" content="Regime intelligence for 17 global markets. Daily bull/neutral/bear classification from walk-forward-validated models, corroborated by systemic risk, macro and smart-money evidence. By iQuant Labs." />
+  <meta name="description" content="Regime intelligence for 20 global markets. Daily bull/neutral/bear classification from walk-forward-validated models, corroborated by systemic risk, macro and smart-money evidence. By iQuant Labs." />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Regime Compass" />
   <meta property="og:title" content="Regime Compass — Know the market you're in" />
-  <meta property="og:description" content="Regime intelligence for 17 global markets. One daily verdict, four independent streams of evidence. By iQuant Labs." />
+  <meta property="og:description" content="Regime intelligence for 20 global markets. One daily verdict, four independent streams of evidence. By iQuant Labs." />
   <meta property="og:image" content="https://www.regimecompass.com/og-image.png" />
   <meta property="og:url" content="https://regimecompass.com" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Regime Compass — Know the market you're in" />
-  <meta name="twitter:description" content="Regime intelligence for 17 global markets. One daily verdict, four independent streams of evidence. By iQuant Labs." />
+  <meta name="twitter:description" content="Regime intelligence for 20 global markets. One daily verdict, four independent streams of evidence. By iQuant Labs." />
   <meta name="twitter:image" content="https://www.regimecompass.com/og-image.png" />
   <meta name="theme-color" content="#07090e" />
   <link rel="canonical" href="https://www.regimecompass.com/" />
@@ -198,7 +198,7 @@
         "@id": "https://www.regimecompass.com/#website",
         "name": "Regime Compass",
         "url": "https://www.regimecompass.com",
-        "description": "Regime intelligence for 17 global markets. One daily verdict, four independent streams of evidence. By iQuant Labs.",
+        "description": "Regime intelligence for 20 global markets. One daily verdict, four independent streams of evidence. By iQuant Labs.",
         "publisher": { "@id": "https://www.regimecompass.com/#org" }
       },
       {
@@ -221,7 +221,7 @@
       {
         "@type": "Dataset",
         "name": "Regime Compass daily market regime classifications",
-        "description": "Daily bull/neutral/bear regime classifications for 17 global markets (S&P 500, Nasdaq 100, Euro Stoxx 50, Nifty 50, Nikkei 225, KOSPI, Shanghai Composite, Hang Seng, TAIEX, Bitcoin, Ethereum, Gold, Silver, Crude Oil, Copper, US 10Y Treasuries, US Dollar Index) from three independent models: a 3-state Gaussian Hidden Markov Model, 200/100/50-day simple moving averages, and exponential moving averages. Includes a blended 0-100 risk-on/risk-off gauge per market.",
+        "description": "Daily bull/neutral/bear regime classifications for 20 global markets (S&P 500, Nasdaq 100, FTSE 100, Euro Stoxx 50, Nifty 50, Nikkei 225, KOSPI, Shanghai Composite, Hang Seng, TAIEX, Bovespa, Tadawul, Bitcoin, Ethereum, Gold, Silver, Crude Oil, Copper, US 10Y Treasuries, US Dollar Index) from three independent models: a 3-state Gaussian Hidden Markov Model, 200/100/50-day simple moving averages, and exponential moving averages. Includes a blended 0-100 risk-on/risk-off gauge per market.",
         "url": "https://www.regimecompass.com",
         "creator": { "@id": "https://www.regimecompass.com/#org" },
         "temporalCoverage": "2010-01-01/..",
@@ -235,7 +235,7 @@
   <!--GEO:JSONLD-->
 </head>
 <body>
-<script src="/shell.js?v=6.5"></script>
+<script src="/shell.js?v=6.6"></script>
 
 <div class="wrap">
   <!-- 1 · The claim -->
@@ -243,7 +243,7 @@
     <div class="hero-grid">
       <div>
         <div class="kicker">Regime Intelligence · iQuant Labs</div>
-        <p class="above-fold"><span class="live-dot"></span> 17 global markets, classified daily. Free.</p>
+        <p class="above-fold"><span class="live-dot"></span> 20 global markets, classified daily. Free.</p>
         <h1>Know the market<br/><span class="grad-text">you're in.</span></h1>
         <div class="tagline">Every decision that matters — sizing, hedging, when to press and when to step back — depends on the market's <strong>regime</strong>. Regime Compass quantifies it daily across equities, rates, currencies, commodities and crypto, then checks the verdict against three more independent streams of evidence.</div>
         <div class="hero-ctas">
@@ -286,7 +286,7 @@
 
   <!-- 2 · The verdict -->
   <section class="model-section reveal" style="margin-top:34px;">
-    <h2>Today's verdict <span class="tag">all 17 markets · updated daily</span></h2>
+    <h2>Today's verdict <span class="tag">all 20 markets · updated daily</span></h2>
     <div class="subline">How much of the board is risk-on right now — rates and the dollar are tracked but sit outside this count (a bond or dollar bull regime is risk-off for everything else). Click any market to see why.</div>
     <div class="board">
       <div class="board-top">
@@ -377,9 +377,9 @@
     <h2>Audited, not asserted</h2>
     <div class="subline">We backtested our own models the way a skeptic would — refit quarterly on data available at the time, costs included, <a href="/validation">every result published</a>, including where the models lose. See what the signals become as <a href="/strategies">model portfolios →</a></div>
     <div class="audit-strip">
-      <div class="cell"><div class="v num" data-count="17">0</div><div class="k">Markets tracked</div></div>
+      <div class="cell"><div class="v num" data-count="20">0</div><div class="k">Markets tracked</div></div>
       <div class="cell"><div class="v num" data-count="3">0</div><div class="k">Independent models</div></div>
-      <div class="cell"><div class="v num" data-count="153">0</div><div class="k">Signals per day</div></div>
+      <div class="cell"><div class="v num" data-count="180">0</div><div class="k">Signals per day</div></div>
       <div class="cell"><div class="v num" id="stat-days" data-count="0">0</div><div class="k">Days of history</div></div>
     </div>
   </section>
@@ -413,6 +413,7 @@ const BOARD_ABBREV = {
   spx: "SPX", nasdaq: "NDX", btc: "BTC", eth: "ETH", gold: "GOLD", silver: "SLV",
   stoxx50: "SX5E", nifty: "NIFTY", nikkei: "N225", kospi: "KOSPI", shcomp: "SSE",
   hangseng: "HSI", taiex: "TWII", wti: "WTI", copper: "HG", us10y: "10Y", dxy: "DXY",
+  ftse: "FTSE", bovespa: "IBOV", tadawul: "TASI",
 };
 async function loadBoard() {
   const r = await fetch("/api/concordance");

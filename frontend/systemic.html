@@ -55,13 +55,13 @@
   </script>
 </head>
 <body>
-<script src="/shell.js?v=6.5"></script>
+<script src="/shell.js?v=6.6"></script>
 
 <div class="wrap">
   <div class="hero">
     <div class="kicker">Systemic Risk</div>
     <h1>How fragile is the whole system?</h1>
-    <div class="tagline">Two institutional statistics computed jointly across all eleven markets. <strong>Turbulence</strong> asks whether today's cross-asset moves are strange relative to recent history &mdash; not just big, but wrong-shaped. The <strong>Absorption Ratio</strong> asks how unified markets have become: when a couple of hidden factors explain most of the variance, shocks propagate instead of dissipating.</div>
+    <div class="tagline">Two institutional statistics computed jointly across all twenty markets on the board — equities, rates, currencies, commodities and crypto. <strong>Turbulence</strong> asks whether today's cross-asset moves are strange relative to recent history &mdash; not just big, but wrong-shaped. The <strong>Absorption Ratio</strong> asks how unified markets have become: when a couple of hidden factors explain most of the variance, shocks propagate instead of dissipating.</div>
     <div id="share-container"></div>
   </div>
 
@@ -80,7 +80,7 @@
 
   <section class="chart-card reveal" style="margin-bottom:20px;">
     <div class="chart-head">
-      <div class="panel-title" style="margin:0;">Financial Turbulence &mdash; Mahalanobis distance, 11 markets</div>
+      <div class="panel-title" style="margin:0;">Financial Turbulence &mdash; Mahalanobis distance, 20 markets</div>
       <div class="sub">dotted lines: 90th / 99th percentile of the last 5 years</div>
     </div>
     <div class="chart-wrap"><canvas id="turb-chart"></canvas></div>
@@ -88,7 +88,7 @@
 
   <section class="chart-card reveal reveal-d1" style="margin-bottom:20px;">
     <div class="chart-head">
-      <div class="panel-title" style="margin:0;">Absorption Ratio &mdash; share of variance in the top 2 factors</div>
+      <div class="panel-title" style="margin:0;">Absorption Ratio &mdash; share of variance in the top 4 factors</div>
       <div class="sub" id="ar-sub"></div>
     </div>
     <div class="chart-wrap"><canvas id="ar-chart"></canvas></div>
@@ -96,9 +96,9 @@
 
   <div class="section reveal">
     <h2>Methodology</h2>
-    <p><strong>Financial Turbulence</strong> measures how statistically unusual today's cross-asset return vector is, in one number. We take the eleven markets' daily returns and compute the Mahalanobis distance <code>d_t = (r_t &minus; &mu;)&#7511; &Sigma;&#8315;&sup1; (r_t &minus; &mu;)</code>, where the mean and covariance are estimated on the trailing 500 trading days ending the day before &mdash; today never informs its own baseline. The covariance uses Ledoit-Wolf shrinkage for stability. High turbulence means assets are moving unusually far, in unusual combinations &mdash; correlations breaking, hedges failing &mdash; which is when risk models built on calm data understate losses. Introduced by Kritzman &amp; Li (2010), <em>"Skulls, Financial Turbulence, and Risk Management."</em></p>
-    <p><strong>The Absorption Ratio</strong> measures how tightly unified markets are. Each day we take the covariance matrix of the eleven return series over the trailing 250 days and ask: how much of the total variance is absorbed by the top two principal components &mdash; two hidden common factors? A high ratio means markets are moving as one bloc, so a shock anywhere transmits everywhere; a low ratio means risk is spread across independent drivers. The standardized 15-day shift (&Delta;AR) is the early-warning version: a rise of more than +1&sigma; says markets are unifying quickly. In both the original research and our own sample, forward returns after unification ran worse than after de-coupling &mdash; treat it as a fragility flag, not a timing signal. From Kritzman, Li, Page &amp; Rigobon (2011), <em>"Principal Components as a Measure of Systemic Risk."</em></p>
-    <p>All markets are first aligned to a common trading calendar: dates where every market traded, with single-day holiday gaps carried forward (one day max). Markets with under three years of history would be excluded (none currently are). Both series are precomputed in the daily pipeline; regime-state models play no role here &mdash; this page is pure price statistics. Fragility measures say nothing about direction: turbulent markets fall <em>and</em> rally hard. Educational, not investment advice &mdash; see the <a href="/disclaimer">Disclaimer</a>.</p>
+    <p><strong>Financial Turbulence</strong> measures how statistically unusual today's cross-asset return vector is, in one number. We take the twenty markets' daily returns and compute the Mahalanobis distance <code>d_t = (r_t &minus; &mu;)&#7511; &Sigma;&#8315;&sup1; (r_t &minus; &mu;)</code>, where the mean and covariance are estimated on the trailing 500 trading days ending the day before &mdash; today never informs its own baseline. The covariance uses Ledoit-Wolf shrinkage for stability. High turbulence means assets are moving unusually far, in unusual combinations &mdash; correlations breaking, hedges failing &mdash; which is when risk models built on calm data understate losses. Introduced by Kritzman &amp; Li (2010), <em>"Skulls, Financial Turbulence, and Risk Management."</em></p>
+    <p><strong>The Absorption Ratio</strong> measures how tightly unified markets are. Each day we take the covariance matrix of the twenty return series over the trailing 250 days and ask: how much of the total variance is absorbed by the top four principal components (Kritzman's ~1/5-of-assets rule) &mdash; a handful of hidden common factors? A high ratio means markets are moving as one bloc, so a shock anywhere transmits everywhere; a low ratio means risk is spread across independent drivers. The standardized 15-day shift (&Delta;AR) is the early-warning version: a rise of more than +1&sigma; says markets are unifying quickly. In both the original research and our own sample, forward returns after unification ran worse than after de-coupling &mdash; treat it as a fragility flag, not a timing signal. From Kritzman, Li, Page &amp; Rigobon (2011), <em>"Principal Components as a Measure of Systemic Risk."</em></p>
+    <p>The universe grew from the original eleven markets to the full twenty-market board in July 2026 (factor count scaled per the 1/5 rule). All markets are first aligned to a common trading calendar: dates where every market traded, with single-day holiday gaps carried forward (one day max). Markets with under three years of history would be excluded (none currently are). Both series are precomputed in the daily pipeline; regime-state models play no role here &mdash; this page is pure price statistics. Fragility measures say nothing about direction: turbulent markets fall <em>and</em> rally hard. Educational, not investment advice &mdash; see the <a href="/disclaimer">Disclaimer</a>.</p>
   </div>
 
   <div class="provenance reveal" id="provenance">Data: Yahoo Finance daily closes &middot; loading&hellip;</div>

@@ -168,6 +168,31 @@ INDICES = {
         # dollar bull = risk-off elsewhere: keep out of the breadth verdict
         "breadth": False,
     },
+    "ftse": {
+        "name": "FTSE 100",
+        "country": "United Kingdom",
+        "currency": "GBP",
+        "tickers": {"price": "^FTSE", "fx": "GBPUSD=X", "vix": None},
+        "cash_rate": 0.030,
+        "cash_label": "UK MMF",
+    },
+    "bovespa": {
+        "name": "Bovespa",
+        "country": "Brazil",
+        "currency": "BRL",
+        "tickers": {"price": "^BVSP", "fx": "BRL=X", "vix": None},
+        "cash_rate": 0.100,
+        "cash_label": "Brazil CDI",
+    },
+    "tadawul": {
+        "name": "Tadawul All Share",
+        "country": "Saudi Arabia",
+        "currency": "SAR",
+        # riyal is USD-pegged — DXY carries the effective currency risk
+        "tickers": {"price": "^TASI.SR", "fx": "DX-Y.NYB", "vix": None},
+        "cash_rate": 0.020,
+        "cash_label": "SAMA bills",
+    },
 }
 
 DEFAULT_INDEX = "spx"
@@ -248,6 +273,33 @@ COUNTRIES = {
         "bond": None,  # no clean free 10y TGB series
         "smartmoney": "/smartmoney/tw",
         "news_query": 'Taiwan economy OR TSMC OR TAIEX',
+        "news_locale": ("en-US", "US", "US:en"),
+    },
+    "united-kingdom": {
+        "name": "United Kingdom", "flag": "🇬🇧", "iso3": "GBR",
+        "indices": ["ftse"], "primary_index": "ftse",
+        "currency_label": "GBP/USD",
+        "bond": {"series": "IRLTLT01GBM156N", "label": "UK 10y Gilt", "freq": "monthly"},
+        "smartmoney": None,
+        "news_query": '"UK economy" OR "Bank of England" OR "FTSE 100"',
+        "news_locale": ("en-GB", "GB", "GB:en"),
+    },
+    "brazil": {
+        "name": "Brazil", "flag": "🇧🇷", "iso3": "BRA",
+        "indices": ["bovespa"], "primary_index": "bovespa",
+        "currency_label": "USD/BRL",
+        "bond": None,  # no clean free 10y BRL sovereign series
+        "smartmoney": None,
+        "news_query": 'Brazil economy OR Bovespa OR "central bank of Brazil"',
+        "news_locale": ("en-US", "US", "US:en"),
+    },
+    "saudi-arabia": {
+        "name": "Saudi Arabia", "flag": "🇸🇦", "iso3": "SAU",
+        "indices": ["tadawul"], "primary_index": "tadawul",
+        "currency_label": "USD/SAR (pegged)",
+        "bond": None,  # no clean free SAR sovereign series
+        "smartmoney": None,
+        "news_query": '"Saudi Arabia" economy OR Tadawul OR Aramco OR "Vision 2030"',
         "news_locale": ("en-US", "US", "US:en"),
     },
 }

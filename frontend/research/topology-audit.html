@@ -98,7 +98,7 @@
   </style>
 </head>
 <body>
-<script src="/shell.js?v=6.5"></script>
+<script src="/shell.js?v=6.6"></script>
 
 <div class="wrap narrow" style="max-width: 860px;">
   <div style="display: flex; align-items: center; gap: 18px; flex-wrap: wrap; margin-bottom: 14px;">
@@ -154,6 +154,9 @@
 <p>It failed on every count that matters. Correlation with the market's own volatility ran 0.45–0.64 — mostly re-measuring vol with extra mathematics. The event studies were inconsistent (Nifty's gauge read the <em>0th</em> percentile before the 2015 slide). And the incremental test flipped sign across markets: hot readings preceded worse drawdowns in the S&amp;P, <em>milder</em> ones in the Nifty and Nikkei. A signal whose sign depends on which market you ask is noise in a topology costume.</p>
 <blockquote>The failure is informative: strip the "cross" out of cross-market geometry and the information disappears. The joint gauge's edge lives in how markets move relative to each other — which is exactly what a single series cannot see.</blockquote>
 <p>So the per-market table doesn't ship, the system-level gauge stands, and this note will keep saying whatever the data says.</p>
+
+<h2>Update: re-audited on the 20-market board</h2>
+<p>When the board expanded to twenty markets (July 2026), the study was re-run on the full 18-market non-crypto panel. The TDA finding <strong>strengthened</strong>: overlap with turbulence fell to 0.15, and hot readings preceded roughly 75% worse conditional drawdowns. One reversal, disclosed: <strong>hub concentration</strong> (how star-shaped the tree is) looked inverted on 9 markets and we said so — on 18 nodes it becomes the strongest conditional signal in the study (~2× worse forward drawdowns across ~12 distinct episodes). Small panels do this; the fix is more panel, not more conviction. The live gauges on the <a href="/geometry">Market Geometry</a> page reflect the extended universe.</p>
 
 
     <a class="art-cta" href="/geometry">See the live Market Geometry page →</a>
