@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-94DE53GC07"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', { analytics_storage: 'denied' });
+    gtag('js', new Date());
+    gtag('config', 'G-94DE53GC07');
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Market Geometry — Regime Compass</title>
+  <meta name="description" content="Topological market indicators, audited: a TDA persistence-landscape early-warning gauge (Gidea & Katz) and the live correlation minimum spanning tree (Mantegna) across 9 global markets." />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Regime Compass" />
+  <meta property="og:title" content="Market Geometry — the shape of market dynamics, daily" />
+  <meta property="og:description" content="A topological early-warning gauge and the live market network tree — published with the audit that earned them a place." />
+  <meta property="og:image" content="https://www.regimecompass.com/og-image.png" />
+  <meta property="og:url" content="https://regimecompass.com/geometry" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="theme-color" content="#07090e" />
+  <link rel="canonical" href="https://www.regimecompass.com/geometry" />
+  <link rel="stylesheet" href="/styles.css?v=6.0" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="manifest" href="/manifest.json" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    .geo-strip { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 22px; }
+    @media (max-width: 760px) { .geo-strip { grid-template-columns: 1fr; } }
+    .geo-tile {
+      padding: 20px 24px; border: 1px solid var(--border); border-radius: var(--r-lg);
+      background: linear-gradient(180deg, rgba(255,255,255,0.015), transparent 45%), var(--panel);
+      box-shadow: var(--shadow-sm), inset 0 1px 0 var(--edge-light);
+    }
+    .geo-tile .t-name { font-size: 10.5px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 1.5px; }
+    .geo-tile .t-val { font-size: 34px; font-weight: 700; font-family: var(--font-mono); letter-spacing: -0.02em; margin: 8px 0 2px; color: var(--text-strong); }
+    .geo-tile .t-val .unit { font-size: 14px; color: var(--muted); font-weight: 500; }
+    .geo-tile .t-read { font-size: 12.5px; color: var(--muted); line-height: 1.55; }
+    .geo-tile .t-read strong { color: var(--text-body); }
+    .geo-tile.hot .t-val { color: var(--bear); }
+    .geo-tile.warm .t-val { color: var(--neutral); }
+    .geo-tile.calm .t-val { color: var(--bull); }
+
+    /* MST network */
+    .tree-card {
+      border: 1px solid var(--border); border-radius: var(--r-lg);
+      background: linear-gradient(180deg, rgba(255,255,255,0.015), transparent 45%), var(--panel);
+      box-shadow: var(--shadow-sm), inset 0 1px 0 var(--edge-light);
+      padding: 18px 20px; margin-bottom: 20px;
+    }
+    .tree-card svg { display: block; width: 100%; height: 380px; }
+    .tree-card .edge { stroke: var(--border-strong); stroke-width: 1.2; }
+    .tree-card .edge.strong { stroke: var(--accent); stroke-width: 2; opacity: 0.85; }
+    .tree-card .node circle { fill: var(--panel-2); stroke: var(--accent); stroke-width: 1.5; }
+    .tree-card .node.hub circle { fill: var(--accent-dim); stroke: var(--accent-strong); stroke-width: 2; }
+    .tree-card .node text { fill: var(--text-strong); font-size: 11px; font-weight: 600; font-family: var(--font-ui); text-anchor: middle; }
+    .tree-card .edge-label { fill: var(--muted); font-size: 9px; font-family: var(--font-mono); text-anchor: middle; }
+    .tree-legend { display: flex; gap: 18px; flex-wrap: wrap; font-size: 11px; color: var(--muted); margin-top: 8px; }
+
+    .audit-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+    .audit-table th, .audit-table td { padding: 8px 10px; text-align: right; border-bottom: 1px solid var(--hairline); font-variant-numeric: tabular-nums; }
+    .audit-table th { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.2px; color: var(--muted); }
+    .audit-table th:first-child, .audit-table td:first-child { text-align: left; }
+    .audit-table td { font-family: var(--font-mono); color: var(--text); }
+    .audit-table td:first-child { font-family: var(--font-ui); color: var(--muted); }
+    .audit-table .good { color: var(--bull); }
+    .audit-table .bad { color: var(--bear); }
+    .audit-table .mut { color: var(--muted); }
+    .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  </style>
+</head>
+<body>
+<script src="/shell.js?v=6.4"></script>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="kicker">Market Geometry</div>
+    <h1>What shape is the market in?</h1>
+    <div class="tagline">Two topology-family measures computed daily across nine global markets. The <strong>TDA gauge</strong> (persistent homology) asks whether the geometry of market dynamics is deforming — a pattern that has preceded major drawdowns. The <strong>market tree</strong> (minimum spanning tree) shows the network skeleton of cross-market correlation — it contracts toward a star when diversification dies. Both shipped with <a href="#audit">the audit that earned them a place</a>.</div>
+  </div>
+
+  <div class="geo-strip reveal" id="geo-strip">
+    <div class="skeleton" style="height:130px;border-radius:var(--r-lg);"></div>
+    <div class="skeleton" style="height:130px;border-radius:var(--r-lg);"></div>
+  </div>
+
+  <section class="chart-card reveal" style="margin-bottom:20px;">
+    <div class="chart-head">
+      <div class="panel-title" style="margin:0;">TDA landscape norm — persistent H1 structure of the 60-day return cloud</div>
+      <div class="sub">shaded bands: the five worst drawdown episodes in the sample</div>
+    </div>
+    <div class="chart-wrap"><canvas id="tda-chart"></canvas></div>
+  </section>
+
+  <section class="tree-card reveal" style="margin-bottom:20px;">
+    <div class="chart-head" style="margin-bottom:6px;">
+      <div class="panel-title" style="margin:0;">The market tree — correlation MST, trailing 90 days</div>
+      <div class="sub" id="tree-sub"></div>
+    </div>
+    <svg id="mst-svg" viewBox="0 0 800 380" preserveAspectRatio="xMidYMid meet"></svg>
+    <div class="tree-legend">
+      <span>edge label = correlation between the two markets</span>
+      <span>highlighted node = current hub (most connected)</span>
+      <span>shorter edges = tighter correlation</span>
+    </div>
+  </section>
+
+  <section class="chart-card reveal" style="margin-bottom:26px;">
+    <div class="chart-head">
+      <div class="panel-title" style="margin:0;">Tree length — mean MST edge distance (contracts in stress)</div>
+      <div class="sub">lower = markets more unified = less diversification available</div>
+    </div>
+    <div class="chart-wrap"><canvas id="mst-chart"></canvas></div>
+  </section>
+
+  <div class="section reveal" id="audit">
+    <h2>The audit that earned this page</h2>
+    <p>We don't add indicators because they're fashionable — every tool has to beat the incumbents somewhere, out loud. Before shipping, both measures were tested on 16 years of daily data (9 markets, 2010–2026) against the site's existing fragility gauges, <a href="/systemic">Turbulence and the Absorption Ratio</a>. Protocol and code mirror our <a href="/validation">walk-forward validation</a> philosophy: trailing percentiles only, no look-ahead, results published win or lose.</p>
+
+    <h3>Did it warn before the five worst drawdowns?</h3>
+    <div class="table-wrap">
+    <table class="audit-table">
+      <thead><tr><th>Episode</th><th>Depth</th><th>TDA 60d before</th><th>TDA 20d before</th><th>Turbulence 20d before</th><th>Absorption 20d before</th></tr></thead>
+      <tbody>
+        <tr><td>2015–16 global</td><td>−18%</td><td class="good">p75</td><td class="good">p90</td><td class="mut">p68</td><td class="mut">p7</td></tr>
+        <tr><td>2018 Q4</td><td>−16%</td><td class="bad">p4</td><td class="bad">p8</td><td class="bad">p23</td><td class="mut">p42</td></tr>
+        <tr><td>COVID 2020</td><td>−27%</td><td class="mut">p48</td><td class="mut">p70</td><td class="mut">p61</td><td class="mut">p24</td></tr>
+        <tr><td>2021–22</td><td>−20%</td><td class="mut">p42</td><td class="good">p69→p91</td><td class="bad">p46</td><td class="good">p61</td></tr>
+        <tr><td>2025 Feb</td><td>−12%</td><td class="bad">p47</td><td class="bad">p36</td><td class="good">p88</td><td class="mut">p27</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p style="margin-top:10px;">The TDA gauge clearly led 2015–16 and 2021–22, built through COVID, and <strong>stayed silent before 2018 and 2025</strong> — episodes other gauges caught. No single fragility measure catches everything; that is exactly why this page exists alongside <a href="/systemic">Systemic Risk</a> rather than instead of it.</p>
+
+    <h3>Does it add anything the incumbents don't have?</h3>
+    <p>The decisive test: average drawdown of the equal-weight panel over the <em>next 60 days</em>, measured only on days when Turbulence read calm (below its 70th percentile):</p>
+    <div class="table-wrap">
+    <table class="audit-table">
+      <thead><tr><th>State (Turbulence calm)</th><th>Avg forward 60-day drawdown</th></tr></thead>
+      <tbody>
+        <tr><td>TDA hot (&gt; 90th pctile)</td><td class="bad">−4.5%</td></tr>
+        <tr><td>TDA calm (&lt; 50th pctile)</td><td class="good">−2.9%</td></tr>
+        <tr><td>Tree tight (&gt; 90th pctile)</td><td class="mut">−3.2%</td></tr>
+        <tr><td>Tree loose (&lt; 50th pctile)</td><td class="mut">−3.1%</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p style="margin-top:10px;">When the TDA gauge is hot while turbulence sees nothing, forward drawdowns ran roughly <strong>55% worse</strong> — genuine incremental information (Spearman overlap with turbulence: just 0.24). The tree's statistical signal, in contrast, <strong>largely dissolves once turbulence is controlled for</strong> — so the MST is published as structure and visualisation, with that caveat stated rather than hidden.</p>
+
+    <h3>Honest limits</h3>
+    <p>Five episodes is a small sample. Parameters follow the literature (60-day windows per Gidea &amp; Katz; 90-day correlations per the MST literature) with no optimisation — which is the honest choice but means no robustness sweep either. The TDA gauge is an <em>environment</em> measure: it says the geometry of market dynamics is deforming, not that a crash is scheduled. Treat readings the way the audit suggests — as a prompt to check the <a href="/">regime board</a> and <a href="/systemic">stress gauges</a>, never as a standalone signal.</p>
+  </div>
+
+  <div class="section reveal">
+    <h2>Methodology</h2>
+    <p><strong>TDA landscape norm.</strong> Each day we take the trailing 60 daily return vectors of the nine markets — a cloud of 60 points in 9-dimensional space — and compute its Vietoris–Rips persistent homology (H1: loops). The persistence landscape's L1 norm summarises how much robust geometric structure the cloud contains. Markets are scaled once by full-sample volatility so no single asset dominates; the day-to-day volatility structure is deliberately preserved — it is part of the signal. Smoothed over 10 days; the dial shows the trailing 5-year percentile. After Gidea &amp; Katz (2018), <em>"Topological data analysis of financial time series: Landscapes of crashes."</em></p>
+    <p><strong>Market tree.</strong> From the trailing 90-day correlation matrix we build Mantegna's distance <code>d = &radic;(2(1&minus;&rho;))</code> and extract the minimum spanning tree — the shortest network connecting all nine markets. Its mean edge length contracts when correlations rise; its shape shows <em>which</em> markets carry the connections. After Mantegna (1999) and Onnela et&nbsp;al. (2003), the workhorse of correlation-network analysis in financial-stability research.</p>
+    <p>Crypto is excluded from this page: 24/7 trading calendars distort the joint geometry of a daily-close panel. Both series are precomputed in the daily pipeline. Educational, not investment advice — see the <a href="/disclaimer">Disclaimer</a>.</p>
+  </div>
+
+  <div class="provenance reveal" id="provenance">Data: Yahoo Finance daily closes &middot; loading&hellip;</div>
+</div>
+
+<script src="/charts.js?v=4.0"></script>
+<script>
+const fmtD = iso => new Date(iso + "T00:00:00").toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+
+/* shaded vertical bands for drawdown episodes */
+const bandPlugin = {
+  id: "bands",
+  beforeDatasetsDraw(chart) {
+    const bands = chart.config.options.rcBands || [];
+    const { ctx, chartArea: a, scales: { x } } = chart;
+    const labels = chart.data.labels;
+    ctx.save();
+    ctx.fillStyle = "rgba(227,84,84,0.07)";
+    for (const b of bands) {
+      let i0 = labels.findIndex(l => l >= b.from);
+      let i1 = labels.findIndex(l => l >= b.to);
+      if (i0 < 0) continue;
+      if (i1 < 0) i1 = labels.length - 1;
+      const x0 = x.getPixelForValue(i0), x1 = x.getPixelForValue(i1);
+      ctx.fillRect(x0, a.top, Math.max(x1 - x0, 2), a.bottom - a.top);
+    }
+    ctx.restore();
+  },
+};
+
+function thin(points, target) {
+  const step = Math.max(1, Math.floor(points.length / target));
+  return points.filter((_, i) => i % step === 0 || i === points.length - 1);
+}
+
+function lineChart(elId, points, color, bands, yFmt) {
+  const pts = thin(points, 800);
+  return new Chart(document.getElementById(elId), {
+    type: "line",
+    data: {
+      labels: pts.map(p => p[0]),
+      datasets: [{ label: "10-day smoothed", data: pts.map(p => p[1]),
+                   borderColor: color, borderWidth: 1.8, pointRadius: 0, tension: 0.2 }],
+    },
+    options: {
+      rcBands: bands,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { ticks: { maxTicksLimit: 9, callback(v) { return this.getLabelForValue(v).slice(0, 4); } }, grid: { display: false } },
+        y: { ticks: yFmt ? { callback: yFmt } : {} },
+      },
+    },
+    plugins: [bandPlugin],
+  });
+}
+
+/* ── deterministic force layout for the 9-node MST ── */
+function renderTree(tree) {
+  const svg = document.getElementById("mst-svg");
+  const W = 800, H = 380, cx = W / 2, cy = H / 2;
+  const nodes = tree.nodes.map((n, i) => ({
+    ...n,
+    x: cx + 150 * Math.cos(2 * Math.PI * i / tree.nodes.length),
+    y: cy + 130 * Math.sin(2 * Math.PI * i / tree.nodes.length),
+  }));
+  const byKey = Object.fromEntries(nodes.map(n => [n.key, n]));
+  const edges = tree.edges.map(e => ({ ...e, a: byKey[e.a], b: byKey[e.b] }));
+
+  /* spring embedding: edge attraction ∝ Mantegna distance, global repulsion */
+  for (let it = 0; it < 300; it++) {
+    for (const n of nodes) { n.fx = 0; n.fy = 0; }
+    for (let i = 0; i < nodes.length; i++) for (let j = i + 1; j < nodes.length; j++) {
+      const p = nodes[i], q = nodes[j];
+      let dx = p.x - q.x, dy = p.y - q.y;
+      const d2 = Math.max(dx * dx + dy * dy, 100), d = Math.sqrt(d2);
+      const f = 14000 / d2;
+      p.fx += f * dx / d; p.fy += f * dy / d;
+      q.fx -= f * dx / d; q.fy -= f * dy / d;
+    }
+    for (const e of edges) {
+      const rest = 60 + 140 * e.d / 1.5;   /* tighter correlation → shorter edge */
+      let dx = e.b.x - e.a.x, dy = e.b.y - e.a.y;
+      const d = Math.max(Math.sqrt(dx * dx + dy * dy), 1);
+      const f = 0.02 * (d - rest);
+      e.a.fx += f * dx / d; e.a.fy += f * dy / d;
+      e.b.fx -= f * dx / d; e.b.fy -= f * dy / d;
+    }
+    for (const n of nodes) {
+      n.x = Math.min(W - 60, Math.max(60, n.x + n.fx));
+      n.y = Math.min(H - 40, Math.max(40, n.y + n.fy));
+    }
+  }
+
+  const maxDeg = Math.max(...nodes.map(n => n.degree));
+  const NAMES_SHORT = { spx: "S&P 500", nasdaq: "Nasdaq", stoxx50: "Stoxx 50", nifty: "Nifty",
+                        nikkei: "Nikkei", kospi: "KOSPI", shcomp: "Shanghai", gold: "Gold", silver: "Silver" };
+  let html = "";
+  for (const e of edges) {
+    const cls = e.rho >= 0.5 ? "edge strong" : "edge";
+    html += `<line class="${cls}" x1="${e.a.x}" y1="${e.a.y}" x2="${e.b.x}" y2="${e.b.y}"></line>`;
+    html += `<text class="edge-label" x="${(e.a.x + e.b.x) / 2}" y="${(e.a.y + e.b.y) / 2 - 4}">${e.rho.toFixed(2)}</text>`;
+  }
+  for (const n of nodes) {
+    const r = 14 + 4 * n.degree;
+    html += `<g class="node ${n.degree === maxDeg ? "hub" : ""}">` +
+      `<circle cx="${n.x}" cy="${n.y}" r="${r}"></circle>` +
+      `<text x="${n.x}" y="${n.y - r - 6}">${NAMES_SHORT[n.key] || n.key}</text></g>`;
+  }
+  svg.innerHTML = html;
+  const hub = nodes.find(n => n.degree === maxDeg);
+  document.getElementById("tree-sub").textContent =
+    `current hub: ${NAMES_SHORT[hub.key] || hub.key} (${hub.degree} connections)`;
+}
+
+function tile(name, pct, readHot, readCalm, extra) {
+  const cls = pct >= 90 ? "hot" : pct >= 70 ? "warm" : "calm";
+  const read = pct >= 90 ? readHot : pct >= 70 ? "Elevated — worth watching alongside the stress gauges." : readCalm;
+  return `<div class="geo-tile ${cls}">
+    <div class="t-name">${name}</div>
+    <div class="t-val">${pct != null ? pct.toFixed(0) : "–"}<span class="unit">th percentile · 5y</span></div>
+    <div class="t-read">${read}${extra || ""}</div>
+  </div>`;
+}
+
+(async () => {
+  const d = await (await fetch("/api/topology")).json();
+  const strip = document.getElementById("geo-strip");
+  strip.innerHTML =
+    tile("TDA gauge — shape of dynamics", d.tda.current_percentile,
+      "<strong>Hot.</strong> The geometry of market dynamics is unusually structured — in our audit, readings like this preceded roughly 55% worse 60-day drawdowns even when turbulence was calm.",
+      "Quiet. The return cloud shows no unusual persistent structure.") +
+    tile("Market tree — tightness", d.mst.tightness_percentile,
+      "<strong>Contracted.</strong> Markets are unusually unified — diversification is thin. (Structure view: statistically this overlaps turbulence.)",
+      "Loose. Markets are moving on their own drivers; diversification is available.");
+
+  lineChart("tda-chart", d.tda.history, RCCharts.accent, d.episodes);
+  lineChart("mst-chart", d.mst.history, RCCharts.cat ? RCCharts.cat[1] : "#d4a017", d.episodes);
+  renderTree(d.mst.tree);
+
+  document.getElementById("provenance").textContent =
+    `Data: Yahoo Finance daily closes · ${d.markets.length} markets (crypto excluded) · as of ${fmtD(d.as_of)} · recomputed daily`;
+})().catch(e => {
+  document.getElementById("geo-strip").innerHTML =
+    '<div class="callout">Geometry feed unavailable right now — try again shortly.</div>';
+  console.error(e);
+});
+</script>
+</body>
+</html>

@@ -189,8 +189,9 @@ def _run_analytics() -> None:
     from . import movers as movers_mod
     from . import sparklines as sparks_mod
     from . import systemic as systemic_mod
+    from . import topology as topology_mod
     for name, mod in (("movers", movers_mod), ("sparklines", sparks_mod), ("systemic", systemic_mod),
-                      ("countries", countries_mod), ("assets", assets_mod)):
+                      ("topology", topology_mod), ("countries", countries_mod), ("assets", assets_mod)):
         try:
             mod.refresh()
         except Exception as e:
@@ -1089,6 +1090,11 @@ def systemic_feed() -> Response:
     return _analytics_feed("systemic")
 
 
+@app.get("/api/topology")
+def topology_feed() -> Response:
+    return _analytics_feed("topology")
+
+
 @app.get("/api/countries")
 def countries_feed() -> Response:
     return _analytics_feed("countries")
@@ -1397,6 +1403,10 @@ if FRONTEND_DIR.exists():
     def movers_page():
         return FileResponse(FRONTEND_DIR / "movers.html")
 
+    @app.get("/geometry")
+    def geometry_page():
+        return FileResponse(FRONTEND_DIR / "geometry.html")
+
     @app.get("/systemic")
     def systemic_page():
         return FileResponse(FRONTEND_DIR / "systemic.html")
@@ -1446,7 +1456,7 @@ if FRONTEND_DIR.exists():
         evergreen = "2026-07-05"
         daily = [("/", "1.0"), ("/today", "1.0"), ("/strategies", "0.9"), ("/composite", "0.9"), ("/hmm", "0.9"),
                  ("/ma", "0.9"), ("/ema", "0.9"), ("/smartmoney", "0.9"), ("/valuation", "0.9"),
-                 ("/movers", "0.9"), ("/systemic", "0.8"),
+                 ("/movers", "0.9"), ("/systemic", "0.8"), ("/geometry", "0.8"),
                  ("/correlations", "0.8"), ("/volatility", "0.8"), ("/news", "0.8"),
                  ("/changes", "0.8"), ("/yields", "0.8"), ("/sectors", "0.8"), ("/macro", "0.8"),
                  ("/countries", "0.8"), ("/assets", "0.8")] \

@@ -18,7 +18,7 @@ FRONTEND = os.path.join(HERE, "..", "frontend")
 OUT_DIR = os.path.join(FRONTEND, "research")
 
 SITE = "https://www.regimecompass.com"
-SHELL_V = "6.3"
+SHELL_V = "6.4"
 STYLES_V = "6.0"
 
 # ─────────────────────────────────────────────────────────────────
@@ -26,6 +26,44 @@ STYLES_V = "6.0"
 # recipe-level: discuss what and why, link the live tool for the how.
 # ─────────────────────────────────────────────────────────────────
 ARTICLES = [
+    {
+        "slug": "topology-audit",
+        "tag": "Method",
+        "title": "We tested topological crash indicators. Here's what survived.",
+        "dek": "Persistent homology and market trees are the frontier of quantitative risk. We audited both against our own gauges before shipping — one earned a place, one earned a caveat.",
+        "date": "2026-07-09",
+        "date_h": "July 2026",
+        "read": 6,
+        "cta_href": "/geometry",
+        "cta_label": "See the live Market Geometry page →",
+        "body": """
+<h2>Why topology, and why suspicion</h2>
+<p>Most market indicators are statistics of size: how far did prices move, how wide is the spread, how big is the variance. Topological methods ask a stranger question — what <em>shape</em> are the dynamics making? Take a sliding window of daily returns across several markets: each day is a point, the window is a cloud. Persistent homology (the core tool of topological data analysis) measures the cloud's robust geometric structure — loops, clusters, voids — in a way that's invariant to the distortions that fool linear statistics.</p>
+<p>The landmark result is Gidea &amp; Katz (2018): a norm built on this machinery rose <em>months</em> before the 2000 and 2008 crashes, before volatility itself moved. Alongside it sits an older, more institutional cousin — Mantegna's (1999) minimum spanning tree, the correlation network's skeleton, which famously contracts toward a star when diversification dies. Central-bank financial-stability research has used it for two decades.</p>
+<p>Both are impressive. Both are also exactly the kind of thing a quant site adds because it sounds sophisticated. So before shipping either, we ran the test that matters: <strong>do they know anything our existing gauges — Turbulence and the Absorption Ratio — don't?</strong></p>
+
+<h2>The protocol</h2>
+<ul>
+<li>Nine markets (US, European and Asian equities, gold, silver — crypto excluded for calendar reasons), daily, 2010–2026.</li>
+<li>Literature parameters, no optimisation: 60-day windows for the TDA norm, 90-day correlations for the tree. Choosing parameters that make the result look good is how this kind of study lies.</li>
+<li>Trailing percentiles only — nothing in the study sees the future.</li>
+<li>Three tests: overlap with the incumbents, an event study around the five worst drawdowns in the sample, and the decisive one — <em>incremental</em> forward-drawdown information after controlling for turbulence.</li>
+</ul>
+
+<h2>What survived</h2>
+<p><strong>The TDA gauge earned a place.</strong> Its overlap with turbulence is low (rank correlation 0.24) — it is genuinely measuring something different. It rose to the 90th percentile before the 2015–16 global drawdown and climbed from the 40s to the 90s into the 2021–22 top, both while turbulence read calm. And on the decisive test: on days when turbulence saw nothing, a hot TDA reading preceded roughly <strong>55% worse average 60-day drawdowns</strong> than a calm one. That is incremental information, from geometry alone.</p>
+<blockquote>It also failed twice — silent before the 2018 Q4 slide and the February 2025 break. We publish that on the tool's own page, because a fragility gauge you trust blindly is worse than none.</blockquote>
+<p><strong>The market tree survived as a picture, not a signal.</strong> Its tightness does contract in every stress episode — but once turbulence is controlled for, the statistical signal essentially dissolves. Mantegna's tree is on the page because seeing <em>which</em> markets carry the connections, and watching the network collapse toward a hub in real time, is structural information a percentile can't convey. The caveat is printed next to it, not buried.</p>
+
+<h2>What we took from the exercise</h2>
+<ul>
+<li><strong>Novelty is not evidence.</strong> The fancier the mathematics, the more an indicator needs to prove against boring incumbents — variance-based gauges are hard to beat.</li>
+<li><strong>Independence is the prize.</strong> A mediocre indicator that's uncorrelated with your existing ones adds more than a brilliant one that's redundant.</li>
+<li><strong>Every gauge misses something.</strong> TDA led 2015 and 2022; turbulence led 2025; nothing led 2018. That is the argument for a panel of independent lenses, which is what this site is.</li>
+</ul>
+<p>The audit code, parameters and the episodes where the new gauge failed are all described on the live page. Five episodes is a small sample; we'll re-run the study as the record grows, and the page will say whatever the data says.</p>
+""",
+    },
     {
         "slug": "why-regimes-matter",
         "tag": "Regime",

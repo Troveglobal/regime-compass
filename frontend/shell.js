@@ -47,6 +47,7 @@
       label: "Risk",
       items: [
         ["/systemic", "Systemic Risk", "turbulence · absorption", "fragility turbulence absorption"],
+        ["/geometry", "Market Geometry", "topology · market tree", "tda topology persistent homology mst tree network geometry"],
         ["/credit", "Credit Stress", "HY spread · equity overlay", "high yield spreads credit"],
         ["/volatility", "Volatility", "stress percentile", "vix vol stress"],
         ["/correlations", "Correlations", "cross-asset matrix", "correlation diversification"],
@@ -183,7 +184,7 @@
     '<div class="f-col"><h5>Regime</h5>' +
     '<a href="/today">Daily Brief</a><a href="/strategies">Strategies</a><a href="/composite">Risk Score</a><a href="/hmm">HMM</a><a href="/ma">SMA</a><a href="/ema">EMA</a><a href="/movers">Regime Movers</a><a href="/changes">Regime Changes</a><a href="/validation">Validation</a></div>' +
     '<div class="f-col"><h5>Risk &amp; Macro</h5>' +
-    '<a href="/systemic">Systemic Risk</a><a href="/credit">Credit Stress</a><a href="/volatility">Volatility</a><a href="/correlations">Correlations</a><a href="/macro">US Macro</a><a href="/yields">Yield Curve</a><a href="/valuation">Valuation</a><a href="/sectors">Sectors</a><a href="/seasonality">Seasonality</a><a href="/calendar">Calendar</a></div>' +
+    '<a href="/systemic">Systemic Risk</a><a href="/geometry">Market Geometry</a><a href="/credit">Credit Stress</a><a href="/volatility">Volatility</a><a href="/correlations">Correlations</a><a href="/macro">US Macro</a><a href="/yields">Yield Curve</a><a href="/valuation">Valuation</a><a href="/sectors">Sectors</a><a href="/seasonality">Seasonality</a><a href="/calendar">Calendar</a></div>' +
     '<div class="f-col"><h5>Smart Money &amp; Explore</h5>' +
     '<a href="/smartmoney">India</a><a href="/smartmoney/tw">Taiwan</a><a href="/smartmoney/id">Indonesia</a><a href="/smartmoney/us">United States</a><a href="/countries">Countries</a><a href="/assets">Assets</a><a href="/news">News</a></div>' +
     '<div class="f-col"><h5>Company</h5>' +
