@@ -149,6 +149,12 @@
 <li><strong>Every gauge misses something.</strong> TDA led 2015 and 2022; turbulence led 2025; nothing led 2018. That is the argument for a panel of independent lenses, which is what this site is.</li>
 </ul>
 <p>The audit code, parameters and the episodes where the new gauge failed are all described on the live page. Five episodes is a small sample; we'll re-run the study as the record grows, and the page will say whatever the data says.</p>
+<h2>Addendum: we also tested per-market topology. It failed.</h2>
+<p>The obvious extension is a market-specific version — rebuild each market's own dynamics via time-delay embedding and ask whether <em>that</em> geometry warns before <em>that</em> market's drawdowns. We ran the same audit on the S&amp;P&nbsp;500, Nifty&nbsp;50, Euro&nbsp;Stoxx&nbsp;50 and Nikkei&nbsp;225, against each market's own realized volatility.</p>
+<p>It failed on every count that matters. Correlation with the market's own volatility ran 0.45–0.64 — mostly re-measuring vol with extra mathematics. The event studies were inconsistent (Nifty's gauge read the <em>0th</em> percentile before the 2015 slide). And the incremental test flipped sign across markets: hot readings preceded worse drawdowns in the S&amp;P, <em>milder</em> ones in the Nifty and Nikkei. A signal whose sign depends on which market you ask is noise in a topology costume.</p>
+<blockquote>The failure is informative: strip the "cross" out of cross-market geometry and the information disappears. The joint gauge's edge lives in how markets move relative to each other — which is exactly what a single series cannot see.</blockquote>
+<p>So the per-market table doesn't ship, the system-level gauge stands, and this note will keep saying whatever the data says.</p>
+
 
     <a class="art-cta" href="/geometry">See the live Market Geometry page →</a>
   </div>
