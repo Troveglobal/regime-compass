@@ -1,9 +1,12 @@
 /* ============================================================
-   Regime Compass — shared shell (nav, footer, loader, banner)
+   Regime Compass — shared shell (nav, palette, footer, loader)
    Include synchronously right after <body>:
-     <script src="/shell.js?v=4.0"></script>
+     <script src="/shell.js?v=6.0"></script>
    Injects the header chrome where the tag sits, appends the
    footer at end of body, and exposes small utilities on RC.
+
+   v6 — IA overhaul: six intent-based categories, ⌘K command
+   palette, account slot (auth/custom dashboards coming soon).
    ============================================================ */
 (function () {
   "use strict";
@@ -18,79 +21,160 @@
     '<circle cx="12" cy="12" r="1.4" class="needle" fill="currentColor"/>' +
     "</svg>";
 
+  /* ============================================================
+     Navigation model — one source of truth for nav, footer and
+     the command palette. Each item: [href, label, note, keywords]
+     ============================================================ */
+  var CATS = [
+    { label: "Today", href: "/today" },
+    {
+      label: "Regime",
+      items: [
+        ["/composite", "Risk Score", "blended 0–100 gauge", "composite risk on off"],
+        ["/hmm", "HMM", "probabilistic · 3-state", "hidden markov model"],
+        ["/ma", "SMA", "price vs trailing average", "simple moving average trend"],
+        ["/ema", "EMA", "faster-reacting trend", "exponential moving average"],
+        ["/movers", "Regime Movers", "today's abnormal moves", "sigma z-score movers"],
+        ["/changes", "Regime Changes", "every flip, logged", "changes log history flips"],
+        ["/validation", "Validation", "walk-forward accuracy", "audit accuracy backtest"],
+      ],
+    },
+    {
+      label: "Risk",
+      items: [
+        ["/systemic", "Systemic Risk", "turbulence · absorption", "fragility turbulence absorption"],
+        ["/credit", "Credit Stress", "HY spread · equity overlay", "high yield spreads credit"],
+        ["/volatility", "Volatility", "stress percentile", "vix vol stress"],
+        ["/correlations", "Correlations", "cross-asset matrix", "correlation diversification"],
+      ],
+    },
+    {
+      label: "Macro",
+      items: [
+        ["/macro", "US Macro Surprise", "FRED surprise meter", "macro economic surprise fred"],
+        ["/yields", "Yield Curve", "US · India", "yield curve inversion rates"],
+        ["/valuation", "Valuation", "where markets are rich", "pe valuation cape"],
+        ["/sectors", "Sector Heatmap", "India · daily", "sector rotation heatmap nifty"],
+        ["/seasonality", "Seasonality", "monthly patterns", "seasonality month patterns"],
+        ["/calendar", "Calendar", "what's ahead", "economic calendar events"],
+      ],
+    },
+    {
+      label: "Smart Money",
+      items: [
+        ["/smartmoney", "🇮🇳 India", "deals · flows · stakes", "nse bulk block fii dii india"],
+        ["/smartmoney/tw", "🇹🇼 Taiwan", "TWSE block deals", "taiwan twse block"],
+        ["/smartmoney/id", "🇮🇩 Indonesia", "IDX negotiated deals", "indonesia idx negotiated"],
+        ["/smartmoney/us", "🇺🇸 United States", "insiders · Congress", "insider congress filings us"],
+      ],
+    },
+    { label: "Strategies", href: "/strategies" },
+    {
+      label: "Explore",
+      items: [
+        ["/countries", "All Countries", "regime · GDP · news", "country hubs economies"],
+        ["/assets", "All Assets", "regime · vol · correlations", "asset hubs"],
+        ["/country/usa", "🇺🇸 United States", "", "usa america country"],
+        ["/country/india", "🇮🇳 India", "", "india country nifty"],
+        ["/asset/bitcoin", "₿ Bitcoin", "", "btc crypto bitcoin"],
+        ["/asset/gold", "🥇 Gold", "", "gold commodity"],
+      ],
+    },
+    { label: "News", href: "/news" },
+  ];
+
+  /* pages reachable via palette / footer but not the top bar */
+  var EXTRA_PAGES = [
+    ["/", "Home", "Overview", "home start landing"],
+    ["/today", "Daily Brief", "Today", "today brief snapshot daily"],
+    ["/strategies", "Strategies", "Portfolios", "strategies model portfolios backtest track record smart money credit regime"],
+    ["/news", "News", "News", "headlines news"],
+    ["/ma/backtest", "SMA Backtest", "Regime", "sma backtest performance"],
+    ["/ema/backtest", "EMA Backtest", "Regime", "ema backtest performance"],
+    ["/country/eurozone", "🇪🇺 Eurozone", "Explore", "europe eurozone stoxx"],
+    ["/country/japan", "🇯🇵 Japan", "Explore", "japan nikkei"],
+    ["/country/south-korea", "🇰🇷 South Korea", "Explore", "korea kospi"],
+    ["/country/china", "🇨🇳 China", "Explore", "china shanghai"],
+    ["/asset/ethereum", "Ξ Ethereum", "Explore", "eth crypto ethereum"],
+    ["/asset/silver", "🥈 Silver", "Explore", "silver commodity"],
+    ["/subscribe", "Alerts", "Account", "subscribe email alerts notify"],
+    ["/feedback", "Feedback & Early Access", "Account", "feedback waitlist early access suggest missing"],
+    ["/about", "About", "Company", "about iquant aditya"],
+    ["/methodology", "Methodology", "Company", "methodology how it works models"],
+    ["/disclaimer", "Disclaimer", "Company", "legal disclaimer"],
+    ["/terms", "Terms", "Company", "legal terms"],
+    ["/privacy", "Privacy", "Company", "legal privacy cookies"],
+  ];
+
+  /* prefix → category for active-state highlighting on spoke pages */
+  var PREFIX_CAT = {
+    "/smartmoney": "Smart Money",
+    "/country": "Explore",
+    "/countries": "Explore",
+    "/asset": "Explore",
+    "/assets": "Explore",
+    "/ma": "Regime",
+    "/ema": "Regime",
+  };
+
+  /* ---------- build nav html from the model ---------- */
+  function ddItem(it) {
+    var note = it[2] ? '<span class="dd-note">' + it[2] + "</span>" : "";
+    return '<a href="' + it[0] + '" data-nav="' + it[0] + '">' + it[1] + note + "</a>";
+  }
+
+  var linksHtml = CATS.map(function (c) {
+    if (c.href) return '<a href="' + c.href + '" data-nav="' + c.href + '">' + c.label + "</a>";
+    return (
+      '<span class="nav-dd" data-cat="' + c.label + '"><span class="dd-trigger">' + c.label +
+      ' <span class="chev">&#9662;</span></span><span class="dd-menu">' +
+      c.items.map(ddItem).join("") +
+      "</span></span>"
+    );
+  }).join("");
+
   var NAV =
     '<div class="page-loader" id="page-loader"></div>' +
     '<div class="stale-banner" id="stale-banner"></div>' +
     '<nav class="top"><div class="inner">' +
     '<a class="brand" href="/">' + LOGO + " Regime Compass</a>" +
     '<button class="nav-burger" type="button" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>' +
-    '<div class="links">' +
-    '<a href="/" data-nav="/">Home</a>' +
-    '<span class="nav-dd"><span class="dd-trigger">Signals <span class="chev">&#9662;</span></span><span class="dd-menu">' +
-    '<a href="/composite" data-nav="/composite">Risk Score <span class="dd-note">Composite</span></a>' +
-    '<a href="/hmm" data-nav="/hmm">HMM <span class="dd-note">Hidden Markov Model</span></a>' +
-    '<a href="/ma" data-nav="/ma">MA <span class="dd-note">Moving Average</span></a>' +
-    '<a href="/ema" data-nav="/ema">EMA <span class="dd-note">Exponential Moving Average</span></a>' +
-    '<a href="/validation" data-nav="/validation">Validation <span class="dd-note">HMM accuracy audit</span></a>' +
-    "</span></span>" +
-    '<span class="nav-dd"><span class="dd-trigger">Quant <span class="chev">&#9662;</span></span><span class="dd-menu">' +
-    '<a href="/movers" data-nav="/movers">Regime Movers <span class="dd-note">today&#39;s abnormal moves</span></a>' +
-    '<a href="/systemic" data-nav="/systemic">Systemic Risk <span class="dd-note">turbulence &middot; absorption</span></a>' +
-    '<a href="/credit" data-nav="/credit">Credit Stress <span class="dd-note">HY spread &middot; equity overlay</span></a>' +
-    '<a href="/volatility" data-nav="/volatility">Volatility <span class="dd-note">stress percentile</span></a>' +
-    '<a href="/correlations" data-nav="/correlations">Correlations <span class="dd-note">cross-asset matrix</span></a>' +
-    "</span></span>" +
-    '<span class="nav-dd"><span class="dd-trigger">Smart Money <span class="chev">&#9662;</span></span><span class="dd-menu">' +
-    '<a href="/smartmoney" data-nav="/smartmoney">🇮🇳 India <span class="dd-note">deals · flows · stakes</span></a>' +
-    '<a href="/smartmoney/tw" data-nav="/smartmoney/tw">🇹🇼 Taiwan <span class="dd-note">TWSE block deals</span></a>' +
-    '<a href="/smartmoney/id" data-nav="/smartmoney/id">🇮🇩 Indonesia <span class="dd-note">IDX negotiated deals</span></a>' +
-    '<a href="/smartmoney/us" data-nav="/smartmoney/us">🇺🇸 United States <span class="dd-note">insiders · Congress</span></a>' +
-    "</span></span>" +
-    '<span class="nav-dd"><span class="dd-trigger">Countries <span class="chev">&#9662;</span></span><span class="dd-menu">' +
-    '<a href="/countries" data-nav="/countries">All Countries <span class="dd-note">regime &middot; GDP &middot; news</span></a>' +
-    '<a href="/country/usa" data-nav="/country/usa">🇺🇸 United States</a>' +
-    '<a href="/country/eurozone" data-nav="/country/eurozone">🇪🇺 Eurozone</a>' +
-    '<a href="/country/india" data-nav="/country/india">🇮🇳 India</a>' +
-    '<a href="/country/japan" data-nav="/country/japan">🇯🇵 Japan</a>' +
-    '<a href="/country/south-korea" data-nav="/country/south-korea">🇰🇷 South Korea</a>' +
-    '<a href="/country/china" data-nav="/country/china">🇨🇳 China</a>' +
-    "</span></span>" +
-    '<span class="nav-dd"><span class="dd-trigger">Assets <span class="chev">&#9662;</span></span><span class="dd-menu">' +
-    '<a href="/assets" data-nav="/assets">All Assets <span class="dd-note">regime &middot; vol &middot; correlations</span></a>' +
-    '<a href="/asset/bitcoin" data-nav="/asset/bitcoin">&#8383; Bitcoin</a>' +
-    '<a href="/asset/ethereum" data-nav="/asset/ethereum">&Xi; Ethereum</a>' +
-    '<a href="/asset/gold" data-nav="/asset/gold">🥇 Gold</a>' +
-    '<a href="/asset/silver" data-nav="/asset/silver">🥈 Silver</a>' +
-    "</span></span>" +
-    '<span class="nav-dd"><span class="dd-trigger">Markets <span class="chev">&#9662;</span></span><span class="dd-menu">' +
-    '<a href="/macro" data-nav="/macro">Macro <span class="dd-note">US surprise meter</span></a>' +
-    '<a href="/sectors" data-nav="/sectors">Sector Heatmap <span class="dd-note">India · daily</span></a>' +
-    '<a href="/yields" data-nav="/yields">Yield Curve</a>' +
-    '<a href="/valuation" data-nav="/valuation">Valuation</a>' +
-    '<a href="/seasonality" data-nav="/seasonality">Seasonality</a>' +
-    '<a href="/calendar" data-nav="/calendar">Calendar</a>' +
-    "</span></span>" +
-    '<a href="/news" data-nav="/news">News</a>' +
-    '<a href="/changes" data-nav="/changes">Changes</a>' +
-    '<a href="/subscribe" data-nav="/subscribe">Alerts</a>' +
+    '<div class="links">' + linksHtml + "</div>" +
+    '<div class="nav-right">' +
+    '<button class="nav-search" type="button" id="nav-search" aria-label="Search tools (Cmd+K)" title="Jump to any tool">' +
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg>' +
+    '<span class="kbd-hint">⌘K</span></button>' +
+    '<span class="nav-dd dd-right"><span class="dd-trigger nav-account" aria-label="Account">' +
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg>' +
+    '<span class="chev">&#9662;</span></span><span class="dd-menu">' +
+    '<span class="dd-head">Personalization is coming</span>' +
+    '<span class="dd-disabled">My Dashboard <span class="soon-pill">soon</span><span class="dd-note">compose your own tools</span></span>' +
+    '<span class="dd-disabled">Sign in <span class="soon-pill">soon</span><span class="dd-note">accounts &amp; saved layouts</span></span>' +
+    '<a href="/feedback" data-nav="/feedback">Early Access <span class="soon-pill">waitlist</span></a>' +
+    '<span class="dd-sep"></span>' +
+    '<a href="/subscribe" data-nav="/subscribe">Email Alerts</a>' +
     '<a href="/about" data-nav="/about">About</a>' +
+    '<a href="/methodology" data-nav="/methodology">Methodology</a>' +
+    "</span></span>" +
     "</div></div></nav>";
 
+  /* ---------- footer, re-grouped to the same taxonomy ---------- */
   var FOOTER =
     '<footer class="site">' +
     '<div class="inner">' +
     '<div class="f-brand">' +
     '<span class="brand-line">' + LOGO + " Regime Compass</span>" +
     "<p>Daily regime classification across eleven global markets. Three independent models, one honest snapshot. An iQuant Labs project.</p>" +
+    '<p class="f-soon">Accounts &amp; custom dashboards are in the works — <a href="/feedback">sign up for early access</a>.</p>' +
     "</div>" +
-    '<div class="f-col"><h5>Signals</h5>' +
-    '<a href="/today">Daily Brief</a><a href="/composite">Risk Score</a><a href="/hmm">HMM</a><a href="/ma">Moving Average</a><a href="/ema">EMA</a><a href="/smartmoney">Smart Money India</a><a href="/smartmoney/tw">Smart Money Taiwan</a><a href="/smartmoney/id">Smart Money Indonesia</a><a href="/smartmoney/us">Smart Money US</a></div>' +
-    '<div class="f-col"><h5>Quant</h5>' +
-    '<a href="/movers">Regime Movers</a><a href="/systemic">Systemic Risk</a><a href="/volatility">Volatility</a><a href="/correlations">Correlations</a><a href="/validation">Validation</a></div>' +
-    '<div class="f-col"><h5>Markets</h5>' +
-    '<a href="/countries">Countries</a><a href="/assets">Assets</a><a href="/macro">Macro</a><a href="/sectors">Sector Heatmap</a><a href="/yields">Yield Curve</a><a href="/valuation">Valuation</a><a href="/seasonality">Seasonality</a><a href="/calendar">Calendar</a><a href="/news">News</a></div>' +
+    '<div class="f-col"><h5>Regime</h5>' +
+    '<a href="/today">Daily Brief</a><a href="/strategies">Strategies</a><a href="/composite">Risk Score</a><a href="/hmm">HMM</a><a href="/ma">SMA</a><a href="/ema">EMA</a><a href="/movers">Regime Movers</a><a href="/changes">Regime Changes</a><a href="/validation">Validation</a></div>' +
+    '<div class="f-col"><h5>Risk &amp; Macro</h5>' +
+    '<a href="/systemic">Systemic Risk</a><a href="/credit">Credit Stress</a><a href="/volatility">Volatility</a><a href="/correlations">Correlations</a><a href="/macro">US Macro</a><a href="/yields">Yield Curve</a><a href="/valuation">Valuation</a><a href="/sectors">Sectors</a><a href="/seasonality">Seasonality</a><a href="/calendar">Calendar</a></div>' +
+    '<div class="f-col"><h5>Smart Money &amp; Explore</h5>' +
+    '<a href="/smartmoney">India</a><a href="/smartmoney/tw">Taiwan</a><a href="/smartmoney/id">Indonesia</a><a href="/smartmoney/us">United States</a><a href="/countries">Countries</a><a href="/assets">Assets</a><a href="/news">News</a></div>' +
     '<div class="f-col"><h5>Company</h5>' +
-    '<a href="/about">About</a><a href="/methodology">Methodology</a><a href="/validation">Validation</a><a href="/subscribe">Alerts</a><a href="/disclaimer">Disclaimer</a><a href="/terms">Terms</a><a href="/privacy">Privacy</a></div>' +
+    '<a href="/about">About</a><a href="/methodology">Methodology</a><a href="/subscribe">Alerts</a><a href="/feedback">Feedback</a><a href="/disclaimer">Disclaimer</a><a href="/terms">Terms</a><a href="/privacy">Privacy</a></div>' +
     "</div>" +
     '<div class="f-bottom">' +
     '<span class="built-by">Built by <a href="https://www.linkedin.com/in/aditya-s1/" target="_blank" rel="noopener">Aditya Sahasrabuddhe' +
@@ -106,15 +190,25 @@
   var nav = document.querySelector("nav.top");
   var inner = nav.querySelector(".inner");
 
-  /* active link + category highlight */
+  /* active link + category highlight (exact match, then prefix fallback) */
   var path = location.pathname.replace(/\/+$/, "") || "/";
+  var matched = false;
   nav.querySelectorAll("[data-nav]").forEach(function (a) {
     if (a.getAttribute("data-nav") === path) {
+      matched = true;
       a.classList.add("active");
       var dd = a.closest(".nav-dd");
       if (dd) dd.classList.add("cat-active");
     }
   });
+  if (!matched) {
+    var seg = "/" + (path.split("/")[1] || "");
+    var cat = PREFIX_CAT[seg];
+    if (cat) {
+      var dd = nav.querySelector('.nav-dd[data-cat="' + cat + '"]');
+      if (dd) dd.classList.add("cat-active");
+    }
+  }
 
   /* burger + tap-toggle dropdowns */
   var burger = nav.querySelector(".nav-burger");
@@ -141,6 +235,112 @@
   var elevate = function () { nav.classList.toggle("scrolled", window.scrollY > 8); };
   window.addEventListener("scroll", elevate, { passive: true });
   elevate();
+
+  /* ============================================================
+     Command palette (⌘K / Ctrl-K) — jump to any tool
+     ============================================================ */
+  var PALETTE = [];
+  CATS.forEach(function (c) {
+    if (c.items) c.items.forEach(function (it) {
+      PALETTE.push({ href: it[0], label: it[1], cat: c.label, kw: (it[2] || "") + " " + (it[3] || "") });
+    });
+  });
+  EXTRA_PAGES.forEach(function (it) {
+    if (PALETTE.some(function (p) { return p.href === it[0]; })) return;
+    PALETTE.push({ href: it[0], label: it[1], cat: it[2], kw: it[3] || "" });
+  });
+
+  var palEl = null, palInput = null, palList = null, palSel = 0, palRows = [];
+
+  function palBuild() {
+    if (palEl) return;
+    palEl = document.createElement("div");
+    palEl.className = "cmdk";
+    palEl.innerHTML =
+      '<div class="cmdk-box" role="dialog" aria-label="Jump to tool">' +
+      '<div class="cmdk-inputwrap">' +
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg>' +
+      '<input type="text" class="cmdk-input" placeholder="Jump to any tool…" spellcheck="false" autocomplete="off"/>' +
+      '<span class="cmdk-esc">esc</span></div>' +
+      '<div class="cmdk-list"></div>' +
+      '<div class="cmdk-foot"><span>↑↓ navigate</span><span>↵ open</span><span class="cmdk-soon">Custom dashboards — coming soon</span></div>' +
+      "</div>";
+    document.body.appendChild(palEl);
+    palInput = palEl.querySelector(".cmdk-input");
+    palList = palEl.querySelector(".cmdk-list");
+    palEl.addEventListener("click", function (e) { if (e.target === palEl) palClose(); });
+    palInput.addEventListener("input", function () { palRender(palInput.value); });
+    palInput.addEventListener("keydown", function (e) {
+      if (e.key === "ArrowDown") { e.preventDefault(); palMove(1); }
+      else if (e.key === "ArrowUp") { e.preventDefault(); palMove(-1); }
+      else if (e.key === "Enter") {
+        e.preventDefault();
+        var r = palRows[palSel];
+        if (r) window.location.href = r.href;
+      } else if (e.key === "Escape") palClose();
+    });
+  }
+
+  function palFilter(q) {
+    q = q.trim().toLowerCase();
+    if (!q) return PALETTE.slice();
+    var starts = [], inLabel = [], inKw = [];
+    PALETTE.forEach(function (p) {
+      var l = p.label.toLowerCase(), hay = (l + " " + p.cat + " " + p.kw).toLowerCase();
+      if (l.indexOf(q) === 0) starts.push(p);
+      else if (l.indexOf(q) >= 0) inLabel.push(p);
+      else if (q.split(/\s+/).every(function (w) { return hay.indexOf(w) >= 0; })) inKw.push(p);
+    });
+    return starts.concat(inLabel, inKw);
+  }
+
+  function palRender(q) {
+    palRows = palFilter(q);
+    palSel = 0;
+    if (!palRows.length) {
+      palList.innerHTML = '<div class="cmdk-empty">No matching tool</div>';
+      return;
+    }
+    palList.innerHTML = palRows.map(function (p, i) {
+      return '<a class="cmdk-row' + (i === palSel ? " sel" : "") + '" href="' + p.href + '" data-i="' + i + '">' +
+        "<span>" + p.label + "</span><span class='cmdk-cat'>" + p.cat + "</span></a>";
+    }).join("");
+    palList.querySelectorAll(".cmdk-row").forEach(function (row) {
+      row.addEventListener("mouseenter", function () { palSelect(+row.dataset.i); });
+    });
+  }
+
+  function palSelect(i) {
+    palSel = i;
+    palList.querySelectorAll(".cmdk-row").forEach(function (r, j) { r.classList.toggle("sel", j === palSel); });
+  }
+
+  function palMove(d) {
+    if (!palRows.length) return;
+    palSelect((palSel + d + palRows.length) % palRows.length);
+    var el = palList.querySelector(".cmdk-row.sel");
+    if (el) el.scrollIntoView({ block: "nearest" });
+  }
+
+  function palOpen() {
+    palBuild();
+    palEl.classList.add("show");
+    palInput.value = "";
+    palRender("");
+    palInput.focus();
+    setTimeout(function () { palInput.focus(); }, 20);
+  }
+  function palClose() { if (palEl) palEl.classList.remove("show"); }
+
+  document.getElementById("nav-search").addEventListener("click", function (e) {
+    e.stopPropagation(); palOpen();
+  });
+  document.addEventListener("keydown", function (e) {
+    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+      e.preventDefault();
+      if (palEl && palEl.classList.contains("show")) palClose(); else palOpen();
+    }
+  });
 
   /* ---- footer + boot tasks on DOM ready ---- */
   document.addEventListener("DOMContentLoaded", function () {
@@ -177,6 +377,9 @@
   RC.cssVar = function (name) {
     return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
   };
+
+  /* open the command palette programmatically */
+  RC.palette = palOpen;
 
   /* IntersectionObserver scroll reveal: .reveal → .in */
   RC.reveal = function (root) {

@@ -12,21 +12,21 @@
   </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Home — Regime Compass</title>
-  <meta name="description" content="Three regime models across eleven markets — equities, crypto, and commodities — updated daily. SMA, EMA, and Hidden Markov Model side by side." />
+  <title>Regime Compass — Know the market you're in</title>
+  <meta name="description" content="Regime intelligence for 11 global markets. Daily bull/neutral/bear classification from walk-forward-validated models, corroborated by systemic risk, macro and smart-money evidence. By iQuant Labs." />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Regime Compass" />
-  <meta property="og:title" content="Regime Compass — What kind of market is this?" />
-  <meta property="og:description" content="Three regime models, eleven markets, one snapshot. Updated daily. By iQuant Labs." />
+  <meta property="og:title" content="Regime Compass — Know the market you're in" />
+  <meta property="og:description" content="Regime intelligence for 11 global markets. One daily verdict, four independent streams of evidence. By iQuant Labs." />
   <meta property="og:image" content="https://www.regimecompass.com/og-image.png" />
   <meta property="og:url" content="https://regimecompass.com" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Regime Compass — What kind of market is this?" />
-  <meta name="twitter:description" content="Three regime models, eleven markets, one snapshot. Updated daily. By iQuant Labs." />
+  <meta name="twitter:title" content="Regime Compass — Know the market you're in" />
+  <meta name="twitter:description" content="Regime intelligence for 11 global markets. One daily verdict, four independent streams of evidence. By iQuant Labs." />
   <meta name="twitter:image" content="https://www.regimecompass.com/og-image.png" />
   <meta name="theme-color" content="#07090e" />
   <link rel="canonical" href="https://www.regimecompass.com/" />
-  <link rel="stylesheet" href="/styles.css?v=4.3" />
+  <link rel="stylesheet" href="/styles.css?v=6.0" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="manifest" href="/manifest.json" />
   <style>
@@ -44,6 +44,11 @@
     }
     .above-fold .live-dot { flex: 0 0 auto; }
     .hero-ctas { margin-top: 26px; display: flex; gap: 12px; flex-wrap: wrap; }
+    .hero-ctas .btn .kbd-hint {
+      font-family: var(--font-mono); font-size: 10px; margin-left: 8px;
+      border: 1px solid var(--border-strong); border-radius: 4px; padding: 1px 5px;
+      background: rgba(255,255,255,0.04); color: var(--muted);
+    }
 
     /* Compass */
     .hero-logo { display: flex; align-items: center; justify-content: center; cursor: pointer; }
@@ -59,27 +64,6 @@
     .hero-logo:hover .compass-rings circle:nth-child(3) { opacity: 0.4; stroke: var(--accent); }
     .hero-logo:hover .logo-svg-xl { filter: drop-shadow(0 0 26px rgba(139,111,240,0.2)); }
 
-    /* Count-up stats strip */
-    .stats-strip {
-      display: flex; gap: 0; margin: 40px 0 46px;
-      border: 1px solid var(--border); border-radius: var(--r-lg);
-      background: linear-gradient(180deg, rgba(255,255,255,0.015), transparent 45%), var(--panel);
-      box-shadow: var(--shadow-sm), inset 0 1px 0 var(--edge-light);
-      overflow: hidden;
-    }
-    .stats-strip .cell {
-      flex: 1; padding: 20px 26px; text-align: left;
-      border-right: 1px solid var(--hairline);
-    }
-    .stats-strip .cell:last-child { border-right: none; }
-    .stats-strip .v { font-size: 30px; font-weight: 700; color: var(--text-strong); letter-spacing: -0.02em; line-height: 1.1; }
-    .stats-strip .k { font-size: 10.5px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 1.6px; margin-top: 6px; }
-    @media (max-width: 700px) {
-      .stats-strip { flex-wrap: wrap; }
-      .stats-strip .cell { flex: 1 1 50%; padding: 14px 18px; border-bottom: 1px solid var(--hairline); }
-      .stats-strip .v { font-size: 22px; }
-    }
-
     @media (max-width: 900px) {
       .hero-grid { grid-template-columns: 1fr; gap: 24px; }
       .logo-svg-xl { width: 160px; height: 160px; }
@@ -87,27 +71,8 @@
       .hero-home { margin: 14px 0 18px; }
     }
 
-    /* Smart Money strip */
-    .sm-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
-    @media (max-width: 980px) { .sm-strip { grid-template-columns: 1fr 1fr; } }
-    @media (max-width: 560px) { .sm-strip { grid-template-columns: 1fr; } }
-    .sm-card {
-      display: flex; flex-direction: column; gap: 4px;
-      padding: 16px 18px; text-decoration: none;
-      background: linear-gradient(180deg, rgba(255,255,255,0.015), transparent 40%), var(--panel);
-      border: 1px solid var(--border); border-radius: var(--r-lg);
-      box-shadow: inset 0 1px 0 var(--edge-light);
-      transition: var(--transition);
-    }
-    .sm-card:hover { border-color: var(--accent-border); transform: translateY(-2px); box-shadow: var(--shadow-md), inset 0 1px 0 var(--edge-light); }
-    .sm-card .sm-flag { font-size: 20px; line-height: 1; }
-    .sm-card .sm-mkt { font-weight: 650; font-size: 14.5px; color: var(--text-strong); margin-top: 4px; }
-    .sm-card .sm-line { font-size: 12px; color: var(--muted); line-height: 1.5; }
-    .sm-card .sm-line strong { color: var(--text-body); font-weight: 600; }
-    .qt-glyph { font-family: var(--font-mono); font-weight: 700; color: var(--accent-strong); font-size: 19px; }
-
     /* Model sections */
-    .model-section { margin-bottom: 44px; }
+    .model-section { margin-bottom: 48px; }
     .model-section h2 {
       font-family: var(--font-display);
       font-size: 23px; color: var(--text-strong);
@@ -123,61 +88,6 @@
     }
     .model-section .subline { font-size: 13.5px; color: var(--muted); margin-bottom: 16px; }
     .model-section .subline a { color: var(--accent-strong); font-weight: 500; }
-
-    /* Snapshot grid */
-    .snap-grid { display: grid; gap: 10px; }
-    .snap-grid.dma, .snap-grid.hmm { grid-template-columns: 1.4fr repeat(3, 1fr); }
-    .snap-grid .snap-h {
-      font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 1.5px;
-      padding: 6px 10px; text-align: center; font-weight: 600;
-    }
-    .snap-grid .snap-h:first-child { text-align: left; }
-    .snap-row-label {
-      display: flex; flex-direction: column; justify-content: center;
-      padding: 16px 14px; border-radius: var(--r-md);
-      background: var(--panel-2); border: 1px solid var(--border);
-      box-shadow: inset 0 1px 0 var(--edge-light);
-      transition: var(--transition);
-    }
-    .snap-row-label:hover { background: var(--panel); border-color: var(--border-strong); }
-    .snap-row-label .name { font-size: 15px; font-weight: 600; color: var(--text-strong); }
-    .snap-row-label .country { font-size: 11px; color: var(--muted); margin-top: 3px; }
-
-    .snap-cell {
-      padding: 14px 12px; border-radius: var(--r-md);
-      border: 1px solid var(--border); cursor: pointer;
-      transition: transform var(--dur-1) var(--ease-out), box-shadow var(--dur-1) var(--ease-out), border-color var(--dur-1) ease;
-      text-align: center; position: relative; overflow: hidden;
-      opacity: 0; transform: translateY(8px);
-      animation: cell-in 0.45s var(--ease-out) forwards;
-    }
-    @keyframes cell-in { to { opacity: 1; transform: translateY(0); } }
-    .snap-cell::before {
-      content: ''; position: absolute; inset: 0;
-      background: radial-gradient(circle at 50% 0%, currentColor, transparent 80%);
-      opacity: 0; transition: opacity 0.18s; pointer-events: none;
-    }
-    .snap-cell:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--border-strong); }
-    .snap-cell:hover::before { opacity: 0.07; }
-    .snap-cell.bull    { background: linear-gradient(180deg, rgba(52,198,115,0.14), rgba(52,198,115,0.05));  border-color: rgba(52,198,115,0.32); color: var(--bull); }
-    .snap-cell.bear    { background: linear-gradient(180deg, rgba(227,84,84,0.14), rgba(227,84,84,0.05));   border-color: rgba(227,84,84,0.32); color: var(--bear); }
-    .snap-cell.neutral { background: linear-gradient(180deg, rgba(212,160,23,0.14), rgba(212,160,23,0.05)); border-color: rgba(212,160,23,0.32); color: var(--neutral); }
-    .snap-cell .reg {
-      display: inline-block; font-size: 10.5px; font-weight: 700; text-transform: uppercase;
-      letter-spacing: 1.4px; padding: 3px 10px; border-radius: 10px; color: white;
-    }
-    .snap-cell.bull    .reg { background: var(--bull); color: #052e17; }
-    .snap-cell.bear    .reg { background: var(--bear); }
-    .snap-cell.neutral .reg { background: var(--neutral); color: #1a1a1a; }
-    .snap-cell .gap {
-      font-size: 20px; font-weight: 600;
-      font-family: var(--font-mono); font-variant-numeric: tabular-nums;
-      margin-top: 8px; line-height: 1; letter-spacing: -0.02em;
-    }
-    .snap-cell .meta { font-size: 10.5px; color: var(--muted); margin-top: 5px; }
-
-    /* skeleton rows while snapshots load */
-    .snap-grid .sk { height: 76px; border-radius: var(--r-md); }
 
     /* ── Global Regime Board ── */
     .board {
@@ -222,6 +132,8 @@
     .board-ribbon .day .n { background: rgba(212,160,23,0.4); }
     .board-ribbon .day .r { background: rgba(227,84,84,0.55); }
     .board-ribbon-cap { display: flex; justify-content: space-between; font-size: 10px; color: var(--muted); margin-top: 6px; text-transform: uppercase; letter-spacing: 1px; }
+    .board-foot { display: flex; gap: 18px; flex-wrap: wrap; margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--hairline); }
+    .board-foot a { font-size: 12.5px; font-weight: 600; color: var(--accent-strong); }
     @media (max-width: 700px) {
       .board-counts { gap: 16px; }
       .bc .n { font-size: 26px; }
@@ -229,31 +141,53 @@
       .bseg { font-size: 8.5px; letter-spacing: 0; }
     }
 
-    @media (max-width: 700px) {
-      .snap-grid.dma, .snap-grid.hmm { grid-template-columns: 1fr; }
-      .snap-grid .snap-h:not(:first-child) { display: none; }
-      .snap-row-label { padding: 12px; }
-    }
+    /* ── Four lenses (2×2) ── */
+    .lens-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    @media (max-width: 700px) { .lens-grid { grid-template-columns: 1fr; } }
+    .cat-card .cat-live { font-size: 12px; color: var(--muted); line-height: 1.5; }
+    .cat-card .cat-live strong { color: var(--text-body); font-weight: 600; }
 
-    /* ── Regime-ribbon sparklines (HMM grid) ── */
-    .spark-ribbon { margin-top: 9px; }
-    .spark-ribbon svg { display: block; width: 100%; height: 34px; border-radius: 4px; }
-    .spark-legend {
-      display: inline-flex; align-items: center; gap: 12px; flex-wrap: wrap;
-      font-size: 11px; color: var(--muted); margin-left: 10px;
+    /* ── How investors use it ── */
+    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    @media (max-width: 760px) { .steps { grid-template-columns: 1fr; } }
+    .step {
+      display: flex; flex-direction: column; gap: 8px;
+      padding: 20px; text-decoration: none;
+      border: 1px solid var(--border); border-radius: var(--r-lg);
+      background: var(--panel-2);
+      transition: var(--transition);
     }
-    .spark-legend .sw { display: inline-block; width: 10px; height: 10px; border-radius: 2px; vertical-align: -1px; margin-right: 4px; }
-    #spark-tt {
-      position: fixed; z-index: 300; pointer-events: none;
-      background: rgba(12, 15, 22, 0.92);
-      -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
-      border: 1px solid var(--border-strong); border-radius: var(--r-md);
-      padding: 8px 11px; box-shadow: var(--shadow-lg);
-      font-size: 11.5px; line-height: 1.5; font-family: var(--font-mono);
-      opacity: 0; transition: opacity 0.12s ease;
+    .step:hover { border-color: var(--accent-border); background: var(--panel); text-decoration: none; transform: translateY(-2px); }
+    .step .s-num {
+      width: 26px; height: 26px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-mono); font-size: 13px; font-weight: 700;
+      background: var(--accent-dim); color: var(--accent-strong); border: 1px solid var(--accent-border);
     }
-    #spark-tt.show { opacity: 1; }
-    #spark-tt .d { color: var(--muted); font-size: 10.5px; }
+    .step .s-title { font-weight: 650; font-size: 15px; color: var(--text-strong); }
+    .step .s-text { font-size: 12.5px; color: var(--muted); line-height: 1.55; }
+    .step .s-text strong { color: var(--text-body); font-weight: 600; }
+
+    /* ── Audited, not asserted ── */
+    .audit-strip {
+      display: flex; gap: 0; align-items: stretch;
+      border: 1px solid var(--border); border-radius: var(--r-lg);
+      background: linear-gradient(180deg, rgba(255,255,255,0.015), transparent 45%), var(--panel);
+      box-shadow: var(--shadow-sm), inset 0 1px 0 var(--edge-light);
+      overflow: hidden;
+    }
+    .audit-strip .cell {
+      flex: 1; padding: 20px 26px; text-align: left;
+      border-right: 1px solid var(--hairline);
+    }
+    .audit-strip .cell:last-child { border-right: none; }
+    .audit-strip .v { font-size: 30px; font-weight: 700; color: var(--text-strong); letter-spacing: -0.02em; line-height: 1.1; }
+    .audit-strip .k { font-size: 10.5px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 1.6px; margin-top: 6px; }
+    @media (max-width: 700px) {
+      .audit-strip { flex-wrap: wrap; }
+      .audit-strip .cell { flex: 1 1 50%; padding: 14px 18px; border-bottom: 1px solid var(--hairline); }
+      .audit-strip .v { font-size: 22px; }
+    }
   </style>
   <script type="application/ld+json">
   {
@@ -264,7 +198,7 @@
         "@id": "https://www.regimecompass.com/#website",
         "name": "Regime Compass",
         "url": "https://www.regimecompass.com",
-        "description": "Three regime models, eleven markets, updated daily. By iQuant Labs.",
+        "description": "Regime intelligence for 11 global markets. One daily verdict, four independent streams of evidence. By iQuant Labs.",
         "publisher": { "@id": "https://www.regimecompass.com/#org" }
       },
       {
@@ -293,7 +227,7 @@
         "temporalCoverage": "2010-01-01/..",
         "isAccessibleForFree": true,
         "license": "https://www.regimecompass.com/terms",
-        "keywords": ["market regime", "risk-on risk-off", "hidden Markov model", "moving average regime", "bull bear indicator"]
+        "keywords": ["market regime", "regime intelligence", "risk-on risk-off", "hidden Markov model", "moving average regime", "bull bear indicator"]
       }
     ]
   }
@@ -301,20 +235,20 @@
   <!--GEO:JSONLD-->
 </head>
 <body>
-<script src="/shell.js?v=5.2"></script>
-<script src="/ribbon.js?v=1.0"></script>
+<script src="/shell.js?v=6.1"></script>
 
 <div class="wrap">
+  <!-- 1 · The claim -->
   <div class="hero hero-home">
     <div class="hero-grid">
       <div>
-        <div class="kicker">Regime Compass</div>
-        <p class="above-fold"><span class="live-dot"></span> Daily regime classification across 11 global markets. Free.</p>
-        <h1>What kind of<br/><span class="grad-text">market is this?</span></h1>
-        <div class="tagline">Volatility-based <strong>SMA</strong>, faster-reacting <strong>EMA</strong>, and a probabilistic <strong>Hidden Markov Model</strong> — across US and European equities, crypto, commodities, and Asian indices. Updated daily after US market close. Click any cell to drill in.</div>
+        <div class="kicker">Regime Intelligence · iQuant Labs</div>
+        <p class="above-fold"><span class="live-dot"></span> 11 global markets, classified daily. Free.</p>
+        <h1>Know the market<br/><span class="grad-text">you're in.</span></h1>
+        <div class="tagline">Every decision that matters — sizing, hedging, when to press and when to step back — depends on the market's <strong>regime</strong>. Regime Compass quantifies it daily across equities, crypto and commodities, then checks the verdict against three more independent streams of evidence.</div>
         <div class="hero-ctas">
-          <a href="/composite" class="btn primary">View risk-on/off gauge →</a>
-          <a href="/subscribe" class="btn ghost">Get alerts</a>
+          <a href="/today" class="btn primary">Today's verdict →</a>
+          <button class="btn ghost" type="button" onclick="RC.palette()">Jump to any tool <span class="kbd-hint">⌘K</span></button>
         </div>
         <div style="margin-top:20px;"><span class="updated-ts" id="updated"></span></div>
       </div>
@@ -350,10 +284,10 @@
 
   <!--GEO:BRIEF-->
 
-  <!-- Global Regime Board -->
+  <!-- 2 · The verdict -->
   <section class="model-section reveal" style="margin-top:34px;">
-    <h2>Global Regime Board <span class="tag">regime concordance · HMM</span></h2>
-    <div class="subline">How many of the eleven markets are risk-on right now — the whole board at a glance. Click a market to drill in.</div>
+    <h2>Today's verdict <span class="tag">all 11 markets · updated daily</span></h2>
+    <div class="subline">How much of the board is risk-on right now. Click any market to see why.</div>
     <div class="board">
       <div class="board-top">
         <div class="board-counts">
@@ -369,204 +303,111 @@
       <div class="board-markets" id="board-markets"></div>
       <div class="board-ribbon" id="board-ribbon" title="Bull / neutral / bear market counts, last 90 sessions"></div>
       <div class="board-ribbon-cap"><span>90 sessions ago</span><span>Regime mix over time</span><span>today</span></div>
+      <div class="board-foot">
+        <a href="/today">Read the full daily brief →</a>
+      </div>
     </div>
   </section>
 
-  <!-- Smart Money strip -->
-  <section class="model-section reveal" id="sm-strip-section">
-    <h2>Smart Money <span class="tag">deal-level disclosures · 4 markets</span></h2>
-    <div class="subline">Follow what the biggest players actually did — bulk &amp; block deals, insider filings and congressional trades, refreshed after each exchange's close. <a href="/smartmoney">Open the tracker &rarr;</a></div>
-    <div class="sm-strip" id="sm-strip">
-      <a class="sm-card" href="/smartmoney">
-        <span class="sm-flag">🇮🇳</span><span class="sm-mkt">India</span>
-        <span class="sm-line" id="sms-in">NSE bulk &amp; block deals · FII/DII flows · quarterly stakes</span>
+  <!-- 3 · The four lenses -->
+  <section class="model-section reveal">
+    <h2>One verdict, four independent lenses</h2>
+    <div class="subline">Any single indicator can lie. The verdict above only matters because three unrelated streams of evidence keep checking it.</div>
+    <div class="lens-grid">
+      <a class="cat-card" href="/composite">
+        <span class="cat-arrow">→</span>
+        <span class="cat-glyph">◉</span>
+        <span class="cat-name">The Models</span>
+        <span class="cat-q">Three independent statistical models classify every market bull, neutral or bear — and say how confident they are.</span>
+        <span class="cat-live" id="live-regime"></span>
+        <span class="cat-tools"><span>Risk Score</span><span>HMM</span><span>Trend models</span><span>Movers</span></span>
       </a>
-      <a class="sm-card" href="/smartmoney/tw">
-        <span class="sm-flag">🇹🇼</span><span class="sm-mkt">Taiwan</span>
-        <span class="sm-line" id="sms-tw">TWSE block deals, premium vs market</span>
+      <a class="cat-card" href="/systemic">
+        <span class="cat-arrow">→</span>
+        <span class="cat-glyph">Σ</span>
+        <span class="cat-name">The Stress</span>
+        <span class="cat-q">How fragile the system is underneath the prices — turbulence, credit spreads, volatility, correlations.</span>
+        <span class="cat-live" id="live-risk"></span>
+        <span class="cat-tools"><span>Systemic Risk</span><span>Credit</span><span>Volatility</span><span>Correlations</span></span>
       </a>
-      <a class="sm-card" href="/smartmoney/id">
-        <span class="sm-flag">🇮🇩</span><span class="sm-mkt">Indonesia</span>
-        <span class="sm-line" id="sms-id">IDX negotiated-market deals</span>
+      <a class="cat-card" href="/macro">
+        <span class="cat-arrow">→</span>
+        <span class="cat-glyph">◫</span>
+        <span class="cat-name">The Backdrop</span>
+        <span class="cat-q">Whether the backdrop is helping or hurting risk assets — US data vs trend, yields, valuation, seasonality.</span>
+        <span class="cat-live" id="live-macro"></span>
+        <span class="cat-tools"><span>US Macro</span><span>Yield Curve</span><span>Valuation</span><span>Sectors</span></span>
       </a>
-      <a class="sm-card" href="/smartmoney/us">
-        <span class="sm-flag">🇺🇸</span><span class="sm-mkt">United States</span>
-        <span class="sm-line" id="sms-us">Insider filings by name · Congress portfolios</span>
-      </a>
-    </div>
-  </section>
-
-  <!-- Quant Toolkit strip -->
-  <section class="model-section reveal" id="qt-strip-section">
-    <h2>Quant Toolkit <span class="tag">cross-market statistics · daily</span></h2>
-    <div class="subline">The numbers behind the regimes — how abnormal today's moves were, and how fragile the system is underneath.</div>
-    <div class="sm-strip" id="qt-strip">
-      <a class="sm-card" href="/movers">
-        <span class="sm-flag qt-glyph">σ</span><span class="sm-mkt">Regime Movers</span>
-        <span class="sm-line" id="qts-movers">Today's moves scored inside each market's own regime</span>
-      </a>
-      <a class="sm-card" href="/systemic">
-        <span class="sm-flag qt-glyph">Σ</span><span class="sm-mkt">Systemic Risk</span>
-        <span class="sm-line" id="qts-systemic">Turbulence &amp; absorption ratio across all 11 markets</span>
-      </a>
-      <a class="sm-card" href="/volatility">
-        <span class="sm-flag qt-glyph">√</span><span class="sm-mkt">Volatility</span>
-        <span class="sm-line" id="qts-vol">A VIX-style stress percentile for every market</span>
-      </a>
-      <a class="sm-card" href="/correlations">
-        <span class="sm-flag qt-glyph">ρ</span><span class="sm-mkt">Correlations</span>
-        <span class="sm-line" id="qts-corr">Cross-asset correlation matrix, three windows</span>
+      <a class="cat-card" href="/smartmoney">
+        <span class="cat-arrow">→</span>
+        <span class="cat-glyph">⇄</span>
+        <span class="cat-name">The Money</span>
+        <span class="cat-q">Not opinions — disclosed deals. Bulk &amp; block trades, insider filings and Congress portfolios across four markets.</span>
+        <span class="cat-live" id="live-sm"></span>
+        <span class="cat-tools"><span>🇮🇳 India</span><span>🇹🇼 Taiwan</span><span>🇮🇩 Indonesia</span><span>🇺🇸 US</span></span>
       </a>
     </div>
   </section>
 
-  <!-- Count-up stats strip -->
-  <div class="stats-strip reveal">
-    <div class="cell"><div class="v num" data-count="11">0</div><div class="k">Markets tracked</div></div>
-    <div class="cell"><div class="v num" data-count="3">0</div><div class="k">Independent models</div></div>
-    <div class="cell"><div class="v num" data-count="99">0</div><div class="k">Signals per day</div></div>
-    <div class="cell"><div class="v num" id="stat-days" data-count="0">0</div><div class="k">Days of history</div></div>
+  <!-- 4 · How investors use it -->
+  <section class="model-section reveal">
+    <h2>How investors use it</h2>
+    <div class="subline">Ten minutes a day. No noise, no calls — just the state of the board.</div>
+    <div class="steps">
+      <a class="step" href="/today">
+        <span class="s-num">1</span>
+        <span class="s-title">Read the verdict</span>
+        <span class="s-text">The <strong>Daily Brief</strong>: every market's regime, what changed overnight, and how strong the signal is.</span>
+      </a>
+      <a class="step" href="/movers">
+        <span class="s-num">2</span>
+        <span class="s-title">Look for disagreement</span>
+        <span class="s-text">Models bullish but stress rising? A market moving abnormally inside its regime? <strong>Divergence is where the story is.</strong></span>
+      </a>
+      <a class="step" href="/countries">
+        <span class="s-num">3</span>
+        <span class="s-title">Drill into your market</span>
+        <span class="s-text">Every <strong>country and asset has its own hub</strong> — regime, volatility, flows and news on one page.</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- 5 · Audited, not asserted -->
+  <section class="model-section reveal">
+    <h2>Audited, not asserted</h2>
+    <div class="subline">We backtested our own models the way a skeptic would — refit quarterly on data available at the time, costs included, <a href="/validation">every result published</a>, including where the models lose. See what the signals become as <a href="/strategies">model portfolios →</a></div>
+    <div class="audit-strip">
+      <div class="cell"><div class="v num" data-count="11">0</div><div class="k">Markets tracked</div></div>
+      <div class="cell"><div class="v num" data-count="3">0</div><div class="k">Independent models</div></div>
+      <div class="cell"><div class="v num" data-count="99">0</div><div class="k">Signals per day</div></div>
+      <div class="cell"><div class="v num" id="stat-days" data-count="0">0</div><div class="k">Days of history</div></div>
+    </div>
+  </section>
+
+  <!-- 6 · What's coming -->
+  <div class="teaser reveal">
+    <div class="t-copy">
+      <h3>Your dashboard, your tools <span class="soon-pill">coming soon</span></h3>
+      <p>Accounts are on the way. Pick any of the tools above, arrange them as tiles, and get one personal view of the markets you care about — saved to your login.</p>
+      <div style="margin-top: 14px; display: flex; gap: 10px; flex-wrap: wrap;">
+        <a href="/feedback" class="btn primary" style="padding: 9px 18px; font-size: 13px;">Get early access →</a>
+        <a href="/feedback" class="btn ghost" style="padding: 9px 18px; font-size: 13px;">Tell us what to build</a>
+      </div>
+    </div>
+    <div class="t-tiles" aria-hidden="true">
+      <span class="t-tile">◉</span>
+      <span class="t-tile">Σ</span>
+      <span class="t-tile">⇄</span>
+      <span class="t-tile ghost">+</span>
+    </div>
   </div>
 
-  <!-- SMA snapshot section -->
-  <section class="model-section reveal">
-    <h2>Simple Moving Average Regime <span class="tag">price vs trailing SMA</span></h2>
-    <div class="subline">Bull when price &gt; SMA, bear when below. Three timeframes per index. <a href="/ma">Drill into detail →</a></div>
-    <div class="snap-grid dma">
-      <div class="snap-h">Index</div>
-      <div class="snap-h">50-day SMA</div>
-      <div class="snap-h">100-day SMA</div>
-      <div class="snap-h">200-day SMA</div>
-    </div>
-    <div class="snap-grid dma" id="dma-rows" style="margin-top: 4px;"></div>
-  </section>
-
-  <!-- EMA snapshot section -->
-  <section class="model-section reveal">
-    <h2>Exponential Moving Average Regime <span class="tag">price vs trailing EMA · faster reaction</span></h2>
-    <div class="subline">Same logic as SMA but recent prices weighted more. <a href="/ema">Drill into detail →</a></div>
-    <div class="snap-grid dma">
-      <div class="snap-h">Index</div>
-      <div class="snap-h">50-day EMA</div>
-      <div class="snap-h">100-day EMA</div>
-      <div class="snap-h">200-day EMA</div>
-    </div>
-    <div class="snap-grid dma" id="ema-rows" style="margin-top: 4px;"></div>
-  </section>
-
-  <!-- HMM snapshot section -->
-  <section class="model-section reveal">
-    <h2>Hidden Markov Model Regime <span class="tag">3-state Gaussian HMM</span></h2>
-    <div class="subline">Filtered probabilities of bear / neutral / bull for each index. <a href="/hmm">Drill into detail →</a>
-      <span class="spark-legend" id="spark-legend" style="display:none;">90-session price, shaded by daily regime:
-        <span><span class="sw" style="background:rgba(52,198,115,0.35);"></span>bull</span>
-        <span><span class="sw" style="background:rgba(212,160,23,0.32);"></span>neutral</span>
-        <span><span class="sw" style="background:rgba(227,84,84,0.35);"></span>bear</span>
-      </span>
-    </div>
-    <div class="snap-grid hmm">
-      <div class="snap-h">Index</div>
-      <div class="snap-h">Bear</div>
-      <div class="snap-h">Neutral</div>
-      <div class="snap-h">Bull</div>
-    </div>
-    <div class="snap-grid hmm" id="hmm-rows" style="margin-top: 4px;"></div>
-  </section>
-
   <div class="callout reveal">
-    <strong>How to use this overview.</strong> The two models reach the same conclusion via different paths. <strong>Moving averages</strong> are a simple, transparent trend filter — used for decades by trend-followers. <strong>HMMs</strong> are a probabilistic regime classifier that combines returns, volatility, currency stress, and (where available) implied volatility. When both models agree on the regime, that's a stronger signal. When they disagree, dig into <a href="/hmm">HMM detail</a> or <a href="/ma">MA detail</a> to understand why.
-    <br/><br/>
-    Not investment advice. See the <a href="/disclaimer">Disclaimer</a> and
-      <a href="/terms">Terms</a>.
+    Regime Compass reports market state. It does not make trade calls, and none of this is investment advice. Method details are in the <a href="/methodology">Methodology</a>; limits and terms in the <a href="/disclaimer">Disclaimer</a> and <a href="/terms">Terms</a>.
   </div>
 </div>
 
 <script>
-const fmtPct = v => (v * 100).toFixed(1) + "%";
-const fmtSignedPct = v => (v >= 0 ? "+" : "") + v.toFixed(2) + "%";
-
-function showSkeletons(rowsElId, cols) {
-  const rows = document.getElementById(rowsElId);
-  rows.innerHTML = "";
-  for (let r = 0; r < 4; r++) {
-    for (let c = 0; c < cols; c++) {
-      const sk = document.createElement("div");
-      sk.className = "skeleton sk";
-      rows.appendChild(sk);
-    }
-  }
-}
-
-/* staggered entrance per cell */
-let cellSeq = 0;
-function stagger(el) {
-  el.style.animationDelay = Math.min(cellSeq++ * 18, 500) + "ms";
-}
-
-async function loadMaSnapshot(apiPath, rowsElId, drillPath) {
-  const r = await fetch(apiPath); const s = await r.json();
-  const rows = document.getElementById(rowsElId);
-  rows.innerHTML = "";
-  for (const row of s.indices) {
-    const label = document.createElement("div");
-    label.className = "snap-row-label";
-    const nm = document.createElement("div"); nm.className = "name"; nm.textContent = row.index_name;
-    const co = document.createElement("div"); co.className = "country"; co.textContent = row.country;
-    label.appendChild(nm); label.appendChild(co);
-    rows.appendChild(label);
-    for (const period of s.periods) {
-      const c = row.cells[period];
-      const cell = document.createElement("div");
-      cell.className = "snap-cell " + c.regime;
-      stagger(cell);
-      cell.innerHTML = `
-        <div class="reg">${c.regime}</div>
-        <div class="gap">${fmtSignedPct(c.gap_pct)}</div>
-        <div class="meta">${c.days_in_regime}d in regime</div>`;
-      cell.addEventListener("click", () => {
-        window.location.href = `${drillPath}?index=${row.index_key}&period=${period}`;
-      });
-      rows.appendChild(cell);
-    }
-  }
-}
-
-async function loadHmmSnapshot() {
-  const r = await fetch("/api/hmm/snapshot"); const s = await r.json();
-  const rows = document.getElementById("hmm-rows");
-  rows.innerHTML = "";
-  for (const row of s.indices) {
-    const label = document.createElement("div");
-    label.className = "snap-row-label";
-    label.dataset.sparkKey = row.index_key;
-    const nm = document.createElement("div"); nm.className = "name"; nm.textContent = row.index_name;
-    const co = document.createElement("div"); co.className = "country"; co.textContent = row.country;
-    label.appendChild(nm); label.appendChild(co);
-    rows.appendChild(label);
-    for (const label_name of ["bear", "neutral", "bull"]) {
-      const prob = row[label_name];
-      const isDominant = label_name === row.hard_state;
-      const cell = document.createElement("div");
-      cell.className = "snap-cell " + (isDominant ? label_name : "");
-      stagger(cell);
-      cell.innerHTML = `
-        <div class="reg">${label_name}</div>
-        <div class="gap">${fmtPct(prob)}</div>
-        <div class="meta">${isDominant ? row.days_in_regime + "d in regime" : ""}</div>`;
-      if (!isDominant) cell.style.animationName = "cell-in-dim";
-      cell.addEventListener("click", () => {
-        window.location.href = `/hmm?index=${row.index_key}`;
-      });
-      rows.appendChild(cell);
-    }
-  }
-}
-
-/* dominant cells land at full opacity; the rest settle dimmed */
-const st = document.createElement("style");
-st.textContent = "@keyframes cell-in-dim { to { opacity: 0.5; transform: translateY(0); } }";
-document.head.appendChild(st);
-
 /* ── Global Regime Board ── */
 const BOARD_ABBREV = {
   spx: "SPX", nasdaq: "NDX", btc: "BTC", eth: "ETH", gold: "GOLD", silver: "SLV",
@@ -619,35 +460,14 @@ async function loadBoard() {
   }
 }
 
-/* Regime-ribbon sparklines: shared implementation in /ribbon.js (RCRibbon) */
-
-async function loadSparklines() {
-  const d = await (await fetch("/api/sparklines")).json();
-  const byKey = Object.fromEntries(d.markets.map(m => [m.index_key, m]));
-  document.querySelectorAll('#hmm-rows [data-spark-key]').forEach(label => {
-    const mkt = byKey[label.dataset.sparkKey];
-    if (mkt) RCRibbon.build(label, mkt, d.state_labels);
-  });
-  document.getElementById("spark-legend").style.display = "";
-}
-
 (async () => {
   loadBoard().catch(e => console.error("board failed:", e));
-  showSkeletons("dma-rows", 4);
-  showSkeletons("ema-rows", 4);
-  showSkeletons("hmm-rows", 4);
-  await Promise.all([
-    loadMaSnapshot("/api/ma/snapshot", "dma-rows", "/ma"),
-    loadMaSnapshot("/api/ema/snapshot", "ema-rows", "/ema"),
-    loadHmmSnapshot(),
-  ]);
-  loadSparklines().catch(e => console.error("sparklines failed:", e));
   const now = new Date();
   const utc = now.toISOString().replace("T", " ").slice(0, 16) + " UTC";
   document.getElementById("updated").textContent = "Last refresh: " + utc + " · updated daily after US close";
 })();
 
-/* count-up stats strip */
+/* count-up audit strip */
 (async () => {
   try {
     const r = await fetch("/api/model_info");
@@ -658,7 +478,7 @@ async function loadSparklines() {
   if (+document.getElementById("stat-days").dataset.count === 0)
     document.getElementById("stat-days").dataset.count = 365;
 
-  const strip = document.querySelector(".stats-strip");
+  const strip = document.querySelector(".audit-strip");
   const run = () => strip.querySelectorAll("[data-count]").forEach((el, i) =>
     setTimeout(() => RC.countUp(el, +el.dataset.count, { duration: 1100 }), i * 120));
   if ("IntersectionObserver" in window) {
@@ -669,7 +489,7 @@ async function loadSparklines() {
   } else run();
 })();
 
-/* Smart Money strip — live one-liners from the cross-market digest */
+/* Lens cards — live one-liners; static copy stays on any failure */
 (async () => {
   const set = (id, html) => { const el = document.getElementById(id); if (el) el.innerHTML = html; };
   const inr = (n) => {
@@ -677,55 +497,30 @@ async function loadSparklines() {
     return "₹" + (v >= 10000 ? (v / 1000).toFixed(1) + "k" : v.toLocaleString("en-IN")) + " cr";
   };
   try {
-    const s = await (await fetch("/api/smartmoney/summary")).json();
-    if (s.in && s.in.net_cr != null) {
-      const pos = s.in.net_cr >= 0;
-      set("sms-in", "Smart money net <strong>" + (pos ? "accumulating +" : "distributing −") + inr(s.in.net_cr) +
-        "</strong> this month" + (s.in.top_sector ? ", heaviest in <strong>" + s.in.top_sector + "</strong>" : ""));
-    }
-    const blk = (d, word) => "<strong>" + d.unit.replace(/m$|bn$/, "") + (d.total >= 1000 ? (d.total / 1000).toFixed(1) + "bn" : Math.round(d.total) + "m") +
-      "</strong> of " + word + " this month" + (d.top ? ", led by <strong>" + d.top + "</strong>" : "");
-    if (s.tw && s.tw.total != null) set("sms-tw", blk(s.tw, "block deals"));
-    if (s.id && s.id.total != null) {
-      set("sms-id", "<strong>Rp" + (s.id.total >= 1000 ? (s.id.total / 1000).toFixed(1) + "tn" : Math.round(s.id.total) + "bn") +
-        "</strong> of negotiated deals this month" + (s.id.top ? ", led by <strong>" + s.id.top + "</strong>" : ""));
-    }
-    if (s.us && s.us.buy != null) {
-      const net = s.us.buy - s.us.sell;
-      const fm = (v) => "$" + (Math.abs(v) >= 1000 ? (Math.abs(v) / 1000).toFixed(1) + "bn" : Math.round(Math.abs(v)) + "m");
-      set("sms-us", "Insiders net <strong>" + (net >= 0 ? "buying +" : "selling −") + fm(net) + "</strong> this month" +
-        (s.congress && s.congress.top ? " · Congress's hottest buy: <strong>" + s.congress.top + "</strong>" : ""));
-    }
-  } catch (e) { /* static card copy stays */ }
-})();
-
-/* Quant Toolkit strip — live one-liners; static copy stays on any failure */
-(async () => {
-  const set = (id, html) => { const el = document.getElementById(id); if (el) el.innerHTML = html; };
-  try {
     const d = await (await fetch("/api/movers")).json();
     const t = d.markets[0];
-    if (t && t.z != null) set("qts-movers",
-      `Most abnormal today: <strong>${t.name} ${(t.z > 0 ? "+" : "") + t.z.toFixed(1)}σ</strong> within its ${t.regime} regime (${(t.pct_1d >= 0 ? "+" : "") + t.pct_1d.toFixed(1)}%)`);
+    if (t && t.z != null) set("live-regime",
+      `Most abnormal today: <strong>${t.name} ${(t.z > 0 ? "+" : "") + t.z.toFixed(1)}σ</strong> within its ${t.regime} regime`);
   } catch (e) {}
   try {
     const s = await (await fetch("/api/systemic")).json();
     const dar = s.absorption.delta_ar;
-    set("qts-systemic",
+    set("live-risk",
       `Turbulence at the <strong>${s.turbulence.current_percentile.toFixed(0)}th percentile</strong>` +
-      (dar != null && dar > 1 ? " · <strong>markets unifying — fragility rising</strong>"
-        : ` · ${(s.absorption.current * 100).toFixed(0)}% of variance in 2 factors`));
+      (dar != null && dar > 1 ? " · <strong>fragility rising</strong>" : ""));
   } catch (e) {}
   try {
-    const v = await (await fetch("/api/vol")).json();
-    const top = v.markets[0];
-    if (top) set("qts-vol",
-      `Most stressed: <strong>${top.index_name}</strong> at its <strong>${top.percentile.toFixed(0)}th</strong> vol percentile`);
+    const m = await (await fetch("/api/macro")).json();
+    const c = m && m.composite;
+    if (c && c.current != null) set("live-macro",
+      `US macro pulse: <strong>${(c.current >= 0 ? "+" : "") + (+c.current).toFixed(2)}</strong>${c.zone ? " · <strong>" + c.zone + "</strong>" : ""} vs trend`);
   } catch (e) {}
   try {
-    const c = await (await fetch("/api/correlations?window=90")).json();
-    if (c.avg_overall != null) set("qts-corr",
-      `Average pairwise correlation: <strong>${c.avg_overall.toFixed(2)}</strong> over 90 days`);
+    const s = await (await fetch("/api/smartmoney/summary")).json();
+    if (s.in && s.in.net_cr != null) {
+      const pos = s.in.net_cr >= 0;
+      set("live-sm", "India: smart money net <strong>" + (pos ? "accumulating +" : "distributing −") + inr(s.in.net_cr) + "</strong> this month");
+    }
   } catch (e) {}
 })();
 </script>

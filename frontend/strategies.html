@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-94DE53GC07"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', { analytics_storage: 'denied' });
+    gtag('js', new Date());
+    gtag('config', 'G-94DE53GC07');
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Strategies — Regime Compass</title>
+  <meta name="description" content="Model portfolios built from Regime Compass signals — credit-stress overlay, walk-forward HMM regime strategies, and the Smart Money India portfolio. Audited honestly: returns, drawdowns and losses shown." />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Regime Compass" />
+  <meta property="og:title" content="Strategies — model portfolios, audited honestly" />
+  <meta property="og:description" content="None of these exist to beat buy-and-hold. They exist to change the shape of your returns — same market, smaller worst day." />
+  <meta property="og:image" content="https://www.regimecompass.com/og-image.png" />
+  <meta property="og:url" content="https://regimecompass.com/strategies" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="theme-color" content="#07090e" />
+  <link rel="canonical" href="https://www.regimecompass.com/strategies" />
+  <link rel="stylesheet" href="/styles.css?v=6.0" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="manifest" href="/manifest.json" />
+  <style>
+    .updated-ts { color: var(--muted); font-size: 12.5px; font-family: var(--font-mono); }
+
+    .strat-card {
+      border: 1px solid var(--border); border-radius: var(--r-lg);
+      background: linear-gradient(180deg, rgba(255,255,255,0.015), transparent 45%), var(--panel);
+      box-shadow: var(--shadow-sm), inset 0 1px 0 var(--edge-light);
+      padding: 24px 26px; margin-bottom: 22px;
+    }
+    .strat-head { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; margin-bottom: 4px; }
+    .strat-head h2 {
+      font-family: var(--font-display); font-size: 21px; font-weight: 600;
+      color: var(--text-strong); letter-spacing: -0.01em; margin: 0;
+    }
+    .strat-tag {
+      display: inline-block; padding: 3px 10px; border-radius: 12px;
+      font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.2px;
+      background: var(--accent-dim); color: var(--accent-strong); border: 1px solid var(--accent-border);
+    }
+    .strat-rule { font-size: 13.5px; color: var(--muted); line-height: 1.6; margin: 6px 0 18px; max-width: 780px; }
+    .strat-rule strong { color: var(--text-body); font-weight: 600; }
+
+    /* compare table (credit / hmm) */
+    .cmp { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .cmp th, .cmp td { padding: 9px 12px; text-align: right; border-bottom: 1px solid var(--hairline); font-variant-numeric: tabular-nums; }
+    .cmp th { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.3px; color: var(--muted); }
+    .cmp th:first-child, .cmp td:first-child { text-align: left; }
+    .cmp td:first-child { color: var(--muted); font-size: 12.5px; }
+    .cmp td { font-family: var(--font-mono); color: var(--text); }
+    .cmp tr:last-child td { border-bottom: none; }
+    .cmp .hl { background: var(--accent-dim); }
+    .cmp thead .hl { color: var(--accent-strong); }
+    .cmp .good { color: var(--bull); }
+    .cmp .bad { color: var(--bear); }
+    .cmp-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+    /* stat tiles (smart money) */
+    .tile-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 16px; }
+    @media (max-width: 860px) { .tile-row { grid-template-columns: repeat(2, 1fr); } }
+    .tile {
+      padding: 14px 16px; border: 1px solid var(--border); border-radius: var(--r-md);
+      background: var(--panel-2); box-shadow: inset 0 1px 0 var(--edge-light);
+    }
+    .tile .v { font-size: 22px; font-weight: 700; color: var(--text-strong); font-family: var(--font-mono); font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+    .tile .v.good { color: var(--bull); }
+    .tile .v.bad { color: var(--bear); }
+    .tile .k { font-size: 10px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 1.3px; margin-top: 5px; }
+
+    /* verdict strip */
+    .verdict {
+      display: block;
+      margin-top: 16px; padding: 13px 16px;
+      border-left: 3px solid var(--accent); border-radius: 0 var(--r-md) var(--r-md) 0;
+      background: var(--accent-dim);
+      font-size: 13.5px; line-height: 1.6; color: var(--text-body);
+    }
+    .verdict strong { color: var(--text-strong); }
+
+    .strat-foot { display: flex; gap: 18px; align-items: center; flex-wrap: wrap; margin-top: 14px; }
+    .strat-foot a { font-size: 12.5px; font-weight: 600; color: var(--accent-strong); }
+    .strat-foot .fine { font-size: 11px; color: var(--muted); margin-left: auto; }
+
+    /* sparkline */
+    .spark { margin: 4px 0 14px; }
+    .spark svg { display: block; width: 100%; height: 96px; }
+    .spark-legend { display: flex; gap: 16px; font-size: 11px; color: var(--muted); margin-top: 6px; }
+    .spark-legend .sw { display: inline-block; width: 14px; height: 3px; border-radius: 2px; vertical-align: 2px; margin-right: 5px; }
+
+    /* hmm mini table */
+    .hmm-agg { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 16px; }
+    @media (max-width: 860px) { .hmm-agg { grid-template-columns: repeat(2, 1fr); } }
+
+    .skl { border-radius: var(--r-md); }
+    .section-note { font-size: 12px; color: var(--muted); margin: -8px 0 22px; }
+  </style>
+</head>
+<body>
+<script src="/shell.js?v=6.1"></script>
+
+<div class="wrap">
+  <div style="display: flex; align-items: center; gap: 18px; flex-wrap: wrap; margin-bottom: 14px;">
+    <span style="font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 1.5px;">Strategies</span>
+    <span class="updated-ts" id="updated" style="margin-left:auto;"></span>
+  </div>
+
+  <div class="hero" style="margin-bottom: 26px;">
+    <div class="kicker">Model Portfolios &middot; Audited</div>
+    <h1>The signals, turned into <span class="grad-text">portfolios.</span></h1>
+    <div class="tagline" style="max-width: 820px;">
+      None of these exist to beat buy-and-hold. They exist to <strong>change the shape of your returns</strong> —
+      same market, smaller worst day. Every portfolio below is rules-based and paper-traded from this site's own signals:
+      walk-forward where the data allows, costs included, losses shown.
+    </div>
+  </div>
+
+  <!-- ── Credit Stress Overlay ── -->
+  <section class="strat-card reveal">
+    <div class="strat-head">
+      <h2>Credit Stress Overlay</h2>
+      <span class="strat-tag">Credit &middot; S&amp;P 500 &middot; <span id="cr-window">2010–present</span></span>
+    </div>
+    <p class="strat-rule">Hold the S&amp;P 500 while its <strong>200-day trend is up</strong> and <strong>credit is calm</strong>.
+      Go to cash when either breaks. Credit is read from Moody's Baa corporate spread — bond investors usually smell trouble before equity holders do.</p>
+    <div class="spark" id="cr-spark"></div>
+    <div class="cmp-wrap">
+      <table class="cmp" id="cr-table">
+        <thead><tr><th></th><th>Buy &amp; hold</th><th>Trend only</th><th class="hl">Trend + credit</th></tr></thead>
+        <tbody>
+          <tr><td>Total return</td><td id="cr-bh-tr">–</td><td id="cr-eq-tr">–</td><td class="hl" id="cr-ov-tr">–</td></tr>
+          <tr><td>CAGR</td><td id="cr-bh-cagr">–</td><td id="cr-eq-cagr">–</td><td class="hl" id="cr-ov-cagr">–</td></tr>
+          <tr><td>Max drawdown</td><td id="cr-bh-dd">–</td><td id="cr-eq-dd">–</td><td class="hl" id="cr-ov-dd">–</td></tr>
+          <tr><td>Volatility (ann.)</td><td id="cr-bh-vol">–</td><td id="cr-eq-vol">–</td><td class="hl" id="cr-ov-vol">–</td></tr>
+          <tr><td>Sharpe</td><td id="cr-bh-sh">–</td><td id="cr-eq-sh">–</td><td class="hl" id="cr-ov-sh">–</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="verdict" id="cr-verdict">Loading&hellip;</div>
+    <div class="strat-foot">
+      <a href="/credit">Open the full interactive backtest →</a>
+      <span class="fine">Rules-based paper portfolio &middot; trading costs not modelled on overlay switches</span>
+    </div>
+  </section>
+
+  <!-- ── HMM Regime Strategy ── -->
+  <section class="strat-card reveal">
+    <div class="strat-head">
+      <h2>HMM Regime Strategy</h2>
+      <span class="strat-tag">Regime &middot; 11 markets &middot; walk-forward</span>
+    </div>
+    <p class="strat-rule">Long when the Hidden Markov Model calls <strong>bull</strong>, cash otherwise — audited the way a skeptic would:
+      the model is <strong>refit quarterly using only data available at the time</strong>, signals applied the next day, 10&nbsp;bps charged per switch.
+      This is the out-of-sample truth, not the flattering in-sample version.</p>
+    <div class="hmm-agg">
+      <div class="tile"><div class="v" id="wf-dd">–</div><div class="k">Markets with smaller max drawdown</div></div>
+      <div class="tile"><div class="v" id="wf-vol">–</div><div class="k">Markets with lower volatility</div></div>
+      <div class="tile"><div class="v" id="wf-sh">–</div><div class="k">Markets with better Sharpe</div></div>
+      <div class="tile"><div class="v" id="wf-cagr">–</div><div class="k">Median CAGR given up vs buy &amp; hold</div></div>
+    </div>
+    <div class="cmp-wrap">
+      <table class="cmp" id="wf-table">
+        <thead><tr><th>Market</th><th>CAGR</th><th>vs B&amp;H</th><th>Max DD</th><th>vs B&amp;H</th><th>Sharpe</th><th>vs B&amp;H</th></tr></thead>
+        <tbody id="wf-rows"></tbody>
+      </table>
+    </div>
+    <div class="verdict" id="wf-verdict">Loading&hellip;</div>
+    <div class="strat-foot">
+      <a href="/validation">Full walk-forward audit →</a>
+      <a href="/ma/backtest">SMA backtests →</a>
+      <a href="/ema/backtest">EMA backtests →</a>
+      <span class="fine">Net of 10 bps per regime switch</span>
+    </div>
+  </section>
+
+  <!-- ── Smart Money India — Refined ── -->
+  <section class="strat-card reveal">
+    <div class="strat-head">
+      <h2>Smart Money India — Refined</h2>
+      <span class="strat-tag">Smart Money &middot; NSE &middot; filtered entries</span>
+    </div>
+    <p class="strat-rule">Follow disclosed <strong>FII bulk &amp; block accumulation of ₹25&nbsp;cr or more</strong> — but only when the
+      <strong>stock is above its 50-DMA</strong> and the <strong>Nifty is above its 100-DMA</strong>. Equal-weight entries, no take-profits,
+      no stops: the exits both hurt in testing, so there are none. The edge lives in the entry filters.</p>
+    <div class="spark" id="smr-spark"></div>
+    <div class="tile-row">
+      <div class="tile"><div class="v" id="smr-port">–</div><div class="k">Portfolio return</div></div>
+      <div class="tile"><div class="v" id="smr-bench">–</div><div class="k">Nifty, same window</div></div>
+      <div class="tile"><div class="v" id="smr-n">–</div><div class="k">Positions taken</div></div>
+      <div class="tile"><div class="v" id="smr-win">–</div><div class="k">Win rate</div></div>
+      <div class="tile"><div class="v" id="smr-alpha">–</div><div class="k">Avg alpha per pick</div></div>
+    </div>
+    <div class="verdict" id="smr-verdict">Loading&hellip;</div>
+    <div class="strat-foot">
+      <a href="/smartmoney">Open the Smart Money tracker →</a>
+      <span class="fine">Short live window — treat as a developing record, not a proven one</span>
+    </div>
+  </section>
+
+  <!-- ── Smart Money India — Raw ── -->
+  <section class="strat-card reveal">
+    <div class="strat-head">
+      <h2>Smart Money India — Raw</h2>
+      <span class="strat-tag">Smart Money &middot; NSE &middot; unfiltered</span>
+    </div>
+    <p class="strat-rule">The control group: <strong>every qualifying FII deal, no filters</strong>. Same feed, same weighting, no momentum
+      or regime conditions. We publish it because the comparison is the point — it shows how much of the edge comes from the
+      entry rules rather than the deal data itself.</p>
+    <div class="spark" id="smw-spark"></div>
+    <div class="tile-row">
+      <div class="tile"><div class="v" id="smw-port">–</div><div class="k">Portfolio return</div></div>
+      <div class="tile"><div class="v" id="smw-bench">–</div><div class="k">Nifty, same window</div></div>
+      <div class="tile"><div class="v" id="smw-n">–</div><div class="k">Positions taken</div></div>
+      <div class="tile"><div class="v" id="smw-win">–</div><div class="k">Win rate</div></div>
+      <div class="tile"><div class="v" id="smw-alpha">–</div><div class="k">Avg alpha per pick</div></div>
+    </div>
+    <div class="verdict" id="smw-verdict">Loading&hellip;</div>
+    <div class="strat-foot">
+      <a href="/smartmoney">Open the Smart Money tracker →</a>
+      <span class="fine">Window starts earlier than refined — it includes deals the filters rejected</span>
+    </div>
+  </section>
+
+  <div class="callout reveal">
+    <strong>What these are — and aren't.</strong> Every portfolio on this page is a rules-based <em>model</em> portfolio: <strong>hypothetical
+    performance</strong>, paper-traded from published signals, never live money, and shown with its failures. Hypothetical results have inherent
+    limitations — they are constructed with hindsight and do not reflect the impact of real execution, liquidity or taxes. Past performance,
+    simulated or otherwise, does not predict future results. This is not investment advice — see the <a href="/disclaimer">Disclaimer</a> and <a href="/terms">Terms</a>.
+    More strategies will be added as they survive testing.
+    <br/><br/>
+    Building this in public — one question: <a href="/feedback">what's missing?</a>
+  </div>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+const pc  = (v, d=1) => (v >= 0 ? "+" : "") + v.toFixed(d) + "%";
+const num = (v, d=2) => v.toFixed(d);
+
+/* tiny multi-line sparkline: series = [{data, color, label}] */
+function spark(elId, series, labels) {
+  const el = $(elId);
+  const W = 900, H = 96, P = 4;
+  const all = series.flatMap(s => s.data);
+  const min = Math.min(...all), max = Math.max(...all), span = (max - min) || 1;
+  const x = (i, n) => P + (W - 2 * P) * i / (n - 1);
+  const y = v => H - P - (H - 2 * P) * (v - min) / span;
+  const lines = series.map(s => {
+    const n = s.data.length;
+    const pts = s.data.map((v, i) => `${x(i, n).toFixed(1)},${y(v).toFixed(1)}`).join(" ");
+    return `<polyline points="${pts}" fill="none" stroke="${s.color}" stroke-width="1.8" stroke-linejoin="round" opacity="${s.dim ? 0.55 : 1}"/>`;
+  }).join("");
+  el.innerHTML = `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none">${lines}</svg>` +
+    `<div class="spark-legend">` +
+    series.map(s => `<span><span class="sw" style="background:${s.color}"></span>${s.label}</span>`).join("") +
+    (labels ? `<span style="margin-left:auto">${labels}</span>` : "") + `</div>`;
+}
+
+const ACCENT = "#8b6ff0", MUTEDL = "#5c6472", BULL = "#34c673";
+
+/* ── Credit overlay ── */
+(async () => {
+  try {
+    const d = await (await fetch("/api/credit/backtest")).json();
+    const bh = d.buy_hold_metrics, eq = d.equity_only_metrics, ov = d.credit_overlay_metrics;
+    $("cr-window").textContent = d.window.start.slice(0, 4) + "–present";
+    const put = (p, m) => {
+      $(`cr-${p}-tr`).textContent = pc(m.total_return_pct, 0);
+      $(`cr-${p}-cagr`).textContent = pc(m.cagr_pct);
+      $(`cr-${p}-dd`).innerHTML = `<span class="${p==='ov'?'good':'bad'}">${m.max_drawdown_pct.toFixed(1)}%</span>`;
+      $(`cr-${p}-vol`).textContent = m.ann_vol_pct.toFixed(1) + "%";
+      $(`cr-${p}-sh`).textContent = num(m.sharpe);
+    };
+    put("bh", bh); put("eq", eq); put("ov", ov);
+    const ec = d.equity_curve, step = Math.max(1, Math.floor(ec.dates.length / 400));
+    const thin = a => a.filter((_, i) => i % step === 0);
+    spark("cr-spark", [
+      { data: thin(ec.buy_hold), color: MUTEDL, label: "Buy & hold", dim: true },
+      { data: thin(ec.equity_only), color: "#d4a017", label: "Trend only", dim: true },
+      { data: thin(ec.credit_overlay), color: ACCENT, label: "Trend + credit" },
+    ], `${d.window.start} → ${d.window.end} · log of equity not shown, levels indexed to 100`);
+    $("cr-verdict").innerHTML =
+      `You give up return vs buy-and-hold (<strong>${pc(ov.total_return_pct,0)}</strong> vs ${pc(bh.total_return_pct,0)}). ` +
+      `In exchange, the worst drawdown shrinks from <strong>${bh.max_drawdown_pct.toFixed(1)}%</strong> to <strong>${ov.max_drawdown_pct.toFixed(1)}%</strong> ` +
+      `and the Sharpe ratio rises from ${num(bh.sharpe)} to <strong>${num(ov.sharpe)}</strong> — ` +
+      `a smoother ride per unit of return. That is what regime awareness is for.`;
+  } catch (e) { $("cr-verdict").textContent = "Backtest data unavailable right now."; }
+})();
+
+/* ── HMM walk-forward ── */
+(async () => {
+  try {
+    const d = await (await fetch("/api/validation")).json();
+    const mkts = d.markets;
+    let ddWin = 0, volWin = 0, shWin = 0; const cagrGaps = [];
+    const rows = mkts.map(m => {
+      const wf = m.walk_forward_net, bh = m.buy_hold;
+      if (wf.max_drawdown_pct > bh.max_drawdown_pct) ddWin++;
+      if (wf.ann_vol_pct < bh.ann_vol_pct) volWin++;
+      if (wf.sharpe > bh.sharpe) shWin++;
+      cagrGaps.push(wf.cagr_pct - bh.cagr_pct);
+      const dCagr = wf.cagr_pct - bh.cagr_pct, dDD = wf.max_drawdown_pct - bh.max_drawdown_pct, dSh = wf.sharpe - bh.sharpe;
+      return `<tr><td>${m.name}</td>` +
+        `<td>${pc(wf.cagr_pct)}</td><td class="${dCagr >= 0 ? "good" : "bad"}">${pc(dCagr)}</td>` +
+        `<td>${wf.max_drawdown_pct.toFixed(1)}%</td><td class="${dDD > 0 ? "good" : "bad"}">${pc(dDD)}</td>` +
+        `<td>${num(wf.sharpe)}</td><td class="${dSh >= 0 ? "good" : "bad"}">${(dSh >= 0 ? "+" : "") + num(dSh)}</td></tr>`;
+    });
+    $("wf-rows").innerHTML = rows.join("");
+    cagrGaps.sort((a, b) => a - b);
+    const medGap = cagrGaps[Math.floor(cagrGaps.length / 2)];
+    $("wf-dd").textContent = `${ddWin}/${mkts.length}`;
+    $("wf-dd").className = "v " + (ddWin > mkts.length / 2 ? "good" : "");
+    $("wf-vol").textContent = `${volWin}/${mkts.length}`;
+    $("wf-vol").className = "v " + (volWin > mkts.length / 2 ? "good" : "");
+    $("wf-sh").textContent = `${shWin}/${mkts.length}`;
+    $("wf-cagr").textContent = Math.abs(medGap).toFixed(1) + " pts";
+    $("wf-verdict").innerHTML =
+      `The honest read: out of sample, the regime strategy usually <strong>earns less than buy-and-hold</strong> ` +
+      `(median ${Math.abs(medGap).toFixed(1)} CAGR points given up) — and in return cuts the max drawdown in ` +
+      `<strong>${ddWin} of ${mkts.length} markets</strong> and volatility in <strong>${volWin} of ${mkts.length}</strong>. ` +
+      `Regime models are a brake, not an engine. If your priority is never eating a −30% year, that trade is worth it; ` +
+      `if it's maximum compounding, buy-and-hold wins and we say so.`;
+  } catch (e) { $("wf-verdict").textContent = "Validation data unavailable right now."; }
+})();
+
+/* ── Smart Money portfolios ── */
+async function smCard(mode, prefix, other) {
+  const d = await (await fetch("/api/smartmoney/portfolio?mode=" + mode)).json();
+  const f = d.follow_the_flow, ec = d.equity_curve;
+  const port = ec.portfolio[ec.portfolio.length - 1] - 100;
+  const bench = ec.nifty[ec.nifty.length - 1] - 100;
+  $(`${prefix}-port`).textContent = pc(port);
+  $(`${prefix}-port`).className = "v " + (port >= 0 ? "good" : "bad");
+  $(`${prefix}-bench`).textContent = pc(bench);
+  $(`${prefix}-bench`).className = "v " + (bench >= 0 ? "good" : "bad");
+  $(`${prefix}-n`).textContent = f.n;
+  $(`${prefix}-win`).textContent = f.win_rate_pct.toFixed(0) + "%";
+  $(`${prefix}-alpha`).textContent = pc(f.avg_alpha_pct);
+  const step = Math.max(1, Math.floor(ec.dates.length / 400));
+  const thin = a => a.filter((_, i) => i % step === 0);
+  spark(`${prefix}-spark`, [
+    { data: thin(ec.nifty), color: MUTEDL, label: "Nifty 50", dim: true },
+    { data: thin(ec.portfolio), color: mode === "refined" ? BULL : "#d4a017", label: mode === "refined" ? "Refined portfolio" : "Raw portfolio" },
+  ], `${ec.dates[0]} → ${ec.dates[ec.dates.length - 1]} · indexed to 100`);
+  return { port, bench, f };
+}
+(async () => {
+  try {
+    const [ref, raw] = await Promise.all([smCard("refined", "smr"), smCard("raw", "smw")]);
+    $("smr-verdict").innerHTML =
+      `<strong>${pc(ref.port)}</strong> while the Nifty did <strong>${pc(ref.bench)}</strong> over the same window — ` +
+      `${ref.f.win_rate_pct.toFixed(0)}% of picks profitable, average alpha <strong>${pc(ref.f.avg_alpha_pct)}</strong> per position. ` +
+      `Caveat we insist on: the live window is short. This is a developing record, not a proven one.`;
+    $("smw-verdict").innerHTML =
+      `Unfiltered, the same deal feed returns <strong>${pc(raw.port)}</strong> with a ${raw.f.win_rate_pct.toFixed(0)}% win rate — ` +
+      `versus <strong>${pc(ref.port)}</strong> and ${ref.f.win_rate_pct.toFixed(0)}% refined. ` +
+      `Following every big deal blindly barely beats the index; the selectivity is the strategy.`;
+  } catch (e) {
+    $("smr-verdict").textContent = "Portfolio data unavailable right now.";
+    $("smw-verdict").textContent = "Portfolio data unavailable right now.";
+  }
+})();
+
+$("updated").textContent = "Recomputed daily from the live backtests";
+</script>
+</body>
+</html>

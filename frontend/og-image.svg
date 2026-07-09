@@ -37,14 +37,14 @@
   </g>
 
   <!-- Kicker -->
-  <text x="80" y="225" font-family="Inter, system-ui, sans-serif" font-size="22" font-weight="700" fill="#c4b5fd" letter-spacing="4">REGIME COMPASS</text>
+  <text x="80" y="225" font-family="Inter, system-ui, sans-serif" font-size="22" font-weight="700" fill="#c4b5fd" letter-spacing="4">REGIME INTELLIGENCE &#183; IQUANT LABS</text>
 
   <!-- Title -->
-  <text x="80" y="320" font-family="Fraunces, Georgia, serif" font-size="68" font-weight="600" fill="#ffffff" letter-spacing="-2">What kind of</text>
-  <text x="80" y="395" font-family="Fraunces, Georgia, serif" font-size="68" font-weight="600" fill="#ffffff" letter-spacing="-2">market is this?</text>
+  <text x="80" y="320" font-family="Fraunces, Georgia, serif" font-size="68" font-weight="600" fill="#ffffff" letter-spacing="-2">Know the market</text>
+  <text x="80" y="395" font-family="Fraunces, Georgia, serif" font-size="68" font-weight="600" fill="#ffffff" letter-spacing="-2">you're in.</text>
 
   <!-- Tagline -->
-  <text x="80" y="450" font-family="Inter, system-ui, sans-serif" font-size="22" fill="#8b95a3">Daily regime snapshot — Nifty · S&amp;P 500 · KOSPI · Shanghai</text>
+  <text x="80" y="450" font-family="Inter, system-ui, sans-serif" font-size="22" fill="#8b95a3">11 global markets &#183; one daily verdict &#183; audited, not asserted</text>
 
   <!-- Tricolor accent at bottom -->
   <rect x="80" y="510" width="220" height="6" rx="3" fill="#e35454"/>
@@ -52,5 +52,5 @@
   <rect x="540" y="510" width="220" height="6" rx="3" fill="#34c673"/>
 
   <!-- Domain hint -->
-  <text x="80" y="570" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="500" fill="#6b7480" letter-spacing="1">iquantlabs.com</text>
+  <text x="80" y="570" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="500" fill="#6b7480" letter-spacing="1">regimecompass.com</text>
 </svg>

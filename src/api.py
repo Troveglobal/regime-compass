@@ -40,6 +40,7 @@ from . import ma_regime
 from . import credit
 from .smartmoney import paths as _sm_paths  # seeds the persistent volume (if any) on startup
 from . import subscriptions
+from . import feedback as feedback_mod
 from .config import (
     API_CORS_ORIGINS,
     COUNTRIES,
@@ -624,6 +625,33 @@ def admin_stats(request: Request):
     return {"subscribers": stats, "data_freshness": fresh}
 
 
+@app.post("/api/feedback")
+async def feedback_endpoint(request: Request):
+    """One-question feedback + early-access waitlist. JSON or form-encoded."""
+    ctype = (request.headers.get("content-type") or "").lower()
+    if "application/json" in ctype:
+        data = await request.json()
+    else:
+        form = await request.form()
+        data = dict(form)
+    try:
+        result = feedback_mod.add(
+            kind=(data.get("kind") or "feedback").strip(),
+            message=data.get("message"),
+            email=data.get("email"),
+            page=data.get("page"),
+        )
+    except ValueError as e:
+        raise HTTPException(400, str(e))
+    return result
+
+
+@app.get("/api/admin/feedback")
+def admin_feedback(request: Request):
+    _require_admin(request)
+    return {"submissions": feedback_mod.list_all()}
+
+
 @app.get("/api/seasonality")
 def seasonality_endpoint(index: str = Query(DEFAULT_INDEX)) -> dict:
     key = _validate(index)
@@ -1139,6 +1167,14 @@ if FRONTEND_DIR.exists():
     def validation_page():
         return FileResponse(FRONTEND_DIR / "validation.html")
 
+    @app.get("/strategies")
+    def strategies_page():
+        return FileResponse(FRONTEND_DIR / "strategies.html")
+
+    @app.get("/feedback")
+    def feedback_page():
+        return FileResponse(FRONTEND_DIR / "feedback.html")
+
     @app.get("/hmm")
     def hmm_page():
         return geo.render_page("hmm.html", "hmm")
@@ -1394,7 +1430,7 @@ if FRONTEND_DIR.exists():
         base = "https://www.regimecompass.com"
         today_str = datetime.now(timezone.utc).strftime("%Y-%m-%d")
         evergreen = "2026-07-05"
-        daily = [("/", "1.0"), ("/today", "1.0"), ("/composite", "0.9"), ("/hmm", "0.9"),
+        daily = [("/", "1.0"), ("/today", "1.0"), ("/strategies", "0.9"), ("/composite", "0.9"), ("/hmm", "0.9"),
                  ("/ma", "0.9"), ("/ema", "0.9"), ("/smartmoney", "0.9"), ("/valuation", "0.9"),
                  ("/movers", "0.9"), ("/systemic", "0.8"),
                  ("/correlations", "0.8"), ("/volatility", "0.8"), ("/news", "0.8"),

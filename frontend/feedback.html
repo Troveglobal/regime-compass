@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-94DE53GC07"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', { analytics_storage: 'denied' });
+    gtag('js', new Date());
+    gtag('config', 'G-94DE53GC07');
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Feedback &amp; Early Access — Regime Compass</title>
+  <meta name="description" content="Regime Compass is built in public. Tell us what's missing, and sign up for early access to accounts and custom dashboards." />
+  <meta name="robots" content="noindex" />
+  <meta name="theme-color" content="#07090e" />
+  <link rel="canonical" href="https://www.regimecompass.com/feedback" />
+  <link rel="stylesheet" href="/styles.css?v=6.0" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="manifest" href="/manifest.json" />
+  <style>
+    .fb-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    @media (max-width: 800px) { .fb-grid { grid-template-columns: 1fr; } }
+    .fb-card {
+      border: 1px solid var(--border); border-radius: var(--r-lg);
+      background: linear-gradient(180deg, rgba(255,255,255,0.015), transparent 45%), var(--panel);
+      box-shadow: var(--shadow-sm), inset 0 1px 0 var(--edge-light);
+      padding: 24px 26px;
+      display: flex; flex-direction: column;
+    }
+    .fb-card h2 {
+      font-family: var(--font-display); font-size: 20px; font-weight: 600;
+      color: var(--text-strong); letter-spacing: -0.01em; margin: 0 0 6px;
+    }
+    .fb-card .sub { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 16px; }
+    .fb-card label { display: block; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.3px; color: var(--muted); margin: 12px 0 6px; }
+    .fb-card textarea, .fb-card input[type="email"] {
+      width: 100%; box-sizing: border-box; padding: 11px 13px;
+      background: var(--panel-2); color: var(--text-strong);
+      border: 1px solid var(--border); border-radius: var(--r-md);
+      font: inherit; font-size: 14px; outline: none;
+      transition: border-color var(--dur-1) ease;
+    }
+    .fb-card textarea:focus, .fb-card input[type="email"]:focus { border-color: var(--accent-border); }
+    .fb-card textarea { min-height: 110px; resize: vertical; }
+    .fb-actions { margin-top: 16px; display: flex; align-items: center; gap: 14px; }
+    .fb-msg { font-size: 13px; }
+    .fb-msg.ok { color: var(--bull); }
+    .fb-msg.err { color: var(--bear); }
+    .fb-fine { font-size: 11px; color: var(--muted); margin-top: auto; padding-top: 14px; line-height: 1.5; }
+  </style>
+</head>
+<body>
+<script src="/shell.js?v=6.1"></script>
+
+<div class="wrap narrow" style="max-width: 960px;">
+  <div class="hero" style="margin-bottom: 26px;">
+    <div class="kicker">Built in public</div>
+    <h1>Help shape <span class="grad-text">what's next.</span></h1>
+    <div class="tagline">Accounts and custom dashboards are coming — pick any tool on this site, arrange your own view, save it to your login. Two ways to be part of it:</div>
+  </div>
+
+  <div class="fb-grid">
+    <!-- Waitlist -->
+    <div class="fb-card reveal">
+      <h2>Sign up for what's coming <span class="soon-pill">early access</span></h2>
+      <div class="sub">Be first in when accounts and custom dashboards launch. One email when it ships — no newsletter, no drip campaign.</div>
+      <form id="wl-form">
+        <label for="wl-email">Email</label>
+        <input type="email" id="wl-email" name="email" placeholder="you@example.com" autocomplete="email" required />
+        <div class="fb-actions">
+          <button class="btn primary" type="submit">Get early access</button>
+          <span class="fb-msg" id="wl-msg"></span>
+        </div>
+      </form>
+      <div class="fb-fine">Your email is stored for this one announcement and never shared or sold. For daily regime alerts instead, see <a href="/subscribe">Alerts</a>.</div>
+    </div>
+
+    <!-- One-question feedback -->
+    <div class="fb-card reveal">
+      <h2>The one question</h2>
+      <div class="sub">What's missing — what would make Regime Compass a daily tool for you?</div>
+      <form id="fb-form">
+        <label for="fb-text">Your answer</label>
+        <textarea id="fb-text" name="message" placeholder="Be blunt. We publish our losses; we can take feedback." required></textarea>
+        <label for="fb-email">Email (optional — only if you'd like a reply)</label>
+        <input type="email" id="fb-email" name="email" placeholder="you@example.com" autocomplete="email" />
+        <div class="fb-actions">
+          <button class="btn primary" type="submit">Send</button>
+          <span class="fb-msg" id="fb-msg"></span>
+        </div>
+      </form>
+      <div class="fb-fine">Feedback goes straight to the builder. If it changes the roadmap, you'll see it on the <a href="/changes">changes</a> page.</div>
+    </div>
+  </div>
+</div>
+
+<script>
+function wire(formId, msgId, kind, fields) {
+  const form = document.getElementById(formId), msg = document.getElementById(msgId);
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    msg.className = "fb-msg"; msg.textContent = "Sending…";
+    const body = { kind, page: document.referrer || "/feedback" };
+    for (const [key, elId] of Object.entries(fields)) body[key] = document.getElementById(elId).value;
+    try {
+      const r = await fetch("/api/feedback", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      const d = await r.json();
+      if (!r.ok) throw new Error(d.detail || "Something went wrong.");
+      msg.className = "fb-msg ok";
+      msg.textContent = kind === "waitlist"
+        ? (d.existing ? "You're already on the list." : "You're on the list. See you at launch.")
+        : "Received — thank you.";
+      form.querySelectorAll("input,textarea").forEach(el => { el.value = ""; });
+    } catch (err) {
+      msg.className = "fb-msg err";
+      msg.textContent = err.message;
+    }
+  });
+}
+wire("wl-form", "wl-msg", "waitlist", { email: "wl-email" });
+wire("fb-form", "fb-msg", "feedback", { message: "fb-text", email: "fb-email" });
+</script>
+</body>
+</html>
