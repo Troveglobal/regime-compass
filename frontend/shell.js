@@ -501,12 +501,7 @@
     ["cr", "Crypto", "#f0883e"],
   ];
   RC.indexSelect = function (sel, items, labelFn) {
-    var label = labelFn || function (i) {
-      /* the group header already says Commodities/Crypto/Rates — only real
-         countries earn a suffix */
-      var redundant = { Commodity: 1, Crypto: 1, Rates: 1, FX: 1 };
-      return i.name + (i.country && !redundant[i.country] ? " \u2014 " + i.country : "");
-    };
+    var label = labelFn || function (i) { return i.name; };
     var byVal = {};
     /* native options (accessibility + state) */
     sel.innerHTML = "";
