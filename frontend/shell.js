@@ -21,6 +21,10 @@
     '<circle cx="12" cy="12" r="1.4" class="needle" fill="currentColor"/>' +
     "</svg>";
 
+  /* platform-aware shortcut label: Mac gets ⌘K, everyone else Ctrl K */
+  var IS_MAC = /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent);
+  var KBD = IS_MAC ? "\u2318K" : "Ctrl K";
+
   /* ============================================================
      Navigation model — one source of truth for nav, footer and
      the command palette. Each item: [href, label, note, keywords]
@@ -141,9 +145,9 @@
     '<button class="nav-burger" type="button" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>' +
     '<div class="links">' + linksHtml + "</div>" +
     '<div class="nav-right">' +
-    '<button class="nav-search" type="button" id="nav-search" aria-label="Search tools (Cmd+K)" title="Jump to any tool">' +
+    '<button class="nav-search" type="button" id="nav-search" aria-label="Search tools (' + KBD + ')" title="Jump to any tool (' + KBD + ')">' +
     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg>' +
-    '<span class="kbd-hint">⌘K</span></button>' +
+    '<span class="kbd-hint">' + KBD + '</span></button>' +
     '<span class="nav-dd dd-right"><span class="dd-trigger nav-account" aria-label="Account">' +
     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg>' +
     '<span class="chev">&#9662;</span></span><span class="dd-menu">' +
@@ -345,6 +349,9 @@
   /* ---- footer + boot tasks on DOM ready ---- */
   document.addEventListener("DOMContentLoaded", function () {
     document.body.insertAdjacentHTML("beforeend", FOOTER);
+
+    /* pages hardcode ⌘K in hints — rewrite for the actual platform */
+    if (!IS_MAC) document.querySelectorAll(".kbd-hint").forEach(function (el) { el.textContent = KBD; });
 
     /* loader: keep visible a beat so fast loads still feel alive */
     setTimeout(function () { document.body.classList.add("loaded"); }, 250);
